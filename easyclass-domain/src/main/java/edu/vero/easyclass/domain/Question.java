@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
+import java.sql.RowId;
 import java.util.Set;
 
 @Entity
@@ -10,16 +11,26 @@ public class Question {
     private int questionId;
     private int answerOrder;
     private Set<QuestionOption> options;
-    private OnlineClassTest classTest;
+    private Course course;
+    private Set<OnlineClassTest> tests;
 
-    @ManyToOne
-    @JoinColumn(name = "testId")
-    public OnlineClassTest getClassTest() {
-        return classTest;
+    @ManyToMany(mappedBy = "questions")
+    public Set<OnlineClassTest> getTests() {
+        return tests;
     }
 
-    public void setClassTest(OnlineClassTest classTest) {
-        this.classTest = classTest;
+    public void setTests(Set<OnlineClassTest> tests) {
+        this.tests = tests;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="courseId")
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Id
