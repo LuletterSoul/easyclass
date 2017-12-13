@@ -11,18 +11,8 @@ public class OnlineClassTest {
     private int testId;
     private Date establishTime;
     private Date deadline;
-    private TestRecord testRecord;
     private Set<Question> questions;
     private TeacherArragement arragement;
-
-    @Embedded
-    public TestRecord getTestRecord() {
-        return testRecord;
-    }
-
-    public void setTestRecord(TestRecord testRecord) {
-        this.testRecord = testRecord;
-    }
 
 
     @ManyToOne
