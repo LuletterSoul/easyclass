@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -9,6 +10,16 @@ public class Department {
     @GeneratedValue(generator = "depId", strategy = GenerationType.IDENTITY)
     private int depId;
     private String depName;
+    private Set<User> users;
+
+    @OneToMany(mappedBy = "department")
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     @Id
     public int getDepId() {

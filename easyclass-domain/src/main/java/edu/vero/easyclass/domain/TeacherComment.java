@@ -9,7 +9,6 @@ public class TeacherComment {
     private int commentId;
     private int score;
     private String type;
-    private TeacherArrangement arrangement;
 
     @Id
     public int getCommentId() {
@@ -36,13 +35,4 @@ public class TeacherComment {
         this.type = type;
     }
 
-    @OneToOne
-    @JoinColumn(name = "arrangeId")
-    public TeacherArrangement getArrangement() {
-        return arrangement;
-    }
-
-    public void setArrangement(TeacherArrangement arrangement) {
-        this.arrangement = arrangement;
-    }
 }

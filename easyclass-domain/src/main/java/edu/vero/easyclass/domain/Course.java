@@ -15,7 +15,6 @@ public class Course {
     private String type;
     private Set<Question> questions;
 
-
     @OneToMany(mappedBy = "course")
     public Set<Question> getQuestions() {
         return questions;

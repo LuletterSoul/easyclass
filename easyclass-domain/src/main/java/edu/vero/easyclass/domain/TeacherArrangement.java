@@ -28,7 +28,7 @@ public class TeacherArrangement {
         this.notices = notices;
     }
 
-    @OneToOne(mappedBy = "arrangement")
+    @OneToOne
     @JoinColumn(name = "commentId")
     public TeacherComment getComment() {
         return comment;
