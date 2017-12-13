@@ -12,6 +12,16 @@ public class OnlineClassTest {
     private int testId;
     private Date establishTime;
     private Date deadline;
+    private float score;
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
+
     private Set<Question> questions;
     private TeacherArragement arragement;
 
