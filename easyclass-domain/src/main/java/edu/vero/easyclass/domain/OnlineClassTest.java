@@ -7,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name="online_class_test")
 public class OnlineClassTest {
-
     @GeneratedValue(generator = "testId",strategy = GenerationType.IDENTITY)
     private int testId;
     private Date establishTime;
