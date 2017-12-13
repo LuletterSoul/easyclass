@@ -7,21 +7,21 @@ import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
-@Table(name="teacher")
-@PrimaryKeyJoinColumn(name="userId")
-public class Teacher extends User{
+@Table(name = "teacher")
+@PrimaryKeyJoinColumn(name = "userId")
+public class Teacher extends User {
     private String teacherId;
     private String teacherName;
     private String teacherGender;
-    private Set<TeacherArragement> arragementSet;
+    private Set<TeacherArrangement> arrangementSet;
 
     @OneToMany(mappedBy = "teacher")
-    public Set<TeacherArragement> getArragementSet() {
-        return arragementSet;
+    public Set<TeacherArrangement> getArragementSet() {
+        return arrangementSet;
     }
 
-    public void setArragementSet(Set<TeacherArragement> arragementSet) {
-        this.arragementSet = arragementSet;
+    public void setArragementSet(Set<TeacherArrangement> arragementSet) {
+        this.arrangementSet = arragementSet;
     }
 
     public String getTeacherId() {

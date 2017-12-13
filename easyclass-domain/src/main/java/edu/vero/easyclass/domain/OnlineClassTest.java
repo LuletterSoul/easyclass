@@ -5,24 +5,32 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="online_class_test")
+@Table(name = "online_class_test")
 public class OnlineClassTest {
-    @GeneratedValue(generator = "testId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "testId", strategy = GenerationType.IDENTITY)
     private int testId;
     private Date establishTime;
     private Date deadline;
     private Set<Question> questions;
-    private TeacherArragement arragement;
+    private TeacherArrangement arrangement;
 
-
-    @ManyToOne
-    @JoinColumn(name="arrageId")
-    public TeacherArragement getArragement() {
-        return arragement;
+    @Id
+    public int getTestId() {
+        return testId;
     }
 
-    public void setArragement(TeacherArragement arragement) {
-        this.arragement = arragement;
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "arrangeId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
+    }
+
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
     }
 
     @OneToMany(mappedBy = "classTest")
@@ -32,17 +40,6 @@ public class OnlineClassTest {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
-    }
-
-
-
-    @Id
-    public int getTestId() {
-        return testId;
-    }
-
-    public void setTestId(int testId) {
-        this.testId = testId;
     }
 
     public Date getEstablishTime() {

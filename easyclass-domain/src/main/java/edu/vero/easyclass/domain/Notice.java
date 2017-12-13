@@ -4,23 +4,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="notice")
+@Table(name = "notice")
 public class Notice {
-    @GeneratedValue(generator = "noticeId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "noticeId", strategy = GenerationType.IDENTITY)
     private int noticeId;
     private String title;
     private String content;
     private Date establishTime;
-    private TeacherArragement arragement;
+    private TeacherArrangement arrangement;
 
     @ManyToOne
-    @JoinColumn(name="arrageId")
-    public TeacherArragement getArragement() {
-        return arragement;
+    @JoinColumn(name = "arrangeId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
     }
 
-    public void setArragement(TeacherArragement arragement) {
-        this.arragement = arragement;
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
     }
 
     @Id

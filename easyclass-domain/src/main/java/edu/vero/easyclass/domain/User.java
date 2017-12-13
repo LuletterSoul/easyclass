@@ -3,19 +3,19 @@ package edu.vero.easyclass.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
-    @GeneratedValue(generator = "userId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "userId", strategy = GenerationType.IDENTITY)
     private int userId;
     private String username;
     private String password;
     private Department department;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="depId")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "depId")
     public Department getDepartment() {
         return department;
     }

@@ -3,17 +3,17 @@ package edu.vero.easyclass.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="question_option")      //option冲突
+@Table(name = "question_option")      //option冲突
 public class QuestionOption {
 
-    @GeneratedValue(generator="optionId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "optionId", strategy = GenerationType.IDENTITY)
     private int optionId;
     private String optionOrder;
     private String content;
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name="questionId")
+    @JoinColumn(name = "questionId")
     public Question getQuestion() {
         return question;
     }

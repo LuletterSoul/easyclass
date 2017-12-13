@@ -5,9 +5,9 @@ import org.hibernate.annotations.ManyToAny;
 import javax.persistence.*;
 
 @Entity
-@Table(name="courseware")
+@Table(name = "courseware")
 public class Courseware {
-    @GeneratedValue(generator = "coursewareId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "coursewareId", strategy = GenerationType.IDENTITY)
     private int coursewareId;
     private String title;
     private String fileName;

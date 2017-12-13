@@ -13,15 +13,15 @@ public class ClassTime {
     private String week;
     private String weekday;
     private String classOrder;
-    private TeacherCommon common;
+    private TeacherComment common;
 
     @OneToOne
     @JoinColumn(name="commonId")
-    public TeacherCommon getCommon() {
+    public TeacherComment getCommon() {
         return common;
     }
 
-    public void setCommon(TeacherCommon common) {
+    public void setCommon(TeacherComment common) {
         this.common = common;
     }
 

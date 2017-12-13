@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="attendance")
+@Table(name = "attendance")
 public class Attendance {
 
-    @GeneratedValue(generator = "attendanceId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "attendanceId", strategy = GenerationType.IDENTITY)
     private int attendanceId;
     private Date establishTime;
     private Date deadline;
@@ -29,7 +29,7 @@ public class Attendance {
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="codeId")
+    @JoinColumn(name = "codeId")
     public QRcode getqRcode() {
         return qRcode;
     }

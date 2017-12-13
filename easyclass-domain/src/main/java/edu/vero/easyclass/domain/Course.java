@@ -5,10 +5,10 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="course")
+@Table(name = "course")
 public class Course {
 
-    @GeneratedValue(generator = "courseId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "courseId", strategy = GenerationType.IDENTITY)
     private int courseId;
     private String courseName;
     private double credit;

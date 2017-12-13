@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="test_record")
+@Table(name = "test_record")
 public class TestRecord {
-    @GeneratedValue(generator = "recordId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "recordId", strategy = GenerationType.IDENTITY)
     private int recordId;
     private float score;
     private String answer;
@@ -14,7 +14,7 @@ public class TestRecord {
     private ClassSchedule schedule;
 
     @ManyToOne
-    @JoinColumn(name="scheduleId")
+    @JoinColumn(name = "scheduleId")
     public ClassSchedule getSchedule() {
         return schedule;
     }
@@ -33,7 +33,7 @@ public class TestRecord {
     }
 
     @ManyToOne
-    @JoinColumn(name="testId")
+    @JoinColumn(name = "testId")
     public OnlineClassTest getTest() {
         return test;
     }

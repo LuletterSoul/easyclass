@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="homework")
+@Table(name = "homework")
 public class Homework {
 
-    @GeneratedValue(generator = "homeworkId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "homeworkId", strategy = GenerationType.IDENTITY)
     private int homeworkId;
     private String title;
     private String content;
@@ -16,7 +16,7 @@ public class Homework {
     private Date establishTime;
     private Date deadline;
     private int size;
-    private boolean isSubmited;
+    private boolean isSubmitted;
 
     @Id
     public int getHomeworkId() {
@@ -83,11 +83,11 @@ public class Homework {
         this.size = size;
     }
 
-    public boolean isSubmited() {
-        return isSubmited;
+    public boolean isSubmitted() {
+        return isSubmitted;
     }
 
-    public void setSubmited(boolean submited) {
-        isSubmited = submited;
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
     }
 }

@@ -4,21 +4,16 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="student")
-@PrimaryKeyJoinColumn(name="userId")
-public class Student extends User{
+@Table(name = "student")
+@PrimaryKeyJoinColumn(name = "userId")
+public class Student extends User {
     private String studentId;
     private String studentName;
     private String studentGender;
     private String majorIn;
     private String grade;
     private Set<ClassSchedule> schedules;
-/*
-    @OneToMany
-    @JoinTable(name ="class_schedule"
-            ,joinColumns = @JoinColumn(name = "studentId")
-            ,inverseJoinColumns = @JoinColumn(name = "scheduleId"))
-    @JoinColumn(name="scheduled")*/
+
     @OneToMany(mappedBy = "student")
     public Set<ClassSchedule> getSchedules() {
         return schedules;

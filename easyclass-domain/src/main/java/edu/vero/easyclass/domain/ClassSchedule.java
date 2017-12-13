@@ -10,7 +10,7 @@ public class ClassSchedule {
     @GeneratedValue(generator = "scheduleId",strategy = GenerationType.IDENTITY)
     private int scheduleId;
     private Student student;
-    private TeacherArragement teacherArragement;
+    private TeacherArrangement teacherArrangement;
     private Set<Homework> homeworks;
     private Set<Attendance> attendances;
     private Set<TestRecord> testRecords;
@@ -53,13 +53,13 @@ public class ClassSchedule {
         this.student = student;
     }
     @ManyToOne
-    @JoinColumn(name="arragId")
-    public TeacherArragement getTeacherArragement() {
-        return teacherArragement;
+    @JoinColumn(name="arrangeId")
+    public TeacherArrangement getTeacherArrangement() {
+        return teacherArrangement;
     }
 
-    public void setTeacherArragement(TeacherArragement teacherArragement) {
-        this.teacherArragement = teacherArragement;
+    public void setTeacherArrangement(TeacherArrangement teacherArrangement) {
+        this.teacherArrangement = teacherArrangement;
     }
     @OneToMany
     @JoinColumn(name="scheduleId")

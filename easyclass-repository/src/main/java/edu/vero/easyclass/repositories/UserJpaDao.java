@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
  * created in  12:33 2017/12/11.
  * @since easyclass
  */
+
 @Repository
 public interface UserJpaDao extends JpaRepository<User, Long> {
 

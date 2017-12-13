@@ -3,16 +3,16 @@ package edu.vero.easyclass.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="sign_record")
+@Table(name = "sign_record")
 public class SignRecord {
-    @GeneratedValue(generator = "signId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "signId", strategy = GenerationType.IDENTITY)
     private int signId;
     private boolean isSign;
     private ClassSchedule schedule;
     private Attendance attendance;
 
     @ManyToOne
-    @JoinColumn(name="attendanceId")
+    @JoinColumn(name = "attendanceId")
     public Attendance getAttendance() {
         return attendance;
     }
@@ -22,7 +22,7 @@ public class SignRecord {
     }
 
     @ManyToOne
-    @JoinColumn(name="scheduleId")
+    @JoinColumn(name = "scheduleId")
     public ClassSchedule getSchedule() {
 
         return schedule;

@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="teacher_arragement")
-public class TeacherArragement {
+@Table(name = "teacher_arrangement")
+public class TeacherArrangement {
 
-    @GeneratedValue(generator = "arrageId",strategy = GenerationType.IDENTITY)
-    private int arrageId;
+    @GeneratedValue(generator = "arrangeId", strategy = GenerationType.IDENTITY)
+    private int arrangeId;
     private String place;
     private Teacher teacher;
     private Course course;
@@ -17,9 +17,9 @@ public class TeacherArragement {
     private List<ClassTime> classTimes;
     private Set<Courseware> coursewares;
     private Set<Notice> notices;
-    private TeacherCommon common;
+    private TeacherComment comment;
 
-    @OneToMany(mappedBy = "arragement")
+    @OneToMany(mappedBy = "arrangement")
     public Set<Notice> getNotices() {
         return notices;
     }
@@ -27,18 +27,19 @@ public class TeacherArragement {
     public void setNotices(Set<Notice> notices) {
         this.notices = notices;
     }
-    @OneToOne
-    @JoinColumn(name="commonId")
-    public TeacherCommon getCommon() {
-        return common;
+
+    @OneToOne(mappedBy = "arrangement")
+    @JoinColumn(name = "commentId")
+    public TeacherComment getComment() {
+        return comment;
     }
 
-    public void setCommon(TeacherCommon common) {
-        this.common = common;
+    public void setComment(TeacherComment comment) {
+        this.comment = comment;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="arrageId")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "arrangeId")
     public Set<Courseware> getCoursewares() {
         return coursewares;
     }
@@ -47,7 +48,7 @@ public class TeacherArragement {
         this.coursewares = coursewares;
     }
 
-    @OneToMany(mappedBy = "arragement")
+    @OneToMany(mappedBy = "arrangement")
     public List<OnlineClassTest> getTests() {
         return tests;
     }
@@ -57,7 +58,7 @@ public class TeacherArragement {
     }
 
     @OneToMany
-    @JoinColumn(name="arrageId")
+    @JoinColumn(name = "arrangeId")
     public List<ClassTime> getClassTimes() {
         return classTimes;
     }
@@ -65,8 +66,9 @@ public class TeacherArragement {
     public void setClassTimes(List<ClassTime> classTimes) {
         this.classTimes = classTimes;
     }
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="courseId")
+    @JoinColumn(name = "courseId")
     public Course getCourse() {
         return course;
     }
@@ -76,12 +78,12 @@ public class TeacherArragement {
     }
 
     @Id
-    public int getArrageId() {
-        return arrageId;
+    public int getArrangeId() {
+        return arrangeId;
     }
 
-    public void setArrageId(int arrageId) {
-        this.arrageId = arrageId;
+    public void setArrangeId(int arrangeId) {
+        this.arrangeId = arrangeId;
     }
 
     public String getPlace() {
@@ -92,10 +94,8 @@ public class TeacherArragement {
         this.place = place;
     }
 
-
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="teacherId")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacherId")
     public Teacher getTeacher() {
         return teacher;
     }

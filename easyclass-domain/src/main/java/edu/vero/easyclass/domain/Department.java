@@ -3,10 +3,10 @@ package edu.vero.easyclass.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="department")
+@Table(name = "department")
 public class Department {
 
-    @GeneratedValue(generator = "depId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "depId", strategy = GenerationType.IDENTITY)
     private int depId;
     private String depName;
 

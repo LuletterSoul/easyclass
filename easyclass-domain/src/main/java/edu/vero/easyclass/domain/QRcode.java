@@ -3,10 +3,10 @@ package edu.vero.easyclass.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="q_rcode")
+@Table(name = "q_rcode")
 public class QRcode {
 
-    @GeneratedValue(generator = "codeId",strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "codeId", strategy = GenerationType.IDENTITY)
     private int codeId;
     private String filePath;
     private String fileName;
