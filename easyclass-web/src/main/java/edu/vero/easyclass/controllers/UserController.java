@@ -23,14 +23,5 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 通过spring data jpa 调用方法 api :localhost:8099/users/byname?username=xxx
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getUser(@PathVariable("username") String username) {
-        return new ResponseEntity<>(userService.getUserByName(username), HttpStatus.OK);
-    }
+
 }

@@ -19,13 +19,5 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserJpaDao userJpaDao;
 
-    /**
-     *
-     * @param UserName
-     * @return
-     */
-    @Override
-    public User getUserByName(String username) {
-        return userJpaDao.findUser(username);
-    }
+
 }
