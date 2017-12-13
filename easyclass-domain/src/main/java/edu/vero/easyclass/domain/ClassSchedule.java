@@ -14,6 +14,16 @@ public class ClassSchedule {
     private Set<Homework> homeworks;
     private Set<Attendance> attendances;
     private Set<TestRecord> testRecords;
+    private Set<SignRecord> signRecords;
+
+    @OneToMany(mappedBy = "schedule")
+    public Set<SignRecord> getSignRecords() {
+        return signRecords;
+    }
+
+    public void setSignRecords(Set<SignRecord> signRecords) {
+        this.signRecords = signRecords;
+    }
 
     @OneToMany(mappedBy = "schedule")
     public Set<TestRecord> getTestRecords() {
