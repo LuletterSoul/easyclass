@@ -16,8 +16,17 @@ public class TeacherArragement {
     private List<OnlineClassTest> tests;
     private List<ClassTime> classTimes;
     private Set<Courseware> coursewares;
+    private Set<Notice> notices;
     private TeacherCommon common;
 
+    @OneToMany(mappedBy = "arragement")
+    public Set<Notice> getNotices() {
+        return notices;
+    }
+
+    public void setNotices(Set<Notice> notices) {
+        this.notices = notices;
+    }
     @OneToOne
     @JoinColumn(name="commonId")
     public TeacherCommon getCommon() {

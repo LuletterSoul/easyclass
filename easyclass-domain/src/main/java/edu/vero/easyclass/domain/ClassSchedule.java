@@ -11,9 +11,28 @@ public class ClassSchedule {
     private int scheduleId;
     private Student student;
     private TeacherArragement teacherArragement;
-    private Set<OnlineClassTest> tests;
     private Set<Homework> homeworks;
     private Set<Attendance> attendances;
+    private Set<TestRecord> testRecords;
+    private Set<SignRecord> signRecords;
+
+    @OneToMany(mappedBy = "schedule")
+    public Set<SignRecord> getSignRecords() {
+        return signRecords;
+    }
+
+    public void setSignRecords(Set<SignRecord> signRecords) {
+        this.signRecords = signRecords;
+    }
+
+    @OneToMany(mappedBy = "schedule")
+    public Set<TestRecord> getTestRecords() {
+        return testRecords;
+    }
+
+    public void setTestRecords(Set<TestRecord> testRecords) {
+        this.testRecords = testRecords;
+    }
 
     @Id
     public int getScheduleId() {
@@ -41,15 +60,6 @@ public class ClassSchedule {
 
     public void setTeacherArragement(TeacherArragement teacherArragement) {
         this.teacherArragement = teacherArragement;
-    }
-    @OneToMany
-    @JoinColumn(name="scheduleId")
-    public Set<OnlineClassTest> getOnlineClassTestSet() {
-        return tests;
-    }
-
-    public void setOnlineClassTestSet(Set<OnlineClassTest> onlineClassTestSet) {
-        this.tests = onlineClassTestSet;
     }
     @OneToMany
     @JoinColumn(name="scheduleId")

@@ -2,6 +2,7 @@ package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="attendance")
@@ -16,6 +17,16 @@ public class Attendance {
     private boolean isClosed;
     private Date closedTime;
     private QRcode qRcode;
+    private Set<SignRecord> signRecords;
+
+    @OneToMany(mappedBy = "attendance")
+    public Set<SignRecord> getSignRecords() {
+        return signRecords;
+    }
+
+    public void setSignRecords(Set<SignRecord> signRecords) {
+        this.signRecords = signRecords;
+    }
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="codeId")
