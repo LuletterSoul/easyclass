@@ -1,5 +1,6 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ public class Courseware {
     private int size;
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getCoursewareId() {
         return coursewareId;
     }

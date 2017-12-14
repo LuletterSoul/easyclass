@@ -1,5 +1,7 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -35,6 +37,8 @@ public class ClassSchedule {
     }
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getScheduleId() {
         return scheduleId;
     }

@@ -1,5 +1,7 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -9,19 +11,19 @@ import java.util.Set;
 public class Vote {
     private int voteId;
     private String voteContent;
-    private Date establishTime;
+    private Date establishedTime;
     private Date deadline;
     private boolean isClosed;
 
     private Set<VoteOption> options;
     private Attendance attendance;
 
-    public Date getEstablishTime() {
-        return establishTime;
+    public Date getEstablishedTime() {
+        return establishedTime;
     }
 
-    public void setEstablishTime(Date establishTime) {
-        this.establishTime = establishTime;
+    public void setEstablishedTime(Date establishedTime) {
+        this.establishedTime = establishedTime;
     }
 
     public Date getDeadline() {
@@ -60,6 +62,8 @@ public class Vote {
     }
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getVoteId() {
         return voteId;
     }

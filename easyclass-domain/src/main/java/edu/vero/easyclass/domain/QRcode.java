@@ -1,5 +1,7 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,8 @@ public class QRcode {
     private String fileName;
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getCodeId() {
         return codeId;
     }

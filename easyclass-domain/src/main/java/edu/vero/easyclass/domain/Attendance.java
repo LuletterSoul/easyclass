@@ -1,5 +1,7 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -8,9 +10,8 @@ import java.util.Set;
 @Table(name = "attendance")
 public class Attendance {
 
-    @GeneratedValue(generator = "attendanceId", strategy = GenerationType.IDENTITY)
     private int attendanceId;
-    private Date establishTime;
+    private Date establishedTime;
     private Date deadline;
     private boolean isAttend;
     private boolean isClosed;
@@ -59,6 +60,8 @@ public class Attendance {
     }
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getAttendanceId() {
         return attendanceId;
     }
@@ -67,12 +70,12 @@ public class Attendance {
         this.attendanceId = attendanceId;
     }
 
-    public Date getEstablishTime() {
-        return establishTime;
+    public Date getEstablishedTime() {
+        return establishedTime;
     }
 
-    public void setEstablishTime(Date establishTime) {
-        this.establishTime = establishTime;
+    public void setEstablishedTime(Date establishedTime) {
+        this.establishedTime = establishedTime;
     }
 
     public Date getDeadline() {

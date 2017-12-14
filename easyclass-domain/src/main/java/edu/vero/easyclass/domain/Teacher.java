@@ -1,14 +1,12 @@
 package edu.vero.easyclass.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import com.google.common.base.Objects;
+
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "teacher")
-@PrimaryKeyJoinColumn(name = "userId")
+@DiscriminatorValue(value = "Teacher")
 public class Teacher extends User {
     private String teacherId;
     private String teacherName;
@@ -46,5 +44,15 @@ public class Teacher extends User {
 
     public void setTeacherGender(String teacherGender) {
         this.teacherGender = teacherGender;
+    }
+
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("teacherId", teacherId)
+                .add("teacherName", teacherName)
+                .add("teacherGender", teacherGender)
+                .toString();
     }
 }

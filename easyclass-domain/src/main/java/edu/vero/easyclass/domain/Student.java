@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "student")
-@PrimaryKeyJoinColumn(name = "userId")
+@DiscriminatorValue(value = "Student")
 public class Student extends User {
     private String studentId;
     private String studentName;

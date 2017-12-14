@@ -1,6 +1,8 @@
 package edu.vero.easyclass.domain;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -26,6 +28,8 @@ public class ClassTime {
     }
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getTimeId() {
         return timeId;
     }

@@ -1,18 +1,27 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "serviceLevel",discriminatorType = DiscriminatorType.STRING)
 public class User {
 
-    @GeneratedValue(generator = "userId", strategy = GenerationType.IDENTITY)
     private int userId;
     private String username;
     private String password;
     private Department department;
 
+
+    @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
+    public int getUserId() {
+        return userId;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "depId")
@@ -24,10 +33,6 @@ public class User {
         this.department = department;
     }
 
-    @Id
-    public int getUserId() {
-        return userId;
-    }
 
     public void setUserId(int userId) {
         this.userId = userId;

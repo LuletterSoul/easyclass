@@ -1,5 +1,7 @@
 package edu.vero.easyclass.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,12 +15,14 @@ public class Homework {
     private String content;
     private String fileName;
     private String filePath;
-    private Date establishTime;
+    private Date establishedTime;
     private Date deadline;
     private int size;
     private boolean isSubmitted;
 
     @Id
+    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
     public int getHomeworkId() {
         return homeworkId;
     }
@@ -59,12 +63,12 @@ public class Homework {
         this.filePath = filePath;
     }
 
-    public Date getEstablishTime() {
-        return establishTime;
+    public Date getEstablishedTime() {
+        return establishedTime;
     }
 
-    public void setEstablishTime(Date establishTime) {
-        this.establishTime = establishTime;
+    public void setEstablishedTime(Date establishedTime) {
+        this.establishedTime = establishedTime;
     }
 
     public Date getDeadline() {
