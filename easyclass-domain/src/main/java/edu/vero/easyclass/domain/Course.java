@@ -13,6 +13,16 @@ public class Course {
     private String courseName;
     private double credit;
     private String type;
+    private Set<Question> questions;
+
+    @OneToMany(mappedBy = "course")
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
 
     @Id
     public int getCourseId() {

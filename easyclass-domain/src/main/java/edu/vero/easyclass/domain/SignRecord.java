@@ -1,15 +1,24 @@
 package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "sign_record")
 public class SignRecord {
     @GeneratedValue(generator = "signId", strategy = GenerationType.IDENTITY)
     private int signId;
-    private boolean isSign;
+    private Date signTime;
     private ClassSchedule schedule;
     private Attendance attendance;
+
+    public Date getSignTime() {
+        return signTime;
+    }
+
+    public void setSignTime(Date signTime) {
+        this.signTime = signTime;
+    }
 
     @ManyToOne
     @JoinColumn(name = "attendanceId")
@@ -41,11 +50,4 @@ public class SignRecord {
         this.signId = signId;
     }
 
-    public boolean isSign() {
-        return isSign;
-    }
-
-    public void setSign(boolean sign) {
-        isSign = sign;
-    }
 }

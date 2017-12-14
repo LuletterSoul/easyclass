@@ -2,6 +2,7 @@ package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,8 +12,20 @@ public class OnlineClassTest {
     private int testId;
     private Date establishTime;
     private Date deadline;
-    private Set<Question> questions;
+    private List<Question> questions;
     private TeacherArrangement arrangement;
+
+    @ManyToMany(targetEntity = Question.class)
+    @JoinTable(name="test_question",
+            joinColumns = @JoinColumn(name="testId"),
+            inverseJoinColumns = @JoinColumn(name="questionId"))
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 
     @Id
     public int getTestId() {
@@ -33,14 +46,6 @@ public class OnlineClassTest {
         this.arrangement = arrangement;
     }
 
-    @OneToMany(mappedBy = "classTest")
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
 
     public Date getEstablishTime() {
         return establishTime;
