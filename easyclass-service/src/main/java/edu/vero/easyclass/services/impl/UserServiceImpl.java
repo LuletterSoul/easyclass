@@ -18,6 +18,4 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserJpaDao userJpaDao;
-
-
 }

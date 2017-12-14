@@ -11,5 +11,4 @@ import edu.vero.easyclass.domain.User;
 
 public interface UserService {
 
-
 }
