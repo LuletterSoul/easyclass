@@ -18,6 +18,17 @@ public class TeacherArrangement {
     private Set<Courseware> coursewares;
     private Set<Notice> notices;
     private TeacherComment comment;
+    private Set<Attendance> attendances;
+
+
+    @OneToMany(mappedBy = "arrangement")
+    public Set<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
+    }
 
     @OneToMany(mappedBy = "arrangement")
     public Set<Notice> getNotices() {

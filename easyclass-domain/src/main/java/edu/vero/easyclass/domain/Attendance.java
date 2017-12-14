@@ -12,12 +12,32 @@ public class Attendance {
     private int attendanceId;
     private Date establishTime;
     private Date deadline;
-    private Date attendTime;
     private boolean isAttend;
     private boolean isClosed;
     private Date closedTime;
     private QRcode qRcode;
     private Set<SignRecord> signRecords;
+    private TeacherArrangement arrangement;
+    private Set<Vote> votes;
+
+    @OneToMany(mappedBy = "attendance")
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="arrangeId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
+    }
+
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
+    }
 
     @OneToMany(mappedBy = "attendance")
     public Set<SignRecord> getSignRecords() {
@@ -61,14 +81,6 @@ public class Attendance {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
-    }
-
-    public Date getAttendTime() {
-        return attendTime;
-    }
-
-    public void setAttendTime(Date attendTime) {
-        this.attendTime = attendTime;
     }
 
     public boolean isAttend() {
