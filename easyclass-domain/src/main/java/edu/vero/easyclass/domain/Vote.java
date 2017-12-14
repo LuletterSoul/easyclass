@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -8,8 +9,36 @@ import java.util.Set;
 public class Vote {
     private int voteId;
     private String voteContent;
+    private Date establishTime;
+    private Date deadline;
+    private boolean isClosed;
+
     private Set<VoteOption> options;
     private Attendance attendance;
+
+    public Date getEstablishTime() {
+        return establishTime;
+    }
+
+    public void setEstablishTime(Date establishTime) {
+        this.establishTime = establishTime;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
+    }
 
     @ManyToOne
     @JoinColumn(name="attendanceId")
