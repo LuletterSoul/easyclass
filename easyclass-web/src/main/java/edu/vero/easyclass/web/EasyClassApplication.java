@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EntityScan({"edu.vero.easyclass.domain"})
 @SpringBootApplication
 public class EasyClassApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(EasyClassApplication.class, args);
 	}

@@ -1,4 +1,4 @@
-package edu.vero.easyclass.web;
+package edu.vero.easyclass.config;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,11 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Configuration
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter
 {
-
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
     {
