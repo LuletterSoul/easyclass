@@ -14,7 +14,7 @@ public class VoteController {
     @Autowired
     private VoteService voteService;
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{voteId}")
     public ResponseEntity<Vote> closeVote(@PathVariable("id") String id){
         return null;
     }

@@ -16,15 +16,15 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
-    @PostMapping(value="/{id}/votes")
+    @PostMapping(value="/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("id") String id){
         return null;
     }
-    @DeleteMapping(value="/{id}/QR_code")
+    @DeleteMapping(value="/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable String id){
         return null;
     }
-    @GetMapping(value="/{id}/QR_code")
+    @GetMapping(value="/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> getQRcode(@PathVariable String id){
         return null;
     }

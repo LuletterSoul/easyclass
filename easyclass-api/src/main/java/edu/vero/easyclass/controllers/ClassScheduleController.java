@@ -25,28 +25,28 @@ public class ClassScheduleController {
                                                    @PathVariable("scheduleId") String scheduleId){
         return null;
     }
-    @GetMapping(value="/{id}/test_Records")
+    @GetMapping(value="/{scheduleId}/test_Records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("id") String id ){
         return null;
     }
-    @GetMapping(value="/{id}/sign_Records")
+    @GetMapping(value="/{scheduleId}/sign_Records")
     public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("id") String id ){
         return null;
     }
-    @GetMapping(value="/{id}/attendances")
+    @GetMapping(value="/{scheduleId}/attendances")
     public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("id") String id ){
         return null;
     }
-    @GetMapping(value="/{id}/homeworks")
+    @GetMapping(value="/{scheduleId}/homeworks")
     public ResponseEntity<List<Homework>> findHomworks(@PathVariable("id") String id ){
         return null;
     }
-    @GetMapping(value="/{id}/arragement")
+    @GetMapping(value="/{scheduleId}/arragement")
     public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("id") String id ){
         return null;
     }
-    @GetMapping(value="/{id}/student")
-    public ResponseEntity<Student> findHomeworks(@PathVariable("id") String id ){
+    @GetMapping(value="/{schduleId}/student")
+    public ResponseEntity<Student> findStudents(@PathVariable("id") String id ){
         return null;
     }
 }

@@ -17,11 +17,11 @@ public class NoticeController {
     public ResponseEntity<Notice> updateNotice(@RequestBody Notice notice){
         return null;
     }
-    @GetMapping(value="/{id}")
+    @GetMapping(value="/{noticeId}")
     public ResponseEntity<Notice> getNotice(@PathVariable("id") String id){
         return null;
     }
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value="/{noticeId}")
     public ResponseEntity<Notice> deleteNotice(@PathVariable("id") String id){
         return null;
     }
