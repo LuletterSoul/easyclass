@@ -2,7 +2,7 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.Notice;
 import edu.vero.easyclass.domain.Teacher;
-import edu.vero.easyclass.repositories.TeacherJapDao;
+import edu.vero.easyclass.repositories.TeacherJpaDao;
 import edu.vero.easyclass.services.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,16 +21,16 @@ public class TeacherServiceImpl implements TeacherService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TeacherServiceImpl.class);
 
-    private TeacherJapDao teacherJapDao;
+    private TeacherJpaDao teacherJpaDao;
 
     @Autowired
-    public void setTeacherJapDao(TeacherJapDao teacherJapDao) {
-        this.teacherJapDao = teacherJapDao;
+    public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao) {
+        this.teacherJpaDao = teacherJpaDao;
     }
 
     @Override
     public Teacher saveTeacher(Teacher teacher) {
-        this.teacherJapDao.save(teacher);
+        this.teacherJpaDao.save(teacher);
         LOGGER.warn("Persistence Teacher is {}.",teacher.toString());
         return teacher;
     }

@@ -1,11 +1,13 @@
 package edu.vero.easyclass.controllers;
 
-import edu.vero.easyclass.domain.Notice;
+import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.TeacherArrangementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -35,5 +37,50 @@ public class TeacherArrangementController {
     @PostMapping(value = "/{arrangementId}/notices")
     public ResponseEntity<Notice> createNotice(@PathVariable("arrangementId") Integer arrangementId,@RequestBody Notice notice){
         return new ResponseEntity<>(teacherArrangementService.createNotice(arrangementId, notice), HttpStatus.CREATED);
+    }
+    @GetMapping(value = "")
+    public ResponseEntity<List<TeacherArrangement>> findAllArrangements( ){
+        return new ResponseEntity<>(teacherArrangementService. findAllArrangements( ), HttpStatus.OK);
+    }
+    @GetMapping(value = "/{arrangementId}/coursewares")
+    public ResponseEntity<List<Courseware>> findAllCoursewares(@PathVariable("arrangementId") Integer arrangementId){
+        return new ResponseEntity<>(teacherArrangementService.findAllCoursewares(arrangementId), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{arrangementId}/notices/newest")
+    public ResponseEntity<Notice> findNewestNotices(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @PostMapping(value = "/{arrangementId}/attendances")
+    public ResponseEntity<Attendance> createAttendence(@PathVariable("arrangementId") Integer arrangementId, @RequestBody Attendance attendance){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}")
+    public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/tests")
+    public ResponseEntity<List<TestRecord>> findAllTestRecord(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/times")
+    public ResponseEntity<List<ClassTime>> findAllClassTime(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/comment")
+    public ResponseEntity<List<TeacherComment>> findAllTeacherComment(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/course")
+    public ResponseEntity<Course> findCourse(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/notices")
+    public ResponseEntity<List<Notice>> findAllNotice(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
+    }
+    @GetMapping(value = "/{arrangementId}/teacher")
+    public ResponseEntity<Teacher> findTeacher(@PathVariable("arrangementId") Integer arrangementId){
+        return null;
     }
 }
