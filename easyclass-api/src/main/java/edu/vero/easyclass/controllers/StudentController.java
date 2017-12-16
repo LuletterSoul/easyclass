@@ -1,11 +1,14 @@
 package edu.vero.easyclass.controllers;
 
+import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -25,8 +28,21 @@ public class StudentController {
     }
 
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<Student> getOneStudent(@PathVariable("userId") Integer userId){
+    public ResponseEntity<Student> findStudent(@PathVariable("userId") Integer userId){
         return new ResponseEntity<>(studentService.findStudentById(userId), HttpStatus.OK);
+    }
+    @GetMapping(value="/{id}/schedules")
+    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("id") String id){
+        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(id),HttpStatus.CREATED);
+    }
+    @GetMapping(value="")
+    public ResponseEntity<List<Student>> findAllStudents(){
+        return null;
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Student> findStudentById(){
+        return null;
     }
 
 }

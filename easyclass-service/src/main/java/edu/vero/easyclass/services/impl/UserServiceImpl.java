@@ -6,6 +6,8 @@ import edu.vero.easyclass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
  * @version 1.5
@@ -16,6 +18,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+
     private UserJpaDao userJpaDao;
+
+    @Autowired
+    public void setUserJpaDao(UserJpaDao userJpaDao) {
+        this.userJpaDao = userJpaDao;
+    }
+
+    @Override
+    public User findUserById(String userId) {
+        long id = Long.parseLong(userId);
+        return userJpaDao.findOne(id);
+    }
 }

@@ -1,6 +1,10 @@
 package edu.vero.easyclass.services;
 
 import edu.vero.easyclass.domain.User;
+import org.springframework.http.ResponseEntity;
+
+import javax.xml.ws.Response;
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -10,5 +14,5 @@ import edu.vero.easyclass.domain.User;
  */
 
 public interface UserService {
-
+    User findUserById(String userId);
 }

@@ -1,6 +1,10 @@
 package edu.vero.easyclass.services;
 
+import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
+import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -11,4 +15,6 @@ import edu.vero.easyclass.domain.Student;
 
 public interface StudentService {
     Student findStudentById(Integer userId);
+
+    List<ClassSchedule> findSchedule(String id);
 }
