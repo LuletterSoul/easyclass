@@ -1,6 +1,10 @@
 package edu.vero.easyclass.services;
 
+import edu.vero.easyclass.domain.Courseware;
 import edu.vero.easyclass.domain.Notice;
+import edu.vero.easyclass.domain.TeacherArrangement;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -18,4 +22,6 @@ public interface TeacherArrangementService {
      * @return
      */
     public Notice createNotice(Integer arrangementId,Notice notice);
+    public List<TeacherArrangement> findAllArrangements( );
+   public List<Courseware> findAllCoursewares(Integer arrangementId);
 }

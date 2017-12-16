@@ -1,6 +1,5 @@
 package edu.vero.easyclass.domain;
 
-import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -47,12 +46,4 @@ public class Teacher extends User {
     }
 
 
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this)
-                .add("teacherId", teacherId)
-                .add("teacherName", teacherName)
-                .add("teacherGender", teacherGender)
-                .toString();
-    }
 }
