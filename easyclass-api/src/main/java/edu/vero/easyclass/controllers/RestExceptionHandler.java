@@ -1,7 +1,6 @@
 package edu.vero.easyclass.controllers;
 
 
-
 import edu.vero.easyclass.exceptions.ErrorInfo;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.TypeMismatchException;
@@ -136,27 +135,31 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
             new HttpHeaders(), INTERNAL_SERVER_ERROR, request);
     }
 
-//    @ExceptionHandler({UnknownAccountException.class})
-//    public ResponseEntity<Object> handleUnknownAccountException(final UnknownAccountException ex,
-//                                                                final WebRequest request)
-//    {
-//        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), NOT_FOUND, request);
-//    }
-//
-//    @ExceptionHandler(UnsupportedTokenException.class)
-//    public ResponseEntity<Object> handleUnsupportedTokenException(final UnsupportedTokenException ex,
-//                                                                  final WebRequest request)
-//    {
-//        return handleExceptionInternal(ex,
-//            "Server can't resolve corresponding negotiation content with client.Please make sure request has include correct params.",
-//            new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-//    }
-//
-//    @ExceptionHandler(ExpiredCredentialsException.class)
-//    public ResponseEntity<Object> handleExpiredCredentialsException(final ExpiredCredentialsException ex,
-//                                                                    final WebRequest request)
-//    {
-//        return handleExceptionInternal(ex, "Expired credentials.", new HttpHeaders(),
-//            HttpStatus.FORBIDDEN, request);
-//    }
+    // @ExceptionHandler({UnknownAccountException.class})
+    // public ResponseEntity<Object> handleUnknownAccountException(final UnknownAccountException
+    // ex,
+    // final WebRequest request)
+    // {
+    // return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), NOT_FOUND, request);
+    // }
+    //
+    // @ExceptionHandler(UnsupportedTokenException.class)
+    // public ResponseEntity<Object> handleUnsupportedTokenException(final
+    // UnsupportedTokenException ex,
+    // final WebRequest request)
+    // {
+    // return handleExceptionInternal(ex,
+    // "Server can't resolve corresponding negotiation content with client.Please make sure request
+    // has include correct params.",
+    // new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    // }
+    //
+    // @ExceptionHandler(ExpiredCredentialsException.class)
+    // public ResponseEntity<Object> handleExpiredCredentialsException(final
+    // ExpiredCredentialsException ex,
+    // final WebRequest request)
+    // {
+    // return handleExceptionInternal(ex, "Expired credentials.", new HttpHeaders(),
+    // HttpStatus.FORBIDDEN, request);
+    // }
 }

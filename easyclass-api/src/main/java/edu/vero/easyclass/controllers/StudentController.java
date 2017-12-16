@@ -1,5 +1,6 @@
 package edu.vero.easyclass.controllers;
 
+
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.services.StudentService;
@@ -10,38 +11,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
- * @version 1.5
- * created in  21:15 2017/12/14.
+ * @version 1.5 created in 21:15 2017/12/14.
  * @since easyclass
  */
 
 @RestController
 @RequestMapping(value = "/students")
-public class StudentController {
+public class StudentController
+{
     private StudentService studentService;
 
     @Autowired
-    public void setStudentService(StudentService studentService) {
+    public void setStudentService(StudentService studentService)
+    {
         this.studentService = studentService;
     }
 
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<Student> findStudent(@PathVariable("userId") Integer userId){
+    public ResponseEntity<Student> findStudent(@PathVariable("userId") Integer userId)
+    {
         return new ResponseEntity<>(studentService.findStudentById(userId), HttpStatus.OK);
     }
-    @GetMapping(value="/{studentId}/schedules")
-    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("id") String id){
-        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(id),HttpStatus.CREATED);
+
+    @GetMapping(value = "/{userId}/schedules")
+    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("userId") String userId)
+    {
+        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(userId),
+            HttpStatus.CREATED);
     }
-    @GetMapping(value="")
-    public ResponseEntity<List<Student>> findAllStudents(){
+
+    @GetMapping(value = "")
+    public ResponseEntity<List<Student>> findAllStudents()
+    {
         return null;
     }
 
     @GetMapping(value = "/{studentId}")
-    public ResponseEntity<Student> findStudentById(){
+    public ResponseEntity<Student> findStudentById(@PathVariable("studentId") String studentId)
+    {
         return null;
     }
 

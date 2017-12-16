@@ -1,5 +1,6 @@
 package edu.vero.easyclass.controllers;
 
+
 import edu.vero.easyclass.domain.Department;
 import edu.vero.easyclass.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping(value = "/arrangements")
-public class DepartmentController {
+public class DepartmentController
+{
     private DepartmentService departmentService;
 
     @Autowired
-    public void setDepartmentService(DepartmentService departmentService) {
+    public void setDepartmentService(DepartmentService departmentService)
+    {
         this.departmentService = departmentService;
     }
 
-
-
     @GetMapping(value = "")
-    public ResponseEntity<List<Department>> findAllDepartments(){
+    public ResponseEntity<List<Department>> findAllDepartments()
+    {
         return null;
     }
 }
