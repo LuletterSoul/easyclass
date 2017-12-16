@@ -1,15 +1,15 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.Notice;
-import edu.vero.easyclass.domain.Teacher;
-import edu.vero.easyclass.services.TeacherService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import edu.vero.easyclass.domain.Teacher;
+import edu.vero.easyclass.domain.TeacherArrangement;
+import edu.vero.easyclass.services.TeacherService;
 
 
 /**
@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.*;
 public class TeacherController
 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TeacherController.class);
-
     private TeacherService teacherService;
 
     @Autowired
@@ -33,17 +31,30 @@ public class TeacherController
         this.teacherService = teacherService;
     }
 
-    @PostMapping
-    public ResponseEntity<Teacher> post(@RequestBody Teacher teacher)
+    @GetMapping(value = "")
+    public ResponseEntity<List<Teacher>> findAllTeacher()
     {
-        return new ResponseEntity<>(teacherService.saveTeacher(teacher), HttpStatus.CREATED);
+        return null;
+
     }
 
-    @PostMapping(value = "/{userId}/arrangements/{arrangementId}/notices")
-    public ResponseEntity<Notice> createNotice(@PathVariable("userId") String userId,
-                                               @RequestBody Notice notice,
-                                               @PathVariable("arrangementId") String arrangementId)
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<Teacher> findTeacher(@PathVariable("id") Integer id)
     {
         return null;
     }
+
+    @GetMapping(value = "/{userId}/arrangements")
+    public ResponseEntity<TeacherArrangement> findTeacherArrangement(@PathVariable("userId") Integer userId)
+    {
+        return null;
+    }
+
+    @PostMapping(value = "/{userId}/arrangements")
+    public ResponseEntity<List<TeacherArrangement>> createTeacherArrangement(@PathVariable("userId") Integer userId,
+                                                                             @RequestBody List<TeacherArrangement> list)
+    {
+        return null;
+    }
+
 }

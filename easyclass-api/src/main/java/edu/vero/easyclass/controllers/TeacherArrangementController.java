@@ -1,8 +1,12 @@
 package edu.vero.easyclass.controllers;
 
 
+import edu.vero.easyclass.domain.Notice;
+import edu.vero.easyclass.domain.OnlineClassTest;
+
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.TeacherArrangementService;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +47,14 @@ public class TeacherArrangementController
     public ResponseEntity<Notice> createNotice(@PathVariable("arrangementId") Integer arrangementId,
                                                @RequestBody Notice notice)
     {
-        return new ResponseEntity<>(teacherArrangementService.createNotice(arrangementId, notice),
-            HttpStatus.CREATED);
+        return null;
+    }
+
+    @PostMapping(value = "/{arrangementId}/tests")
+    public ResponseEntity<OnlineClassTest> createOnlineClassTest(@PathVariable("arrangementId") Integer arrangementId,
+                                                                 @RequestBody OnlineClassTest onlineClassTest)
+    {
+        return null;
     }
 
     @GetMapping(value = "")
