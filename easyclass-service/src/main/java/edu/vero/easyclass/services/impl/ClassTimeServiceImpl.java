@@ -3,7 +3,9 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.repositories.ClassTimeJpaDao;
 import edu.vero.easyclass.services.ClassTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ClassTimeServiceImpl implements ClassTimeService {
 
     private ClassTimeJpaDao classTimeJpaDao;
