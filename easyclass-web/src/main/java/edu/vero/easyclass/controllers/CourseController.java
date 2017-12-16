@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.Course;
 import edu.vero.easyclass.domain.Question;
 import edu.vero.easyclass.services.CourseService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
+@Api(description = "上课时间节点业务")
 @RestController
 @RequestMapping(value = "courses")
 public class CourseController
@@ -35,13 +37,13 @@ public class CourseController
     }
 
     @GetMapping(value = "/{courseId}")
-    public ResponseEntity<Course> findCourse(@PathVariable("courseId") String courseId)
+    public ResponseEntity<Course> findCourse(@PathVariable("courseId") Integer courseId)
     {
         return null;
     }
 
     @GetMapping(value = "/{courseId}/questions")
-    public RequestEntity<List<Question>> findQuestions(@PathVariable("courseId") String courseId)
+    public RequestEntity<List<Question>> findQuestions(@PathVariable("courseId") Integer courseId)
     {
         return null;
     }

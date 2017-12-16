@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.domain.User;
 import edu.vero.easyclass.services.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -18,7 +19,7 @@ import java.util.List;
  * @version 1.5 created in 12:40 2017/12/11.
  * @since easyclass
  */
-
+@Api(description = "用户业务")
 @RestController
 @RequestMapping(value = "/users")
 public class UserController
@@ -40,9 +41,9 @@ public class UserController
     }
 
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<User> findUserById(@PathVariable("userId") String userId)
+    public ResponseEntity<User> findUserById(@PathVariable("userId") Integer userId)
     {
-        return new ResponseEntity<User>(userService.findUserById(userId), HttpStatus.OK);
+        return null;
     }
 
 }

@@ -1,7 +1,7 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.exceptions.ErrorInfo;
+import exceptions.ErrorInfo;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataAccessException;

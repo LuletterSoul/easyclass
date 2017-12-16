@@ -5,11 +5,13 @@ import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.QRcode;
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.AttendanceService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+@Api(description = "签到业务")
 @RestController
 @RequestMapping(value = "/attendances")
 public class AttendanceController
@@ -24,19 +26,19 @@ public class AttendanceController
     }
 
     @PostMapping(value = "/{attendanceId}/votes")
-    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") String attendanceId)
+    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId)
     {
         return null;
     }
 
     @DeleteMapping(value = "/{attendanceId}/QR_code")
-    public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") String attendanceId)
+    public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
         return null;
     }
 
     @GetMapping(value = "/{attendanceId}/QR_code")
-    public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") String attendanceId)
+    public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
         return null;
     }

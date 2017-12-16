@@ -1,4 +1,4 @@
-package edu.vero.easyclass.exceptions;
+package exceptions;
 
 
 import org.springframework.http.HttpStatus;

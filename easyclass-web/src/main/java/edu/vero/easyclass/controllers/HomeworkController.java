@@ -3,6 +3,7 @@ package edu.vero.easyclass.controllers;
 
 import edu.vero.easyclass.domain.Homework;
 import edu.vero.easyclass.services.HomeworkService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@Api(description = "作业业务")
 @RestController
 @RequestMapping(value = "/homeworks")
 public class HomeworkController

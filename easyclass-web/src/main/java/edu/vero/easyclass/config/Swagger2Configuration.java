@@ -1,10 +1,12 @@
-package edu.vero.easyclass.web;
+package edu.vero.easyclass.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -18,21 +20,36 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2Configuration {
+    private static final String SWAGGER_SCAN_BASE_PACKAGE = "edu.vero.easyclass.controllers";
+
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("edu.vero.easyclass.api"))
+                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
                 .paths(PathSelectors.any())
                 .build();
     }
+
+//    @Bean
+//    public Docket swaggerSpringMvcPlugin() {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(apiInfo())
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
+//                .paths(PathSelectors.any())
+//                .build();
+//    }
+
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("易授微服务RESTful APIs说明文档")
-                .description("用于指定规范的API文档")
-                .contact("luvletterU@njust.edu.cn")
+                .description("本文档说明了每个接口返回、接收的字段信息。" +
+                        "并且制定相应的规范作为前后端交流的渠道。")
                 .version("1.0")
+                .contact(new Contact("刘祥德","/","luvletterU@njust.edu.cn"))
                 .build();
     }
 }

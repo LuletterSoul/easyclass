@@ -3,6 +3,7 @@ package edu.vero.easyclass.controllers;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import edu.vero.easyclass.services.TeacherService;
  * @version 1.5 created in 23:52 2017/12/14.
  * @since easyclass
  */
-
+@Api(description = "教师业务")
 @RestController
 @RequestMapping(value = "/teachers")
 public class TeacherController
@@ -39,7 +40,7 @@ public class TeacherController
     }
 
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<Teacher> findTeacher(@PathVariable("id") Integer id)
+    public ResponseEntity<Teacher> findTeacher(@PathVariable("userId") Integer id)
     {
         return null;
     }

@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.TeacherComment;
 import edu.vero.easyclass.services.ClassTimeService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
+@Api(description = "上课时间节点业务")
 @RestController
 @RequestMapping(value = "/class_time")
 public class ClassTimeController

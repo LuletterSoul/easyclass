@@ -3,11 +3,13 @@ package edu.vero.easyclass.controllers;
 
 import edu.vero.easyclass.domain.Notice;
 import edu.vero.easyclass.services.NoticeService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+@Api(description = "公告业务")
 @RestController
 @RequestMapping(value = "/notices")
 public class NoticeController
@@ -27,13 +29,13 @@ public class NoticeController
     }
 
     @GetMapping(value = "/{noticeId}")
-    public ResponseEntity<Notice> getNotice(@PathVariable("id") String id)
+    public ResponseEntity<Notice> getNotice(@PathVariable("noticeId") Integer noticeId)
     {
         return null;
     }
 
     @DeleteMapping(value = "/{noticeId}")
-    public ResponseEntity<Notice> deleteNotice(@PathVariable("id") String id)
+    public ResponseEntity<Notice> deleteNotice(@PathVariable("noticeId") Integer noticeId)
     {
         return null;
     }

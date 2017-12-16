@@ -6,6 +6,7 @@ import edu.vero.easyclass.domain.OnlineClassTest;
 
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.TeacherArrangementService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.util.List;
  * @version 1.5 created in 0:09 2017/12/15.
  * @since easyclass
  */
-
+@Api(description = "教师安排表业务")
 @RestController
 @RequestMapping(value = "/arrangements")
 public class TeacherArrangementController
@@ -36,7 +37,7 @@ public class TeacherArrangementController
 
     /**
      * 通过教师安排表的Id，新建旗下的一个公告，并建立对应的关联
-     * 
+     *
      * @param arrangementId
      *            教师安排表的Id
      * @param notice

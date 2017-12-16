@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.services.StudentService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.List;
  * @version 1.5 created in 21:15 2017/12/14.
  * @since easyclass
  */
-
+@Api(description = "学生业务")
 @RestController
 @RequestMapping(value = "/students")
 public class StudentController
@@ -37,10 +38,9 @@ public class StudentController
     }
 
     @GetMapping(value = "/{userId}/schedules")
-    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("userId") String userId)
+    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("userId") Integer userId)
     {
-        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(userId),
-            HttpStatus.CREATED);
+        return null;
     }
 
     @GetMapping(value = "")
