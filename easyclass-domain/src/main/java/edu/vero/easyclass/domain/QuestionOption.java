@@ -1,53 +1,67 @@
 package edu.vero.easyclass.domain;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "question_option")      //option冲突
-public class QuestionOption {
+@Table(name = "question_option") // option冲突
+public class QuestionOption
+{
 
     @GeneratedValue(generator = "optionId", strategy = GenerationType.IDENTITY)
     private int optionId;
+
     private String optionOrder;
+
     private String content;
+
     private Question question;
 
     @ManyToOne
     @JoinColumn(name = "questionId")
-    public Question getQuestion() {
+    public Question getQuestion()
+    {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(Question question)
+    {
         this.question = question;
     }
 
     @Id
-    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
     @GeneratedValue(generator = "identityGenerator")
-    public int getOptionId() {
+    public int getOptionId()
+    {
         return optionId;
     }
 
-    public void setOptionId(int optionId) {
+    public void setOptionId(int optionId)
+    {
         this.optionId = optionId;
     }
 
-    public String getOptionOrder() {
+    public String getOptionOrder()
+    {
         return optionOrder;
     }
 
-    public void setOptionOrder(String optionOrder) {
+    public void setOptionOrder(String optionOrder)
+    {
         this.optionOrder = optionOrder;
     }
 
-    public String getContent() {
+    public String getContent()
+    {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(String content)
+    {
         this.content = content;
     }
 }

@@ -1,97 +1,126 @@
 package edu.vero.easyclass.domain;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "homework")
-public class Homework {
+public class Homework
+{
 
     @GeneratedValue(generator = "homeworkId", strategy = GenerationType.IDENTITY)
     private int homeworkId;
+
     private String title;
+
     private String content;
+
     private String fileName;
+
     private String filePath;
+
     private Date establishedTime;
+
     private Date deadline;
+
     private int size;
+
     private boolean isSubmitted;
 
     @Id
-    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
     @GeneratedValue(generator = "identityGenerator")
-    public int getHomeworkId() {
+    public int getHomeworkId()
+    {
         return homeworkId;
     }
 
-    public void setHomeworkId(int homeworkId) {
+    public void setHomeworkId(int homeworkId)
+    {
         this.homeworkId = homeworkId;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public String getContent() {
+    public String getContent()
+    {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(String content)
+    {
         this.content = content;
     }
 
-    public String getFileName() {
+    public String getFileName()
+    {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(String fileName)
+    {
         this.fileName = fileName;
     }
 
-    public String getFilePath() {
+    public String getFilePath()
+    {
         return filePath;
     }
 
-    public void setFilePath(String filePath) {
+    public void setFilePath(String filePath)
+    {
         this.filePath = filePath;
     }
 
-    public Date getEstablishedTime() {
+    public Date getEstablishedTime()
+    {
         return establishedTime;
     }
 
-    public void setEstablishedTime(Date establishedTime) {
+    public void setEstablishedTime(Date establishedTime)
+    {
         this.establishedTime = establishedTime;
     }
 
-    public Date getDeadline() {
+    public Date getDeadline()
+    {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Date deadline)
+    {
         this.deadline = deadline;
     }
 
-    public int getSize() {
+    public int getSize()
+    {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(int size)
+    {
         this.size = size;
     }
 
-    public boolean isSubmitted() {
+    public boolean isSubmitted()
+    {
         return isSubmitted;
     }
 
-    public void setSubmitted(boolean submitted) {
+    public void setSubmitted(boolean submitted)
+    {
         isSubmitted = submitted;
     }
 }

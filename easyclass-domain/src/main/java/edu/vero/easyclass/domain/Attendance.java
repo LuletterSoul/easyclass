@@ -1,112 +1,149 @@
 package edu.vero.easyclass.domain;
 
+
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
+
 
 @Entity
 @Table(name = "attendance")
-public class Attendance {
+public class Attendance
+{
 
     private int attendanceId;
+
     private Date establishedTime;
+
     private Date deadline;
+
     private boolean isAttend;
+
     private boolean isClosed;
+
     private Date closedTime;
+
     private QRcode qRcode;
+
+    @ApiModelProperty(hidden = true)
     private Set<SignRecord> signRecords;
+
     private TeacherArrangement arrangement;
+
+    @ApiModelProperty(hidden = true)
     private Set<Vote> votes;
 
     @OneToMany(mappedBy = "attendance")
-    public Set<Vote> getVotes() {
+    public Set<Vote> getVotes()
+    {
         return votes;
     }
 
-    public void setVotes(Set<Vote> votes) {
+    public void setVotes(Set<Vote> votes)
+    {
         this.votes = votes;
     }
 
     @ManyToOne
-    @JoinColumn(name="arrangeId")
-    public TeacherArrangement getArrangement() {
+    @JoinColumn(name = "arrangeId")
+    public TeacherArrangement getArrangement()
+    {
         return arrangement;
     }
 
-    public void setArrangement(TeacherArrangement arrangement) {
+    public void setArrangement(TeacherArrangement arrangement)
+    {
         this.arrangement = arrangement;
     }
 
     @OneToMany(mappedBy = "attendance")
-    public Set<SignRecord> getSignRecords() {
+    public Set<SignRecord> getSignRecords()
+    {
         return signRecords;
     }
 
-    public void setSignRecords(Set<SignRecord> signRecords) {
+    public void setSignRecords(Set<SignRecord> signRecords)
+    {
         this.signRecords = signRecords;
     }
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "codeId")
-    public QRcode getqRcode() {
+    public QRcode getqRcode()
+    {
         return qRcode;
     }
 
-    public void setqRcode(QRcode qRcode) {
+    public void setqRcode(QRcode qRcode)
+    {
         this.qRcode = qRcode;
     }
 
     @Id
-    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
     @GeneratedValue(generator = "identityGenerator")
-    public int getAttendanceId() {
+    public int getAttendanceId()
+    {
         return attendanceId;
     }
 
-    public void setAttendanceId(int attendanceId) {
+    public void setAttendanceId(int attendanceId)
+    {
         this.attendanceId = attendanceId;
     }
 
-    public Date getEstablishedTime() {
+    public Date getEstablishedTime()
+    {
         return establishedTime;
     }
 
-    public void setEstablishedTime(Date establishedTime) {
+    public void setEstablishedTime(Date establishedTime)
+    {
         this.establishedTime = establishedTime;
     }
 
-    public Date getDeadline() {
+    public Date getDeadline()
+    {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Date deadline)
+    {
         this.deadline = deadline;
     }
 
-    public boolean isAttend() {
+    public boolean isAttend()
+    {
         return isAttend;
     }
 
-    public void setAttend(boolean attend) {
+    public void setAttend(boolean attend)
+    {
         isAttend = attend;
     }
 
-    public boolean isClosed() {
+    public boolean isClosed()
+    {
         return isClosed;
     }
 
-    public void setClosed(boolean closed) {
+    public void setClosed(boolean closed)
+    {
         isClosed = closed;
     }
 
-    public Date getClosedTime() {
+    public Date getClosedTime()
+    {
         return closedTime;
     }
 
-    public void setClosedTime(Date closedTime) {
+    public void setClosedTime(Date closedTime)
+    {
         this.closedTime = closedTime;
     }
+
 }

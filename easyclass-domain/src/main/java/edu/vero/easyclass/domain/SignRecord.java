@@ -1,56 +1,70 @@
 package edu.vero.easyclass.domain;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "sign_record")
-public class SignRecord {
+public class SignRecord
+{
     @GeneratedValue(generator = "signId", strategy = GenerationType.IDENTITY)
     private int signId;
+
     private Date signTime;
+
     private ClassSchedule schedule;
+
     private Attendance attendance;
 
-    public Date getSignTime() {
+    public Date getSignTime()
+    {
         return signTime;
     }
 
-    public void setSignTime(Date signTime) {
+    public void setSignTime(Date signTime)
+    {
         this.signTime = signTime;
     }
 
     @ManyToOne
     @JoinColumn(name = "attendanceId")
-    public Attendance getAttendance() {
+    public Attendance getAttendance()
+    {
         return attendance;
     }
 
-    public void setAttendance(Attendance attendance) {
+    public void setAttendance(Attendance attendance)
+    {
         this.attendance = attendance;
     }
 
     @ManyToOne
     @JoinColumn(name = "scheduleId")
-    public ClassSchedule getSchedule() {
+    public ClassSchedule getSchedule()
+    {
 
         return schedule;
     }
 
-    public void setSchedule(ClassSchedule schedule) {
+    public void setSchedule(ClassSchedule schedule)
+    {
         this.schedule = schedule;
     }
 
     @Id
-    @GenericGenerator(name = "identityGenerator",strategy = "identity")
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
     @GeneratedValue(generator = "identityGenerator")
-    public int getSignId() {
+    public int getSignId()
+    {
         return signId;
     }
 
-    public void setSignId(int signId) {
+    public void setSignId(int signId)
+    {
         this.signId = signId;
     }
 

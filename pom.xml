@@ -12,7 +12,6 @@
         <module>easyclass-repository</module>
 		<module>easyclass-domain</module>
 		<module>easyclass-core</module>
-		<module>easyclass-api</module>
 	</modules>
 	<packaging>pom</packaging>
 
