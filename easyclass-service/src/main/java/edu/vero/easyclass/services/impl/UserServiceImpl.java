@@ -31,4 +31,10 @@ public class UserServiceImpl implements UserService {
         long id = Long.parseLong(userId);
         return userJpaDao.findOne(id);
     }
+
+    @Override
+    public User save(User user) {
+        return userJpaDao.save(user);
+    }
+
 }
