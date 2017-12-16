@@ -17,4 +17,6 @@ public interface StudentService {
     Student findStudentById(Integer userId);
 
     List<ClassSchedule> findSchedule(String id);
+
+    Student save(Student student);
 }

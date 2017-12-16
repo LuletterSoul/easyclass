@@ -39,4 +39,9 @@ public class StudentServiceImpl implements StudentService {
         Long stuId = Long.parseLong(id);
         return null;
     }
+
+    @Override
+    public Student save(Student student) {
+        return studentJpaDao.save(student);
+    }
 }

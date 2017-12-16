@@ -21,9 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
@@ -37,5 +40,4 @@ public class UserController {
     public ResponseEntity<User> findUserById(@PathVariable("userId")String userId ){
         return new ResponseEntity<User>(userService.findUserById(userId),HttpStatus.OK);
     }
-
 }
