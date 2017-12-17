@@ -1,5 +1,6 @@
 package edu.vero.easyclass.services;
 
+import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.domain.User;
 import org.springframework.http.ResponseEntity;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 public interface UserService {
-    User findUserById(String userId);
-
-    User save(User user);
+    public User findUserById(String userId);
+    public Student registerStudent(Student student);
+    public List<User> findAll();
 }

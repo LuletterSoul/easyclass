@@ -23,5 +23,6 @@ public interface TeacherArrangementService {
      */
     public Notice createNotice(Integer arrangementId,Notice notice);
     public List<TeacherArrangement> findAllArrangements( );
-   public List<Courseware> findAllCoursewares(Integer arrangementId);
+    public List<Courseware> findAllCoursewares(Integer arrangementId);
+
 }
