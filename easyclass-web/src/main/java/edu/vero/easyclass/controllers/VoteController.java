@@ -7,6 +7,7 @@ import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.VoteService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +27,9 @@ public class VoteController
     }
 
     @PutMapping(value = "/{voteId}")
-    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") Integer id)
+    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") Integer voteId)
     {
-        return null;
+        return new ResponseEntity<Vote>(voteService.closeVote(voteId), HttpStatus.OK);
     }
 
 }

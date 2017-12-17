@@ -36,19 +36,19 @@ public class UserController
     @GetMapping
     public ResponseEntity<List<User>> findAll()
     {
-        return null;
+        return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
     }
 
     @PostMapping
-    public RequestEntity<Student> registerStudent(@RequestBody Student student)
+    public ResponseEntity<Student> registerStudent(@RequestBody Student student)
     {
-        return null;
+        return new ResponseEntity<Student>(userService.registerStudent(student),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{userId}")
     public ResponseEntity<User> findUserById(@PathVariable("userId") Integer userId)
     {
-        return null;
+        return new ResponseEntity<User>(userService.findUserById(userId),HttpStatus.OK);
     }
 
 }
