@@ -25,8 +25,13 @@ import java.util.List;
 public class UserController
 {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService)
+    {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll()
