@@ -1,4 +1,14 @@
 package edu.vero.easyclass.services;
 
-public interface HomeworkService
-{}
+import edu.vero.easyclass.domain.Homework;
+
+import java.util.List;
+
+public interface HomeworkService {
+
+    public Homework deleteHomework( Integer homeworkId);
+
+
+    public List<Homework> findAllHomeworks();
+
+}

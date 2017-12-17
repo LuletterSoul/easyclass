@@ -6,6 +6,7 @@ import edu.vero.easyclass.domain.TeacherComment;
 import edu.vero.easyclass.services.ClassTimeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,18 +32,22 @@ public class ClassTimeController
     @GetMapping(value = "/{timeId}/comment")
     public ResponseEntity<List<TeacherComment>> findAllTeacherComment(@PathVariable("timeId") Integer timeId)
     {
-        return null;
+        return new ResponseEntity<>(classTimeService.findAllTeacherComment(timeId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{timeId}")
     public ResponseEntity<ClassTime> findClassTime(@PathVariable("timeId") Integer timeId)
     {
-        return null;
+        return new ResponseEntity<>(classTimeService.findClassTime(timeId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "")
     public ResponseEntity<List<ClassTime>> findAllClassTimes()
+
     {
-        return null;
+        return new ResponseEntity<>(classTimeService.findAllClassTimes(),
+                HttpStatus.OK);
     }
 }
