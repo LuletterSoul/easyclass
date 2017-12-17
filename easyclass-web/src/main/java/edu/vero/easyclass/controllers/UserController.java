@@ -24,13 +24,14 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController
 {
+
     private UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(UserService userService)
+    {
         this.userService = userService;
     }
-
 
     @GetMapping
     public ResponseEntity<List<User>> findAll()

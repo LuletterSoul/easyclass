@@ -1,7 +1,7 @@
 package edu.vero.easyclass.repositories;
 
 
-import edu.vero.easyclass.domain.Courseware;
+import edu.vero.easyclass.domain.TestRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since easyclass
  */
 
-public interface CoursewareJpaDao extends JpaRepository<Courseware,Integer> {
+public interface TestRecordJpaDao extends JpaRepository<TestRecord,Integer> {
 }

@@ -56,8 +56,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
 
     @Override
     public List<TeacherArrangement> findAllArrangements() {
-        List<TeacherArrangement> list=teacherArrangementJpaDao.findAll();
-        return list;
+        return teacherArrangementJpaDao.findAll();
     }
 
     @Override
