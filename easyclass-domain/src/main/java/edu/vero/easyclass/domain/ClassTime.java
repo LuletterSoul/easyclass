@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "classtime")
+@Table(name = "class_time")
 public class ClassTime
 {
 
