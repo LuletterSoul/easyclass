@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CourseService {
     List<Course> findAllCourse();
-    Course findCourseById(String courseId);
-    List<Question> findCourseQuestion(String courseId);
+    Course findCourseById(Integer courseId);
+    List<Question> findCourseQuestion(Integer courseId);
 }

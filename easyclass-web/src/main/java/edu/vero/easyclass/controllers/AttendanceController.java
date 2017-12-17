@@ -3,12 +3,15 @@ package edu.vero.easyclass.controllers;
 
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.QRcode;
+import edu.vero.easyclass.domain.SignRecord;
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.AttendanceService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Api(description = "签到业务")
@@ -49,8 +52,8 @@ public class AttendanceController
         return null;
     }
 
-    @GetMapping(value = "/sign_records")
-    public ResponseEntity<Attendance> getAttendance(@RequestBody Attendance attendance)
+    @GetMapping(value = "/{attendanceId}/sign_records")
+    public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
         return null;
     }

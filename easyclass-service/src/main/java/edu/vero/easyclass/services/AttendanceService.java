@@ -7,9 +7,9 @@ import edu.vero.easyclass.domain.Vote;
 import java.util.List;
 
 public interface AttendanceService {
-    public Vote createVote(String attendanceId);
-    public QRcode deleteQRcode(String attendanceId);
-    public QRcode findQRcode(String attendanceId);
-    public Attendance updateAttendance(String attendanceId);
-    public Attendance findSignRecords(String attendanceId);
+    public Vote createVote(Integer attendanceId);
+    public QRcode deleteQRcode(Integer attendanceId);
+    public QRcode findQRcode(Integer attendanceId);
+    public Attendance updateAttendance(Attendance attendance);
+    public Attendance findSignRecords(Integer attendanceId);
 }

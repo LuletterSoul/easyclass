@@ -49,8 +49,8 @@ public class StudentController
         return null;
     }
 
-    @GetMapping(value = "/{studentId}")
-    public ResponseEntity<Student> findStudentById(@PathVariable("studentId") String studentId)
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<Student> findStudentById(@PathVariable("userId") Integer userId)
     {
         return null;
     }

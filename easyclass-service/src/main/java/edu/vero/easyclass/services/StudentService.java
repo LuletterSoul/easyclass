@@ -16,7 +16,7 @@ import java.util.List;
 public interface StudentService {
     public Student findStudentById(Integer userId);
 
-    public List<ClassSchedule> findSchedule(String userId);
+    public List<ClassSchedule> findSchedule(Integer userId);
 
     public Student save(Student student);
 

@@ -26,7 +26,7 @@ public class VoteController
     }
 
     @PutMapping(value = "/{voteId}")
-    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") Integer id)
+    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") Integer voteId)
     {
         return null;
     }

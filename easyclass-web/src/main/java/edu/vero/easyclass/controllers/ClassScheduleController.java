@@ -69,7 +69,7 @@ public class ClassScheduleController
     }
 
     @GetMapping(value = "/{scheduleId}/student")
-    public ResponseEntity<Student> findStudents(@PathVariable("scheduleId") String scheduleId)
+    public ResponseEntity<Student> findStudents(@PathVariable("scheduleId") Integer scheduleId)
     {
         return null;
     }

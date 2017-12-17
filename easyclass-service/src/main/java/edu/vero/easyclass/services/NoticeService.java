@@ -4,6 +4,6 @@ import edu.vero.easyclass.domain.Notice;
 
 public interface NoticeService {
     public Notice updateNotice(Notice notice);
-    public Notice findNotice(String noticeId);
-    public Notice deleteNotice(String noticeId);
+    public Notice findNotice(Integer noticeId);
+    public Notice deleteNotice(Integer noticeId);
 }
