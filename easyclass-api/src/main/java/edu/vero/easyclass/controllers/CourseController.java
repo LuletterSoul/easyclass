@@ -16,8 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping(value="courses")
 public class CourseController {
-    @Autowired
+
     private CourseService courseService;
+
+    @Autowired
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Course>> findAll(){

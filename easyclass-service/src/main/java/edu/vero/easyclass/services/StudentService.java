@@ -19,4 +19,6 @@ public interface StudentService {
     List<ClassSchedule> findSchedule(String id);
 
     Student save(Student student);
+
+    List<Student> findAll();
 }

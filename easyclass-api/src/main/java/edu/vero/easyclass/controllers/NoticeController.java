@@ -10,19 +10,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/notices")
 public class NoticeController {
 
-    @Autowired
+
     private NoticeService noticeService;
+
+    @Autowired
+    public void setNoticeService(NoticeService noticeService) {
+        this.noticeService = noticeService;
+    }
 
     @PutMapping
     public ResponseEntity<Notice> updateNotice(@RequestBody Notice notice){
         return null;
     }
     @GetMapping(value="/{noticeId}")
-    public ResponseEntity<Notice> getNotice(@PathVariable("id") String id){
+    public ResponseEntity<Notice> getNotice(@PathVariable("noticeId") String id){
         return null;
     }
     @DeleteMapping(value="/{noticeId}")
-    public ResponseEntity<Notice> deleteNotice(@PathVariable("id") String id){
+    public ResponseEntity<Notice> deleteNotice(@PathVariable("noticeId") String id){
         return null;
     }
 

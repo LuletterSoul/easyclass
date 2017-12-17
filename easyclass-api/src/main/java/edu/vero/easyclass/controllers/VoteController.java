@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value="/votes")
 public class VoteController {
-    @Autowired
+
     private VoteService voteService;
 
+    @Autowired
+    public void setVoteService(VoteService voteService) {
+        this.voteService = voteService;
+    }
+
     @PutMapping(value = "/{voteId}")
-    public ResponseEntity<Vote> closeVote(@PathVariable("id") String id){
+    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") String id){
         return null;
     }
 

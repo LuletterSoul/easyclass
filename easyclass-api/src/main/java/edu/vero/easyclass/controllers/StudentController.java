@@ -31,16 +31,16 @@ public class StudentController {
     public ResponseEntity<Student> findStudent(@PathVariable("userId") Integer userId){
         return new ResponseEntity<>(studentService.findStudentById(userId), HttpStatus.OK);
     }
-    @GetMapping(value="/{studentId}/schedules")
-    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("id") String id){
-        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(id),HttpStatus.CREATED);
+    @GetMapping(value="/{userId}/schedules")
+    public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("userId") String useId){
+        return new ResponseEntity<List<ClassSchedule>>(studentService.findSchedule(useId),HttpStatus.CREATED);
     }
     @GetMapping(value="")
     public ResponseEntity<List<Student>> findAllStudents(){
         return null;
     }
 
-    @GetMapping(value = "/{studentId}")
+    @GetMapping(value = "/{userId}")
     public ResponseEntity<Student> findStudentById(){
         return null;
     }

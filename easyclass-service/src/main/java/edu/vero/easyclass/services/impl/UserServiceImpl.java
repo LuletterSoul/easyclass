@@ -3,6 +3,7 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.User;
 import edu.vero.easyclass.repositories.UserJpaDao;
 import edu.vero.easyclass.services.UserService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(String userId) {
-        long id = Long.parseLong(userId);
+        Integer id = Integer.valueOf(userId);
         return userJpaDao.findOne(id);
     }
 

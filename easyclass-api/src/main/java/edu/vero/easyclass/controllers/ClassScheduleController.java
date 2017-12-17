@@ -11,8 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/schedules")
 public class ClassScheduleController {
-    @Autowired
+
     private ClassScheduleService scheduleService;
+
+    @Autowired
+    public void setScheduleService(ClassScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
+    }
 
     @GetMapping
     public ResponseEntity<List<ClassSchedule>> findAllSchedule(){
@@ -26,27 +31,27 @@ public class ClassScheduleController {
         return null;
     }
     @GetMapping(value="/{scheduleId}/test_Records")
-    public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("id") String id ){
+    public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") String id ){
         return null;
     }
     @GetMapping(value="/{scheduleId}/sign_Records")
-    public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("id") String id ){
+    public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("scheduleId") String id ){
         return null;
     }
     @GetMapping(value="/{scheduleId}/attendances")
-    public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("id") String id ){
+    public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("scheduleId") String id ){
         return null;
     }
     @GetMapping(value="/{scheduleId}/homeworks")
-    public ResponseEntity<List<Homework>> findHomworks(@PathVariable("id") String id ){
+    public ResponseEntity<List<Homework>> findHomworks(@PathVariable("scheduleId") String id ){
         return null;
     }
     @GetMapping(value="/{scheduleId}/arragement")
-    public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("id") String id ){
+    public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("scheduleId") String id ){
         return null;
     }
     @GetMapping(value="/{schduleId}/student")
-    public ResponseEntity<Student> findStudents(@PathVariable("id") String id ){
+    public ResponseEntity<Student> findStudents(@PathVariable("scheduleId") String id ){
         return null;
     }
 }
