@@ -1,7 +1,7 @@
 package edu.vero.easyclass.repositories;
 
-import edu.vero.easyclass.domain.Notice;
-import edu.vero.easyclass.domain.Teacher;
+
+import edu.vero.easyclass.domain.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since easyclass
  */
 
-public interface TeacherJapDao extends JpaRepository<Teacher,Integer> {
+public interface QuestionJpaDao extends JpaRepository<Question,Integer> {
 }
