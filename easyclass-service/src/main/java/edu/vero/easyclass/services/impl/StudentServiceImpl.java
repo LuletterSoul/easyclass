@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +23,6 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     private StudentJpaDao studentJpaDao;
 
-    @Autowired
-    private ClassScheduleJpaDao scheduleJpaDao;
 
     @Autowired
     public void setStudentJpaDao(StudentJpaDao studentJpaDao) {
@@ -35,13 +34,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<ClassSchedule> findSchedule(String id) {
-        Long stuId = Long.parseLong(id);
-        return null;
+    public List<ClassSchedule> findSchedule(Integer userId) {
+        return new ArrayList<ClassSchedule>(studentJpaDao.findOne(userId).getSchedules());
     }
+
 
     @Override
     public Student save(Student student) {
-        return studentJpaDao.save(student);
+        return studentJpaDao.saveAndFlush(student);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        return studentJpaDao.findAll();
     }
 }

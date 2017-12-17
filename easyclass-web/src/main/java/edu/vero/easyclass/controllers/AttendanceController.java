@@ -8,6 +8,7 @@ import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.AttendanceService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,33 +30,33 @@ public class AttendanceController
     }
 
     @PostMapping(value = "/{attendanceId}/votes")
-    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId)
+    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,@RequestBody Vote vote)
     {
-        return null;
+        return new ResponseEntity<>(attendanceService.createVote(attendanceId,vote),HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return null;
+        return new ResponseEntity<>(attendanceService.deleteQRcode(attendanceId), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 
     @GetMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return null;
+        return new ResponseEntity<>(attendanceService.findQRcode(attendanceId),HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance attendance)
     {
-        return null;
+        return new ResponseEntity<>(attendanceService.updateAttendance(attendance),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{attendanceId}/sign_records")
     public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return null;
+        return new ResponseEntity<List<SignRecord>>(attendanceService.findSignRecords(attendanceId),HttpStatus.OK);
     }
 
 }

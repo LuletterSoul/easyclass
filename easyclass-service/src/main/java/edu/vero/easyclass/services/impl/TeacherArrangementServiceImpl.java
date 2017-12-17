@@ -49,7 +49,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
         //这步可以删去，因为教师安排表中没有对应的公告键
 //        teacherArrangement.getNotices().add(notice);
         //持久化公告
-        noticeJpaDao.save(notice);
+        noticeJpaDao.saveAndFlush(notice);
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return notice;
     }

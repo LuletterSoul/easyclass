@@ -5,12 +5,12 @@ import edu.vero.easyclass.domain.*;
 import java.util.List;
 
 public interface ClassScheduleService {
-    public Homework updateHomework(String scheduled,Homework homework);
-    public List<ClassSchedule> findAll();
-    public List<TestRecord> findAllTestRecords(Integer scheduleId);
-    public List<SignRecord> findAllSignRecords(Integer scheduleId);
-    public List<Attendance> findAllAttendances(Integer scheduleId);
-    public List<Homework> findAllHomeworks(Integer scheduleId);
-    public TeacherArrangement findArrangement(Integer schduleId);
-    public Student findStudent(Integer schduleId);
+    Homework updateHomework(Integer scheduled,Homework homework);
+    List<ClassSchedule> findAll();
+    List<TestRecord> findAllTestRecords(Integer scheduleId);
+    List<SignRecord> findAllSignRecords(Integer scheduleId);
+    List<Attendance> findAllAttendances(Integer scheduleId);
+    List<Homework> findAllHomeworks(Integer scheduleId);
+    TeacherArrangement findArrangement(Integer schduleId);
+    Student findStudent(Integer schduleId);
 }

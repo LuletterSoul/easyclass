@@ -23,6 +23,18 @@ public class ClassSchedule
 
     private TeacherArrangement teacherArrangement;
 
+    private TeacherComment teacherComment;
+
+    @OneToOne
+    @JoinColumn(name="commentId")
+    public TeacherComment getTeacherComment() {
+        return teacherComment;
+    }
+
+    public void setTeacherComment(TeacherComment teacherComment) {
+        this.teacherComment = teacherComment;
+    }
+
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     private Set<Homework> homeworks;
