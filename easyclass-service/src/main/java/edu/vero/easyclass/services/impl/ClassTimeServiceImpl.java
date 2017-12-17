@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClassTimeServiceImpl implements ClassTimeService {
+public class ClassTimeServiceImpl implements ClassTimeService
+{
 
     private ClassTimeJpaDao classTimeJpaDao;
 
     @Autowired
-    public void setClassTimeJpaDao(ClassTimeJpaDao classTimeJpaDao) {
+    public void setClassTimeJpaDao(ClassTimeJpaDao classTimeJpaDao)
+    {
         this.classTimeJpaDao = classTimeJpaDao;
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,27 +36,29 @@ public class TeacherController
     @GetMapping(value = "")
     public ResponseEntity<List<Teacher>> findAllTeacher()
     {
-        return null;
+        return new ResponseEntity<>(teacherService.findAllTeachers(), HttpStatus.OK);
 
     }
 
     @GetMapping(value = "/{userId}")
     public ResponseEntity<Teacher> findTeacher(@PathVariable("userId") Integer id)
     {
-        return null;
+
+        return new ResponseEntity<>(teacherService.findTeacher(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{userId}/arrangements")
-    public ResponseEntity<TeacherArrangement> findTeacherArrangement(@PathVariable("userId") Integer userId)
+    public ResponseEntity<List<TeacherArrangement>> findTeacherArrangement(@PathVariable("userId") Integer userId)
     {
-        return null;
+        return new ResponseEntity<>(teacherService.findTeacherArrangement(userId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/{userId}/arrangements")
     public ResponseEntity<List<TeacherArrangement>> createTeacherArrangement(@PathVariable("userId") Integer userId,
                                                                              @RequestBody List<TeacherArrangement> list)
     {
-        return null;
+        return new ResponseEntity<>(teacherService.createTeacherArrangement(userId, list),
+            HttpStatus.OK);
     }
 
 }

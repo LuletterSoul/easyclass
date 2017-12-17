@@ -1,4 +1,10 @@
 package edu.vero.easyclass.services;
 
-public interface VoteService {
+
+import edu.vero.easyclass.domain.Vote;
+
+
+public interface VoteService
+{
+    public Vote closeVote(Integer voteId);
 }

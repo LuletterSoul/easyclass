@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.Notice;
 import edu.vero.easyclass.services.NoticeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,19 +26,20 @@ public class NoticeController
     @PutMapping
     public ResponseEntity<Notice> updateNotice(@RequestBody Notice notice)
     {
-        return null;
+        return new ResponseEntity<Notice>(noticeService.updateNotice(notice), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{noticeId}")
     public ResponseEntity<Notice> getNotice(@PathVariable("noticeId") Integer noticeId)
     {
-        return null;
+        return new ResponseEntity<Notice>(noticeService.findNotice(noticeId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{noticeId}")
     public ResponseEntity<Notice> deleteNotice(@PathVariable("noticeId") Integer noticeId)
     {
-        return null;
+        return new ResponseEntity<Notice>(noticeService.deleteNotice(noticeId),
+            HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 
 }
