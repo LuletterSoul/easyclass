@@ -19,12 +19,13 @@ import java.util.List;
 @RequestMapping(value = "/questions")
 public class QuestionController
 {
-  private QuestionService questionService;
+    private QuestionService questionService;
 
-  @Autowired
-  public void setQuestionService(QuestionService questionService){
-      this.questionService=questionService;
-  }
+    @Autowired
+    public void setQuestionService(QuestionService questionService)
+    {
+        this.questionService = questionService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Question>> findAllQuestions()
@@ -35,19 +36,20 @@ public class QuestionController
     @PostMapping
     public ResponseEntity<Question> createQuestion(@RequestBody Question question)
     {
-        return new ResponseEntity<>(questionService.createQuestion(question),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "/{questionId}")
     public ResponseEntity<Question> findQuestion(@PathVariable("questionId") Integer questionId)
     {
-        return new ResponseEntity<>(questionService.findQuestion(questionId),HttpStatus.OK);
+        return new ResponseEntity<>(questionService.findQuestion(questionId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{questionId}/options")
     public ResponseEntity<List<QuestionOption>> findQuestionOptions(@PathVariable("questionId") Integer questionId)
     {
-        return new ResponseEntity<>(questionService.findQuestionOptions(questionId),HttpStatus.OK);
+        return new ResponseEntity<>(questionService.findQuestionOptions(questionId),
+            HttpStatus.OK);
     }
 
 }

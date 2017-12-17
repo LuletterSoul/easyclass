@@ -24,8 +24,9 @@ public class TestRecordController
     private TestRecordService testRecordService;
 
     @Autowired
-    public void setTestRecordService(TestRecordService testRecordService){
-        this.testRecordService=testRecordService;
+    public void setTestRecordService(TestRecordService testRecordService)
+    {
+        this.testRecordService = testRecordService;
     }
 
     @GetMapping
@@ -38,21 +39,22 @@ public class TestRecordController
     @PostMapping(value = "/{recordId}")
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {
-        return new ResponseEntity<>(testRecordService.createTestRecord(testRecord),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(testRecordService.createTestRecord(testRecord),
+            HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "/{recordId}/schedule")
     public ResponseEntity<ClassSchedule> findClassSchedule(@PathVariable("recordId") Integer recordId)
     {
 
-        return new ResponseEntity<>(testRecordService.findClassSchedule(recordId),HttpStatus.OK);
+        return new ResponseEntity<>(testRecordService.findClassSchedule(recordId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{recordId}/test")
     public ResponseEntity<OnlineClassTest> findTest(@PathVariable("recordId") Integer recordId)
     {
 
-        return new ResponseEntity<>(testRecordService.findTest(recordId),HttpStatus.OK);
+        return new ResponseEntity<>(testRecordService.findTest(recordId), HttpStatus.OK);
     }
 
 }

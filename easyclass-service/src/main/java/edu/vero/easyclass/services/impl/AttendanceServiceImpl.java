@@ -1,5 +1,6 @@
 package edu.vero.easyclass.services.impl;
 
+
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.QRcode;
 import edu.vero.easyclass.domain.SignRecord;
@@ -16,15 +17,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
- * @version 1.5
- * created in  18:39 2017/12/16.
+ * @version 1.5 created in 18:39 2017/12/16.
  * @since easyclass
  */
 
 @Service
-public class AttendanceServiceImpl implements AttendanceService {
+public class AttendanceServiceImpl implements AttendanceService
+{
     private VoteJpaDao voteJpaDao;
 
     private AttendanceJpaDao attendanceJpaDao;
@@ -32,21 +34,26 @@ public class AttendanceServiceImpl implements AttendanceService {
     private QRcodeJpaDao qRcodeJpaDao;
 
     @Autowired
-    public void setqRcodeJpaDao(QRcodeJpaDao qRcodeJpaDao) {
+    public void setqRcodeJpaDao(QRcodeJpaDao qRcodeJpaDao)
+    {
         this.qRcodeJpaDao = qRcodeJpaDao;
     }
 
     @Autowired
-    public void setVoteJpaDao(VoteJpaDao voteJpaDao) {
+    public void setVoteJpaDao(VoteJpaDao voteJpaDao)
+    {
         this.voteJpaDao = voteJpaDao;
     }
+
     @Autowired
-    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao) {
+    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
+    {
         this.attendanceJpaDao = attendanceJpaDao;
     }
 
     @Override
-    public Vote createVote(Integer attendanceId,Vote vote) {
+    public Vote createVote(Integer attendanceId, Vote vote)
+    {
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         Date date = new Date();
         vote.setEstablishedTime(date);
@@ -56,7 +63,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public QRcode deleteQRcode(Integer attendanceId) {
+    public QRcode deleteQRcode(Integer attendanceId)
+    {
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         QRcode qRcode = attendance.getqRcode();
         qRcodeJpaDao.delete(qRcode);
@@ -64,21 +72,24 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public QRcode findQRcode(Integer attendanceId) {
+    public QRcode findQRcode(Integer attendanceId)
+    {
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         QRcode qRcode = attendance.getqRcode();
         return qRcode;
     }
 
     @Override
-    public Attendance updateAttendance(Attendance attendance) {
-        return  attendanceJpaDao.save(attendance);
+    public Attendance updateAttendance(Attendance attendance)
+    {
+        return attendanceJpaDao.save(attendance);
     }
 
     @Override
-    public List<SignRecord> findSignRecords(Integer attendanceId) {
+    public List<SignRecord> findSignRecords(Integer attendanceId)
+    {
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
-        Set<SignRecord> signRecordSet= attendance.getSignRecords();
+        Set<SignRecord> signRecordSet = attendance.getSignRecords();
         return new ArrayList<SignRecord>(signRecordSet);
     }
 }

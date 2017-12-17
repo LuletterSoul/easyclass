@@ -1,4 +1,4 @@
 package edu.vero.easyclass.services;
 
-public interface DepartmentService {
-}
+public interface DepartmentService
+{}

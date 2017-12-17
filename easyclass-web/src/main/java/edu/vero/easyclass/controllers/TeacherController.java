@@ -44,20 +44,21 @@ public class TeacherController
     public ResponseEntity<Teacher> findTeacher(@PathVariable("userId") Integer id)
     {
 
-        return new ResponseEntity<>(teacherService.findTeacher(id),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.findTeacher(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{userId}/arrangements")
     public ResponseEntity<List<TeacherArrangement>> findTeacherArrangement(@PathVariable("userId") Integer userId)
     {
-        return new ResponseEntity<>(teacherService.findTeacherArrangement(userId),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.findTeacherArrangement(userId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/{userId}/arrangements")
     public ResponseEntity<List<TeacherArrangement>> createTeacherArrangement(@PathVariable("userId") Integer userId,
                                                                              @RequestBody List<TeacherArrangement> list)
     {
-        return new ResponseEntity<>(teacherService.createTeacherArrangement(userId,list),HttpStatus.OK);
+        return new ResponseEntity<>(teacherService.createTeacherArrangement(userId, list),
+            HttpStatus.OK);
     }
 
 }

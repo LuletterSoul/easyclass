@@ -27,8 +27,9 @@ public class SignRecordController
     private SignRecordService signRecordService;
 
     @Autowired
-    public void setSignRecordService(SignRecordService signRecordService){
-        this.signRecordService=signRecordService;
+    public void setSignRecordService(SignRecordService signRecordService)
+    {
+        this.signRecordService = signRecordService;
     }
 
     @GetMapping(value = "")
@@ -41,13 +42,13 @@ public class SignRecordController
     public ResponseEntity<Attendance> findAttendance(@PathVariable("signId") Integer signId)
     {
 
-        return new ResponseEntity<>(signRecordService.findAttendence(signId),HttpStatus.OK);
+        return new ResponseEntity<>(signRecordService.findAttendence(signId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{signId}/schedule")
     public ResponseEntity<ClassSchedule> findClassSchedule(@PathVariable("signId") Integer signId)
     {
 
-        return new ResponseEntity<>(signRecordService.findClassSchedule(signId),HttpStatus.OK);
+        return new ResponseEntity<>(signRecordService.findClassSchedule(signId), HttpStatus.OK);
     }
 }

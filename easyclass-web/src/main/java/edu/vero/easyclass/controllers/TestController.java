@@ -22,11 +22,12 @@ public class TestController
 
     private TestsService testsService;
 
+    @Autowired
+    public void setTestsService(TestsService testsService)
+    {
+        this.testsService = testsService;
+    }
 
-     @Autowired
-     public void setTestsService(TestsService testsService){
-        this.testsService=testsService;
-     }
     @GetMapping
     public ResponseEntity<List<OnlineClassTest>> findAllTests()
     {
@@ -36,31 +37,31 @@ public class TestController
     @PostMapping
     public ResponseEntity<OnlineClassTest> createTest(@RequestBody OnlineClassTest onlineClassTest)
     {
-        return new ResponseEntity<>(testsService.createTest(onlineClassTest),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(testsService.createTest(onlineClassTest), HttpStatus.ACCEPTED);
     }
 
     @PutMapping
     public ResponseEntity<OnlineClassTest> updateTest(@RequestBody OnlineClassTest onlineClassTest)
     {
 
-        return new ResponseEntity<>(testsService.updateTest(onlineClassTest),HttpStatus.CREATED);
+        return new ResponseEntity<>(testsService.updateTest(onlineClassTest), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{testId}")
     public ResponseEntity<OnlineClassTest> findTest(@PathVariable("testId") Integer testId)
     {
-        return new ResponseEntity<>(testsService.findTest(testId),HttpStatus.OK);
+        return new ResponseEntity<>(testsService.findTest(testId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{testId}/arrangement")
     public ResponseEntity<TeacherArrangement> findTestArrangement(@PathVariable("testId") Integer testId)
     {
-        return new ResponseEntity<>(testsService.findTestArrangement(testId),HttpStatus.OK);
+        return new ResponseEntity<>(testsService.findTestArrangement(testId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{testId}/questions")
     public ResponseEntity<List<Question>> findTestQuestions(@PathVariable("testId") Integer testId)
     {
-        return new ResponseEntity<>(testsService.findTestQuestions(testId),HttpStatus.OK);
+        return new ResponseEntity<>(testsService.findTestQuestions(testId), HttpStatus.OK);
     }
 }

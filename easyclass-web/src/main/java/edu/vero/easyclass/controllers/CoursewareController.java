@@ -23,9 +23,11 @@ public class CoursewareController
     private CoursewareService coursewareService;
 
     @Autowired
-    public void setCoursewareService(CoursewareService coursewareService){
-        this.coursewareService=coursewareService;
+    public void setCoursewareService(CoursewareService coursewareService)
+    {
+        this.coursewareService = coursewareService;
     }
+
     @GetMapping(value = "")
     public ResponseEntity<List<Courseware>> findAllCoursewares()
     {
@@ -35,6 +37,6 @@ public class CoursewareController
     @GetMapping(value = "/{coursewareId}")
     public ResponseEntity<Courseware> findCourseware(@PathVariable("coursewareId") Integer coursewareId)
     {
-        return new ResponseEntity<>(coursewareService.findCourseWare(coursewareId),HttpStatus.OK);
+        return new ResponseEntity<>(coursewareService.findCourseWare(coursewareId), HttpStatus.OK);
     }
 }
