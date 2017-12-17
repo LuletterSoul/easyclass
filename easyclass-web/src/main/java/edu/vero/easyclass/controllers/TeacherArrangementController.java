@@ -1,13 +1,9 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.Notice;
-import edu.vero.easyclass.domain.OnlineClassTest;
-
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.TeacherArrangementService;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,14 +44,16 @@ public class TeacherArrangementController
     public ResponseEntity<Notice> createNotice(@PathVariable("arrangementId") Integer arrangementId,
                                                @RequestBody Notice notice)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.createNotice(arrangementId,  notice),
+                HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/{arrangementId}/tests")
     public ResponseEntity<OnlineClassTest> createOnlineClassTest(@PathVariable("arrangementId") Integer arrangementId,
                                                                  @RequestBody OnlineClassTest onlineClassTest)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.createOnlineClassTest(arrangementId,  onlineClassTest),
+                HttpStatus.CREATED);
     }
 
     @GetMapping(value = "")
@@ -75,55 +73,64 @@ public class TeacherArrangementController
     @GetMapping(value = "/{arrangementId}/notices/newest")
     public ResponseEntity<Notice> findNewestNotices(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findNewestNotices(arrangementId),
+                HttpStatus.OK);
     }
 
     @PostMapping(value = "/{arrangementId}/attendances")
     public ResponseEntity<Attendance> createAttendance(@PathVariable("arrangementId") Integer arrangementId,
                                                        @RequestBody Attendance attendance)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.createAttendance(arrangementId,  attendance),
+                HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{arrangementId}")
     public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findArrangement(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/tests")
-    public ResponseEntity<List<TestRecord>> findAllTestRecord(@PathVariable("arrangementId") Integer arrangementId)
+    public ResponseEntity<List<OnlineClassTest>> findAllOnlineClassTest(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findAllOnlineClassTest(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/times")
     public ResponseEntity<List<ClassTime>> findAllClassTime(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findAllClassTime(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/comment")
-    public ResponseEntity<List<TeacherComment>> findAllTeacherComment(@PathVariable("arrangementId") Integer arrangementId)
+    public ResponseEntity<TeacherComment> findTeacherComment(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findTeacherComment(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/course")
     public ResponseEntity<Course> findCourse(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findCourse(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/notices")
     public ResponseEntity<List<Notice>> findAllNotice(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findAllNotice(arrangementId),
+                HttpStatus.OK);
     }
 
     @GetMapping(value = "/{arrangementId}/teacher")
     public ResponseEntity<Teacher> findTeacher(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return null;
+        return new ResponseEntity<>(teacherArrangementService.findTeacher(arrangementId),
+                HttpStatus.OK);
     }
 }

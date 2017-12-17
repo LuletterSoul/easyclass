@@ -1,8 +1,6 @@
 package edu.vero.easyclass.services;
 
-import edu.vero.easyclass.domain.Courseware;
-import edu.vero.easyclass.domain.Notice;
-import edu.vero.easyclass.domain.TeacherArrangement;
+import edu.vero.easyclass.domain.*;
 
 import java.util.List;
 
@@ -22,6 +20,17 @@ public interface TeacherArrangementService {
      * @return
      */
     public Notice createNotice(Integer arrangementId,Notice notice);
+    public OnlineClassTest createOnlineClassTest(Integer arrangementId, OnlineClassTest onlineClassTest);
+    public Notice findNewestNotices(Integer arrangementId);
+    public Attendance createAttendance(Integer arrangementId, Attendance attendance);
+    public  TeacherArrangement findArrangement( Integer arrangementId);
+    public List<OnlineClassTest> findAllOnlineClassTest( Integer arrangementId);
+    public List<ClassTime> findAllClassTime( Integer arrangementId);
+    public TeacherComment findTeacherComment( Integer arrangementId);
+    public Course findCourse( Integer arrangementId);
+    public List<Notice> findAllNotice(Integer arrangementId);
+    public Teacher findTeacher( Integer arrangementId);
     public List<TeacherArrangement> findAllArrangements( );
-   public List<Courseware> findAllCoursewares(Integer arrangementId);
+    public List<Courseware> findAllCoursewares(Integer arrangementId);
+
 }

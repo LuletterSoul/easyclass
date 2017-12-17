@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.Homework;
 import edu.vero.easyclass.services.HomeworkService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,14 @@ public class HomeworkController
     @DeleteMapping(value = "/{homeworkId}")
     public ResponseEntity<Homework> deleteHomework(@PathVariable("homeworkId") Integer homeworkId)
     {
-        return null;
+        return new ResponseEntity<>(homeworkService.deleteHomework(homeworkId),
+                HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "")
     public ResponseEntity<List<Homework>> findAllHomeworks()
     {
-        return null;
+        return new ResponseEntity<>(homeworkService.findAllHomeworks(),
+                HttpStatus.OK);
     }
 }
