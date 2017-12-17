@@ -44,4 +44,9 @@ public class StudentServiceImpl implements StudentService {
     public Student save(Student student) {
         return studentJpaDao.save(student);
     }
+
+    @Override
+    public List<Student> findAll() {
+        return null;
+    }
 }
