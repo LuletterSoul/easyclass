@@ -75,14 +75,14 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
-    public TeacherArrangement findArrangement(Integer schduleId)
+    public TeacherArrangement findArrangement(Integer scheduleId)
     {
-        return scheduleJpaDao.findOne(schduleId).getTeacherArrangement();
+        return scheduleJpaDao.findOne(scheduleId).getTeacherArrangement();
     }
 
     @Override
-    public Student findStudent(Integer schduleId)
+    public Student findStudent(Integer scheduleId)
     {
-        return scheduleJpaDao.findOne(schduleId).getStudent();
+        return scheduleJpaDao.findOne(scheduleId).getStudent();
     }
 }

@@ -42,7 +42,7 @@ public class SignRecordController
     public ResponseEntity<Attendance> findAttendance(@PathVariable("signId") Integer signId)
     {
 
-        return new ResponseEntity<>(signRecordService.findAttendence(signId), HttpStatus.OK);
+        return new ResponseEntity<>(signRecordService.findAttendance(signId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{signId}/schedule")

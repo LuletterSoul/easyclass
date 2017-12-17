@@ -20,7 +20,7 @@ public interface ClassScheduleService
 
     List<Homework> findAllHomeworks(Integer scheduleId);
 
-    TeacherArrangement findArrangement(Integer schduleId);
+    TeacherArrangement findArrangement(Integer scheduleId);
 
-    Student findStudent(Integer schduleId);
+    Student findStudent(Integer scheduleId);
 }

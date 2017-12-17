@@ -12,7 +12,7 @@ public interface SignRecordService
 {
     public List<SignRecord> findAllSignRecord();
 
-    public Attendance findAttendence(Integer signId);
+    public Attendance findAttendance(Integer signId);
 
     public ClassSchedule findClassSchedule(Integer signId);
 

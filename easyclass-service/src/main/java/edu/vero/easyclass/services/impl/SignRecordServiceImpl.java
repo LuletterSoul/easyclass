@@ -1,5 +1,6 @@
 package edu.vero.easyclass.services.impl;
 
+
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.SignRecord;
@@ -10,28 +11,36 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
-public class SignRecordServiceImpl implements SignRecordService{
+public class SignRecordServiceImpl implements SignRecordService
+{
 
     private SignRecordJpaDao signRecordJpaDao;
+
     @Autowired
-    public void setSignRecordJpaDao(SignRecordJpaDao signRecordJpaDao){
-        this.signRecordJpaDao=signRecordJpaDao;
+    public void setSignRecordJpaDao(SignRecordJpaDao signRecordJpaDao)
+    {
+        this.signRecordJpaDao = signRecordJpaDao;
     }
+
     @Override
-    public List<SignRecord> findAllSignRecord() {
+    public List<SignRecord> findAllSignRecord()
+    {
         return signRecordJpaDao.findAll();
     }
 
     @Override
-    public Attendance findAttendence(Integer signId) {
-        SignRecord signRecord=signRecordJpaDao.findOne(signId);
+    public Attendance findAttendance(Integer signId)
+    {
+        SignRecord signRecord = signRecordJpaDao.findOne(signId);
         return signRecord.getAttendance();
     }
 
     @Override
-    public ClassSchedule findClassSchedule(Integer signId) {
-        SignRecord signRecord=signRecordJpaDao.findOne(signId);
+    public ClassSchedule findClassSchedule(Integer signId)
+    {
+        SignRecord signRecord = signRecordJpaDao.findOne(signId);
         return signRecord.getSchedule();
     }
 }

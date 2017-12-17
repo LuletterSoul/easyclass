@@ -30,33 +30,37 @@ public class AttendanceController
     }
 
     @PostMapping(value = "/{attendanceId}/votes")
-    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,@RequestBody Vote vote)
+    public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
+                                           @RequestBody Vote vote)
     {
-        return new ResponseEntity<>(attendanceService.createVote(attendanceId,vote),HttpStatus.CREATED);
+        return new ResponseEntity<>(attendanceService.createVote(attendanceId, vote),
+            HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(attendanceService.deleteQRcode(attendanceId), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        return new ResponseEntity<>(attendanceService.deleteQRcode(attendanceId),
+            HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 
     @GetMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(attendanceService.findQRcode(attendanceId),HttpStatus.OK);
+        return new ResponseEntity<>(attendanceService.findQRcode(attendanceId), HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance attendance)
     {
-        return new ResponseEntity<>(attendanceService.updateAttendance(attendance),HttpStatus.OK);
+        return new ResponseEntity<>(attendanceService.updateAttendance(attendance), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{attendanceId}/sign_records")
     public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<List<SignRecord>>(attendanceService.findSignRecords(attendanceId),HttpStatus.OK);
+        return new ResponseEntity<List<SignRecord>>(
+            attendanceService.findSignRecords(attendanceId), HttpStatus.OK);
     }
 
 }
