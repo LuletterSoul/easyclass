@@ -7,8 +7,10 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "teacher_comment")
-public class TeacherComment
+@Table(name = "teaching_comment")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "commentLevel", discriminatorType = DiscriminatorType.STRING)
+public class TeachingComment
 {
     @GeneratedValue(generator = "commentId", strategy = GenerationType.IDENTITY)
     private int commentId;
