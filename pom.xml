@@ -12,6 +12,7 @@
         <module>easyclass-repository</module>
 		<module>easyclass-domain</module>
 		<module>easyclass-core</module>
+		<module>easyclass-auth</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -46,7 +47,6 @@
 			<!--<artifactId>spring-boot-devtools</artifactId>-->
 			<!--<optional>true</optional>-->
 		<!--</dependency>-->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
