@@ -97,12 +97,12 @@ public class TeacherArrangement
 
     @OneToMany
     @JoinColumn(name = "arrangeId")
-    public List<ClassTime> getClassTimes()
+    public Set<ClassTime> getClassTimes()
     {
         return classTimes;
     }
 
-    public void setClassTimes(List<ClassTime> classTimes)
+    public void setClassTimes(Set<ClassTime> classTimes)
     {
         this.classTimes = classTimes;
     }
