@@ -40,9 +40,10 @@ public class TeacherArrangement
     @ApiModelProperty(hidden = true)
     private Set<Notice> notices;
 
+
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    private TeacherComment comment;
+    private List<CourseComment> courseComments;
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -70,17 +71,6 @@ public class TeacherArrangement
         this.notices = notices;
     }
 
-    @OneToOne
-    @JoinColumn(name = "commentId")
-    public TeacherComment getComment()
-    {
-        return comment;
-    }
-
-    public void setComment(TeacherComment comment)
-    {
-        this.comment = comment;
-    }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "arrangeId")
@@ -162,5 +152,14 @@ public class TeacherArrangement
     public void setTeacher(Teacher teacher)
     {
         this.teacher = teacher;
+    }
+
+    @OneToMany(mappedBy = "courseComment")
+    public List<CourseComment> getCourseComments() {
+        return courseComments;
+    }
+
+    public void setCourseComments(List<CourseComment> courseComments) {
+        this.courseComments = courseComments;
     }
 }

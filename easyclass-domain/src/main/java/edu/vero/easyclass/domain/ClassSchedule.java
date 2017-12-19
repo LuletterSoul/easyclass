@@ -3,11 +3,11 @@ package edu.vero.easyclass.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -23,16 +23,21 @@ public class ClassSchedule
 
     private TeacherArrangement teacherArrangement;
 
-    private TeacherComment teacherComment;
+    private CourseComment courseComment;
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private List<ClassTimeComment> timeComments;
+
 
     @OneToOne
     @JoinColumn(name="commentId")
-    public TeacherComment getTeacherComment() {
-        return teacherComment;
+    public CourseComment getCourseComment() {
+        return courseComment;
     }
 
-    public void setTeacherComment(TeacherComment teacherComment) {
-        this.teacherComment = teacherComment;
+    public void setCourseComment(CourseComment courseComment) {
+        this.courseComment = courseComment;
     }
 
     @ApiModelProperty(hidden = true)
@@ -139,5 +144,14 @@ public class ClassSchedule
     {
         return MoreObjects.toStringHelper(this).add("scheduleId", scheduleId).add("student",
             student).add("teacherArrangement", teacherArrangement).toString();
+    }
+
+    @OneToMany(mappedBy = "classTime")
+    public List<ClassTimeComment> getTimeComments() {
+        return timeComments;
+    }
+
+    public void setTimeComments(List<ClassTimeComment> timeComments) {
+        this.timeComments = timeComments;
     }
 }

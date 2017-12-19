@@ -1,8 +1,6 @@
 package edu.vero.easyclass.domain;
 
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,7 +23,7 @@ public class ClassTime
 
     private String classOrder;
 
-    private List<TeacherComment> comments;
+    private List<ClassTimeComment> classTimeComments;
 
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
@@ -81,18 +79,18 @@ public class ClassTime
     }
 
     /**
-     * TeacherComment 里面没有双向关联关系，需要加入中间表
+     * TeachingComment 里面没有双向关联关系，需要加入中间表
      * @return
      */
-    @OneToMany
+    @OneToMany(mappedBy = "classTime")
     @JoinTable(name = "time_comments"
             ,joinColumns = @JoinColumn(name = "timeId",referencedColumnName = "timeId")
             ,inverseJoinColumns = @JoinColumn(name = "commentId",referencedColumnName = "commentId"))
-    public List<TeacherComment> getComments() {
-        return comments;
+    public List<ClassTimeComment> getClassTimeComments() {
+        return classTimeComments;
     }
 
-    public void setComments(List<TeacherComment> comments) {
-        this.comments = comments;
-    }
+    public void setClassTimeComments(List<ClassTimeComment> classTimeComments) {
+        this.classTimeComments = classTimeComments;
+}
 }
