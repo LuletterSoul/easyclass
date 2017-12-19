@@ -3,14 +3,13 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.ClassTimeComment;
-import edu.vero.easyclass.domain.TeachingComment;
 import edu.vero.easyclass.repositories.ClassTimeCommentJpaDao;
 import edu.vero.easyclass.repositories.ClassTimeJpaDao;
-import edu.vero.easyclass.repositories.CourseCommentJpaDao;
 import edu.vero.easyclass.services.ClassTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -61,7 +60,9 @@ public class ClassTimeServiceImpl implements ClassTimeService
     @Override
     public List<ClassTimeComment> findAllClassComments(Integer timeId)
     {
-        return null;
+        ClassTime time = classTimeJpaDao.findOne(timeId);
+        Set<ClassTimeComment> classTimeComment =time.getClassTimeComments();
+        return new ArrayList<>(classTimeComment);
     }
 
 }
