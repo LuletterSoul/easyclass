@@ -6,6 +6,7 @@ import com.google.common.base.Objects;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -24,19 +25,7 @@ public class ClassTime
 
     private String classOrder;
 
-    private TeacherComment common;
-
-    @OneToOne
-    @JoinColumn(name = "commonId")
-    public TeacherComment getCommon()
-    {
-        return common;
-    }
-
-    public void setCommon(TeacherComment common)
-    {
-        this.common = common;
-    }
+    private List<TeacherComment> comments;
 
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
@@ -91,11 +80,19 @@ public class ClassTime
         this.classOrder = classOrder;
     }
 
-    @Override
-    public String toString()
-    {
-        return MoreObjects.toStringHelper(this).add("timeId", timeId).add("term", term).add("week",
-            week).add("weekday", weekday).add("classOrder", classOrder).add("common",
-                common).toString();
+    /**
+     * TeacherComment 里面没有双向关联关系，需要加入中间表
+     * @return
+     */
+    @OneToMany
+    @JoinTable(name = "time_comments"
+            ,joinColumns = @JoinColumn(name = "timeId",referencedColumnName = "timeId")
+            ,inverseJoinColumns = @JoinColumn(name = "commentId",referencedColumnName = "commentId"))
+    public List<TeacherComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<TeacherComment> comments) {
+        this.comments = comments;
     }
 }
