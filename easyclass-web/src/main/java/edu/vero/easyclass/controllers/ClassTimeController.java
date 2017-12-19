@@ -29,7 +29,7 @@ public class ClassTimeController
         this.classTimeService = classTimeService;
     }
 
-    @GetMapping(value = "/{timeId}/comment")
+    @GetMapping(value = "/{timeId}/comments")
     public ResponseEntity<List<TeacherComment>> findAllTeacherComment(@PathVariable("timeId") Integer timeId)
     {
         return new ResponseEntity<>(classTimeService.findAllTeacherComment(timeId),

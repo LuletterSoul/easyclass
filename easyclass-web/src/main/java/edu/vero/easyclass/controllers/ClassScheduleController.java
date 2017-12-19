@@ -44,8 +44,7 @@ public class ClassScheduleController
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<List<TestRecord>>(scheduleService.findAllTestRecords(scheduleId),
-            HttpStatus.OK);
+        return null;
     }
 
     @GetMapping(value = "/{scheduleId}/sign_records")
@@ -58,8 +57,7 @@ public class ClassScheduleController
     @GetMapping(value = "/{scheduleId}/attendances")
     public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<List<Attendance>>(scheduleService.findAllAttendances(scheduleId),
-            HttpStatus.OK);
+        return null;
     }
 
     @GetMapping(value = "/{scheduleId}/homeworks")
