@@ -1,5 +1,6 @@
 package edu.vero.easyclass.repositories;
 
+import edu.vero.easyclass.domain.CourseComment;
 import edu.vero.easyclass.domain.TeachingComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since easyclass
  */
 
-public interface CourseCommentJpaDao extends JpaRepository<CourseCommentJpaDao,Integer> {
+public interface CourseCommentJpaDao extends JpaRepository<CourseComment,Integer> {
 }
