@@ -106,10 +106,10 @@ public class TeacherArrangementController
                 HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{arrangementId}/comment")
-    public ResponseEntity<TeacherComment> findTeacherComment(@PathVariable("arrangementId") Integer arrangementId)
+    @GetMapping(value = "/{arrangementId}/comments")
+    public ResponseEntity<List<CourseComment>> findTeacherComment(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return new ResponseEntity<>(teacherArrangementService.findTeacherComment(arrangementId),
+        return new ResponseEntity<>(teacherArrangementService.findAllCourseComment(arrangementId),
                 HttpStatus.OK);
     }
 

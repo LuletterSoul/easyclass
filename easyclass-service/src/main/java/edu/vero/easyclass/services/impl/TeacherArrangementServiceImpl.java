@@ -32,6 +32,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private TestRecordJpaDao testRecordJpaDao;
 
+    private CourseCommentJpaDao courseCommentJpaDao;
+
     @Autowired
     public void setTestRecordJpaDao(TestRecordJpaDao testRecordJpaDao)
     {
@@ -66,6 +68,12 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public void setTeacherArrangementJpaDao(TeacherArrangementJpaDao teacherArrangementJpaDao)
     {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
+    }
+
+    @Autowired
+    public void setCourseCommentJpaDao(CourseCommentJpaDao courseCommentJpaDao)
+    {
+        this.courseCommentJpaDao = courseCommentJpaDao;
     }
 
     @Override
@@ -151,18 +159,18 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<ClassTime> findAllClassTime(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-
-        List<ClassTime> classTime = teacherArrangement.getClassTimes();
-        return classTime;
+        Set<ClassTime> classTime = teacherArrangement.getClassTimes();
+        return new ArrayList<>(classTime);
     }
 
     @Override
-    public TeacherComment findTeacherComment(Integer arrangementId)
+    public List<CourseComment> findAllCourseComment(Integer arrangementId)
     {
-        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        TeacherComment teacherComment = teacherArrangement.getComment();
-        return teacherComment;
-
+//        TeacherArrangement teacherArrangement = te.findOne(arrangementId);
+//        TeachingComment teachingComment = teacherArrangement.getComment();
+//        return teachingComment;
+        //待商榷
+        return null;
     }
 
     @Override
@@ -202,8 +210,15 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<Courseware> findAllCoursewares(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        Set<Courseware> courseware0 = teacherArrangement.getCoursewares();
-        List<Courseware> courseware1 = new ArrayList<Courseware>(courseware0);
-        return courseware1;
+        Set<Courseware> courseware = teacherArrangement.getCoursewares();
+        return new ArrayList<>(courseware);
     }
+
+    @Override
+    public List<CourseComment> findAllCourseComments(Integer arrangementId) {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<CourseComment> courseComments =teacherArrangement.getCourseComments();
+        return new ArrayList<>(courseComments);
+    }
+
 }

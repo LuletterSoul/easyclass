@@ -38,7 +38,7 @@ public interface TeacherArrangementService
 
     public List<ClassTime> findAllClassTime(Integer arrangementId);
 
-    public TeacherComment findTeacherComment(Integer arrangementId);
+    public List<CourseComment> findAllCourseComment(Integer arrangementId);
 
     public Course findCourse(Integer arrangementId);
 
@@ -49,5 +49,8 @@ public interface TeacherArrangementService
     public List<TeacherArrangement> findAllArrangements();
 
     public List<Courseware> findAllCoursewares(Integer arrangementId);
+
+    public List<CourseComment> findAllCourseComments(Integer arrangementId);
+
 
 }
