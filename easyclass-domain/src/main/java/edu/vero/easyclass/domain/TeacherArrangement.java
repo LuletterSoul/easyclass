@@ -30,7 +30,7 @@ public class TeacherArrangement
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    private List<ClassTime> classTimes;
+    private Set<ClassTime> classTimes;
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -43,7 +43,7 @@ public class TeacherArrangement
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    private List<CourseComment> courseComments;
+    private Set<CourseComment> courseComments;
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -155,11 +155,11 @@ public class TeacherArrangement
     }
 
     @OneToMany(mappedBy = "courseComment")
-    public List<CourseComment> getCourseComments() {
+    public Set<CourseComment> getCourseComments() {
         return courseComments;
     }
 
-    public void setCourseComments(List<CourseComment> courseComments) {
+    public void setCourseComments(Set<CourseComment> courseComments) {
         this.courseComments = courseComments;
     }
 }

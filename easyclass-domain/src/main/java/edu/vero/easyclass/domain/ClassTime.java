@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -23,7 +24,7 @@ public class ClassTime
 
     private String classOrder;
 
-    private List<ClassTimeComment> classTimeComments;
+    private Set<ClassTimeComment> classTimeComments;
 
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
@@ -86,11 +87,11 @@ public class ClassTime
     @JoinTable(name = "time_comments"
             ,joinColumns = @JoinColumn(name = "timeId",referencedColumnName = "timeId")
             ,inverseJoinColumns = @JoinColumn(name = "commentId",referencedColumnName = "commentId"))
-    public List<ClassTimeComment> getClassTimeComments() {
+    public Set<ClassTimeComment> getClassTimeComments() {
         return classTimeComments;
     }
 
-    public void setClassTimeComments(List<ClassTimeComment> classTimeComments) {
+    public void setClassTimeComments(Set<ClassTimeComment> classTimeComments) {
         this.classTimeComments = classTimeComments;
 }
 }
