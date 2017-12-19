@@ -27,7 +27,7 @@ public class ClassSchedule
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    private List<ClassTimeComment> timeComments;
+    private Set<ClassTimeComment> timeComments;
 
 
     @OneToOne
@@ -147,11 +147,11 @@ public class ClassSchedule
     }
 
     @OneToMany(mappedBy = "classTime")
-    public List<ClassTimeComment> getTimeComments() {
+    public Set<ClassTimeComment> getTimeComments() {
         return timeComments;
     }
 
-    public void setTimeComments(List<ClassTimeComment> timeComments) {
+    public void setTimeComments(Set<ClassTimeComment> timeComments) {
         this.timeComments = timeComments;
     }
 }

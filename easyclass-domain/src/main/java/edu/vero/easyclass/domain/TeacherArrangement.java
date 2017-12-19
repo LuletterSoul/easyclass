@@ -40,7 +40,6 @@ public class TeacherArrangement
     @ApiModelProperty(hidden = true)
     private Set<Notice> notices;
 
-
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     private Set<CourseComment> courseComments;
@@ -53,6 +52,19 @@ public class TeacherArrangement
     public Set<Attendance> getAttendances()
     {
         return attendances;
+    }
+
+    @Id
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
+    public int getArrangeId()
+    {
+        return arrangeId;
+    }
+
+    public void setArrangeId(int arrangeId)
+    {
+        this.arrangeId = arrangeId;
     }
 
     public void setAttendances(Set<Attendance> attendances)
@@ -70,7 +82,6 @@ public class TeacherArrangement
     {
         this.notices = notices;
     }
-
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "arrangeId")
@@ -119,19 +130,6 @@ public class TeacherArrangement
         this.course = course;
     }
 
-    @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
-    public int getArrangeId()
-    {
-        return arrangeId;
-    }
-
-    public void setArrangeId(int arrangeId)
-    {
-        this.arrangeId = arrangeId;
-    }
-
     public String getPlace()
     {
         return place;
@@ -154,12 +152,14 @@ public class TeacherArrangement
         this.teacher = teacher;
     }
 
-    @OneToMany(mappedBy = "courseComment")
-    public Set<CourseComment> getCourseComments() {
+    @OneToMany(mappedBy = "arrangement")
+    public Set<CourseComment> getCourseComments()
+    {
         return courseComments;
     }
 
-    public void setCourseComments(Set<CourseComment> courseComments) {
+    public void setCourseComments(Set<CourseComment> courseComments)
+    {
         this.courseComments = courseComments;
     }
 }

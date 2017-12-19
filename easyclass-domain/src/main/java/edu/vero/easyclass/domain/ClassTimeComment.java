@@ -11,11 +11,12 @@ import javax.persistence.*;
  */
 
 @Entity
-@DiscriminatorValue(value = "Per")
+@DiscriminatorValue(value = "Class")
 public class ClassTimeComment extends TeachingComment
 {
 
     private ClassSchedule schedule;
+
     private ClassTime classTime;
 
     @ManyToOne
@@ -30,11 +31,15 @@ public class ClassTimeComment extends TeachingComment
         this.classTime = classTime;
     }
 
-    public ClassSchedule getSchedule() {
+    @ManyToOne
+    @JoinColumn(name = "scheduleId")
+    public ClassSchedule getSchedule()
+    {
         return schedule;
     }
 
-    public void setSchedule(ClassSchedule schedule) {
+    public void setSchedule(ClassSchedule schedule)
+    {
         this.schedule = schedule;
     }
 }

@@ -84,9 +84,6 @@ public class ClassTime
      * @return
      */
     @OneToMany(mappedBy = "classTime")
-    @JoinTable(name = "time_comments"
-            ,joinColumns = @JoinColumn(name = "timeId",referencedColumnName = "timeId")
-            ,inverseJoinColumns = @JoinColumn(name = "commentId",referencedColumnName = "commentId"))
     public Set<ClassTimeComment> getClassTimeComments() {
         return classTimeComments;
     }
