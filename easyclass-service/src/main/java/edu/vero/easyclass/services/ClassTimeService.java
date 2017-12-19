@@ -1,19 +1,24 @@
 package edu.vero.easyclass.services;
 
+
 import edu.vero.easyclass.domain.ClassTime;
-import edu.vero.easyclass.domain.TeacherComment;
+import edu.vero.easyclass.domain.ClassTimeComment;
+import edu.vero.easyclass.domain.TeachingComment;
 
 import java.util.List;
 
-public interface ClassTimeService {
 
+public interface ClassTimeService
+{
 
-    public List<TeacherComment> findAllTeacherComment(Integer timeId);
+//    List<TeachingComment> findAllTeacherComment(Integer timeId);
 
+    ClassTime findClassTime(Integer timeId);
 
+    List<ClassTime> findAllClassTimes();
 
-    public ClassTime findClassTime(Integer timeId);
+    ClassTimeComment savePerClassComment(Integer timeId, ClassTimeComment comment);
 
+    List<ClassTimeComment> findAllClassComments(Integer timeId);
 
-    public List<ClassTime> findAllClassTimes();
 }
