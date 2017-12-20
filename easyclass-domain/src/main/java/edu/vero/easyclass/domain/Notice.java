@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "notice")
 public class Notice
 {
-    @GeneratedValue(generator = "noticeId", strategy = GenerationType.IDENTITY)
     private int noticeId;
 
     private String title;

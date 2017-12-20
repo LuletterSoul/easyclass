@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "question")
 public class Question
 {
-    @GeneratedValue(generator = "questionId", strategy = GenerationType.IDENTITY)
     private int questionId;
 
     private int answerOrder;

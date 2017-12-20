@@ -14,7 +14,6 @@ import java.util.Set;
 public class Department
 {
 
-    @GeneratedValue(generator = "depId", strategy = GenerationType.IDENTITY)
     private int depId;
 
     private String depName;

@@ -16,7 +16,6 @@ import java.util.Set;
 public class ClassSchedule
 {
 
-    @GeneratedValue(generator = "scheduleId", strategy = GenerationType.IDENTITY)
     private int scheduleId;
 
     private Student student;
@@ -29,14 +28,28 @@ public class ClassSchedule
     @ApiModelProperty(hidden = true)
     private Set<ClassTimeComment> timeComments;
 
+    @Id
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
+    public int getScheduleId()
+    {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId)
+    {
+        this.scheduleId = scheduleId;
+    }
 
     @OneToOne
-    @JoinColumn(name="commentId")
-    public CourseComment getCourseComment() {
+    @JoinColumn(name = "commentId")
+    public CourseComment getCourseComment()
+    {
         return courseComment;
     }
 
-    public void setCourseComment(CourseComment courseComment) {
+    public void setCourseComment(CourseComment courseComment)
+    {
         this.courseComment = courseComment;
     }
 
@@ -76,19 +89,6 @@ public class ClassSchedule
     public void setTestRecords(Set<TestRecord> testRecords)
     {
         this.testRecords = testRecords;
-    }
-
-    @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
-    public int getScheduleId()
-    {
-        return scheduleId;
-    }
-
-    public void setScheduleId(int scheduleId)
-    {
-        this.scheduleId = scheduleId;
     }
 
     @ManyToOne
@@ -147,11 +147,13 @@ public class ClassSchedule
     }
 
     @OneToMany(mappedBy = "classTime")
-    public Set<ClassTimeComment> getTimeComments() {
+    public Set<ClassTimeComment> getTimeComments()
+    {
         return timeComments;
     }
 
-    public void setTimeComments(Set<ClassTimeComment> timeComments) {
+    public void setTimeComments(Set<ClassTimeComment> timeComments)
+    {
         this.timeComments = timeComments;
     }
 }

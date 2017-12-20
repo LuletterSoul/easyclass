@@ -13,7 +13,6 @@ import java.util.Set;
 public class ClassTime
 {
 
-    @GeneratedValue(generator = "timeId", strategy = GenerationType.IDENTITY)
     private int timeId;
 
     private String term;
@@ -81,14 +80,17 @@ public class ClassTime
 
     /**
      * TeachingComment 里面没有双向关联关系，需要加入中间表
+     * 
      * @return
      */
     @OneToMany(mappedBy = "classTime")
-    public Set<ClassTimeComment> getClassTimeComments() {
+    public Set<ClassTimeComment> getClassTimeComments()
+    {
         return classTimeComments;
     }
 
-    public void setClassTimeComments(Set<ClassTimeComment> classTimeComments) {
+    public void setClassTimeComments(Set<ClassTimeComment> classTimeComments)
+    {
         this.classTimeComments = classTimeComments;
-}
+    }
 }

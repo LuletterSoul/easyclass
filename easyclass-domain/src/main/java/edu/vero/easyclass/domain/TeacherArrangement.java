@@ -15,7 +15,6 @@ import java.util.Set;
 public class TeacherArrangement
 {
 
-    @GeneratedValue(generator = "arrangeId", strategy = GenerationType.IDENTITY)
     private int arrangeId;
 
     private String place;
@@ -23,6 +22,19 @@ public class TeacherArrangement
     private Teacher teacher;
 
     private Course course;
+
+    @Id
+    @GenericGenerator(name = "identityGenerator", strategy = "identity")
+    @GeneratedValue(generator = "identityGenerator")
+    public int getArrangeId()
+    {
+        return arrangeId;
+    }
+
+    public void setArrangeId(int arrangeId)
+    {
+        this.arrangeId = arrangeId;
+    }
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -52,19 +64,6 @@ public class TeacherArrangement
     public Set<Attendance> getAttendances()
     {
         return attendances;
-    }
-
-    @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
-    public int getArrangeId()
-    {
-        return arrangeId;
-    }
-
-    public void setArrangeId(int arrangeId)
-    {
-        this.arrangeId = arrangeId;
     }
 
     public void setAttendances(Set<Attendance> attendances)

@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Table(name = "courseware")
 public class Courseware
 {
-    @GeneratedValue(generator = "coursewareId", strategy = GenerationType.IDENTITY)
     private int coursewareId;
 
     private String title;

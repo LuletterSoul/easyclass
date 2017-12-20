@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "vote_option")
 public class VoteOption
 {
-    @GeneratedValue(generator = "voteOptionId", strategy = GenerationType.IDENTITY)
     private int voteOptionId;
 
     private String optionContent;

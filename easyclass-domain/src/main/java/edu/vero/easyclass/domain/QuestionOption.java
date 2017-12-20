@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class QuestionOption
 {
 
-    @GeneratedValue(generator = "optionId", strategy = GenerationType.IDENTITY)
     private int optionId;
 
     private String optionOrder;

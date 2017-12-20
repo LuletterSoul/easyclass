@@ -12,7 +12,6 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "commentLevel", discriminatorType = DiscriminatorType.STRING)
 public class TeachingComment
 {
-    @GeneratedValue(generator = "commentId", strategy = GenerationType.IDENTITY)
     private int commentId;
 
     private int score;

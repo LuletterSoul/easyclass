@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class QRcode
 {
 
-    @GeneratedValue(generator = "codeId", strategy = GenerationType.IDENTITY)
     private int codeId;
 
     private String filePath;

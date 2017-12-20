@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "sign_record")
 public class SignRecord
 {
-    @GeneratedValue(generator = "signId", strategy = GenerationType.IDENTITY)
     private int signId;
 
     private Date signTime;

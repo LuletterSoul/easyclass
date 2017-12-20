@@ -12,7 +12,6 @@ import java.util.Date;
 public class Homework
 {
 
-    @GeneratedValue(generator = "homeworkId", strategy = GenerationType.IDENTITY)
     private int homeworkId;
 
     private String title;

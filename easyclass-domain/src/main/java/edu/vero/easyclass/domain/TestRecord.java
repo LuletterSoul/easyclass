@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "test_record")
 public class TestRecord
 {
-    @GeneratedValue(generator = "recordId", strategy = GenerationType.IDENTITY)
     private int recordId;
 
     private float score;
@@ -21,18 +20,6 @@ public class TestRecord
     private OnlineClassTest test;
 
     private ClassSchedule schedule;
-
-    @ManyToOne
-    @JoinColumn(name = "scheduleId")
-    public ClassSchedule getSchedule()
-    {
-        return schedule;
-    }
-
-    public void setSchedule(ClassSchedule schedule)
-    {
-        this.schedule = schedule;
-    }
 
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
@@ -45,6 +32,18 @@ public class TestRecord
     public void setRecordId(int recordId)
     {
         this.recordId = recordId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "scheduleId")
+    public ClassSchedule getSchedule()
+    {
+        return schedule;
+    }
+
+    public void setSchedule(ClassSchedule schedule)
+    {
+        this.schedule = schedule;
     }
 
     @ManyToOne

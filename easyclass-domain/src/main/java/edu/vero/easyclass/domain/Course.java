@@ -16,7 +16,6 @@ import java.util.Set;
 public class Course
 {
 
-    @GeneratedValue(generator = "courseId", strategy = GenerationType.IDENTITY)
     private int courseId;
 
     private String courseName;
