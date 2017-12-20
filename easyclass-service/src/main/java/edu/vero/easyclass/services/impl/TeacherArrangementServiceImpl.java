@@ -165,12 +165,9 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     @Override
     public List<CourseComment> findAllCourseComment(Integer arrangementId)
-    {
-//        TeacherArrangement teacherArrangement = te.findOne(arrangementId);
-//        TeachingComment teachingComment = teacherArrangement.getComment();
-//        return teachingComment;
-        //待商榷
-        return null;
+    { TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<CourseComment> courseComments =teacherArrangement.getCourseComments();
+        return new ArrayList<>(courseComments);
     }
 
     @Override
@@ -214,11 +211,6 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         return new ArrayList<>(courseware);
     }
 
-    @Override
-    public List<CourseComment> findAllCourseComments(Integer arrangementId) {
-        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        Set<CourseComment> courseComments =teacherArrangement.getCourseComments();
-        return new ArrayList<>(courseComments);
-    }
+
 
 }

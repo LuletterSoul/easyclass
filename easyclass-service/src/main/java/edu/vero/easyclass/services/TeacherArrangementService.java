@@ -50,7 +50,7 @@ public interface TeacherArrangementService
 
     public List<Courseware> findAllCoursewares(Integer arrangementId);
 
-    public List<CourseComment> findAllCourseComments(Integer arrangementId);
+
 
 
 }
