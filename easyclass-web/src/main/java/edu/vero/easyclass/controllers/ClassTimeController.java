@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(description = "上课时间节点业务")
 @RestController
-@RequestMapping(value = "/class_time")
+@RequestMapping(value = "/class_times")
 public class ClassTimeController
 {
     private ClassTimeService classTimeService;
