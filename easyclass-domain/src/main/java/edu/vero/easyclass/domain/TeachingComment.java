@@ -14,9 +14,7 @@ public class TeachingComment
 {
     private int commentId;
 
-    private int score;
-
-    private String type;
+    private float score;
 
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
@@ -31,24 +29,14 @@ public class TeachingComment
         this.commentId = commentId;
     }
 
-    public int getScore()
+    public float getScore()
     {
         return score;
     }
 
-    public void setScore(int score)
+    public void setScore(float score)
     {
         this.score = score;
-    }
-
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
     }
 
 }
