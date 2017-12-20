@@ -25,6 +25,6 @@ public class CourseCommentController {
 
     @PostMapping
     public ResponseEntity<CourseComment> postCourseComent(@RequestBody  CourseComment comment, @RequestParam("arrangeId") Integer arrangeId, @RequestParam("scheduled") Integer scheduleId){
-        return new ResponseEntity<CourseComment>(courseCommentService.save(arrangeId,scheduleId,comment), HttpStatus.CREATED);
+        return new ResponseEntity<>(courseCommentService.save(arrangeId,scheduleId,comment), HttpStatus.CREATED);
     }
 }
