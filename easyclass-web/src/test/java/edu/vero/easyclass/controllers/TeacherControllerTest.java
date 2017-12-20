@@ -101,8 +101,8 @@ public class TeacherControllerTest extends ControllerBaseTester
                 .andDo(print()).andReturn();
         String content = result.getResponse().getContentAsString();
         Teacher createdTeacher = objectMapper.readValue(content,Teacher.class);
-        Assert.assertNotNull(((User)teacher).getUserId());
+        Assert.assertNotNull(teacher.getUserId());
+        System.out.println("Created teacher's user is "+createdTeacher.getUserId());
         // TODO: Test goes here...
     }
-
 }
