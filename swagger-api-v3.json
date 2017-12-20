@@ -1,0 +1,3760 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "本文档说明了每个接口返回、接收的字段信息。并且制定相应的规范作为前后端交流的渠道。",
+    "version": "1.0",
+    "title": "易授微服务RESTful APIs说明文档",
+    "contact": {
+      "name": "刘祥德",
+      "url": "/",
+      "email": "luvletterU@njust.edu.cn"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "notice-controller",
+      "description": "公告业务"
+    },
+    {
+      "name": "student-controller",
+      "description": "学生业务"
+    },
+    {
+      "name": "teacher-arrangement-controller",
+      "description": "教师安排表业务"
+    },
+    {
+      "name": "user-controller",
+      "description": "用户业务"
+    },
+    {
+      "name": "class-comment-controller",
+      "description": "课后评教业务"
+    },
+    {
+      "name": "attendance-controller",
+      "description": "签到业务"
+    },
+    {
+      "name": "homework-controller",
+      "description": "作业业务"
+    },
+    {
+      "name": "sign-record-controller",
+      "description": "签到记录业务"
+    },
+    {
+      "name": "courseware-controller",
+      "description": "上课时间节点业务"
+    },
+    {
+      "name": "test-record-controller",
+      "description": "测试记录务"
+    },
+    {
+      "name": "course-comment-controller",
+      "description": "课程总评业务"
+    },
+    {
+      "name": "question-controller",
+      "description": "在线测试问题业务"
+    },
+    {
+      "name": "vote-option-controller",
+      "description": "投票更新业务"
+    },
+    {
+      "name": "class-schedule-controller",
+      "description": "学生课表业务"
+    },
+    {
+      "name": "department-controller",
+      "description": "院系业务"
+    },
+    {
+      "name": "teacher-controller",
+      "description": "教师业务"
+    },
+    {
+      "name": "class-time-controller",
+      "description": "上课时间节点业务"
+    },
+    {
+      "name": "course-controller",
+      "description": "课程查询业务"
+    },
+    {
+      "name": "vote-controller",
+      "description": "在线投票业务"
+    },
+    {
+      "name": "test-controller",
+      "description": "在线测试业务"
+    }
+  ],
+  "paths": {
+    "/arrangements": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取所有老师的所有安排表",
+        "operationId": "findAllArrangementsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TeacherArrangement"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取特定的教师安排表",
+        "operationId": "findArrangementUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/attendances": {
+      "post": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课的所有出勤信息",
+        "operationId": "createAttendanceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "attendance",
+            "description": "attendance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Attendance"
+            }
+          },
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Attendance"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/comments": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课下的所有学生总评信息",
+        "operationId": "findAllCourseCommentUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CourseComment"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/course": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该教师安排表对应的课程详情",
+        "operationId": "findCourseUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/coursewares": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取给门课的所有课件(此API涉及下载,尚未实现)",
+        "operationId": "findAllCoursewaresUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Courseware"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/notices": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课下的所有公告",
+        "operationId": "findAllNoticeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Notice"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "教师创建一个公告,此公告跟对应的教师安排相关联",
+        "operationId": "createNoticeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "notice",
+            "description": "notice",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/notices/newest": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课的最新公告",
+        "operationId": "findNewestNoticesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/teacher": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课对应的老师详情",
+        "operationId": "findTeacherUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/tests": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取给该门课下发起的所有测试",
+        "operationId": "findAllOnlineClassTestUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OnlineClassTest"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "教师创建一个在线测试,此测试跟对应的教师安排相关联",
+        "operationId": "createOnlineClassTestUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "onlineClassTest",
+            "description": "onlineClassTest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/times": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课下的所有上课时间",
+        "operationId": "findAllClassTimeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassTime"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/attendances": {
+      "put": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "更新签到信息(可用于老师主动关闭签到)",
+        "operationId": "updateAttendanceUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "attendance",
+            "description": "attendance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Attendance"
+            }
+          },
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Attendance"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/attendances/{attendanceId}/QR_code": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取签到的二维码(尚未实现)",
+        "operationId": "getQRcodeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QRcode"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "删除签到的二维码(尚未实现)",
+        "operationId": "deleteQRcodeUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QRcode"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/attendances/{attendanceId}/sign_records": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取该签到项下的所有签到记录",
+        "operationId": "getAttendanceUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/attendances/{attendanceId}/votes": {
+      "post": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "发起一个属于该签到项下的投票",
+        "operationId": "createVoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "vote",
+            "description": "投票的模型数据",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vote"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/class_comments": {
+      "post": {
+        "tags": [
+          "class-comment-controller"
+        ],
+        "summary": "给每节课提交评教",
+        "operationId": "postClassCommentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "timeId",
+            "in": "query",
+            "description": "教师安排表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "课表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "comment",
+            "description": "节后评教的模型数据",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTimeComment"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/class_times": {
+      "get": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "findAllClassTimes",
+        "operationId": "findAllClassTimesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassTime"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/class_times/{timeId}": {
+      "get": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "findClassTime",
+        "operationId": "findClassTimeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "timeId",
+            "in": "path",
+            "description": "timeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/class_times/{timeId}/comments": {
+      "get": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "findAllClassComments",
+        "operationId": "findAllClassCommentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "timeId",
+            "in": "path",
+            "description": "timeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassTimeComment"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "saveClassComment",
+        "operationId": "saveClassCommentUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comment",
+            "description": "comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassTimeComment"
+            }
+          },
+          {
+            "name": "timeId",
+            "in": "path",
+            "description": "timeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTimeComment"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/course_comments": {
+      "post": {
+        "tags": [
+          "course-comment-controller"
+        ],
+        "summary": "给每门课程提交总评",
+        "operationId": "postCourseCommentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comment",
+            "description": "comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CourseComment"
+            }
+          },
+          {
+            "name": "arrangeId",
+            "in": "query",
+            "description": "教师安排表编号",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "课表编号",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CourseComment"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "tags": [
+          "course-controller"
+        ],
+        "summary": "findAll",
+        "operationId": "findAllUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Course"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/courses/{courseId}": {
+      "get": {
+        "tags": [
+          "course-controller"
+        ],
+        "summary": "findCourse",
+        "operationId": "findCourseUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "courseId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/courses/{courseId}/questions": {
+      "get": {
+        "tags": [
+          "course-controller"
+        ],
+        "summary": "findQuestions",
+        "operationId": "findQuestionsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "courseId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Question"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/courseware": {
+      "get": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "findAllCoursewares",
+        "operationId": "findAllCoursewaresUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Courseware"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/courseware/{coursewareId}": {
+      "get": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "findCourseware",
+        "operationId": "findCoursewareUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "coursewareId",
+            "in": "path",
+            "description": "coursewareId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "findAllDepartments",
+        "operationId": "findAllDepartmentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Department"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/homeworks": {
+      "get": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "findAllHomeworks",
+        "operationId": "findAllHomeworksUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Homework"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/homeworks/{homeworkId}": {
+      "delete": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "deleteHomework",
+        "operationId": "deleteHomeworkUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "homeworkId",
+            "in": "path",
+            "description": "homeworkId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/notices": {
+      "put": {
+        "tags": [
+          "notice-controller"
+        ],
+        "summary": "updateNotice",
+        "operationId": "updateNoticeUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "notice",
+            "description": "notice",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/notices/{noticeId}": {
+      "get": {
+        "tags": [
+          "notice-controller"
+        ],
+        "summary": "getNotice",
+        "operationId": "getNoticeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "noticeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "notice-controller"
+        ],
+        "summary": "deleteNotice",
+        "operationId": "deleteNoticeUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "noticeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Notice"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/questions": {
+      "get": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "findAllQuestions",
+        "operationId": "findAllQuestionsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Question"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "createQuestion",
+        "operationId": "createQuestionUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "question",
+            "description": "question",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}": {
+      "get": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "findQuestion",
+        "operationId": "findQuestionUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "questionId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/options": {
+      "get": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "findQuestionOptions",
+        "operationId": "findQuestionOptionsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "questionId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/QuestionOption"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "查找所有学生的所有课表",
+        "operationId": "findAllScheduleUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassSchedule"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/arrangement": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "查看该课表对应的教师安排表",
+        "operationId": "findArrangementUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "学生课表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/homeworks": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "学生下载课件(涉及下载尚未实现)",
+        "operationId": "findHomeworksUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "学生课表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Homework"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "学生上传作业(设计上传，尚未实现)",
+        "operationId": "uploadHomeWorkUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "homework",
+            "description": "homework",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "scheduleId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/sign_records": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "学生获取给该课表下的所有签到记录",
+        "operationId": "findSignRecordsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "学生课表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/student": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "查看该课表对应的学生信息",
+        "operationId": "findStudentUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "学生课表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/schedules/{scheduleId}/test_records": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "学生获取给该课表下发起的所有测试记录",
+        "operationId": "findTestRecordsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "学生课表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TestRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sign_records": {
+      "get": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "findAllSignRecords",
+        "operationId": "findAllSignRecordsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sign_records/{signId}/attendance": {
+      "get": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "findAttendance",
+        "operationId": "findAttendanceUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "signId",
+            "in": "path",
+            "description": "signId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Attendance"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sign_records/{signId}/schedule": {
+      "get": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "findClassSchedule",
+        "operationId": "findClassScheduleUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "signId",
+            "in": "path",
+            "description": "signId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassSchedule"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "tags": [
+          "student-controller"
+        ],
+        "summary": "findAllStudents",
+        "operationId": "findAllStudentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/students/{userId}": {
+      "get": {
+        "tags": [
+          "student-controller"
+        ],
+        "summary": "findStudentById",
+        "operationId": "findStudentByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/students/{userId}/schedules": {
+      "get": {
+        "tags": [
+          "student-controller"
+        ],
+        "summary": "findSchedule",
+        "operationId": "findScheduleUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassSchedule"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/teachers": {
+      "get": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "findAllTeacher",
+        "operationId": "findAllTeacherUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Teacher"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "createTeacher",
+        "operationId": "createTeacherUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacher",
+            "description": "teacher",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/teachers/{userId}": {
+      "get": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "findTeacher",
+        "operationId": "findTeacherUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/teachers/{userId}/arrangements": {
+      "get": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "findTeacherArrangement",
+        "operationId": "findTeacherArrangementUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TeacherArrangement"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "createTeacherArrangement",
+        "operationId": "createTeacherArrangementUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "list",
+            "description": "list",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TeacherArrangement"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TeacherArrangement"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/test_records": {
+      "get": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "findAllTestRecords",
+        "operationId": "findAllTestRecordsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TestRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/test_records/{recordId}": {
+      "post": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "createTestRecord",
+        "operationId": "createTestRecordUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "testRecord",
+            "description": "testRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/test_records/{recordId}/schedule": {
+      "get": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "findClassSchedule",
+        "operationId": "findClassScheduleUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "recordId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassSchedule"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/test_records/{recordId}/test": {
+      "get": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "findTest",
+        "operationId": "findTestUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "recordId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tests": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "findAllTests",
+        "operationId": "findAllTestsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OnlineClassTest"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "createTest",
+        "operationId": "createTestUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "onlineClassTest",
+            "description": "onlineClassTest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "updateTest",
+        "operationId": "updateTestUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "onlineClassTest",
+            "description": "onlineClassTest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tests/{testId}": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "findTest",
+        "operationId": "findTestUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "testId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tests/{testId}/arrangement": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "findTestArrangement",
+        "operationId": "findTestArrangementUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "testId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tests/{testId}/questions": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "findTestQuestions",
+        "operationId": "findTestQuestionsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "testId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Question"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "findAll",
+        "operationId": "findAllUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "学生注册",
+        "operationId": "registerStudentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "student",
+            "description": "student",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          {
+            "in": "body",
+            "name": "userId",
+            "description": "学生的模型数据",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "通过用户Id查找用户信息",
+        "operationId": "findUserByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "投票项的模型数据",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/vote_options": {
+      "put": {
+        "tags": [
+          "vote-option-controller"
+        ],
+        "summary": "可更新投票项的被选次数",
+        "operationId": "updateOptionUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "voteOption",
+            "description": "投票项的模型数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VoteOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VoteOption"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/vote_options/{voteId}": {
+      "delete": {
+        "tags": [
+          "vote-option-controller"
+        ],
+        "summary": "删除投票",
+        "operationId": "deleteOptionUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "voteId",
+            "in": "path",
+            "description": "投票项的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VoteOption"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/votes/{voteId}": {
+      "put": {
+        "tags": [
+          "vote-controller"
+        ],
+        "summary": "closeVote",
+        "operationId": "closeVoteUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "voteId",
+            "in": "path",
+            "description": "voteId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vote"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attendance": {
+      "type": "object",
+      "properties": {
+        "arrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        },
+        "attend": {
+          "type": "boolean"
+        },
+        "attendanceId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "closed": {
+          "type": "boolean"
+        },
+        "closedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "establishedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "qRcode": {
+          "$ref": "#/definitions/QRcode"
+        }
+      }
+    },
+    "ClassSchedule": {
+      "type": "object",
+      "properties": {
+        "courseComment": {
+          "$ref": "#/definitions/CourseComment"
+        },
+        "scheduleId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "student": {
+          "$ref": "#/definitions/Student"
+        },
+        "teacherArrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        }
+      }
+    },
+    "ClassTime": {
+      "type": "object",
+      "properties": {
+        "classOrder": {
+          "type": "string"
+        },
+        "classTimeComments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassTimeComment"
+          }
+        },
+        "term": {
+          "type": "string"
+        },
+        "timeId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "week": {
+          "type": "string"
+        },
+        "weekday": {
+          "type": "string"
+        }
+      }
+    },
+    "ClassTimeComment": {
+      "type": "object",
+      "properties": {
+        "classTime": {
+          "$ref": "#/definitions/ClassTime"
+        },
+        "commentId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ClassSchedule"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Course": {
+      "type": "object",
+      "properties": {
+        "courseId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "courseName": {
+          "type": "string"
+        },
+        "credit": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CourseComment": {
+      "type": "object",
+      "properties": {
+        "arrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        },
+        "commentId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ClassSchedule"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "Courseware": {
+      "type": "object",
+      "properties": {
+        "coursewareId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Department": {
+      "type": "object",
+      "properties": {
+        "depId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "depName": {
+          "type": "string"
+        }
+      }
+    },
+    "Homework": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "establishedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "homeworkId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "submitted": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Notice": {
+      "type": "object",
+      "properties": {
+        "arrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        },
+        "content": {
+          "type": "string"
+        },
+        "establishedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "noticeId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "OnlineClassTest": {
+      "type": "object",
+      "properties": {
+        "arrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "establishedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "testId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "QRcode": {
+      "type": "object",
+      "properties": {
+        "codeId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "answerOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "course": {
+          "$ref": "#/definitions/Course"
+        },
+        "questionId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "QuestionOption": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "optionId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "optionOrder": {
+          "type": "string"
+        },
+        "question": {
+          "$ref": "#/definitions/Question"
+        }
+      }
+    },
+    "SignRecord": {
+      "type": "object",
+      "properties": {
+        "attendance": {
+          "$ref": "#/definitions/Attendance"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ClassSchedule"
+        },
+        "signId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "signTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Student": {
+      "type": "object",
+      "properties": {
+        "department": {
+          "$ref": "#/definitions/Department"
+        },
+        "grade": {
+          "type": "string"
+        },
+        "majorIn": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "studentGender": {
+          "type": "string"
+        },
+        "studentId": {
+          "type": "string"
+        },
+        "studentName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "Teacher": {
+      "type": "object",
+      "properties": {
+        "arragementSet": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TeacherArrangement"
+          }
+        },
+        "department": {
+          "$ref": "#/definitions/Department"
+        },
+        "password": {
+          "type": "string"
+        },
+        "teacherGender": {
+          "type": "string"
+        },
+        "teacherId": {
+          "type": "string"
+        },
+        "teacherName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "description": "教师实体"
+    },
+    "TeacherArrangement": {
+      "type": "object",
+      "properties": {
+        "arrangementId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "course": {
+          "$ref": "#/definitions/Course"
+        },
+        "place": {
+          "type": "string"
+        },
+        "teacher": {
+          "$ref": "#/definitions/Teacher"
+        }
+      }
+    },
+    "TestRecord": {
+      "type": "object",
+      "properties": {
+        "answer": {
+          "type": "string"
+        },
+        "recordId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ClassSchedule"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "test": {
+          "$ref": "#/definitions/OnlineClassTest"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "department": {
+          "$ref": "#/definitions/Department"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "Vote": {
+      "type": "object",
+      "properties": {
+        "attendance": {
+          "$ref": "#/definitions/Attendance"
+        },
+        "closed": {
+          "type": "boolean"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "establishedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "voteContent": {
+          "type": "string"
+        },
+        "voteId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "VoteOption": {
+      "type": "object",
+      "properties": {
+        "optionContent": {
+          "type": "string"
+        },
+        "optionCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "vote": {
+          "$ref": "#/definitions/Vote"
+        },
+        "voteOptionId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

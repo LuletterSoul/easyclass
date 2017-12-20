@@ -42,6 +42,10 @@ public class UserController
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+
+    @ApiOperation(value = "学生注册")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "学生的模型数据")})
     @PostMapping
     public ResponseEntity<Student> registerStudent(@RequestBody Student student)
     {
