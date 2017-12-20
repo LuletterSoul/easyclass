@@ -64,7 +64,7 @@ public class TeacherServiceImpl implements TeacherService
     public List<TeacherArrangement> findTeacherArrangement(Integer userId)
     {
         Teacher teacher = teacherJpaDao.findOne(userId);
-        return (List) new ArrayList(teacher.getArragementSet());
+        return (List) new ArrayList(teacher.getArrangementSet());
     }
 
     @Override

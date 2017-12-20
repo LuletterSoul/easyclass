@@ -29,8 +29,7 @@ public class ClassCommentController
     @ApiOperation(value = "给每节课提交评教")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "timeId", value = "教师安排表编号", dataType = "int", paramType = "query", required = true),
-        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true),
-        @ApiImplicitParam(name = "comment", value = "节后评教的模型数据")})
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
     @PostMapping
     public ResponseEntity<ClassTimeComment> postClassComment(@RequestParam("timeId") Integer timeId,
                                                              @RequestParam("scheduleId") Integer scheduleId,

@@ -28,12 +28,12 @@ public class ClassTimeController
         this.classTimeService = classTimeService;
     }
 
-    @PutMapping(value = "/{timeId}/comments")
+    @PostMapping(value = "/{timeId}/comments")
     public ResponseEntity<ClassTimeComment> saveClassComment(@RequestBody ClassTimeComment comment,
                                                              @PathVariable("timeId") Integer timeId)
     {
         return new ResponseEntity<>(classTimeService.savePerClassComment(timeId, comment),
-            HttpStatus.ACCEPTED);
+            HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{timeId}/comments")

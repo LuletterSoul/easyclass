@@ -3622,7 +3622,7 @@
     "Teacher": {
       "type": "object",
       "properties": {
-        "arragementSet": {
+        "arrangementSet": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TeacherArrangement"
