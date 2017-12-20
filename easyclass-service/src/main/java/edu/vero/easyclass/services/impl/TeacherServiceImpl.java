@@ -44,6 +44,11 @@ public class TeacherServiceImpl implements TeacherService
     }
 
     @Override
+    public Teacher createTeacher(Teacher teacher) {
+        return teacherJpaDao.save(teacher);
+    }
+
+    @Override
     public List<Teacher> findAllTeachers()
     {
         return teacherJpaDao.findAll();

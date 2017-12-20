@@ -15,6 +15,8 @@ import java.util.List;
 
 public interface TeacherService
 {
+    public Teacher createTeacher(Teacher teacher);
+
     public List<Teacher> findAllTeachers();
 
     public Teacher findTeacher(Integer userId);
