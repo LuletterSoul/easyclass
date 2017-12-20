@@ -52,7 +52,7 @@ public class ClassTimeServiceImpl implements ClassTimeService
     @Override
     public ClassTimeComment savePerClassComment(Integer timeId, ClassTimeComment comment)
     {
-        ClassTime time = classTimeJpaDao.findOne(timeId);
+        comment.setClassTime(classTimeJpaDao.findOne(timeId));
         timeCommentJpaDao.save(comment);
         return comment;
     }

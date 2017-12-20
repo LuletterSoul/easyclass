@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,26 +28,31 @@ public class ClassTimeController
         this.classTimeService = classTimeService;
     }
 
+    @PutMapping(value = "/{timeId}/comments")
+    public ResponseEntity<ClassTimeComment> saveClassComment(@RequestBody ClassTimeComment comment,
+                                                             @PathVariable("timeId") Integer timeId)
+    {
+        return new ResponseEntity<>(classTimeService.savePerClassComment(timeId, comment),
+            HttpStatus.ACCEPTED);
+    }
+
     @GetMapping(value = "/{timeId}/comments")
     public ResponseEntity<List<ClassTimeComment>> findAllClassComments(@PathVariable("timeId") Integer timeId)
     {
-        return new ResponseEntity<>(classTimeService.findAllClassComments(timeId),
-                HttpStatus.OK);
+        return new ResponseEntity<>(classTimeService.findAllClassComments(timeId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{timeId}")
     public ResponseEntity<ClassTime> findClassTime(@PathVariable("timeId") Integer timeId)
     {
-        return new ResponseEntity<>(classTimeService.findClassTime(timeId),
-                HttpStatus.OK);
+        return new ResponseEntity<>(classTimeService.findClassTime(timeId), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
     public ResponseEntity<List<ClassTime>> findAllClassTimes()
 
     {
-        return new ResponseEntity<>(classTimeService.findAllClassTimes(),
-                HttpStatus.OK);
+        return new ResponseEntity<>(classTimeService.findAllClassTimes(), HttpStatus.OK);
     }
 
 }
