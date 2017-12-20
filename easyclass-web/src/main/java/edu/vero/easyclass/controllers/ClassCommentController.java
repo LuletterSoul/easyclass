@@ -22,6 +22,6 @@ public class ClassCommentController {
     @PostMapping
     public ResponseEntity<ClassTimeComment> postClassComment(@RequestParam("timeId") Integer timeId, @RequestParam("scheduleId") Integer scheduleId, @RequestBody ClassTimeComment comment)
     {
-        return new ResponseEntity<ClassTimeComment>(classCommentService.save(timeId,scheduleId,comment), HttpStatus.CREATED);
+        return new ResponseEntity<>(classCommentService.save(timeId,scheduleId,comment), HttpStatus.CREATED);
     }
 }
