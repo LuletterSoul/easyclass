@@ -18,6 +18,8 @@ public class CourseComment extends TeachingComment
 {
     private TeacherArrangement arrangement;
 
+    private ClassSchedule schedule;
+
     public void setArrangement(TeacherArrangement arrangement)
     {
         this.arrangement = arrangement;
@@ -27,5 +29,14 @@ public class CourseComment extends TeachingComment
     public TeacherArrangement getArrangement()
     {
         return arrangement;
+    }
+
+    @OneToOne(mappedBy = "courseComment")
+    public ClassSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ClassSchedule schedule) {
+        this.schedule = schedule;
     }
 }

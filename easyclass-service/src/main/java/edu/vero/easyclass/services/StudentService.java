@@ -16,11 +16,12 @@ import java.util.List;
 
 public interface StudentService
 {
-    public Student findStudentById(Integer userId);
+    Student findStudentById(Integer userId);
 
-    public List<ClassSchedule> findSchedule(Integer userId);
+    List<ClassSchedule> findSchedule(Integer userId);
 
-    public Student save(Student student);
+    Student save(Student student);
 
-    public List<Student> findAll();
+    List<Student> findAll();
+
 }
