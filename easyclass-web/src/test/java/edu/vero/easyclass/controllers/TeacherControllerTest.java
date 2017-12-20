@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import edu.vero.easyclass.domain.User;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -87,6 +89,7 @@ public class TeacherControllerTest extends ControllerBaseTester
      * List<TeacherArrangement> list)
      */
     @Test
+    @Rollback
     public void testCreateTeacherArrangement()
         throws Exception
     {
@@ -95,7 +98,8 @@ public class TeacherControllerTest extends ControllerBaseTester
         teacher.setTeacherGender("女");
         teacher.setUsername("冬梅冬梅马冬梅");
         String jsonString = objectMapper.writeValueAsString(teacher);
-        MvcResult result =  mockMvc.perform(post("/teachers").content(jsonString.getBytes())
+        MvcResult result =  mockMvc.perform(post("/teachers")
+                .content(jsonString.getBytes())
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isCreated())
                 .andDo(print()).andReturn();

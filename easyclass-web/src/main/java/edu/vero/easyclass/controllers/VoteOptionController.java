@@ -3,6 +3,7 @@ package edu.vero.easyclass.controllers;
 
 import edu.vero.easyclass.domain.VoteOption;
 import edu.vero.easyclass.services.VoteOptionService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.5 created in 11:24 2017/12/19.
  * @since easyclass
  */
-
-@RestController(value = "/vote_options")
+@Api("投票更新业务")
+@RestController
+@RequestMapping(value = "/vote_options")
 public class VoteOptionController
 {
 

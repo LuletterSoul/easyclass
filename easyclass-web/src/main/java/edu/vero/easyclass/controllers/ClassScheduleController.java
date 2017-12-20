@@ -14,6 +14,7 @@ import java.util.List;
 
 
 @Api(description = "学生课表业务")
+@RestController
 @RequestMapping(value = "/schedules")
 public class ClassScheduleController
 {

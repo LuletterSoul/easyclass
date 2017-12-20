@@ -17,8 +17,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * created in  20:32 2017/12/14.
  * @since easyclass
  */
-@Configuration
+
 @EnableSwagger2
+@Configuration
 public class Swagger2Configuration {
     private static final String SWAGGER_SCAN_BASE_PACKAGE = "edu.vero.easyclass.controllers";
 
