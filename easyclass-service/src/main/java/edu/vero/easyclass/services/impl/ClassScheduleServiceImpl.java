@@ -62,11 +62,11 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
         return new ArrayList<SignRecord>(scheduleJpaDao.findOne(scheduleId).getSignRecords());
     }
 
-//    @Override
-//    public List<Attendance> findAllAttendances(Integer scheduleId)
-//    {
-//        return new ArrayList<Attendance>(scheduleJpaDao.findOne(scheduleId).getAttendances());
-//    }
+    @Override
+    public List<Attendance> findAllAttendances(Integer scheduleId)
+    {
+        return new ArrayList<Attendance>(scheduleJpaDao.findOne(scheduleId).getAttendances());
+    }
 
     @Override
     public List<Homework> findAllHomeworks(Integer scheduleId)

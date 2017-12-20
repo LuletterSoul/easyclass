@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Api(description = "在线测试业务")
+@Api(description = "在线业务")
 @RestController
 @RequestMapping(value = "/tests")
 public class TestController

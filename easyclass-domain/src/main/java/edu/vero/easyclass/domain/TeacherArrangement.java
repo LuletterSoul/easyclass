@@ -15,7 +15,7 @@ import java.util.Set;
 public class TeacherArrangement
 {
 
-    private int arrangementId;
+    private int arrangeId;
 
     private String place;
 
@@ -26,14 +26,14 @@ public class TeacherArrangement
     @Id
     @GenericGenerator(name = "identityGenerator", strategy = "identity")
     @GeneratedValue(generator = "identityGenerator")
-    public int getArrangementId()
+    public int getArrangeId()
     {
-        return arrangementId;
+        return arrangeId;
     }
 
-    public void setArrangementId(int arrangementId)
+    public void setArrangeId(int arrangeId)
     {
-        this.arrangementId = arrangementId;
+        this.arrangeId = arrangeId;
     }
 
     @JsonIgnore
@@ -83,7 +83,7 @@ public class TeacherArrangement
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "arrangementId")
+    @JoinColumn(name = "arrangeId")
     public Set<Courseware> getCoursewares()
     {
         return coursewares;
@@ -106,7 +106,7 @@ public class TeacherArrangement
     }
 
     @OneToMany
-    @JoinColumn(name = "arrangementId")
+    @JoinColumn(name = "arrangeId")
     public Set<ClassTime> getClassTimes()
     {
         return classTimes;
