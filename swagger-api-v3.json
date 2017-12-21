@@ -931,6 +931,15 @@
         ],
         "parameters": [
           {
+            "in": "body",
+            "name": "comment",
+            "description": "comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassTimeComment"
+            }
+          },
+          {
             "name": "timeId",
             "in": "query",
             "description": "教师安排表编号",
@@ -945,15 +954,6 @@
             "required": true,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "in": "body",
-            "name": "comment",
-            "description": "节后评教的模型数据",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -1099,12 +1099,12 @@
           }
         }
       },
-      "put": {
+      "post": {
         "tags": [
           "class-time-controller"
         ],
         "summary": "saveClassComment",
-        "operationId": "saveClassCommentUsingPUT",
+        "operationId": "saveClassCommentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3622,7 +3622,7 @@
     "Teacher": {
       "type": "object",
       "properties": {
-        "arragementSet": {
+        "arrangementSet": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TeacherArrangement"

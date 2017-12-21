@@ -22,12 +22,12 @@ public class Teacher extends User
     private Set<TeacherArrangement> arrangementSet;
 
     @OneToMany(mappedBy = "teacher")
-    public Set<TeacherArrangement> getArragementSet()
+    public Set<TeacherArrangement> getArrangementSet()
     {
         return arrangementSet;
     }
 
-    public void setArragementSet(Set<TeacherArrangement> arrangementSet)
+    public void setArrangementSet(Set<TeacherArrangement> arrangementSet)
     {
         this.arrangementSet = arrangementSet;
     }

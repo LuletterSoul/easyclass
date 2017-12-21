@@ -10,4 +10,10 @@ public interface DepartmentService
 {
 
     public List<Department> findAllDepartments();
+
+    Department deleteDepartment(Integer depId);
+
+    Department createDepartment(Department department);
+
+    Department updateDepartment(Department department);
 }
