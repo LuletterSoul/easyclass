@@ -16,4 +16,10 @@ public interface SignRecordService
 
     public ClassSchedule findClassSchedule(Integer signId);
 
+    SignRecord createSignRecord(SignRecord courseware);
+
+    SignRecord deleteSignRecord(Integer SignRecordId);
+
+    SignRecord updateSignRecord(SignRecord courseware);
+
 }

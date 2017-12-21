@@ -43,4 +43,23 @@ public class SignRecordServiceImpl implements SignRecordService
         SignRecord signRecord = signRecordJpaDao.findOne(signId);
         return signRecord.getSchedule();
     }
+
+    @Override
+    public SignRecord createSignRecord(SignRecord signRecord) {
+       signRecordJpaDao.saveAndFlush(signRecord);
+
+        return signRecord;
+    }
+
+    @Override
+    public SignRecord deleteSignRecord(Integer signrecordId) {
+        SignRecord signRecord=signRecordJpaDao.findOne(signrecordId);
+        return signRecord;
+    }
+
+    @Override
+    public SignRecord updateSignRecord(SignRecord courseware) {
+        signRecordJpaDao.saveAndFlush(courseware);
+        return courseware;
+    }
 }
