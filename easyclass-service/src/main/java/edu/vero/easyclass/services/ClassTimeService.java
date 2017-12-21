@@ -3,7 +3,6 @@ package edu.vero.easyclass.services;
 
 import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.ClassTimeComment;
-import edu.vero.easyclass.domain.TeachingComment;
 
 import java.util.List;
 
@@ -21,4 +20,9 @@ public interface ClassTimeService
 
     List<ClassTimeComment> findAllClassComments(Integer timeId);
 
+    ClassTime createClassTime(ClassTime classTime);
+
+    ClassTime updateClassTime(ClassTime classTime);
+
+    ClassTime deleteClassTime(Integer timeId);
 }

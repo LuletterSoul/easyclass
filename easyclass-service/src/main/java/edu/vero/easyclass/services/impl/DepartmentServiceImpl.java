@@ -22,4 +22,23 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> findAllDepartments() {
         return departmentJpaDao.findAll();
     }
+
+    @Override
+    public Department deleteDepartment(Integer depId) {
+        Department department =departmentJpaDao.findOne(depId);
+        departmentJpaDao.delete(department);
+        return department;
+    }
+
+    @Override
+    public Department createDepartment(Department department) {
+        departmentJpaDao.saveAndFlush(department);
+        return department;
+    }
+
+    @Override
+    public Department updateDepartment(Department department) {
+        departmentJpaDao.saveAndFlush(department);
+        return department;
+    }
 }

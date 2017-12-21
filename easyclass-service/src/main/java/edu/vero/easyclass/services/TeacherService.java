@@ -21,8 +21,12 @@ public interface TeacherService
 
     public Teacher findTeacher(Integer userId);
 
-    public List<TeacherArrangement> findTeacherArrangement(Integer userId);
+    public List findTeacherArrangement(Integer userId);
 
     public List<TeacherArrangement> createTeacherArrangement(Integer userId,
                                                              List<TeacherArrangement> list);
+
+    Teacher deleteTeacher(Integer TeacherId);
+
+    Teacher updateTeacher(Teacher question);
 }
