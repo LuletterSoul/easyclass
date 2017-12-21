@@ -128,6 +128,136 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "createArrangement",
+        "operationId": "createArrangementUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacherArrangement",
+            "description": "teacherArrangement",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "updateArrangement",
+        "operationId": "updateArrangementUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacherArrangement",
+            "description": "teacherArrangement",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangeId}": {
+      "delete": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "deleteArrangement",
+        "operationId": "deleteArrangementUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangeId",
+            "in": "path",
+            "description": "arrangeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeacherArrangement"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/arrangements/{arrangementId}": {
@@ -1011,6 +1141,94 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "createClassTime",
+        "operationId": "createClassTimeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "classTime",
+            "description": "classTime",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "updateClassTime",
+        "operationId": "updateClassTimeUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "classTime",
+            "description": "classTime",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/class_times/{timeId}": {
@@ -1053,6 +1271,46 @@
             "description": "Not Found"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "class-time-controller"
+        ],
+        "summary": "deleteClassTime",
+        "operationId": "deleteClassTimeUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "timeId",
+            "in": "path",
+            "description": "timeId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClassTime"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/class_times/{timeId}/comments": {
@@ -1087,58 +1345,6 @@
                 "$ref": "#/definitions/ClassTimeComment"
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "class-time-controller"
-        ],
-        "summary": "saveClassComment",
-        "operationId": "saveClassCommentUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "comment",
-            "description": "comment",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClassTimeComment"
-            }
-          },
-          {
-            "name": "timeId",
-            "in": "path",
-            "description": "timeId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClassTimeComment"
-            }
-          },
-          "201": {
-            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -1369,6 +1575,94 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "createCourseware",
+        "operationId": "createCoursewareUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "courseware",
+            "description": "courseware",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "updateCourseware",
+        "operationId": "updateCoursewareUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "courseware",
+            "description": "courseware",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/courseware/{coursewareId}": {
@@ -1411,6 +1705,46 @@
             "description": "Not Found"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "deleteCourseware",
+        "operationId": "deleteCoursewareUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "coursewareId",
+            "in": "path",
+            "description": "coursewareId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/departments": {
@@ -1446,6 +1780,136 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "createDepartment",
+        "operationId": "createDepartmentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "department",
+            "description": "department",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "updateDepartment",
+        "operationId": "updateDepartmentUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "department",
+            "description": "department",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/departments/{depId}": {
+      "delete": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "deleteDepartment",
+        "operationId": "deleteDepartmentUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "depId",
+            "in": "path",
+            "description": "depId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/homeworks": {
@@ -1470,6 +1934,94 @@
                 "$ref": "#/definitions/Homework"
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "createHomework",
+        "operationId": "createHomeworkUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "homework",
+            "description": "homework",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "updateHomework",
+        "operationId": "updateHomeworkUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "homework",
+            "description": "homework",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "201": {
+            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -1730,6 +2282,50 @@
             "description": "Not Found"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "updateQuestion",
+        "operationId": "updateQuestionUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "question",
+            "description": "question",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/questions/{questionId}": {
@@ -1770,6 +2366,46 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "question-controller"
+        ],
+        "summary": "deleteQuestion",
+        "operationId": "deleteQuestionUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "questionId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -2158,6 +2794,94 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "createSignRecord",
+        "operationId": "createSignRecordUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "signRecord",
+            "description": "signRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "updateSignRecord",
+        "operationId": "updateSignRecordUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "signRecord",
+            "description": "signRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/sign_records/{signId}/attendance": {
@@ -2240,6 +2964,48 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sign_records/{signRecordId}": {
+      "delete": {
+        "tags": [
+          "sign-record-controller"
+        ],
+        "summary": "deleteSignRecord",
+        "operationId": "deleteSignRecordUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "signRecordId",
+            "in": "path",
+            "description": "signRecordId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -2443,6 +3209,92 @@
             "description": "Not Found"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "updateTeacher",
+        "operationId": "updateTeacherUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacher",
+            "description": "teacher",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/teachers/{teacherId}": {
+      "delete": {
+        "tags": [
+          "teacher-controller"
+        ],
+        "summary": "deleteTeacher",
+        "operationId": "deleteTeacherUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "description": "teacherId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     },
     "/teachers/{userId}": {
@@ -2623,6 +3475,50 @@
             "description": "Not Found"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "updateTestRecord",
+        "operationId": "updateTestRecordUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "testRecord",
+            "description": "testRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/test_records/{recordId}": {
@@ -2751,6 +3647,48 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/test_records/{testId}": {
+      "delete": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "deleteTestRecord",
+        "operationId": "deleteTestRecordUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "testId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -2916,6 +3854,46 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "deleteTest",
+        "operationId": "deleteTestUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "testrId",
+            "in": "path",
+            "description": "testrId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
