@@ -1,15 +1,21 @@
 package edu.vero.easyclass.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import edu.vero.easyclass.base.ControllerBaseTester;
+import edu.vero.easyclass.domain.Attendance;
+import edu.vero.easyclass.domain.Notice;
+import edu.vero.easyclass.domain.OnlineClassTest;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Date;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import edu.vero.easyclass.base.ControllerBaseTester;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 
 
 /**
@@ -55,7 +61,21 @@ public class TeacherArrangementControllerTest extends ControllerBaseTester
     public void testCreateNotice()
         throws Exception
     {
-        // TODO: Test goes here...
+        Notice notice = new Notice();
+        notice.setEstablishedTime(new Date());
+        notice.setTitle("title!!!");
+
+        String jsonString = objectMapper.writeValueAsString(notice);
+        int arrangementId=1;
+        MvcResult result =  mockMvc.perform(post("/arrangements/{arrangementId}/notices",arrangementId)
+                .content(jsonString.getBytes())
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andDo(print()).andReturn();
+        String content = result.getResponse().getContentAsString();
+        Notice created = objectMapper.readValue(content,Notice.class);
+        Assert.assertNotNull(notice.getNoticeId());
+        System.out.println("Created notice is "+created.getNoticeId());
     }
 
     /**
@@ -66,7 +86,20 @@ public class TeacherArrangementControllerTest extends ControllerBaseTester
     public void testCreateOnlineClassTest()
         throws Exception
     {
-        // TODO: Test goes here...
+        OnlineClassTest onlineClassTest = new OnlineClassTest();
+        onlineClassTest.setEstablishedTime(new Date());
+
+
+        String jsonString = objectMapper.writeValueAsString(onlineClassTest);
+        MvcResult result =  mockMvc.perform(post("/arrangements/{arrangementId}/tests")
+                .content(jsonString.getBytes())
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andDo(print()).andReturn();
+        String content = result.getResponse().getContentAsString();
+        OnlineClassTest created = objectMapper.readValue(content,OnlineClassTest.class);
+        Assert.assertNotNull(onlineClassTest.getTestId());
+        System.out.println("Created onlineClassTest is "+created.getTestId());
     }
 
     /**
@@ -76,7 +109,16 @@ public class TeacherArrangementControllerTest extends ControllerBaseTester
     public void testFindAllArrangements()
         throws Exception
     {
-        // TODO: Test goes here...
+       /* TeacherArrangement teacherArrangement = new TeacherArrangement();
+
+        String jsonString = objectMapper.writeValueAsString(teacherArrangement);
+        MvcResult result =  mockMvc.perform(get("/arrangements")
+                .content(jsonString.getBytes())
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andDo(print()).andReturn();
+        String content = result.getResponse().getContentAsString();
+*/
     }
 
     /**
@@ -105,9 +147,22 @@ public class TeacherArrangementControllerTest extends ControllerBaseTester
      */
     @Test
     public void testCreateAttendance()
-        throws Exception
+       throws Exception
     {
-        // TODO: Test goes here...
+        Attendance attendance = new Attendance();
+        attendance.setEstablishedTime(new Date());
+        attendance.setClosed(false);
+
+        String jsonString = objectMapper.writeValueAsString(attendance);
+        MvcResult result =  mockMvc.perform(post("/arrangements/{arrangementId}/attendances")
+                .content(jsonString.getBytes())
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andDo(print()).andReturn();
+        String content = result.getResponse().getContentAsString();
+        Attendance created = objectMapper.readValue(content,Attendance.class);
+        Assert.assertNotNull(attendance.getAttendanceId());
+        System.out.println("Created attendance is "+created.getAttendanceId());
     }
 
     /**

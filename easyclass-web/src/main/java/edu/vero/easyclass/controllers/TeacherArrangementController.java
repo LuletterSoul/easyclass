@@ -166,4 +166,26 @@ public class TeacherArrangementController
         return new ResponseEntity<>(teacherArrangementService.findTeacher(arrangementId),
             HttpStatus.OK);
     }
+
+
+
+
+    @PutMapping(value = "")
+    public ResponseEntity<TeacherArrangement> updateArrangement(@RequestBody TeacherArrangement teacherArrangement)
+    {
+        return new ResponseEntity<>(teacherArrangementService.updateArrangement(teacherArrangement),
+                HttpStatus.OK);
+    }
+    @PostMapping(value = "")
+    public ResponseEntity<TeacherArrangement> createArrangement( @RequestBody TeacherArrangement teacherArrangement)
+    {
+        return new ResponseEntity<>(teacherArrangementService.createArrangement(teacherArrangement),
+                HttpStatus.CREATED);
+    }
+    @DeleteMapping(value = "/{arrangeId}")
+    public ResponseEntity<TeacherArrangement> deleteArrangement(@PathVariable("arrangeId") Integer arrangeId)
+    {
+        return new ResponseEntity<>(teacherArrangementService.deleteArrangement(arrangeId),
+                HttpStatus.NO_CONTENT);
+    }
 }
