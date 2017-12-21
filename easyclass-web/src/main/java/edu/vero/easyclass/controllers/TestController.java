@@ -1,17 +1,18 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.OnlineClassTest;
-import edu.vero.easyclass.domain.Question;
-import edu.vero.easyclass.domain.TeacherArrangement;
-import edu.vero.easyclass.services.TestsService;
-import io.swagger.annotations.Api;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import edu.vero.easyclass.domain.OnlineClassTest;
+import edu.vero.easyclass.domain.Question;
+import edu.vero.easyclass.domain.TeacherArrangement;
+import edu.vero.easyclass.services.TestsService;
+import io.swagger.annotations.Api;
 
 
 @Api(description = "在线测试业务")
@@ -64,9 +65,9 @@ public class TestController
     {
         return new ResponseEntity<>(testsService.findTestQuestions(testId), HttpStatus.OK);
     }
-
-    @DeleteMapping(value = "/{testId}")
-    public ResponseEntity<OnlineClassTest>deleteTest(@PathVariable("testrId") Integer testId){
-        return new ResponseEntity<>(testsService.deleteTest(testId),HttpStatus.OK);
+    @DeleteMapping(value="/{testId}")
+    public ResponseEntity<OnlineClassTest> deleteTest(@PathVariable("testId")Integer testId){
+        return new ResponseEntity<>(testsService.deleteTest(testId),HttpStatus.NO_CONTENT);
     }
+
 }

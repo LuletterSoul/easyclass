@@ -46,4 +46,16 @@ public class CourseServiceImpl implements CourseService
     {
         return new ArrayList<Question>(courseJpaDao.findOne(courseId).getQuestions());
     }
+
+    @Override
+    public Course createCourse(Course course) {
+        return courseJpaDao.saveAndFlush(course);
+    }
+
+    @Override
+    public Course deleteCourse(Integer courseId) {
+        Course course = courseJpaDao.findOne(courseId);
+        courseJpaDao.delete(course);
+        return course;
+    }
 }

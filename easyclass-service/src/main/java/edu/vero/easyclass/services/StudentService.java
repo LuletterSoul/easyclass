@@ -3,6 +3,7 @@ package edu.vero.easyclass.services;
 
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
+import io.swagger.models.auth.In;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public interface StudentService
     Student save(Student student);
 
     List<Student> findAll();
+
+    Student createStudent(Student student);
+
+    Student deleteStudent(Integer userId);
 
 }

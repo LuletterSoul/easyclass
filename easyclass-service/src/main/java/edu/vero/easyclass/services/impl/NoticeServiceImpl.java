@@ -45,4 +45,9 @@ public class NoticeServiceImpl implements NoticeService
         noticeJpaDao.delete(notice);
         return notice;
     }
+
+    @Override
+    public Notice createNotice(Notice notice) {
+        return noticeJpaDao.saveAndFlush(notice);
+    }
 }

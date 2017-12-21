@@ -53,4 +53,16 @@ public class StudentServiceImpl implements StudentService
     {
         return studentJpaDao.findAll();
     }
+
+    @Override
+    public Student createStudent(Student student) {
+        return studentJpaDao.saveAndFlush(student);
+    }
+
+    @Override
+    public Student deleteStudent(Integer userId) {
+        Student student = studentJpaDao.findOne(userId);
+        studentJpaDao.delete(student);
+        return student;
+    }
 }

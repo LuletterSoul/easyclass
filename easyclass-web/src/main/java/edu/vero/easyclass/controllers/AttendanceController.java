@@ -32,10 +32,22 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
+
+    @PostMapping(value="/create/{arrangeId}")
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance,@PathVariable("arrangeId") Integer arrangeId){
+        return new ResponseEntity<>(attendanceService.createAttendance(attendance,arrangeId),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/{attendanceId}/delete")
+    public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId")Integer attendanceId){
+        return new ResponseEntity<>(attendanceService.deleteAttendance(attendanceId),HttpStatus.NO_CONTENT);
+    }
+
+
     @ApiOperation(value = "发起一个属于该签到项下的投票")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
-        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
+            @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+            @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -51,7 +63,7 @@ public class AttendanceController
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
         return new ResponseEntity<>(attendanceService.deleteQRcode(attendanceId),
-            HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+            HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "获取签到的二维码(尚未实现)")

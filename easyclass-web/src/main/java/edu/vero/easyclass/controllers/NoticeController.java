@@ -42,4 +42,10 @@ public class NoticeController
             HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 
+    @PostMapping(value="/create")
+
+    public ResponseEntity<Notice> createNotice(@RequestBody Notice notice){
+        return new ResponseEntity<>(noticeService.createNotice(notice),HttpStatus.CREATED);
+    }
+
 }

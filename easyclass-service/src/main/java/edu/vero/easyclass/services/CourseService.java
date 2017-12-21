@@ -14,4 +14,8 @@ public interface CourseService
     Course findCourseById(Integer courseId);
 
     List<Question> findCourseQuestion(Integer courseId);
+
+    Course createCourse(Course course);
+
+    Course deleteCourse(Integer courseId);
 }

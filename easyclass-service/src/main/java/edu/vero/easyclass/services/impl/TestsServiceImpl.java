@@ -79,8 +79,8 @@ public class TestsServiceImpl implements TestsService
 
     @Override
     public OnlineClassTest deleteTest(Integer testId) {
-        OnlineClassTest onlineClassTest=testsJpaDao.findOne(testId);
-        testsJpaDao.delete(onlineClassTest);
-        return onlineClassTest;
+        OnlineClassTest test = testsJpaDao.findOne(testId);
+        testsJpaDao.delete(testId);
+        return test;
     }
 }

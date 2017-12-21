@@ -21,4 +21,8 @@ public interface AttendanceService
     Attendance updateAttendance(Attendance attendance);
 
     List<SignRecord> findSignRecords(Integer attendanceId);
+
+    Attendance createAttendance(Attendance attendance,Integer arrangeId);
+
+    Attendance deleteAttendance(Integer attendanceId);
 }

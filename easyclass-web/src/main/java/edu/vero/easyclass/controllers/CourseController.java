@@ -9,17 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Api(description = "课程查询业务")
 @RestController
-@RequestMapping(value = "courses")
+@RequestMapping(value = "/courses")
 public class CourseController
 {
 
@@ -30,6 +27,18 @@ public class CourseController
     {
         this.courseService = courseService;
     }
+
+
+    @PostMapping(value="/create")
+    public ResponseEntity<Course> createCourse(@RequestBody Course course){
+        return new ResponseEntity<>(courseService.createCourse(course),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/{courseId}/delete")
+    public ResponseEntity<Course> deleteCourse(@PathVariable("courseID") Integer courseId){
+        return  new ResponseEntity<>(courseService.deleteCourse(courseId),HttpStatus.NO_CONTENT);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Course>> findAll()
