@@ -26,13 +26,13 @@ public class ClassTimeController
         this.classTimeService = classTimeService;
     }
 
-    @PostMapping(value = "/{timeId}/comments")
-    public ResponseEntity<ClassTimeComment> saveClassComment(@RequestBody ClassTimeComment comment,
-                                                             @PathVariable("timeId") Integer timeId)
-    {
-        return new ResponseEntity<>(classTimeService.savePerClassComment(timeId, comment),
-            HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "/{timeId}/comments")
+//    public ResponseEntity<ClassTimeComment> saveClassComment(@RequestBody ClassTimeComment comment,
+//                                                             @PathVariable("timeId") Integer timeId)
+//    {
+//        return new ResponseEntity<>(classTimeService.savePerClassComment(timeId, comment),
+//            HttpStatus.CREATED);
+//    }
 
     @GetMapping(value = "/{timeId}/comments")
     public ResponseEntity<List<ClassTimeComment>> findAllClassComments(@PathVariable("timeId") Integer timeId)

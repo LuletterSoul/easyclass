@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import edu.vero.easyclass.domain.ClassTimeComment;
 import edu.vero.easyclass.domain.User;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
