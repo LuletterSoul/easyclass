@@ -26,6 +26,19 @@ public class HomeworkServiceImpl implements HomeworkService {
     }
 
     @Override
+    public Homework updateHomework( Homework  homework) {
+
+        homeworkJpaDao.saveAndFlush(homework);
+        return homework;
+    }
+
+    @Override
+    public Homework createHomework( Homework  homework) {
+        homeworkJpaDao.saveAndFlush(homework);
+        return homework;
+    }
+
+    @Override
     public List<Homework> findAllHomeworks() {
         List<Homework> list=homeworkJpaDao.findAll();
         return list;

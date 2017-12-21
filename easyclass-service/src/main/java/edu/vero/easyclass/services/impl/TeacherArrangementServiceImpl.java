@@ -211,6 +211,24 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         return new ArrayList<>(courseware);
     }
 
+    @Override
+    public TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement) {
+        teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
+        return teacherArrangement;
+    }
+
+    @Override
+    public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement) {
+        teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
+        return teacherArrangement;
+    }
+
+    @Override
+    public TeacherArrangement deleteArrangement(Integer arrangeId) {
+        TeacherArrangement teacherArrangement =teacherArrangementJpaDao.findOne(arrangeId);
+        teacherArrangementJpaDao.delete(teacherArrangement);
+        return teacherArrangement;
+    }
 
 
 }

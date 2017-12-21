@@ -3,8 +3,6 @@ package edu.vero.easyclass.controllers;
 
 import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.ClassTimeComment;
-import edu.vero.easyclass.domain.CourseComment;
-import edu.vero.easyclass.domain.TeachingComment;
 import edu.vero.easyclass.services.ClassTimeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +51,24 @@ public class ClassTimeController
 
     {
         return new ResponseEntity<>(classTimeService.findAllClassTimes(), HttpStatus.OK);
+    }
+    @PostMapping(value = "")
+    public ResponseEntity<ClassTime> createClassTime(@RequestBody ClassTime classTime)
+
+    {
+        return new ResponseEntity<>(classTimeService.createClassTime(classTime), HttpStatus.CREATED);
+    }
+    @PutMapping(value = "")
+    public ResponseEntity<ClassTime> updateClassTime(@RequestBody ClassTime classTime)
+
+    {
+        return new ResponseEntity<>(classTimeService.updateClassTime(classTime), HttpStatus.OK);
+    }
+    @DeleteMapping(value = "/{timeId}")
+    public ResponseEntity<ClassTime> deleteClassTime(@PathVariable("timeId") Integer timeId)
+    {
+        return new ResponseEntity<>(classTimeService.deleteClassTime(timeId),
+                HttpStatus.NO_CONTENT);
     }
 
 }

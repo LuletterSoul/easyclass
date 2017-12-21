@@ -65,4 +65,23 @@ public class ClassTimeServiceImpl implements ClassTimeService
         return new ArrayList<>(classTimeComment);
     }
 
+    @Override
+    public ClassTime createClassTime(ClassTime classTime) {
+        classTimeJpaDao.saveAndFlush(classTime);
+        return classTime;
+    }
+
+    @Override
+    public ClassTime updateClassTime(ClassTime classTime) {
+        classTimeJpaDao.saveAndFlush(classTime);
+        return classTime;
+    }
+
+    @Override
+    public ClassTime deleteClassTime(Integer timeId) {
+        ClassTime classTime =classTimeJpaDao.findOne(timeId);
+        classTimeJpaDao.delete(classTime);
+        return classTime;
+    }
+
 }

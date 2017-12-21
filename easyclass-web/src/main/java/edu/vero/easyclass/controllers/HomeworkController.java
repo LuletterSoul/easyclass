@@ -38,4 +38,16 @@ public class HomeworkController
         return new ResponseEntity<>(homeworkService.findAllHomeworks(),
                 HttpStatus.OK);
     }
+    @PutMapping(value = "")
+    public ResponseEntity<Homework> updateHomework( @RequestBody Homework homework)
+    {
+        return new ResponseEntity<>(homeworkService.updateHomework(homework),
+                HttpStatus.OK);
+    }
+    @PostMapping(value = "")
+    public ResponseEntity<Homework> createHomework( @RequestBody Homework homework)
+    {
+        return new ResponseEntity<>(homeworkService.createHomework(homework),
+                HttpStatus.CREATED);
+    }
 }
