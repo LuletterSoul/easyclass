@@ -17,4 +17,9 @@ public interface QuestionService
     public Question findQuestion(Integer questionId);
 
     public List<QuestionOption> findQuestionOptions(Integer questionId);
+
+    Question deleteQuestion(Integer QuestionId);
+
+    Question updateQuestion(Question question);
+
 }
