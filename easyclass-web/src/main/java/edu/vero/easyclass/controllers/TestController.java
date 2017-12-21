@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.List;
 
 
@@ -63,5 +64,9 @@ public class TestController
     public ResponseEntity<List<Question>> findTestQuestions(@PathVariable("testId") Integer testId)
     {
         return new ResponseEntity<>(testsService.findTestQuestions(testId), HttpStatus.OK);
+    }
+    @DeleteMapping(value="/{testId}/delete")
+    public ResponseEntity<OnlineClassTest> deleteTest(@PathVariable("testId")Integer testId){
+        return new ResponseEntity<>(testsService.deleteTest(testId),HttpStatus.NO_CONTENT);
     }
 }

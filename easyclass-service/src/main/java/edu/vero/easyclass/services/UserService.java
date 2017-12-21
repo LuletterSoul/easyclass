@@ -17,9 +17,9 @@ import java.util.List;
 
 public interface UserService
 {
-    public User findUserById(Integer userId);
+    User findUserById(Integer userId);
 
-    public Student registerStudent(Student student);
+    Student registerStudent(Student student);
 
-    public List<User> findAll();
+    List<User> findAll();
 }

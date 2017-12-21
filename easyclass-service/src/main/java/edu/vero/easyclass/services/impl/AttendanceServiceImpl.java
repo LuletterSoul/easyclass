@@ -1,12 +1,10 @@
 package edu.vero.easyclass.services.impl;
 
 
-import edu.vero.easyclass.domain.Attendance;
-import edu.vero.easyclass.domain.QRcode;
-import edu.vero.easyclass.domain.SignRecord;
-import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.AttendanceJpaDao;
 import edu.vero.easyclass.repositories.QRcodeJpaDao;
+import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
 import edu.vero.easyclass.repositories.VoteJpaDao;
 import edu.vero.easyclass.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,13 @@ public class AttendanceServiceImpl implements AttendanceService
     private AttendanceJpaDao attendanceJpaDao;
 
     private QRcodeJpaDao qRcodeJpaDao;
+
+    private TeacherArrangementJpaDao arrangementJpaDao;
+
+    @Autowired
+    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
+        this.arrangementJpaDao = arrangementJpaDao;
+    }
 
     @Autowired
     public void setqRcodeJpaDao(QRcodeJpaDao qRcodeJpaDao)
@@ -91,5 +96,18 @@ public class AttendanceServiceImpl implements AttendanceService
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         Set<SignRecord> signRecordSet = attendance.getSignRecords();
         return new ArrayList<SignRecord>(signRecordSet);
+    }
+
+    @Override
+    public Attendance createAttendance(Attendance attendance,Integer arrangeId) {
+        attendance.setArrangement(arrangementJpaDao.findOne(arrangeId));
+        return attendanceJpaDao.saveAndFlush(attendance);
+    }
+
+    @Override
+    public Attendance deleteAttendance(Integer attendanceId) {
+        Attendance attendance =  attendanceJpaDao.findOne(attendanceId);
+        attendanceJpaDao.delete(attendance);
+        return attendance;
     }
 }

@@ -50,4 +50,14 @@ public class StudentController
         return new ResponseEntity<Student>(studentService.findStudentById(userId), HttpStatus.OK);
     }
 
+    @PostMapping(value="/create")
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        return new ResponseEntity<>(studentService.createStudent(student),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/{userId}/delete")
+    public ResponseEntity<Student> deleteStudent(@PathVariable("userId") Integer userId){
+        return new ResponseEntity<>(studentService.deleteStudent(userId),HttpStatus.NO_CONTENT);
+    }
+
 }

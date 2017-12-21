@@ -7,6 +7,7 @@ import edu.vero.easyclass.domain.SignRecord;
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.AttendanceService;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,18 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
+    @PostMapping(value="/create/{arrangeId}")
+
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance,@PathVariable("arrangeId") Integer arrangeId){
+        return new ResponseEntity<>(attendanceService.createAttendance(attendance,arrangeId),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/{attendanceId}/delete")
+    public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId")Integer attendanceId){
+        return new ResponseEntity<>(attendanceService.deleteAttendance(attendanceId),HttpStatus.NO_CONTENT);
+    }
+
+
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -41,7 +54,7 @@ public class AttendanceController
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
         return new ResponseEntity<>(attendanceService.deleteQRcode(attendanceId),
-            HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+            HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "/{attendanceId}/QR_code")

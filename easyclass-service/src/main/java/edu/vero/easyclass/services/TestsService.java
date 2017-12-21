@@ -10,15 +10,17 @@ import java.util.List;
 
 public interface TestsService
 {
-    public List<OnlineClassTest> findAllTests();
+    List<OnlineClassTest> findAllTests();
 
-    public OnlineClassTest createTest(OnlineClassTest onlineClassTest);
+    OnlineClassTest createTest(OnlineClassTest onlineClassTest);
 
-    public OnlineClassTest updateTest(OnlineClassTest onlineClassTest);
+    OnlineClassTest updateTest(OnlineClassTest onlineClassTest);
 
-    public OnlineClassTest findTest(Integer testId);
+    OnlineClassTest findTest(Integer testId);
 
-    public TeacherArrangement findTestArrangement(Integer testId);
+    TeacherArrangement findTestArrangement(Integer testId);
 
-    public List<Question> findTestQuestions(Integer testId);
+    List<Question> findTestQuestions(Integer testId);
+
+    OnlineClassTest deleteTest(Integer testId);
 }
