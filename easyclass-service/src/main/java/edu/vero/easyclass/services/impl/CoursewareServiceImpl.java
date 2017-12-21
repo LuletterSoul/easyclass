@@ -34,4 +34,23 @@ public class CoursewareServiceImpl implements CoursewareService
         Courseware courseware = coursewareJpaDao.findOne(coursewareId);
         return courseware;
     }
+
+    @Override
+    public Courseware createCourseware(Courseware courseware) {
+        coursewareJpaDao.saveAndFlush(courseware);
+        return courseware;
+    }
+
+    @Override
+    public Courseware deleteCourseware(Integer CoursewareId) {
+        Courseware courseware=coursewareJpaDao.findOne(CoursewareId);
+        coursewareJpaDao.delete(courseware);
+        return courseware;
+    }
+
+    @Override
+    public Courseware updateCourseware(Courseware courseware) {
+        coursewareJpaDao.saveAndFlush(courseware);
+        return courseware;
+    }
 }

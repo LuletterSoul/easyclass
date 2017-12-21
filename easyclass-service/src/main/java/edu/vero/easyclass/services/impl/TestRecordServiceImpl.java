@@ -65,4 +65,17 @@ public class TestRecordServiceImpl implements TestRecordService
         return testRecord.getTest();
     }
 
+    @Override
+    public TestRecord deleteTestRecord(Integer recordId) {
+        TestRecord testRecord=testRecordJpaDao.findOne(recordId);
+        testRecordJpaDao.delete(testRecord);
+        return testRecord;
+    }
+
+    @Override
+    public TestRecord updateTestRecord(TestRecord question) {
+        testRecordJpaDao.saveAndFlush(question);
+        return question;
+    }
+
 }

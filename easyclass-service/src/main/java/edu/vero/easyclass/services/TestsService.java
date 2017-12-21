@@ -21,4 +21,6 @@ public interface TestsService
     public TeacherArrangement findTestArrangement(Integer testId);
 
     public List<Question> findTestQuestions(Integer testId);
+
+    OnlineClassTest deleteTest(Integer testId);
 }
