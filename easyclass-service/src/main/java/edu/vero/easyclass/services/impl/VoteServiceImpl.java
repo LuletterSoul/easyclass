@@ -1,17 +1,16 @@
 package edu.vero.easyclass.services.impl;
 
 
-import edu.vero.easyclass.domain.Attendance;
-import edu.vero.easyclass.domain.Vote;
-import edu.vero.easyclass.domain.VoteOption;
-import edu.vero.easyclass.repositories.AttendanceJpaDao;
-import edu.vero.easyclass.repositories.VoteJpaDao;
-import edu.vero.easyclass.repositories.VoteOptionJpaDao;
-import edu.vero.easyclass.services.VoteService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.VoteOption;
+import edu.vero.easyclass.repositories.VoteJpaDao;
+import edu.vero.easyclass.repositories.VoteOptionJpaDao;
+import edu.vero.easyclass.services.VoteService;
 
 
 /**
@@ -33,11 +32,11 @@ public class VoteServiceImpl implements VoteService
         this.voteOptionJpaDao = voteOptionJpaDao;
     }
 
-//    @Autowired
-//    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
-//    {
-//        this.attendanceJpaDao = attendanceJpaDao;
-//    }
+    // @Autowired
+    // public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
+    // {
+    // this.attendanceJpaDao = attendanceJpaDao;
+    // }
 
     @Autowired
     public void setVoteJpaDao(VoteJpaDao voteJpaDao)
@@ -45,17 +44,18 @@ public class VoteServiceImpl implements VoteService
         this.voteJpaDao = voteJpaDao;
     }
 
-//    @Override
-//    public Vote updateVote(Integer voteId)
-//    {
-//        Vote vote = voteJpaDao.findOne(voteId);
-//        vote.setClosed(true);
-//        voteJpaDao.save(vote);
-//        return vote;
-//    }
+    // @Override
+    // public Vote updateVote(Integer voteId)
+    // {
+    // Vote vote = voteJpaDao.findOne(voteId);
+    // vote.setClosed(true);
+    // voteJpaDao.save(vote);
+    // return vote;
+    // }
 
     @Override
-    public Vote updateVote(Vote vote) {
+    public Vote updateVote(Vote vote)
+    {
         return voteJpaDao.save(vote);
     }
 
@@ -71,6 +71,12 @@ public class VoteServiceImpl implements VoteService
     public Vote createVote(Vote vote)
     {
         return voteJpaDao.save(vote);
+    }
+
+    @Override
+    public Vote findVote(Integer voteId)
+    {
+        return voteJpaDao.findOne(voteId);
     }
 
     @Override
