@@ -60,4 +60,16 @@ public class QuestionServiceImpl implements QuestionService
         List<QuestionOption> list = new ArrayList(question.getOptions());
         return list;
     }
+
+    @Override
+    public Question deleteQuestion(Integer questionId) {
+        Question question=questionJpaDao.findOne(questionId);
+        return question;
+    }
+
+    @Override
+    public Question updateQuestion(Question question) {
+        questionJpaDao.saveAndFlush(question);
+        return question;
+    }
 }

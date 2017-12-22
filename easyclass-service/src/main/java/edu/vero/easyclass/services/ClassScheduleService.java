@@ -16,7 +16,7 @@ public interface ClassScheduleService
 
     List<SignRecord> findAllSignRecords(Integer scheduleId);
 
-    List<Attendance> findAllAttendances(Integer scheduleId);
+//    List<Attendance> findAllAttendances(Integer scheduleId);
 
     List<Homework> findAllHomeworks(Integer scheduleId);
 

@@ -7,7 +7,9 @@ import edu.vero.easyclass.domain.SignRecord;
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.services.AttendanceService;
 import io.swagger.annotations.Api;
-import io.swagger.models.auth.In;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +32,8 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
-    @PostMapping(value="/create/{arrangeId}")
 
+    @PostMapping(value="/create/{arrangeId}")
     public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance,@PathVariable("arrangeId") Integer arrangeId){
         return new ResponseEntity<>(attendanceService.createAttendance(attendance,arrangeId),HttpStatus.CREATED);
     }
@@ -42,6 +44,10 @@ public class AttendanceController
     }
 
 
+    @ApiOperation(value = "发起一个属于该签到项下的投票")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+            @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -50,6 +56,9 @@ public class AttendanceController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "删除签到的二维码(尚未实现)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @DeleteMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> deleteQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
@@ -57,18 +66,27 @@ public class AttendanceController
             HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "获取签到的二维码(尚未实现)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") Integer attendanceId)
     {
         return new ResponseEntity<>(attendanceService.findQRcode(attendanceId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @PutMapping
     public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance attendance)
     {
         return new ResponseEntity<>(attendanceService.updateAttendance(attendance), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取该签到项下的所有签到记录")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{attendanceId}/sign_records")
     public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {

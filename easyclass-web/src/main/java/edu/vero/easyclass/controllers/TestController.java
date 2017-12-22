@@ -1,21 +1,21 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.OnlineClassTest;
-import edu.vero.easyclass.domain.Question;
-import edu.vero.easyclass.domain.TeacherArrangement;
-import edu.vero.easyclass.services.TestsService;
-import io.swagger.annotations.Api;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
-import java.util.List;
+import edu.vero.easyclass.domain.OnlineClassTest;
+import edu.vero.easyclass.domain.Question;
+import edu.vero.easyclass.domain.TeacherArrangement;
+import edu.vero.easyclass.services.TestsService;
+import io.swagger.annotations.Api;
 
 
-@Api(description = "在线业务")
+@Api(description = "在线测试业务")
 @RestController
 @RequestMapping(value = "/tests")
 public class TestController
@@ -69,4 +69,5 @@ public class TestController
     public ResponseEntity<OnlineClassTest> deleteTest(@PathVariable("testId")Integer testId){
         return new ResponseEntity<>(testsService.deleteTest(testId),HttpStatus.NO_CONTENT);
     }
+
 }

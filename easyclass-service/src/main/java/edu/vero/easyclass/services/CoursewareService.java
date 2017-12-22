@@ -8,7 +8,13 @@ import java.util.List;
 
 public interface CoursewareService
 {
-    public List<Courseware> findAllCourseWare();
+     List<Courseware> findAllCourseWare();
 
-    public Courseware findCourseWare(Integer coursewareId);
+     Courseware findCourseWare(Integer coursewareId);
+
+     Courseware createCourseware(Courseware courseware);
+
+     Courseware deleteCourseware(Integer CoursewareId);
+
+     Courseware updateCourseware(Courseware courseware);
 }

@@ -61,10 +61,10 @@ public class TeacherServiceImpl implements TeacherService
     }
 
     @Override
-    public List<TeacherArrangement> findTeacherArrangement(Integer userId)
+    public List findTeacherArrangement(Integer userId)
     {
         Teacher teacher = teacherJpaDao.findOne(userId);
-        return (List) new ArrayList(teacher.getArragementSet());
+        return (List) new ArrayList(teacher.getArrangementSet());
     }
 
     @Override
@@ -79,5 +79,17 @@ public class TeacherServiceImpl implements TeacherService
         }
         teacherJpaDao.saveAndFlush(teacher);
         return list;
+    }
+
+    @Override
+    public Teacher deleteTeacher(Integer teacherId) {
+        Teacher teacher=teacherJpaDao.findOne(teacherId);
+        return teacher;
+    }
+
+    @Override
+    public Teacher updateTeacher(Teacher question) {
+        teacherJpaDao.saveAndFlush(question);
+        return question;
     }
 }

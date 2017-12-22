@@ -51,6 +51,9 @@ public interface TeacherArrangementService
     public List<Courseware> findAllCoursewares(Integer arrangementId);
 
 
+    TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement);
 
+    TeacherArrangement createArrangement(TeacherArrangement teacherArrangement);
 
+    TeacherArrangement deleteArrangement(Integer arrangeId);
 }

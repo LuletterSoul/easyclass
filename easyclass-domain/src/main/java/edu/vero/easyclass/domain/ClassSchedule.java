@@ -57,9 +57,9 @@ public class ClassSchedule
     @JsonIgnore
     private Set<Homework> homeworks;
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
-    private Set<Attendance> attendances;
+//    @ApiModelProperty(hidden = true)
+//    @JsonIgnore
+//    private Set<Attendance> attendances;
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore
@@ -127,17 +127,17 @@ public class ClassSchedule
         this.homeworks = homeworks;
     }
 
-    @OneToMany
-    @JoinColumn(name = "scheduleId")
-    public Set<Attendance> getAttendances()
-    {
-        return attendances;
-    }
-
-    public void setAttendances(Set<Attendance> attendances)
-    {
-        this.attendances = attendances;
-    }
+//    @OneToMany
+//    @JoinColumn(name = "scheduleId")
+//    public Set<Attendance> getAttendances()
+//    {
+//        return attendances;
+//    }
+//
+//    public void setAttendances(Set<Attendance> attendances)
+//    {
+//        this.attendances = attendances;
+//    }
 
     @Override
     public String toString()

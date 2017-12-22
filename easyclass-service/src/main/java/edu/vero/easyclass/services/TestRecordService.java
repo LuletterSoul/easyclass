@@ -18,4 +18,8 @@ public interface TestRecordService
     public ClassSchedule findClassSchedule(Integer recordId);
 
     public OnlineClassTest findTest(Integer recordId);
+
+    TestRecord deleteTestRecord(Integer TestRecordId);
+
+    TestRecord updateTestRecord(TestRecord question);
 }

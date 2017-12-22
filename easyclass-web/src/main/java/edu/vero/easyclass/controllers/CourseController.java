@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Api(description = "上课时间节点业务")
+@Api(description = "课程查询业务")
 @RestController
 @RequestMapping(value = "/courses")
 public class CourseController
@@ -49,12 +49,12 @@ public class CourseController
     @GetMapping(value = "/{courseId}")
     public ResponseEntity<Course> findCourse(@PathVariable("courseId") Integer courseId)
     {
-        return new ResponseEntity<>(courseService.findCourseById(courseId),HttpStatus.OK);
+        return new ResponseEntity<>(courseService.findCourseById(courseId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{courseId}/questions")
     public ResponseEntity<List<Question>> findQuestions(@PathVariable("courseId") Integer courseId)
     {
-        return new ResponseEntity<>(courseService.findCourseQuestion(courseId),HttpStatus.OK);
+        return new ResponseEntity<>(courseService.findCourseQuestion(courseId), HttpStatus.OK);
     }
 }

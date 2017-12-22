@@ -4,16 +4,14 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.ClassSchedule;
 
+import edu.vero.easyclass.domain.Courseware;
 import edu.vero.easyclass.domain.SignRecord;
 import edu.vero.easyclass.services.SignRecordService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,5 +48,21 @@ public class SignRecordController
     {
 
         return new ResponseEntity<>(signRecordService.findClassSchedule(signId), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "")
+    public ResponseEntity<SignRecord>createSignRecord(@RequestBody SignRecord signRecord){
+        return new ResponseEntity<>(signRecordService.createSignRecord(signRecord),HttpStatus.CREATED);
+
+    }
+
+    @PutMapping(value = "")
+    public ResponseEntity<SignRecord>updateSignRecord(@RequestBody SignRecord signRecord){
+        return new ResponseEntity<>(signRecordService.updateSignRecord(signRecord),HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{signRecordId}")
+    public ResponseEntity<SignRecord>deleteSignRecord(@PathVariable("signRecordId") Integer signRecordId){
+        return new ResponseEntity<>(signRecordService.deleteSignRecord(signRecordId),HttpStatus.OK);
     }
 }
