@@ -49,6 +49,8 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter
         registry.addInterceptor(originalAccessHandler());
     }
 
+
+
     @Bean
     public ViewResolver internalResourceViewResolver()
     {
@@ -100,6 +102,15 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter
         return mapperFactoryBean.getObject();
     }
 
+    @Bean
+    public Jackson2ObjectMapperFactoryBean objectMapperFactoryBean(){
+        Jackson2ObjectMapperFactoryBean objectMapperFactoryBean = new Jackson2ObjectMapperFactoryBean();
+        objectMapperFactoryBean.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapperFactoryBean.setDateFormat(new SimpleDateFormat(DateStyle.YYYY_MM_DD_HH_MM.getValue()));
+        objectMapperFactoryBean.afterPropertiesSet();
+        return objectMapperFactoryBean;
+    }
+
 
     @Bean
     public MappingJackson2HttpMessageConverter jsonConverter()
@@ -110,11 +121,11 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter
         supportedMediaType.add(MediaType.TEXT_PLAIN);
         supportedMediaType.add(MediaType.TEXT_HTML);
         converter.setSupportedMediaTypes(supportedMediaType);
-        converter.setObjectMapper(objectMapper());
+        converter.setObjectMapper(objectMapperFactoryBean().getObject());
         return converter;
     }
 
-//    @Bean
+//    @Beanw
 //    public AuthorizationAttributeSourceAdvisor
 //    authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager)
 //    {
