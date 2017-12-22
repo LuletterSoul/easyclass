@@ -24,8 +24,8 @@ public class TeacherArrangement
     private Course course;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getArrangementId()
     {
         return arrangementId;

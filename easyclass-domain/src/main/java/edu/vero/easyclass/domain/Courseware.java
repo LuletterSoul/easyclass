@@ -24,8 +24,8 @@ public class Courseware
     private int size;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getCoursewareId()
     {
         return coursewareId;
