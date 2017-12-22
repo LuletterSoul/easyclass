@@ -34,7 +34,8 @@ public class AttendanceServiceImpl implements AttendanceService
     private TeacherArrangementJpaDao arrangementJpaDao;
 
     @Autowired
-    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
+    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao)
+    {
         this.arrangementJpaDao = arrangementJpaDao;
     }
 
@@ -99,14 +100,15 @@ public class AttendanceServiceImpl implements AttendanceService
     }
 
     @Override
-    public Attendance createAttendance(Attendance attendance,Integer arrangeId) {
-        attendance.setArrangement(arrangementJpaDao.findOne(arrangeId));
-        return attendanceJpaDao.saveAndFlush(attendance);
+    public Attendance createAttendance(Attendance attendance)
+    {
+        return attendanceJpaDao.save(attendance);
     }
 
     @Override
-    public Attendance deleteAttendance(Integer attendanceId) {
-        Attendance attendance =  attendanceJpaDao.findOne(attendanceId);
+    public Attendance deleteAttendance(Integer attendanceId)
+    {
+        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         attendanceJpaDao.delete(attendance);
         return attendance;
     }

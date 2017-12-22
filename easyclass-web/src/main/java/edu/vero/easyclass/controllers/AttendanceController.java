@@ -33,9 +33,9 @@ public class AttendanceController
     }
 
 
-    @PostMapping(value="/create/{arrangeId}")
-    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance,@PathVariable("arrangeId") Integer arrangeId){
-        return new ResponseEntity<>(attendanceService.createAttendance(attendance,arrangeId),HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance){
+        return new ResponseEntity<>(attendanceService.createAttendance(attendance),HttpStatus.CREATED);
     }
 
     @DeleteMapping(value="/{attendanceId}")
@@ -90,8 +90,8 @@ public class AttendanceController
     @GetMapping(value = "/{attendanceId}/sign_records")
     public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<List<SignRecord>>(
-            attendanceService.findSignRecords(attendanceId), HttpStatus.OK);
+        return new ResponseEntity<>(
+                attendanceService.findSignRecords(attendanceId), HttpStatus.OK);
     }
 
 }

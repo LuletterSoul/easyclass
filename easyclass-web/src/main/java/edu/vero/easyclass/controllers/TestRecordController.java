@@ -58,13 +58,15 @@ public class TestRecordController
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<TestRecord>updateTestRecord(@RequestBody TestRecord testRecord){
-        return new ResponseEntity<>(testRecordService.updateTestRecord(testRecord),HttpStatus.OK);
+    public ResponseEntity<TestRecord> updateTestRecord(@RequestBody TestRecord testRecord)
+    {
+        return new ResponseEntity<>(testRecordService.updateTestRecord(testRecord), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{testId}")
-    public ResponseEntity<TestRecord>deleteTestRecord(@PathVariable("testId") Integer testId){
-        return new ResponseEntity<>(testRecordService.deleteTestRecord(testId),HttpStatus.OK);
+    public ResponseEntity<TestRecord> deleteTestRecord(@PathVariable("testId") Integer testId)
+    {
+        return new ResponseEntity<>(testRecordService.deleteTestRecord(testId), HttpStatus.OK);
     }
 
 }

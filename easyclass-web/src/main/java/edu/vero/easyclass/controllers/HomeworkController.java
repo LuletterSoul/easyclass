@@ -29,25 +29,24 @@ public class HomeworkController
     public ResponseEntity<Homework> deleteHomework(@PathVariable("homeworkId") Integer homeworkId)
     {
         return new ResponseEntity<>(homeworkService.deleteHomework(homeworkId),
-                HttpStatus.NO_CONTENT);
+            HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "")
     public ResponseEntity<List<Homework>> findAllHomeworks()
     {
-        return new ResponseEntity<>(homeworkService.findAllHomeworks(),
-                HttpStatus.OK);
+        return new ResponseEntity<>(homeworkService.findAllHomeworks(), HttpStatus.OK);
     }
+
     @PutMapping(value = "")
-    public ResponseEntity<Homework> updateHomework( @RequestBody Homework homework)
+    public ResponseEntity<Homework> updateHomework(@RequestBody Homework homework)
     {
-        return new ResponseEntity<>(homeworkService.updateHomework(homework),
-                HttpStatus.OK);
+        return new ResponseEntity<>(homeworkService.updateHomework(homework), HttpStatus.OK);
     }
+
     @PostMapping(value = "")
-    public ResponseEntity<Homework> createHomework( @RequestBody Homework homework)
+    public ResponseEntity<Homework> createHomework(@RequestBody Homework homework)
     {
-        return new ResponseEntity<>(homeworkService.createHomework(homework),
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(homeworkService.createHomework(homework), HttpStatus.CREATED);
     }
 }

@@ -22,7 +22,7 @@ public interface AttendanceService
 
     List<SignRecord> findSignRecords(Integer attendanceId);
 
-    Attendance createAttendance(Attendance attendance,Integer arrangeId);
+    Attendance createAttendance(Attendance attendance);
 
     Attendance deleteAttendance(Integer attendanceId);
 }

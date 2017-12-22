@@ -42,10 +42,11 @@ public class NoticeController
             HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping(value="/create")
+    @PostMapping(value = "/create")
 
-    public ResponseEntity<Notice> createNotice(@RequestBody Notice notice){
-        return new ResponseEntity<>(noticeService.createNotice(notice),HttpStatus.CREATED);
+    public ResponseEntity<Notice> createNotice(@RequestBody Notice notice)
+    {
+        return new ResponseEntity<>(noticeService.createNotice(notice), HttpStatus.CREATED);
     }
 
 }

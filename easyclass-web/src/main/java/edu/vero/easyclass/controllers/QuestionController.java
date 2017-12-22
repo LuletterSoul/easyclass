@@ -52,14 +52,16 @@ public class QuestionController
             HttpStatus.OK);
     }
 
-      @PutMapping(value = "")
-        public ResponseEntity<Question>updateQuestion(@RequestBody Question question){
-            return new ResponseEntity<>(questionService.updateQuestion(question),HttpStatus.CREATED);
-        }
+    @PutMapping(value = "")
+    public ResponseEntity<Question> updateQuestion(@RequestBody Question question)
+    {
+        return new ResponseEntity<>(questionService.updateQuestion(question), HttpStatus.CREATED);
+    }
 
-        @DeleteMapping(value = "/{questionId}")
-        public ResponseEntity<Question>deleteQuestion(@PathVariable("questionId") Integer questionId){
-            return new ResponseEntity<>(questionService.deleteQuestion(questionId),HttpStatus.OK);
-        }
+    @DeleteMapping(value = "/{questionId}")
+    public ResponseEntity<Question> deleteQuestion(@PathVariable("questionId") Integer questionId)
+    {
+        return new ResponseEntity<>(questionService.deleteQuestion(questionId), HttpStatus.OK);
+    }
 
 }

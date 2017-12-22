@@ -61,8 +61,9 @@ public class VoteController
     }
 
     @GetMapping(value = "/{voteId}")
-    public ResponseEntity<Vote> findVote(@PathVariable("voteId") Integer voteId){
-        return new ResponseEntity<>(voteService.findVote(voteId),HttpStatus.OK);
+    public ResponseEntity<Vote> findVote(@PathVariable("voteId") Integer voteId)
+    {
+        return new ResponseEntity<>(voteService.findVote(voteId), HttpStatus.OK);
     }
 
 }

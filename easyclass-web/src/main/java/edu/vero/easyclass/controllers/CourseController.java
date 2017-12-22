@@ -28,17 +28,17 @@ public class CourseController
         this.courseService = courseService;
     }
 
-
     @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody Course course){
-        return new ResponseEntity<>(courseService.createCourse(course),HttpStatus.CREATED);
+    public ResponseEntity<Course> createCourse(@RequestBody Course course)
+    {
+        return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value="/{courseId}")
-    public ResponseEntity<Course> deleteCourse(@PathVariable("courseId") Integer courseId){
-        return  new ResponseEntity<>(courseService.deleteCourse(courseId),HttpStatus.NO_CONTENT);
+    @DeleteMapping(value = "/{courseId}")
+    public ResponseEntity<Course> deleteCourse(@PathVariable("courseId") Integer courseId)
+    {
+        return new ResponseEntity<>(courseService.deleteCourse(courseId), HttpStatus.NO_CONTENT);
     }
-
 
     @GetMapping
     public ResponseEntity<List<Course>> findAll()

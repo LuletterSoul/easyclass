@@ -46,53 +46,48 @@ public class ClassScheduleController
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<>(scheduleService.findAllTestRecords(scheduleId),HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findAllTestRecords(scheduleId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/sign_records")
     public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<List<SignRecord>>(scheduleService.findAllSignRecords(scheduleId),
-            HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/{scheduleId}/attendances")
-    public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("scheduleId") Integer scheduleId)
-    {
-        return new ResponseEntity<>(scheduleService.findAllAttendances(scheduleId),HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findAllSignRecords(scheduleId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/homeworks")
     public ResponseEntity<List<Homework>> findHomeworks(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<List<Homework>>(scheduleService.findAllHomeworks(scheduleId),
-            HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findAllHomeworks(scheduleId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/arrangement")
     public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<TeacherArrangement>(scheduleService.findArrangement(scheduleId),
-            HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findArrangement(scheduleId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/student")
     public ResponseEntity<Student> findStudents(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<Student>(scheduleService.findStudent(scheduleId), HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findStudent(scheduleId), HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/{scheduleId}")
-    public ResponseEntity<ClassSchedule> deleteSchedule(@PathVariable("scheduleId") Integer scheduleId){
-        return new ResponseEntity<>(scheduleService.deleteSchedule(scheduleId),HttpStatus.NO_CONTENT);
+    @DeleteMapping(value = "/{scheduleId}")
+    public ResponseEntity<ClassSchedule> deleteSchedule(@PathVariable("scheduleId") Integer scheduleId)
+    {
+        return new ResponseEntity<>(scheduleService.deleteSchedule(scheduleId),
+            HttpStatus.NO_CONTENT);
     }
 
     @PostMapping
-    public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId, @RequestParam("arrangeId")Integer arrangeId,
-                                                        @RequestBody ClassSchedule classSchedule){
-        return new ResponseEntity<>(scheduleService.createSchedule(userId,arrangeId,classSchedule),HttpStatus.CREATED);
+    public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId,
+                                                        @RequestParam("arrangeId") Integer arrangeId,
+                                                        @RequestBody ClassSchedule classSchedule)
+    {
+        return new ResponseEntity<>(
+            scheduleService.createSchedule(userId, arrangeId, classSchedule), HttpStatus.CREATED);
 
     }
-
 
 }

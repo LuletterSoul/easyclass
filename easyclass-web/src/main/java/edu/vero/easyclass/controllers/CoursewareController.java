@@ -39,18 +39,23 @@ public class CoursewareController
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Courseware>createCourseware(@RequestBody Courseware courseware){
-        return new ResponseEntity<>(coursewareService.createCourseware(courseware),HttpStatus.OK);
+    public ResponseEntity<Courseware> createCourseware(@RequestBody Courseware courseware)
+    {
+        return new ResponseEntity<>(coursewareService.createCourseware(courseware), HttpStatus.OK);
 
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<Courseware>updateCourseware(@RequestBody Courseware courseware){
-        return new ResponseEntity<>(coursewareService.updateCourseware(courseware),HttpStatus.CREATED);
+    public ResponseEntity<Courseware> updateCourseware(@RequestBody Courseware courseware)
+    {
+        return new ResponseEntity<>(coursewareService.updateCourseware(courseware),
+            HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{coursewareId}")
-    public ResponseEntity<Courseware>deleteCourseware(@PathVariable("coursewareId") Integer coursewareId){
-        return new ResponseEntity<>(coursewareService.deleteCourseware(coursewareId),HttpStatus.OK);
+    public ResponseEntity<Courseware> deleteCourseware(@PathVariable("coursewareId") Integer coursewareId)
+    {
+        return new ResponseEntity<>(coursewareService.deleteCourseware(coursewareId),
+            HttpStatus.OK);
     }
 }

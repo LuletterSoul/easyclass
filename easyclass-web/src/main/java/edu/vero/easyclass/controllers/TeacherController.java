@@ -69,13 +69,15 @@ public class TeacherController
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<Teacher>updateTeacher(@RequestBody Teacher teacher){
-        return new ResponseEntity<>(teacherService.updateTeacher(teacher),HttpStatus.OK);
+    public ResponseEntity<Teacher> updateTeacher(@RequestBody Teacher teacher)
+    {
+        return new ResponseEntity<>(teacherService.updateTeacher(teacher), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{teacherId}")
-    public ResponseEntity<Teacher>deleteTeacher(@PathVariable("teacherId") Integer teacherId){
-        return new ResponseEntity<>(teacherService.deleteTeacher(teacherId),HttpStatus.OK);
+    public ResponseEntity<Teacher> deleteTeacher(@PathVariable("teacherId") Integer teacherId)
+    {
+        return new ResponseEntity<>(teacherService.deleteTeacher(teacherId), HttpStatus.OK);
     }
 
 }

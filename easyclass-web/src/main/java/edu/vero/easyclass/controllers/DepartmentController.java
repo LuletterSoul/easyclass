@@ -28,25 +28,26 @@ public class DepartmentController
     @GetMapping(value = "")
     public ResponseEntity<List<Department>> findAllDepartments()
     {
-        return new ResponseEntity<>(departmentService.findAllDepartments(),
-                HttpStatus.OK);
+        return new ResponseEntity<>(departmentService.findAllDepartments(), HttpStatus.OK);
     }
+
     @PutMapping(value = "")
     public ResponseEntity<Department> updateDepartment(@RequestBody Department department)
     {
-        return new ResponseEntity<>(departmentService.updateDepartment(department),
-                HttpStatus.OK);
+        return new ResponseEntity<>(departmentService.updateDepartment(department), HttpStatus.OK);
     }
+
     @PostMapping(value = "")
-    public ResponseEntity<Department> createDepartment( @RequestBody Department department)
+    public ResponseEntity<Department> createDepartment(@RequestBody Department department)
     {
         return new ResponseEntity<>(departmentService.createDepartment(department),
-                HttpStatus.CREATED);
+            HttpStatus.CREATED);
     }
+
     @DeleteMapping(value = "/{depId}")
     public ResponseEntity<Department> deleteDepartment(@PathVariable("depId") Integer depId)
     {
         return new ResponseEntity<>(departmentService.deleteDepartment(depId),
-                HttpStatus.NO_CONTENT);
+            HttpStatus.NO_CONTENT);
     }
 }

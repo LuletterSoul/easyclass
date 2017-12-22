@@ -51,18 +51,23 @@ public class SignRecordController
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<SignRecord>createSignRecord(@RequestBody SignRecord signRecord){
-        return new ResponseEntity<>(signRecordService.createSignRecord(signRecord),HttpStatus.CREATED);
+    public ResponseEntity<SignRecord> createSignRecord(@RequestBody SignRecord signRecord)
+    {
+        return new ResponseEntity<>(signRecordService.createSignRecord(signRecord),
+            HttpStatus.CREATED);
 
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<SignRecord>updateSignRecord(@RequestBody SignRecord signRecord){
-        return new ResponseEntity<>(signRecordService.updateSignRecord(signRecord),HttpStatus.OK);
+    public ResponseEntity<SignRecord> updateSignRecord(@RequestBody SignRecord signRecord)
+    {
+        return new ResponseEntity<>(signRecordService.updateSignRecord(signRecord), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{signRecordId}")
-    public ResponseEntity<SignRecord>deleteSignRecord(@PathVariable("signRecordId") Integer signRecordId){
-        return new ResponseEntity<>(signRecordService.deleteSignRecord(signRecordId),HttpStatus.OK);
+    public ResponseEntity<SignRecord> deleteSignRecord(@PathVariable("signRecordId") Integer signRecordId)
+    {
+        return new ResponseEntity<>(signRecordService.deleteSignRecord(signRecordId),
+            HttpStatus.OK);
     }
 }
