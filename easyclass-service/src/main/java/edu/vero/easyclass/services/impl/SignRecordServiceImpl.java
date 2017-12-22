@@ -4,6 +4,8 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.SignRecord;
+import edu.vero.easyclass.repositories.AttendanceJpaDao;
+import edu.vero.easyclass.repositories.ClassScheduleJpaDao;
 import edu.vero.easyclass.repositories.SignRecordJpaDao;
 import edu.vero.easyclass.services.SignRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,19 @@ public class SignRecordServiceImpl implements SignRecordService
 {
 
     private SignRecordJpaDao signRecordJpaDao;
+
+    private AttendanceJpaDao attendanceJpaDao;
+    private ClassScheduleJpaDao classScheduleJpaDao;
+
+    @Autowired
+    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao){
+        this.attendanceJpaDao=attendanceJpaDao;
+    }
+
+    @Autowired
+    public void setClassScheduleJpaDao(ClassScheduleJpaDao classScheduleJpaDao){
+        this.classScheduleJpaDao=classScheduleJpaDao;
+    }
 
     @Autowired
     public void setSignRecordJpaDao(SignRecordJpaDao signRecordJpaDao)
@@ -46,6 +61,10 @@ public class SignRecordServiceImpl implements SignRecordService
 
     @Override
     public SignRecord createSignRecord(SignRecord signRecord) {
+        ClassSchedule classSchedule=classScheduleJpaDao.findOne(signRecord.getSchedule().getScheduleId());
+        Attendance attendance=attendanceJpaDao.findOne(signRecord.getAttendance().getAttendanceId());
+        signRecord.setAttendance(attendance);
+        signRecord.setSchedule(classSchedule);
        signRecordJpaDao.saveAndFlush(signRecord);
 
         return signRecord;

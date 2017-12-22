@@ -49,6 +49,8 @@ public class TestsServiceImpl implements TestsService
 
     public OnlineClassTest createTest(OnlineClassTest onlineClassTest)
     {
+        TeacherArrangement teacherArrangement=teacherArrangementJpaDao.findOne(onlineClassTest.getArrangement().getArrangementId());
+        onlineClassTest.setArrangement(teacherArrangement);
         testsJpaDao.save(onlineClassTest);
         return onlineClassTest;
     }
