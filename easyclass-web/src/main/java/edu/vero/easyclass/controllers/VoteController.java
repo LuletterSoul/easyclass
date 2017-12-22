@@ -1,15 +1,19 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.QRcode;
-import edu.vero.easyclass.domain.Question;
 import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.VoteOption;
 import edu.vero.easyclass.services.VoteService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Api(description = "在线投票业务")
@@ -26,20 +30,33 @@ public class VoteController
         this.voteService = voteService;
     }
 
-    @PutMapping(value = "/{voteId}")
-    public ResponseEntity<Vote> closeVote(@PathVariable("voteId") Integer voteId)
+    @PutMapping
+    public ResponseEntity<Vote> updateVote(@RequestBody Vote vote)
     {
-        return new ResponseEntity<Vote>(voteService.closeVote(voteId), HttpStatus.OK);
+        return new ResponseEntity<>(voteService.updateVote(vote), HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/{voteId}/delete")
-    public ResponseEntity<Vote> deleteVote(@PathVariable("voteId") Integer voteId){
-        return new ResponseEntity<>(voteService.deleteVote(voteId),HttpStatus.NO_CONTENT);
+    @DeleteMapping(value = "/{voteId}")
+    public ResponseEntity<Vote> deleteVote(@PathVariable("voteId") Integer voteId)
+    {
+        return new ResponseEntity<>(voteService.deleteVote(voteId), HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping(value="/create/{attendanceId}")
-    public ResponseEntity<Vote> createVote(@RequestBody Vote vote,@PathVariable("attendanceId") Integer attendanceId){
-        return new ResponseEntity<>(voteService.createVote(vote,attendanceId),HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Vote> createVote(@RequestBody Vote vote)
+    {
+        return new ResponseEntity<>(voteService.createVote(vote), HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "创建投可投票项")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "voteId", value = "投票编号", dataType = "int", paramType = "path", required = true)})
+    @PostMapping(value = "/{voteId}/vote_options")
+    public ResponseEntity<List<VoteOption>> createVoteOptions(@RequestBody List<VoteOption> voteOptions,
+                                                              @PathVariable("voteId") Integer voteId)
+    {
+        return new ResponseEntity<>(voteService.createVoteOptions(voteId, voteOptions),
+            HttpStatus.CREATED);
     }
 
 }

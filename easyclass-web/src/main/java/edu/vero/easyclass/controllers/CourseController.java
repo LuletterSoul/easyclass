@@ -29,13 +29,13 @@ public class CourseController
     }
 
 
-    @PostMapping(value="/create")
+    @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course){
         return new ResponseEntity<>(courseService.createCourse(course),HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value="/{courseId}/delete")
-    public ResponseEntity<Course> deleteCourse(@PathVariable("courseID") Integer courseId){
+    @DeleteMapping(value="/{courseId}")
+    public ResponseEntity<Course> deleteCourse(@PathVariable("courseId") Integer courseId){
         return  new ResponseEntity<>(courseService.deleteCourse(courseId),HttpStatus.NO_CONTENT);
     }
 

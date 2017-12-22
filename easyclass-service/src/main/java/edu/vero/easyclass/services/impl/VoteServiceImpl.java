@@ -3,11 +3,15 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.Attendance;
 import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.VoteOption;
 import edu.vero.easyclass.repositories.AttendanceJpaDao;
 import edu.vero.easyclass.repositories.VoteJpaDao;
+import edu.vero.easyclass.repositories.VoteOptionJpaDao;
 import edu.vero.easyclass.services.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -20,12 +24,20 @@ import org.springframework.stereotype.Service;
 public class VoteServiceImpl implements VoteService
 {
     private VoteJpaDao voteJpaDao;
-    private AttendanceJpaDao attendanceJpaDao;
+
+    private VoteOptionJpaDao voteOptionJpaDao;
 
     @Autowired
-    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao) {
-        this.attendanceJpaDao = attendanceJpaDao;
+    public void setVoteOptionJpaDao(VoteOptionJpaDao voteOptionJpaDao)
+    {
+        this.voteOptionJpaDao = voteOptionJpaDao;
     }
+
+//    @Autowired
+//    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
+//    {
+//        this.attendanceJpaDao = attendanceJpaDao;
+//    }
 
     @Autowired
     public void setVoteJpaDao(VoteJpaDao voteJpaDao)
@@ -33,25 +45,50 @@ public class VoteServiceImpl implements VoteService
         this.voteJpaDao = voteJpaDao;
     }
 
+//    @Override
+//    public Vote updateVote(Integer voteId)
+//    {
+//        Vote vote = voteJpaDao.findOne(voteId);
+//        vote.setClosed(true);
+//        voteJpaDao.save(vote);
+//        return vote;
+//    }
+
     @Override
-    public Vote closeVote(Integer voteId)
-    {
-        Vote vote = voteJpaDao.findOne(voteId);
-        vote.setClosed(true);
-        voteJpaDao.save(vote);
-        return vote;
+    public Vote updateVote(Vote vote) {
+        return voteJpaDao.save(vote);
     }
 
     @Override
-    public Vote deleteVote(Integer voteId) {
+    public Vote deleteVote(Integer voteId)
+    {
         Vote vote = voteJpaDao.findOne(voteId);
         voteJpaDao.delete(vote);
         return vote;
     }
 
     @Override
-    public Vote createVote(Vote vote, Integer attendanceId) {
-        vote.setAttendance(attendanceJpaDao.findOne(attendanceId));
-        return voteJpaDao.saveAndFlush(vote);
+    public Vote createVote(Vote vote)
+    {
+        return voteJpaDao.save(vote);
     }
+
+    @Override
+    public List<VoteOption> createVoteOptions(Integer voteId, List<VoteOption> voteOptions)
+    {
+        Vote vote = voteJpaDao.findOne(voteId);
+        for (VoteOption voteOption : voteOptions)
+        {
+            voteOption.setVote(vote);
+        }
+        voteOptionJpaDao.save(voteOptions);
+        return voteOptions;
+    }
+
+    //
+    // @Override
+    // public Vote createVote(Vote vote, Integer attendanceId) {
+    // vote.setAttendance(attendanceJpaDao.findOne(attendanceId));
+    // return voteJpaDao.saveAndFlush(vote);
+    // }
 }

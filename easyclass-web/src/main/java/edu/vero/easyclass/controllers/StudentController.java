@@ -38,7 +38,7 @@ public class StudentController
             HttpStatus.OK);
     }
 
-    @GetMapping(value = "")
+    @GetMapping
     public ResponseEntity<List<Student>> findAllStudents()
     {
         return new ResponseEntity<List<Student>>(studentService.findAll(), HttpStatus.OK);
@@ -50,12 +50,12 @@ public class StudentController
         return new ResponseEntity<Student>(studentService.findStudentById(userId), HttpStatus.OK);
     }
 
-    @PostMapping(value="/create")
+    @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         return new ResponseEntity<>(studentService.createStudent(student),HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value="/{userId}/delete")
+    @DeleteMapping(value="/{userId}")
     public ResponseEntity<Student> deleteStudent(@PathVariable("userId") Integer userId){
         return new ResponseEntity<>(studentService.deleteStudent(userId),HttpStatus.NO_CONTENT);
     }
