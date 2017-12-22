@@ -34,6 +34,20 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private CourseCommentJpaDao courseCommentJpaDao;
 
+    private TeacherJpaDao teacherJpaDao;
+
+    private CourseJpaDao courseJpaDao;
+
+    @Autowired
+   public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao) {
+        this.teacherJpaDao = teacherJpaDao;
+    }
+
+    @Autowired
+    public void setCourseJpaDao(CourseJpaDao courseJpaDao) {
+        this.courseJpaDao = courseJpaDao;
+    }
+
     @Autowired
     public void setTestRecordJpaDao(TestRecordJpaDao testRecordJpaDao)
     {
@@ -219,6 +233,10 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     @Override
     public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement) {
+        Teacher teacher = teacherJpaDao.findOne(teacherArrangement.getTeacher().getUserId());
+        Course course = courseJpaDao.findOne(teacherArrangement.getCourse().getCourseId());
+        teacherArrangement.setCourse(course);
+        teacherArrangement.setTeacher(teacher);
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return teacherArrangement;
     }

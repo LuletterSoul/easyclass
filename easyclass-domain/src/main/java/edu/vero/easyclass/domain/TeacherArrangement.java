@@ -140,7 +140,7 @@ public class TeacherArrangement
     }
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacherId")
+    @JoinColumn(name = "userId")
     public Teacher getTeacher()
     {
         return teacher;

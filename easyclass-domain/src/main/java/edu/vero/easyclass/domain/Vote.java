@@ -24,7 +24,6 @@ public class Vote
 
     private boolean isClosed;
 
-    @JsonIgnore
     @ApiModelProperty(hidden = true)
     private Set<VoteOption> options;
 

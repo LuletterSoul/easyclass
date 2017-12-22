@@ -46,6 +46,7 @@ public class User
         this.userId = userId;
     }
 
+    @Column(unique = true)
     public String getUsername()
     {
         return username;

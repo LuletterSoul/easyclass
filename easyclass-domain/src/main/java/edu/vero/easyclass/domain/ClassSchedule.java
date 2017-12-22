@@ -92,7 +92,7 @@ public class ClassSchedule
     }
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
+    @JoinColumn(name = "userId")
     public Student getStudent()
     {
         return student;
