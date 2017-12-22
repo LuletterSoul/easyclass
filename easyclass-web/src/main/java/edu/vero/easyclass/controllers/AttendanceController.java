@@ -38,7 +38,7 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.createAttendance(attendance,arrangeId),HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value="/{attendanceId}/delete")
+    @DeleteMapping(value="/{attendanceId}")
     public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId")Integer attendanceId){
         return new ResponseEntity<>(attendanceService.deleteAttendance(attendanceId),HttpStatus.NO_CONTENT);
     }

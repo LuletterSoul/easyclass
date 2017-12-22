@@ -1,11 +1,10 @@
 package edu.vero.easyclass.services;
 
 
+import java.util.List;
+
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.domain.VoteOption;
-import io.swagger.models.auth.In;
-
-import java.util.List;
 
 
 public interface VoteService
@@ -14,7 +13,9 @@ public interface VoteService
 
     Vote deleteVote(Integer voteId);
 
+    Vote findVote(Integer voteId);
+
     Vote createVote(Vote vote);
 
-    List<VoteOption> createVoteOptions(Integer voteId,List<VoteOption> voteOptions);
+    List<VoteOption> createVoteOptions(Integer voteId, List<VoteOption> voteOptions);
 }

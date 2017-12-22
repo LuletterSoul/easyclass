@@ -1,6 +1,13 @@
 package edu.vero.easyclass.controllers;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import edu.vero.easyclass.domain.Vote;
 import edu.vero.easyclass.domain.VoteOption;
 import edu.vero.easyclass.services.VoteService;
@@ -8,12 +15,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Api(description = "在线投票业务")
@@ -57,6 +58,11 @@ public class VoteController
     {
         return new ResponseEntity<>(voteService.createVoteOptions(voteId, voteOptions),
             HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/{voteId}")
+    public ResponseEntity<Vote> findVote(@PathVariable("voteId") Integer voteId){
+        return new ResponseEntity<>(voteService.findVote(voteId),HttpStatus.OK);
     }
 
 }
