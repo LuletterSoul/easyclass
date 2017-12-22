@@ -23,4 +23,8 @@ public interface ClassScheduleService
     TeacherArrangement findArrangement(Integer scheduleId);
 
     Student findStudent(Integer scheduleId);
+
+    ClassSchedule deleteSchedule(Integer scheduleId);
+
+    ClassSchedule createSchedule(Integer userId,Integer arrangeId,ClassSchedule classSchedule);
 }

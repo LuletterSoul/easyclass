@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.ClassScheduleService;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class ClassScheduleController
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return null;
+        return new ResponseEntity<>(scheduleService.findAllTestRecords(scheduleId),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/sign_records")
@@ -58,7 +59,7 @@ public class ClassScheduleController
     @GetMapping(value = "/{scheduleId}/attendances")
     public ResponseEntity<List<Attendance>> findAttendances(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return null;
+        return new ResponseEntity<>(scheduleService.findAllAttendances(scheduleId),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/homeworks")
@@ -80,4 +81,18 @@ public class ClassScheduleController
     {
         return new ResponseEntity<Student>(scheduleService.findStudent(scheduleId), HttpStatus.OK);
     }
+
+    @DeleteMapping(value="/{scheduleId}")
+    public ResponseEntity<ClassSchedule> deleteSchedule(@PathVariable("scheduleId") Integer scheduleId){
+        return new ResponseEntity<>(scheduleService.deleteSchedule(scheduleId),HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping
+    public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId, @RequestParam("arrangeId")Integer arrangeId,
+                                                        @RequestBody ClassSchedule classSchedule){
+        return new ResponseEntity<>(scheduleService.createSchedule(userId,arrangeId,classSchedule),HttpStatus.CREATED);
+
+    }
+
+
 }

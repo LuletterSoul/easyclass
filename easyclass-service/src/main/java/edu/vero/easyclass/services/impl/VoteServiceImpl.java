@@ -54,4 +54,9 @@ public class VoteServiceImpl implements VoteService
         vote.setAttendance(attendanceJpaDao.findOne(attendanceId));
         return voteJpaDao.saveAndFlush(vote);
     }
+
+    @Override
+    public Vote findVote(Integer voteId) {
+        return voteJpaDao.findOne(voteId);
+    }
 }

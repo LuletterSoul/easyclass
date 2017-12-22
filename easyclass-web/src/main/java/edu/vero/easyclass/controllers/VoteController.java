@@ -32,7 +32,7 @@ public class VoteController
         return new ResponseEntity<Vote>(voteService.closeVote(voteId), HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/{voteId}/delete")
+    @DeleteMapping(value="/{voteId}")
     public ResponseEntity<Vote> deleteVote(@PathVariable("voteId") Integer voteId){
         return new ResponseEntity<>(voteService.deleteVote(voteId),HttpStatus.NO_CONTENT);
     }
@@ -40,6 +40,11 @@ public class VoteController
     @PostMapping(value="/create/{attendanceId}")
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote,@PathVariable("attendanceId") Integer attendanceId){
         return new ResponseEntity<>(voteService.createVote(vote,attendanceId),HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/{voteId}")
+    public ResponseEntity<Vote> findVote(Integer voteId){
+        return new ResponseEntity<>(voteService.findVote(voteId),HttpStatus.OK);
     }
 
 }

@@ -39,7 +39,7 @@ public class NoticeController
     public ResponseEntity<Notice> deleteNotice(@PathVariable("noticeId") Integer noticeId)
     {
         return new ResponseEntity<Notice>(noticeService.deleteNotice(noticeId),
-            HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+            HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(value="/create")

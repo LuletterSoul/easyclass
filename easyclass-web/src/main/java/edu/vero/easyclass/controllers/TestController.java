@@ -65,7 +65,7 @@ public class TestController
     {
         return new ResponseEntity<>(testsService.findTestQuestions(testId), HttpStatus.OK);
     }
-    @DeleteMapping(value="/{testId}/delete")
+    @DeleteMapping(value="/{testId}")
     public ResponseEntity<OnlineClassTest> deleteTest(@PathVariable("testId")Integer testId){
         return new ResponseEntity<>(testsService.deleteTest(testId),HttpStatus.NO_CONTENT);
     }

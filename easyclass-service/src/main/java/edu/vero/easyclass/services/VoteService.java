@@ -12,4 +12,6 @@ public interface VoteService
     Vote deleteVote(Integer voteId);
 
     Vote createVote(Vote vote, Integer attendanceId);
+
+    Vote findVote(Integer voteId);
 }
