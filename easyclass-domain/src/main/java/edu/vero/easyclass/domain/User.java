@@ -22,7 +22,7 @@ public class User
     private Department department;
 
     @Id
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
     @GeneratedValue(generator = "increment")
     public int getUserId()
     {

@@ -39,8 +39,8 @@ public class OnlineClassTest
     }
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getTestId()
     {
         return testId;

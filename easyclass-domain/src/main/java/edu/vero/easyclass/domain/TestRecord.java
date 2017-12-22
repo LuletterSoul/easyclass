@@ -22,8 +22,8 @@ public class TestRecord
     private ClassSchedule schedule;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getRecordId()
     {
         return recordId;

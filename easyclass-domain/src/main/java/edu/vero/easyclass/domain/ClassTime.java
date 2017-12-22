@@ -26,8 +26,8 @@ public class ClassTime
     private Set<ClassTimeComment> classTimeComments;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getTimeId()
     {
         return timeId;

@@ -17,8 +17,8 @@ public class TeachingComment
     private float score;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getCommentId()
     {
         return commentId;

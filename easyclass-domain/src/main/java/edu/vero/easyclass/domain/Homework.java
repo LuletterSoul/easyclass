@@ -31,8 +31,8 @@ public class Homework
     private boolean isSubmitted;
 
     @Id
-    @GenericGenerator(name = "identityGenerator", strategy = "identity")
-    @GeneratedValue(generator = "identityGenerator")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     public int getHomeworkId()
     {
         return homeworkId;
