@@ -4,11 +4,12 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.OnlineClassTest;
 import edu.vero.easyclass.domain.TestRecord;
-import edu.vero.easyclass.repositories.ScheduleJpaDao;
+import edu.vero.easyclass.repositories.ClassScheduleJpaDao;
 import edu.vero.easyclass.repositories.TestRecordJpaDao;
 import edu.vero.easyclass.repositories.TestsJpaDao;
 import edu.vero.easyclass.services.TestRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class TestRecordServiceImpl implements TestRecordService
 
     private TestRecordJpaDao testRecordJpaDao;
 
-    private ScheduleJpaDao scheduleJpaDao;
+    private ClassScheduleJpaDao classScheduleJpaDao;
 
     private TestsJpaDao testsJpaDao;
 
@@ -31,9 +32,9 @@ public class TestRecordServiceImpl implements TestRecordService
     }
 
     @Autowired
-    public void setScheduleJpaDao(ScheduleJpaDao scheduleJpaDao)
+    public void setScheduleJpaDao(ClassScheduleJpaDao classScheduleJpaDao)
     {
-        this.scheduleJpaDao = scheduleJpaDao;
+        this.classScheduleJpaDao = classScheduleJpaDao;
     }
 
     @Autowired
@@ -49,6 +50,10 @@ public class TestRecordServiceImpl implements TestRecordService
 
     public TestRecord createTestRecord(TestRecord testRecord)
     {
+        ClassSchedule classSchedule=classScheduleJpaDao.findOne(testRecord.getSchedule().getScheduleId());
+        OnlineClassTest onlineClassTest=testsJpaDao.findOne(testRecord.getTest().getTestId());
+        testRecord.setSchedule(classSchedule);
+        testRecord.setTest(onlineClassTest);
         testRecordJpaDao.saveAndFlush(testRecord);
         return testRecord;
     }

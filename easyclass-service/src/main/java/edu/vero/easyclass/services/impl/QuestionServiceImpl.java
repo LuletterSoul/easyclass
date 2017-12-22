@@ -1,8 +1,10 @@
 package edu.vero.easyclass.services.impl;
 
 
+import edu.vero.easyclass.domain.Course;
 import edu.vero.easyclass.domain.Question;
 import edu.vero.easyclass.domain.QuestionOption;
+import edu.vero.easyclass.repositories.CourseJpaDao;
 import edu.vero.easyclass.repositories.OptionJpaDao;
 import edu.vero.easyclass.repositories.QuestionJpaDao;
 import edu.vero.easyclass.services.QuestionService;
@@ -20,6 +22,10 @@ public class QuestionServiceImpl implements QuestionService
     private QuestionJpaDao questionJpaDao;
 
     private OptionJpaDao optionJpaDao;
+    private CourseJpaDao courseJpaDao;
+
+    @Autowired
+    public void setCourseJpaDao(CourseJpaDao courseJpaDao){this.courseJpaDao=courseJpaDao;}
 
     @Autowired
     public void setQuestionJpaDao(QuestionJpaDao questionJpaDao)
@@ -42,6 +48,8 @@ public class QuestionServiceImpl implements QuestionService
     @Override
     public Question createQuestion(Question question)
     {
+        Course course=courseJpaDao.findOne(question.getCourse().getCourseId());
+        question.setCourse(course);
         questionJpaDao.saveAndFlush(question);
         return question;
     }
