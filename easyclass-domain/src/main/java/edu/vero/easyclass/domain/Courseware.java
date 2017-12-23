@@ -23,6 +23,8 @@ public class Courseware
 
     private int size;
 
+    private TeacherArrangement arrangement;
+
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")
@@ -82,5 +84,16 @@ public class Courseware
         return MoreObjects.toStringHelper(this).add("coursewareId", coursewareId).add("title",
             title).add("fileName", fileName).add("filePath", filePath).add("size",
                 size).toString();
+    }
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "arrangementId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
+    }
+
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
     }
 }

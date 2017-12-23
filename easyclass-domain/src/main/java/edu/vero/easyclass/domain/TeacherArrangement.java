@@ -85,7 +85,7 @@ public class TeacherArrangement
     }
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "arrangement")
     public Set<Courseware> getCoursewares()
     {
         return coursewares;
