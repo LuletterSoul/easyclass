@@ -65,10 +65,12 @@ public class ClassSchedule
     @JsonIgnore
     private Set<TestRecord> testRecords;
 
-    @ApiModelProperty
+    @ApiModelProperty(hidden = true)
     @JsonIgnore
     private Set<SignRecord> signRecords;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     @OneToMany(mappedBy = "schedule")
     public Set<SignRecord> getSignRecords()
     {
@@ -80,6 +82,8 @@ public class ClassSchedule
         this.signRecords = signRecords;
     }
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     @OneToMany(mappedBy = "schedule")
     public Set<TestRecord> getTestRecords()
     {
@@ -115,6 +119,8 @@ public class ClassSchedule
         this.teacherArrangement = teacherArrangement;
     }
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     @OneToMany(mappedBy = "schedule")
     public Set<Homework> getHomeworks()
     {
@@ -145,6 +151,8 @@ public class ClassSchedule
             student).add("teacherArrangement", teacherArrangement).toString();
     }
 
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     @OneToMany(mappedBy = "classTime")
     public Set<ClassTimeComment> getTimeComments()
     {

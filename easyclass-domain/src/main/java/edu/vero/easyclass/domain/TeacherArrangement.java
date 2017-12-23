@@ -60,6 +60,7 @@ public class TeacherArrangement
     @ApiModelProperty(hidden = true)
     private Set<Attendance> attendances;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
     public Set<Attendance> getAttendances()
     {
@@ -71,6 +72,7 @@ public class TeacherArrangement
         this.attendances = attendances;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
     public Set<Notice> getNotices()
     {
@@ -82,8 +84,8 @@ public class TeacherArrangement
         this.notices = notices;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "arrangementId")
+    @JsonIgnore
+    @OneToMany(mappedBy = "arrangement")
     public Set<Courseware> getCoursewares()
     {
         return coursewares;
@@ -94,6 +96,7 @@ public class TeacherArrangement
         this.coursewares = coursewares;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
     public List<OnlineClassTest> getTests()
     {
@@ -105,6 +108,7 @@ public class TeacherArrangement
         this.tests = tests;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
     public Set<ClassTime> getClassTimes()
     {
@@ -116,7 +120,6 @@ public class TeacherArrangement
         this.classTimes = classTimes;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "courseId")
     public Course getCourse()
     {
@@ -138,7 +141,7 @@ public class TeacherArrangement
         this.place = place;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "userId")
     public Teacher getTeacher()
     {
@@ -151,6 +154,7 @@ public class TeacherArrangement
     }
 
     @OneToMany(mappedBy = "arrangement")
+    @JsonIgnore
     public Set<CourseComment> getCourseComments()
     {
         return courseComments;
