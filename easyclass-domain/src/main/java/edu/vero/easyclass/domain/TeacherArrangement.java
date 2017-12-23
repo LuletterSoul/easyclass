@@ -85,7 +85,7 @@ public class TeacherArrangement
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "arrangement")
+    @OneToMany
     public Set<Courseware> getCoursewares()
     {
         return coursewares;
@@ -120,6 +120,7 @@ public class TeacherArrangement
         this.classTimes = classTimes;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "courseId")
     public Course getCourse()
     {
@@ -141,7 +142,7 @@ public class TeacherArrangement
         this.place = place;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     public Teacher getTeacher()
     {
@@ -154,7 +155,6 @@ public class TeacherArrangement
     }
 
     @OneToMany(mappedBy = "arrangement")
-    @JsonIgnore
     public Set<CourseComment> getCourseComments()
     {
         return courseComments;
