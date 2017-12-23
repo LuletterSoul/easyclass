@@ -111,7 +111,11 @@ public class TeacherArrangementController
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/tests")
-    public ResponseEntity<List<OnlineClassTest>> findAllOnlineClassTest(@PathVariable("arrangementId") Integer arrangementId)
+    public ResponseEntity<List<OnlineClassTest>> findAllOnlineClassTest(
+                        @PathVariable("arrangementId") Integer arrangementId,
+                        @RequestParam(value = "isOpening",defaultValue = "true") Boolean isOpening,
+                        @RequestParam(value = "isTimeOut",defaultValue = "false") Boolean isTimeOut,
+                        @RequestParam(value = "isFinished",defaultValue = "false")Boolean isFinished)
     {
         return new ResponseEntity<>(
             teacherArrangementService.findAllOnlineClassTest(arrangementId), HttpStatus.OK);

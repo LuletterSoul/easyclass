@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 import io.swagger.annotations.ApiModel;
 
@@ -21,6 +22,7 @@ public class Teacher extends User
 
     private Set<TeacherArrangement> arrangementSet;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "teacher")
     public Set<TeacherArrangement> getArrangementSet()
     {

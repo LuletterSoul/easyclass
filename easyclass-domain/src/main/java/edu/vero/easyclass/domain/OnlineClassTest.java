@@ -26,8 +26,11 @@ public class OnlineClassTest
 
     private TeacherArrangement arrangement;
 
+
+
     @ManyToMany(targetEntity = Question.class)
-    @JoinTable(name = "test_question", joinColumns = @JoinColumn(name = "testId"), inverseJoinColumns = @JoinColumn(name = "questionId"))
+    @JoinTable(name = "test_question", joinColumns = @JoinColumn(name = "testId"),
+            inverseJoinColumns = @JoinColumn(name = "questionId"))
     public List<Question> getQuestions()
     {
         return questions;

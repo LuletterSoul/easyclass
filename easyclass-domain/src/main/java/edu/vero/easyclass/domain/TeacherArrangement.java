@@ -120,7 +120,7 @@ public class TeacherArrangement
         this.classTimes = classTimes;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseId")
     public Course getCourse()
     {
@@ -142,7 +142,7 @@ public class TeacherArrangement
         this.place = place;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     public Teacher getTeacher()
     {
