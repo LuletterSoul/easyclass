@@ -188,16 +188,16 @@ public class TeacherArrangementController
             HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(value = "/{arrangementId}/finishedTests")
-    public ResponseEntity<List<OnlineClassTest>> findFinishTests(@PathVariable("arrangementId") Integer arrangementId)
+    @GetMapping(value = "/{arrangementId}/opening_tests")
+    public ResponseEntity<List<OnlineClassTest>> findOpeningTests(@PathVariable("arrangementId") Integer arrangementId)
     {
         return new ResponseEntity<>(
-                teacherArrangementService.findFinishedTests(arrangementId), HttpStatus.OK);
+                teacherArrangementService.findOpeningTests(arrangementId), HttpStatus.OK);
     }
-    @GetMapping(value = "/{arrangementId}/unfinishedTests")
-    public ResponseEntity<List<OnlineClassTest>> findUnfinishedTests(@PathVariable("arrangementId") Integer arrangementId)
+    @GetMapping(value = "/{arrangementId}/time_out_tests")
+    public ResponseEntity<List<OnlineClassTest>> findTimeOutTests(@PathVariable("arrangementId") Integer arrangementId)
     {
         return new ResponseEntity<>(
-                teacherArrangementService.findUnfinishedTests(arrangementId), HttpStatus.OK);
+                teacherArrangementService.findTimeOutTests(arrangementId), HttpStatus.OK);
     }
 }

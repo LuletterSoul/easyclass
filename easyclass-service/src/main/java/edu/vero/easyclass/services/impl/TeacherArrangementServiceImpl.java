@@ -170,7 +170,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public List<OnlineClassTest> findFinishedTests(Integer arrangementId) {
+    public List<OnlineClassTest> findOpeningTests(Integer arrangementId) {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         List<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
@@ -184,7 +184,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public List<OnlineClassTest> findUnfinishedTests(Integer arrangementId) {
+    public List<OnlineClassTest> findTimeOutTests(Integer arrangementId) {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         List<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();

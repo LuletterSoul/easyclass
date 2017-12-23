@@ -18,14 +18,9 @@ import java.util.List;
 public interface TeacherArrangementService
 {
 
-    /**
-     * @param arrangementId
-     * @param notice
-     * @return
-     */
-    public Notice createNotice(Integer arrangementId, Notice notice);
+    Notice createNotice(Integer arrangementId, Notice notice);
 
-    public OnlineClassTest createOnlineClassTest(Integer arrangementId,
+    OnlineClassTest createOnlineClassTest(Integer arrangementId,
                                                  OnlineClassTest onlineClassTest);
 
     Notice findNewestNotices(Integer arrangementId);
@@ -36,9 +31,9 @@ public interface TeacherArrangementService
 
     List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId);
 
-    List<OnlineClassTest> findFinishedTests(Integer arrangementId);
+    List<OnlineClassTest> findOpeningTests(Integer arrangementId);
 
-    List<OnlineClassTest> findUnfinishedTests(Integer arrangementId);
+    List<OnlineClassTest> findTimeOutTests(Integer arrangementId);
 
     List<ClassTime> findAllClassTime(Integer arrangementId);
 
