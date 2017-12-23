@@ -111,11 +111,10 @@ public class TeacherArrangementController
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/tests")
-    public ResponseEntity<List<OnlineClassTest>> findAllOnlineClassTest(
-                        @PathVariable("arrangementId") Integer arrangementId,
-                        @RequestParam(value = "isOpening",defaultValue = "true") Boolean isOpening,
-                        @RequestParam(value = "isTimeOut",defaultValue = "false") Boolean isTimeOut,
-                        @RequestParam(value = "isFinished",defaultValue = "false")Boolean isFinished)
+    public ResponseEntity<List<OnlineClassTest>> findAllOnlineClassTest(@PathVariable("arrangementId") Integer arrangementId,
+                                                                        @RequestParam(value = "isOpening", defaultValue = "true") Boolean isOpening,
+                                                                        @RequestParam(value = "isTimeOut", defaultValue = "false") Boolean isTimeOut,
+                                                                        @RequestParam(value = "isFinished", defaultValue = "false") Boolean isFinished)
     {
         return new ResponseEntity<>(
             teacherArrangementService.findAllOnlineClassTest(arrangementId), HttpStatus.OK);
@@ -192,16 +191,23 @@ public class TeacherArrangementController
             HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "获取该门课下正在开放的测试")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/opening_tests")
     public ResponseEntity<List<OnlineClassTest>> findOpeningTests(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return new ResponseEntity<>(
-                teacherArrangementService.findOpeningTests(arrangementId), HttpStatus.OK);
+        return new ResponseEntity<>(teacherArrangementService.findOpeningTests(arrangementId),
+            HttpStatus.OK);
     }
+
+    @ApiOperation(value = "获取该门课下已经关闭的测试")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/time_out_tests")
     public ResponseEntity<List<OnlineClassTest>> findTimeOutTests(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return new ResponseEntity<>(
-                teacherArrangementService.findTimeOutTests(arrangementId), HttpStatus.OK);
+        return new ResponseEntity<>(teacherArrangementService.findTimeOutTests(arrangementId),
+            HttpStatus.OK);
     }
 }

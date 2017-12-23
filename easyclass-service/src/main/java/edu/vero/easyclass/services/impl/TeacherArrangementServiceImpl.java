@@ -7,6 +7,7 @@ import edu.vero.easyclass.services.TeacherArrangementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 
@@ -39,12 +40,14 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     private CourseJpaDao courseJpaDao;
 
     @Autowired
-   public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao) {
+    public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao)
+    {
         this.teacherJpaDao = teacherJpaDao;
     }
 
     @Autowired
-    public void setCourseJpaDao(CourseJpaDao courseJpaDao) {
+    public void setCourseJpaDao(CourseJpaDao courseJpaDao)
+    {
         this.courseJpaDao = courseJpaDao;
     }
 
@@ -170,33 +173,44 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public List<OnlineClassTest> findOpeningTests(Integer arrangementId) {
+    public List<OnlineClassTest> findOpeningTests(Integer arrangementId)
+    {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         List<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
-        for(OnlineClassTest test:onlineClassTests){
-            if(test.getDeadline().compareTo(date)<0){
+        for (OnlineClassTest test : onlineClassTests)
+        {
+            if (test.getDeadline().compareTo(date) >= 0)
+            {
                 tests.add(test);
             }
+        }
+        if (tests.isEmpty()) {
+            throw new EntityNotFoundException();
         }
         return tests;
     }
 
     @Override
-    public List<OnlineClassTest> findTimeOutTests(Integer arrangementId) {
+    public List<OnlineClassTest> findTimeOutTests(Integer arrangementId)
+    {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         List<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
-        System.out.println(date);
-        for(OnlineClassTest test:onlineClassTests){
-            if(test.getDeadline().compareTo(date)>=0){
+        for (OnlineClassTest test : onlineClassTests)
+        {
+            if (test.getDeadline().compareTo(date) < 0)
+            {
                 tests.add(test);
-                System.out.println(test.getTestId());
             }
         }
+        if (tests.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
         return tests;
+
     }
 
     @Override
@@ -209,8 +223,9 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     @Override
     public List<CourseComment> findAllCourseComment(Integer arrangementId)
-    { TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        Set<CourseComment> courseComments =teacherArrangement.getCourseComments();
+    {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<CourseComment> courseComments = teacherArrangement.getCourseComments();
         return new ArrayList<>(courseComments);
     }
 
@@ -256,13 +271,15 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement) {
+    public TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement)
+    {
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return teacherArrangement;
     }
 
     @Override
-    public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement) {
+    public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement)
+    {
         Teacher teacher = teacherJpaDao.findOne(teacherArrangement.getTeacher().getUserId());
         Course course = courseJpaDao.findOne(teacherArrangement.getCourse().getCourseId());
         teacherArrangement.setCourse(course);
@@ -271,11 +288,11 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public TeacherArrangement deleteArrangement(Integer arrangeId) {
-        TeacherArrangement teacherArrangement =teacherArrangementJpaDao.findOne(arrangeId);
+    public TeacherArrangement deleteArrangement(Integer arrangeId)
+    {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangeId);
         teacherArrangementJpaDao.delete(teacherArrangement);
         return teacherArrangement;
     }
-
 
 }
