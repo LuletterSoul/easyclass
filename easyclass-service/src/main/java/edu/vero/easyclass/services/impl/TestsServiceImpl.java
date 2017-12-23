@@ -12,6 +12,7 @@ import edu.vero.easyclass.services.TestsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,8 +52,13 @@ public class TestsServiceImpl implements TestsService
     {
         TeacherArrangement teacherArrangement=teacherArrangementJpaDao.findOne(onlineClassTest.getArrangement().getArrangementId());
         onlineClassTest.setArrangement(teacherArrangement);
-        testsJpaDao.save(onlineClassTest);
-        return onlineClassTest;
+        List<Question> questions = onlineClassTest.getQuestions();
+        List<Question> questionList = new ArrayList<>();
+        for(Question question:questions){
+            questionList.add(questionJpaDao.findOne(question.getQuestionId()));
+        }
+        onlineClassTest.setQuestions(questionList);
+        return testsJpaDao.saveAndFlush(onlineClassTest);
     }
 
     @Override

@@ -187,4 +187,17 @@ public class TeacherArrangementController
         return new ResponseEntity<>(teacherArrangementService.deleteArrangement(arrangeId),
             HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(value = "/{arrangementId}/finishedTests")
+    public ResponseEntity<List<OnlineClassTest>> findFinishTests(@PathVariable("arrangementId") Integer arrangementId)
+    {
+        return new ResponseEntity<>(
+                teacherArrangementService.findFinishedTests(arrangementId), HttpStatus.OK);
+    }
+    @GetMapping(value = "/{arrangementId}/unfinishedTests")
+    public ResponseEntity<List<OnlineClassTest>> findUnfinishedTests(@PathVariable("arrangementId") Integer arrangementId)
+    {
+        return new ResponseEntity<>(
+                teacherArrangementService.findUnfinishedTests(arrangementId), HttpStatus.OK);
+    }
 }

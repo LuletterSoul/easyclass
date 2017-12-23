@@ -54,8 +54,7 @@ public class TestRecordServiceImpl implements TestRecordService
         OnlineClassTest onlineClassTest=testsJpaDao.findOne(testRecord.getTest().getTestId());
         testRecord.setSchedule(classSchedule);
         testRecord.setTest(onlineClassTest);
-        testRecordJpaDao.saveAndFlush(testRecord);
-        return testRecord;
+        return testRecordJpaDao.saveAndFlush(testRecord);
     }
 
     public ClassSchedule findClassSchedule(Integer recordId)

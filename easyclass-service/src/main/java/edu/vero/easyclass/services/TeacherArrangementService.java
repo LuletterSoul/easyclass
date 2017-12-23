@@ -28,27 +28,31 @@ public interface TeacherArrangementService
     public OnlineClassTest createOnlineClassTest(Integer arrangementId,
                                                  OnlineClassTest onlineClassTest);
 
-    public Notice findNewestNotices(Integer arrangementId);
+    Notice findNewestNotices(Integer arrangementId);
 
-    public Attendance createAttendance(Integer arrangementId, Attendance attendance);
+    Attendance createAttendance(Integer arrangementId, Attendance attendance);
 
-    public TeacherArrangement findArrangement(Integer arrangementId);
+    TeacherArrangement findArrangement(Integer arrangementId);
 
-    public List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId);
+    List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId);
 
-    public List<ClassTime> findAllClassTime(Integer arrangementId);
+    List<OnlineClassTest> findFinishedTests(Integer arrangementId);
 
-    public List<CourseComment> findAllCourseComment(Integer arrangementId);
+    List<OnlineClassTest> findUnfinishedTests(Integer arrangementId);
 
-    public Course findCourse(Integer arrangementId);
+    List<ClassTime> findAllClassTime(Integer arrangementId);
 
-    public List<Notice> findAllNotice(Integer arrangementId);
+    List<CourseComment> findAllCourseComment(Integer arrangementId);
 
-    public Teacher findTeacher(Integer arrangementId);
+    Course findCourse(Integer arrangementId);
 
-    public List<TeacherArrangement> findAllArrangements();
+    List<Notice> findAllNotice(Integer arrangementId);
 
-    public List<Courseware> findAllCoursewares(Integer arrangementId);
+    Teacher findTeacher(Integer arrangementId);
+
+    List<TeacherArrangement> findAllArrangements();
+
+    List<Courseware> findAllCoursewares(Integer arrangementId);
 
 
     TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement);

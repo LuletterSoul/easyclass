@@ -20,8 +20,8 @@ public class OnlineClassTest
 
     private Date deadline;
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
+//    @ApiModelProperty(hidden = true)
+//    @JsonIgnore
     private List<Question> questions;
 
     private TeacherArrangement arrangement;

@@ -38,7 +38,7 @@ public class TestController
     @PostMapping
     public ResponseEntity<OnlineClassTest> createTest(@RequestBody OnlineClassTest onlineClassTest)
     {
-        return new ResponseEntity<>(testsService.createTest(onlineClassTest), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(testsService.createTest(onlineClassTest), HttpStatus.CREATED);
     }
 
     @PutMapping

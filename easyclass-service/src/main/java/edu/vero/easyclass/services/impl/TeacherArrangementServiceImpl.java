@@ -170,6 +170,36 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
+    public List<OnlineClassTest> findFinishedTests(Integer arrangementId) {
+        TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        List<OnlineClassTest> tests = new ArrayList<>();
+        Date date = new Date();
+        for(OnlineClassTest test:onlineClassTests){
+            if(test.getDeadline().compareTo(date)<0){
+                tests.add(test);
+            }
+        }
+        return tests;
+    }
+
+    @Override
+    public List<OnlineClassTest> findUnfinishedTests(Integer arrangementId) {
+        TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        List<OnlineClassTest> tests = new ArrayList<>();
+        Date date = new Date();
+        System.out.println(date);
+        for(OnlineClassTest test:onlineClassTests){
+            if(test.getDeadline().compareTo(date)>=0){
+                tests.add(test);
+                System.out.println(test.getTestId());
+            }
+        }
+        return tests;
+    }
+
+    @Override
     public List<ClassTime> findAllClassTime(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
