@@ -16,7 +16,25 @@ public class Question
 {
     private int questionId;
 
-    private int answerOrder;
+    private String answerOrder;
+
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getAnswerOrder() {
+        return answerOrder;
+    }
+
+    public void setAnswerOrder(String answerOrder) {
+        this.answerOrder = answerOrder;
+    }
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore
@@ -64,15 +82,6 @@ public class Question
         this.questionId = questionId;
     }
 
-    public int getAnswerOrder()
-    {
-        return answerOrder;
-    }
-
-    public void setAnswerOrder(int answerOrder)
-    {
-        this.answerOrder = answerOrder;
-    }
 
     @OneToMany(mappedBy = "question")
     public Set<QuestionOption> getOptions()

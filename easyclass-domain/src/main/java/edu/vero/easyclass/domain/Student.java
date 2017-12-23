@@ -37,6 +37,7 @@ public class Student extends User
         this.schedules = schedules;
     }
 
+    @Column(unique = true)
     public String getStudentId()
     {
         return studentId;

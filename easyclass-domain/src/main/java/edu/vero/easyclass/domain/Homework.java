@@ -30,6 +30,18 @@ public class Homework
 
     private boolean isSubmitted;
 
+    private ClassSchedule schedule;
+
+    @ManyToOne
+    @JoinColumn(name="scheduleId")
+    public ClassSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ClassSchedule schedule) {
+        this.schedule = schedule;
+    }
+
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")

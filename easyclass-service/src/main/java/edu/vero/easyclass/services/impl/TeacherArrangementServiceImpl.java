@@ -237,8 +237,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         Course course = courseJpaDao.findOne(teacherArrangement.getCourse().getCourseId());
         teacherArrangement.setCourse(course);
         teacherArrangement.setTeacher(teacher);
-        teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
-        return teacherArrangement;
+        return teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
     }
 
     @Override

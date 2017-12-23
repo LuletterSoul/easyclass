@@ -25,6 +25,20 @@ public class ClassTime
 
     private Set<ClassTimeComment> classTimeComments;
 
+    private TeacherArrangement arrangement;
+
+
+    @ManyToOne
+    @JoinColumn(name="arrangementId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
+    }
+
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
+    }
+
+
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")
@@ -81,7 +95,7 @@ public class ClassTime
     /**
      * TeachingComment 里面没有双向关联关系，需要加入中间表
      * 
-     * @return
+     *
      */
     @OneToMany(mappedBy = "classTime")
     public Set<ClassTimeComment> getClassTimeComments()

@@ -12,7 +12,7 @@ public interface QuestionService
 
     public List<Question> findAllQuestions();
 
-    public Question createQuestion(Question question);
+    public Question createQuestion(Question question,List<QuestionOption> options);
 
     public Question findQuestion(Integer questionId);
 

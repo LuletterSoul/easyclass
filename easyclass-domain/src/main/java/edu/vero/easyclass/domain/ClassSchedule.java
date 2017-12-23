@@ -115,8 +115,7 @@ public class ClassSchedule
         this.teacherArrangement = teacherArrangement;
     }
 
-    @OneToMany
-    @JoinColumn(name = "scheduleId")
+    @OneToMany(mappedBy = "schedule")
     public Set<Homework> getHomeworks()
     {
         return homeworks;

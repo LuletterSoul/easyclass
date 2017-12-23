@@ -32,6 +32,7 @@ public class Teacher extends User
         this.arrangementSet = arrangementSet;
     }
 
+    @Column(unique = true)
     public String getTeacherId()
     {
         return teacherId;

@@ -70,5 +70,6 @@ public class ClassTimeController
         return new ResponseEntity<>(classTimeService.deleteClassTime(timeId),
                 HttpStatus.NO_CONTENT);
     }
+    
 
 }

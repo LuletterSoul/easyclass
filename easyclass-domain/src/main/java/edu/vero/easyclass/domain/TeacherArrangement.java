@@ -105,8 +105,7 @@ public class TeacherArrangement
         this.tests = tests;
     }
 
-    @OneToMany
-    @JoinColumn(name = "arrangementId")
+    @OneToMany(mappedBy = "arrangement")
     public Set<ClassTime> getClassTimes()
     {
         return classTimes;

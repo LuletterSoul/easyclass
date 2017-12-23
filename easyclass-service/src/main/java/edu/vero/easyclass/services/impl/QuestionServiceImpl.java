@@ -46,11 +46,15 @@ public class QuestionServiceImpl implements QuestionService
     }
 
     @Override
-    public Question createQuestion(Question question)
+    public Question createQuestion(Question question,List<QuestionOption> options)
     {
         Course course=courseJpaDao.findOne(question.getCourse().getCourseId());
         question.setCourse(course);
+        for(QuestionOption option:options){
+            option.setQuestion(question);
+        }
         questionJpaDao.saveAndFlush(question);
+        optionJpaDao.save(options);
         return question;
     }
 

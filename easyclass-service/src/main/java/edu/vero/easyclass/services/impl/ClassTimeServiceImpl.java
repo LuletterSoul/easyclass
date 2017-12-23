@@ -3,8 +3,10 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.ClassTimeComment;
+import edu.vero.easyclass.domain.TeacherArrangement;
 import edu.vero.easyclass.repositories.ClassTimeCommentJpaDao;
 import edu.vero.easyclass.repositories.ClassTimeJpaDao;
+import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
 import edu.vero.easyclass.services.ClassTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,13 @@ public class ClassTimeServiceImpl implements ClassTimeService
     private ClassTimeJpaDao classTimeJpaDao;
 
     private ClassTimeCommentJpaDao timeCommentJpaDao;
+
+    private TeacherArrangementJpaDao arrangementJpaDao;
+
+    @Autowired
+    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
+        this.arrangementJpaDao = arrangementJpaDao;
+    }
 
     @Autowired
     public void setTimeCommentJpaDao(ClassTimeCommentJpaDao timeCommentJpaDao)
@@ -67,8 +76,9 @@ public class ClassTimeServiceImpl implements ClassTimeService
 
     @Override
     public ClassTime createClassTime(ClassTime classTime) {
-        classTimeJpaDao.saveAndFlush(classTime);
-        return classTime;
+        TeacherArrangement arrangement = arrangementJpaDao.findOne(classTime.getArrangement().getArrangementId());
+        classTime.setArrangement(arrangement);
+        return classTimeJpaDao.saveAndFlush(classTime);
     }
 
     @Override
