@@ -2,10 +2,7 @@ package edu.vero.easyclass.services.impl;
 
 
 import edu.vero.easyclass.domain.*;
-import edu.vero.easyclass.repositories.AttendanceJpaDao;
-import edu.vero.easyclass.repositories.QRcodeJpaDao;
-import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
-import edu.vero.easyclass.repositories.VoteJpaDao;
+import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,28 +30,19 @@ public class AttendanceServiceImpl implements AttendanceService
 
     private TeacherArrangementJpaDao arrangementJpaDao;
 
-    @Autowired
-    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao)
-    {
-        this.arrangementJpaDao = arrangementJpaDao;
-    }
+    private VoteOptionJpaDao voteOptionJpaDao;
 
     @Autowired
-    public void setqRcodeJpaDao(QRcodeJpaDao qRcodeJpaDao)
-    {
-        this.qRcodeJpaDao = qRcodeJpaDao;
-    }
-
-    @Autowired
-    public void setVoteJpaDao(VoteJpaDao voteJpaDao)
+    public AttendanceServiceImpl(VoteJpaDao voteJpaDao, AttendanceJpaDao attendanceJpaDao,
+                                 QRcodeJpaDao qRcodeJpaDao,
+                                 TeacherArrangementJpaDao arrangementJpaDao,
+                                 VoteOptionJpaDao voteOptionJpaDao)
     {
         this.voteJpaDao = voteJpaDao;
-    }
-
-    @Autowired
-    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
-    {
         this.attendanceJpaDao = attendanceJpaDao;
+        this.qRcodeJpaDao = qRcodeJpaDao;
+        this.arrangementJpaDao = arrangementJpaDao;
+        this.voteOptionJpaDao = voteOptionJpaDao;
     }
 
     @Override
@@ -65,6 +53,12 @@ public class AttendanceServiceImpl implements AttendanceService
         vote.setEstablishedTime(date);
         vote.setAttendance(attendance);
         voteJpaDao.save(vote);
+        Set<VoteOption> voteOptions = vote.getOptions();
+        for (VoteOption option :
+                voteOptions) {
+            option.setVote(vote);
+        }
+        voteOptionJpaDao.save(voteOptions);
         return vote;
     }
 
@@ -112,4 +106,5 @@ public class AttendanceServiceImpl implements AttendanceService
         attendanceJpaDao.delete(attendance);
         return attendance;
     }
+
 }
