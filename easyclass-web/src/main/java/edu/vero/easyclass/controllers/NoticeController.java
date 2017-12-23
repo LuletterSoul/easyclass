@@ -32,14 +32,14 @@ public class NoticeController
     @GetMapping(value = "/{noticeId}")
     public ResponseEntity<Notice> getNotice(@PathVariable("noticeId") Integer noticeId)
     {
-        return new ResponseEntity<Notice>(noticeService.findNotice(noticeId), HttpStatus.OK);
+        return new ResponseEntity<>(noticeService.findNotice(noticeId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{noticeId}")
     public ResponseEntity<Notice> deleteNotice(@PathVariable("noticeId") Integer noticeId)
     {
-        return new ResponseEntity<Notice>(noticeService.deleteNotice(noticeId),
-            HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(noticeService.deleteNotice(noticeId),
+                HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(value = "/create")

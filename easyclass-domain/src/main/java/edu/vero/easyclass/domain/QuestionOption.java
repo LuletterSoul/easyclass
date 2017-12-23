@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,10 +14,11 @@ public class QuestionOption
 
     private int optionId;
 
-    private String optionOrder;
+    private Integer optionOrder;
 
     private String content;
 
+    @JsonIgnore
     private Question question;
 
     @ManyToOne
@@ -44,12 +46,12 @@ public class QuestionOption
         this.optionId = optionId;
     }
 
-    public String getOptionOrder()
+    public Integer getOptionOrder()
     {
         return optionOrder;
     }
 
-    public void setOptionOrder(String optionOrder)
+    public void setOptionOrder(Integer optionOrder)
     {
         this.optionOrder = optionOrder;
     }

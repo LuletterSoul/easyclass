@@ -92,15 +92,15 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter
         converters.add(jsonConverter());
     }
 
-    @Bean
-    public ObjectMapper objectMapper()
-    {
-        Jackson2ObjectMapperFactoryBean mapperFactoryBean = new Jackson2ObjectMapperFactoryBean();
-        mapperFactoryBean.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapperFactoryBean.setDateFormat(new SimpleDateFormat(DateStyle.YYYY_MM_DD_HH_MM.getValue()));
-        mapperFactoryBean.afterPropertiesSet();
-        return mapperFactoryBean.getObject();
-    }
+//    @Bean
+//    public ObjectMapper objectMapper()
+//    {
+//        Jackson2ObjectMapperFactoryBean mapperFactoryBean = new Jackson2ObjectMapperFactoryBean();
+//        mapperFactoryBean.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        mapperFactoryBean.setDateFormat(new SimpleDateFormat(DateStyle.YYYY_MM_DD_HH_MM.getValue()));
+//        mapperFactoryBean.afterPropertiesSet();
+//        return mapperFactoryBean.getObject();
+//    }
 
     @Bean
     public Jackson2ObjectMapperFactoryBean objectMapperFactoryBean(){

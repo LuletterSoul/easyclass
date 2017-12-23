@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -22,10 +23,14 @@ public class QuestionServiceImpl implements QuestionService
     private QuestionJpaDao questionJpaDao;
 
     private OptionJpaDao optionJpaDao;
+
     private CourseJpaDao courseJpaDao;
 
     @Autowired
-    public void setCourseJpaDao(CourseJpaDao courseJpaDao){this.courseJpaDao=courseJpaDao;}
+    public void setCourseJpaDao(CourseJpaDao courseJpaDao)
+    {
+        this.courseJpaDao = courseJpaDao;
+    }
 
     @Autowired
     public void setQuestionJpaDao(QuestionJpaDao questionJpaDao)
@@ -46,15 +51,18 @@ public class QuestionServiceImpl implements QuestionService
     }
 
     @Override
-    public Question createQuestion(Question question,List<QuestionOption> options)
+    public Question createQuestion(Question question)
     {
-        Course course=courseJpaDao.findOne(question.getCourse().getCourseId());
+        Course course = courseJpaDao.findOne(question.getCourse().getCourseId());
+        Set<QuestionOption> questionOptions = question.getOptions();
         question.setCourse(course);
-        for(QuestionOption option:options){
+        questionJpaDao.saveAndFlush(question);
+        for (QuestionOption option : questionOptions)
+        {
             option.setQuestion(question);
         }
+        optionJpaDao.save(questionOptions);
         questionJpaDao.saveAndFlush(question);
-        optionJpaDao.save(options);
         return question;
     }
 
@@ -74,13 +82,15 @@ public class QuestionServiceImpl implements QuestionService
     }
 
     @Override
-    public Question deleteQuestion(Integer questionId) {
-        Question question=questionJpaDao.findOne(questionId);
+    public Question deleteQuestion(Integer questionId)
+    {
+        Question question = questionJpaDao.findOne(questionId);
         return question;
     }
 
     @Override
-    public Question updateQuestion(Question question) {
+    public Question updateQuestion(Question question)
+    {
         questionJpaDao.saveAndFlush(question);
         return question;
     }

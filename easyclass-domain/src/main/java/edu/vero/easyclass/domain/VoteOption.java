@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class VoteOption
 
     private Integer optionCount;
 
+    @JsonIgnore
     private Vote vote;
 
     @ManyToOne

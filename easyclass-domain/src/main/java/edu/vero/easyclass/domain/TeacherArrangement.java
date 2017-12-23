@@ -156,7 +156,7 @@ public class TeacherArrangement
         return courseComments;
     }
 
-    public void setCourseComments(Set<CourseComment> courseComments)
+    public void setCourseComments(Set<  CourseComment> courseComments)
     {
         this.courseComments = courseComments;
     }

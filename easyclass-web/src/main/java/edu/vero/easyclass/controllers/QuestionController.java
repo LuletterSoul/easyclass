@@ -34,9 +34,9 @@ public class QuestionController
     }
 
     @PostMapping
-    public ResponseEntity<Question> createQuestion(@RequestBody Question question,@RequestBody List<QuestionOption> options)
+    public ResponseEntity<Question> createQuestion(@RequestBody Question question)
     {
-        return new ResponseEntity<>(questionService.createQuestion(question,options), HttpStatus.CREATED);
+        return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{questionId}")

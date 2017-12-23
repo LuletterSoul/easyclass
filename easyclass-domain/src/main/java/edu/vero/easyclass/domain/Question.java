@@ -16,7 +16,7 @@ public class Question
 {
     private int questionId;
 
-    private String answerOrder;
+    private Integer answerOrder;
 
     private String content;
 
@@ -28,16 +28,14 @@ public class Question
         this.content = content;
     }
 
-    public String getAnswerOrder() {
+    public Integer getAnswerOrder() {
         return answerOrder;
     }
 
-    public void setAnswerOrder(String answerOrder) {
+    public void setAnswerOrder(Integer answerOrder) {
         this.answerOrder = answerOrder;
     }
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
     private Set<QuestionOption> options;
 
     private Course course;

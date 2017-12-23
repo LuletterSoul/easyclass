@@ -49,7 +49,7 @@ public class Swagger2Configuration {
                 .title("易授微服务RESTful APIs说明文档")
                 .description("本文档说明了每个接口返回、接收的字段信息。" +
                         "并且制定相应的规范作为前后端交流的渠道。")
-                .version("1.0")
+                .version("2.0")
                 .contact(new Contact("刘祥德","/","luvletterU@njust.edu.cn"))
                 .build();
     }
