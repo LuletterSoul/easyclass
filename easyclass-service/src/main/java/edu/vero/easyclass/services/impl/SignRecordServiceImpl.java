@@ -65,9 +65,7 @@ public class SignRecordServiceImpl implements SignRecordService
         Attendance attendance=attendanceJpaDao.findOne(signRecord.getAttendance().getAttendanceId());
         signRecord.setAttendance(attendance);
         signRecord.setSchedule(classSchedule);
-       signRecordJpaDao.saveAndFlush(signRecord);
-
-        return signRecord;
+        return  signRecordJpaDao.saveAndFlush(signRecord);
     }
 
     @Override

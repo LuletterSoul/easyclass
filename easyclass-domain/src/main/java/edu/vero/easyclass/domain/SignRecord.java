@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class SignRecord
         this.signTime = signTime;
     }
 
+
     @ManyToOne
     @JoinColumn(name = "attendanceId")
     public Attendance getAttendance()
@@ -40,6 +42,7 @@ public class SignRecord
     {
         this.attendance = attendance;
     }
+
 
     @ManyToOne
     @JoinColumn(name = "scheduleId")

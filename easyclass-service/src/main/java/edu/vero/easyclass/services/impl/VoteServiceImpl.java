@@ -70,6 +70,7 @@ public class VoteServiceImpl implements VoteService
     @Override
     public Vote createVote(Vote vote)
     {
+
         return voteJpaDao.save(vote);
     }
 
@@ -83,9 +84,11 @@ public class VoteServiceImpl implements VoteService
     public List<VoteOption> createVoteOptions(Integer voteId, List<VoteOption> voteOptions)
     {
         Vote vote = voteJpaDao.findOne(voteId);
+
         for (VoteOption voteOption : voteOptions)
         {
             voteOption.setVote(vote);
+
         }
         voteOptionJpaDao.save(voteOptions);
         return voteOptions;

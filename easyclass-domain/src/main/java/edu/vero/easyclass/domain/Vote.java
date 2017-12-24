@@ -59,6 +59,7 @@ public class Vote
         isClosed = closed;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "attendanceId")
     public Attendance getAttendance()
