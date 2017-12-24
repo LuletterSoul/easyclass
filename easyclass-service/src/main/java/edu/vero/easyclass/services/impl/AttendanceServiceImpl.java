@@ -96,6 +96,10 @@ public class AttendanceServiceImpl implements AttendanceService
     @Override
     public Attendance createAttendance(Attendance attendance)
     {
+        TeacherArrangement teacherArrangement=arrangementJpaDao.findOne(attendance.getArrangement().getArrangementId());
+        QRcode qRcode=qRcodeJpaDao.findOne(attendance.getqRcode().getCodeId());
+        attendance.setArrangement(teacherArrangement);
+        attendance.setqRcode(qRcode);
         return attendanceJpaDao.save(attendance);
     }
 
