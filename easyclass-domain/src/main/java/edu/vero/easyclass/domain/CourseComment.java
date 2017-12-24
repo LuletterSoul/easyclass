@@ -29,7 +29,8 @@ public class CourseComment extends TeachingComment
         return arrangement;
     }
 
-    @OneToOne(mappedBy = "courseComment")
+    @OneToOne
+    @JoinColumn(name = "scheduleId")
     public ClassSchedule getSchedule() {
         return schedule;
     }
