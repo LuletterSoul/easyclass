@@ -62,6 +62,7 @@ public class Attendance
         this.arrangement = arrangement;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "attendance")
     public Set<SignRecord> getSignRecords()
     {
