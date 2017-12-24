@@ -55,4 +55,6 @@ public interface TeacherArrangementService
     TeacherArrangement createArrangement(TeacherArrangement teacherArrangement);
 
     TeacherArrangement deleteArrangement(Integer arrangeId);
+
+    OnlineClassTest findNewestTest(Integer arrangementId);
 }

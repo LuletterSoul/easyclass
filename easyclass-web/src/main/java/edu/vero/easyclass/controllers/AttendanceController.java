@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 
@@ -94,4 +95,13 @@ public class AttendanceController
                 attendanceService.findSignRecords(attendanceId), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{attendanceId}/votes")
+    public ResponseEntity<List<Vote>> findAllVote(@PathVariable("attendanceId") Integer attendanceId){
+        return new ResponseEntity<>(attendanceService.findAllVote(attendanceId),HttpStatus.OK);
+    }
+
+    @GetMapping(value="/{attendanceId}/schedule/{scheduleId}")
+    public ResponseEntity<SignRecord> createSignRecord(@PathVariable("attendanceId") Integer attendanceId,@PathVariable("scheduleId") Integer scheduleId){
+        return new ResponseEntity<>(attendanceService.createSignRecord(attendanceId,scheduleId),HttpStatus.CREATED);
+    }
 }

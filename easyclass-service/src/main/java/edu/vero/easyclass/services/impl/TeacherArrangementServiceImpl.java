@@ -39,6 +39,13 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private CourseJpaDao courseJpaDao;
 
+    private TestsJpaDao testsJpaDao;
+
+    @Autowired
+    public void setTestsJpaDao(TestsJpaDao testsJpaDao) {
+        this.testsJpaDao = testsJpaDao;
+    }
+
     @Autowired
     public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao)
     {
@@ -293,6 +300,13 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangeId);
         teacherArrangementJpaDao.delete(teacherArrangement);
         return teacherArrangement;
+    }
+
+    @Override
+    public OnlineClassTest findNewestTest(Integer arrangementId) {
+        List<OnlineClassTest> tests = testsJpaDao.findNewestTest(arrangementId);
+        if(tests.isEmpty())return null;
+        else return tests.get(0);
     }
 
 }

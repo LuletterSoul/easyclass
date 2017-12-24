@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -209,5 +210,11 @@ public class TeacherArrangementController
     {
         return new ResponseEntity<>(teacherArrangementService.findTimeOutTests(arrangementId),
             HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/{arrangementId}/find_newest_test")
+    public ResponseEntity<OnlineClassTest> findNewestTest(@PathVariable("arrangementId") Integer arrangementId){
+        return new ResponseEntity<>(teacherArrangementService.findNewestTest(arrangementId),HttpStatus.OK);
     }
 }

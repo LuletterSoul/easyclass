@@ -25,4 +25,8 @@ public interface AttendanceService
     Attendance createAttendance(Attendance attendance);
 
     Attendance deleteAttendance(Integer attendanceId);
+
+    SignRecord createSignRecord(Integer attendanceId,Integer scheduleId);
+
+    List<Vote> findAllVote(Integer attenndanceId);
 }
