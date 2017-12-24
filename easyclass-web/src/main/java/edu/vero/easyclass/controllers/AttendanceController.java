@@ -32,22 +32,24 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
-
     @PostMapping
-    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance){
-        return new ResponseEntity<>(attendanceService.createAttendance(attendance),HttpStatus.CREATED);
+    public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance)
+    {
+        return new ResponseEntity<>(attendanceService.createAttendance(attendance),
+            HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value="/{attendanceId}")
-    public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId")Integer attendanceId){
-        return new ResponseEntity<>(attendanceService.deleteAttendance(attendanceId),HttpStatus.NO_CONTENT);
+    @DeleteMapping(value = "/{attendanceId}")
+    public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId") Integer attendanceId)
+    {
+        return new ResponseEntity<>(attendanceService.deleteAttendance(attendanceId),
+            HttpStatus.NO_CONTENT);
     }
-
 
     @ApiOperation(value = "发起一个属于该签到项下的投票")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
-            @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -90,8 +92,32 @@ public class AttendanceController
     @GetMapping(value = "/{attendanceId}/sign_records")
     public ResponseEntity<List<SignRecord>> getAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
+        return new ResponseEntity<>(attendanceService.findSignRecords(attendanceId),
+            HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "增加一条签到记录")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
+    @PostMapping(value = "/{attendanceId}/sign_records")
+    public ResponseEntity<SignRecord> postSignRecord(@RequestBody SignRecord signRecord,
+                                                     @RequestParam("scheduleId") Integer scheduleId,
+                                                     @PathVariable("attendanceId") Integer attendanceId)
+    {
         return new ResponseEntity<>(
-                attendanceService.findSignRecords(attendanceId), HttpStatus.OK);
+            attendanceService.createSignRecord(attendanceId, signRecord, scheduleId),
+            HttpStatus.CREATED);
+
+    }
+
+    @ApiOperation(value = "获取该签到项下的所有投票")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
+    @GetMapping(value = "/{attendanceId}/votes")
+    public ResponseEntity<List<Vote>> getVotes(@PathVariable("attendanceId") Integer attendanceId)
+    {
+        return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
 }
