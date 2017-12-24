@@ -1,10 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 /**
@@ -26,6 +23,7 @@ public class CourseComment extends TeachingComment
     }
 
     @ManyToOne
+    @JoinColumn(name = "arrangementId")
     public TeacherArrangement getArrangement()
     {
         return arrangement;

@@ -41,7 +41,7 @@ public class ClassSchedule
         this.scheduleId = scheduleId;
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "commentId")
     public CourseComment getCourseComment()
     {
@@ -107,7 +107,7 @@ public class ClassSchedule
         this.student = student;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "arrangeId")
     public TeacherArrangement getTeacherArrangement()
     {
