@@ -144,15 +144,15 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTest = teacherArrangement.getTests();
-        return onlineClassTest;
+        Set<OnlineClassTest> onlineClassTest = teacherArrangement.getTests();
+        return new ArrayList<>(onlineClassTest);
     }
 
     @Override
     public List<OnlineClassTest> findOpeningTests(Integer arrangementId)
     {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
         for (OnlineClassTest test : onlineClassTests)
@@ -173,7 +173,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<OnlineClassTest> findTimeOutTests(Integer arrangementId)
     {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
         for (OnlineClassTest test : onlineClassTests)

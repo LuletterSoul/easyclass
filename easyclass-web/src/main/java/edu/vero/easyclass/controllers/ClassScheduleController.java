@@ -4,6 +4,9 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.ClassScheduleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +32,7 @@ public class ClassScheduleController
     @GetMapping
     public ResponseEntity<List<ClassSchedule>> findAllSchedule()
     {
-        return null;
+        return new ResponseEntity<>(scheduleService.findAll(),HttpStatus.OK);
     }
 
     // 一次上传一个作业
@@ -39,6 +42,24 @@ public class ClassScheduleController
     {
         return new ResponseEntity<>(scheduleService.updateHomework(scheduleId, homework),
             HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "获取所有已经被学生完成的课堂测试")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
+    @GetMapping(value = "/{scheduleId}/done_tests")
+    public ResponseEntity<List<OnlineClassTest>> findTestsIsDone(@PathVariable("scheduleId") Integer scheduleId)
+    {
+        return new ResponseEntity<>(scheduleService.findTestsIsDone(scheduleId), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "获取学生所有还未完成的课堂测试")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
+    @GetMapping(value = "/{scheduleId}/doing_tests")
+    public ResponseEntity<List<OnlineClassTest>> findTestsIsExpectedDone(@PathVariable("scheduleId") Integer scheduleId)
+    {
+        return new ResponseEntity<>(scheduleService.findTestIsExpectedDone(scheduleId), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/test_records")
@@ -80,11 +101,10 @@ public class ClassScheduleController
 
     @PostMapping
     public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId,
-                                                        @RequestParam("arrangeId") Integer arrangeId,
-                                                        @RequestBody ClassSchedule classSchedule)
+                                                        @RequestParam("arrangeId") Integer arrangeId)
     {
         return new ResponseEntity<>(
-            scheduleService.createSchedule(userId, arrangeId, classSchedule), HttpStatus.CREATED);
+            scheduleService.createSchedule(userId, arrangeId), HttpStatus.CREATED);
 
     }
 

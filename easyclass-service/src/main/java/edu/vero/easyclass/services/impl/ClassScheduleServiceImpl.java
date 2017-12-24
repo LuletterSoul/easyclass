@@ -2,16 +2,15 @@ package edu.vero.easyclass.services.impl;
 
 
 import edu.vero.easyclass.domain.*;
-import edu.vero.easyclass.repositories.ClassScheduleJpaDao;
-import edu.vero.easyclass.repositories.HomeworkJpaDao;
-import edu.vero.easyclass.repositories.StudentJpaDao;
-import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
+import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.ClassScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -32,26 +31,19 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
 
     private TeacherArrangementJpaDao arrangementJpaDao;
 
-    @Autowired
-    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
-        this.arrangementJpaDao = arrangementJpaDao;
-    }
+    private OnlineClassTestJpaDao onlineClassTestJpaDao;
 
     @Autowired
-    public void setStudentJpaDao(StudentJpaDao studentJpaDao) {
-        this.studentJpaDao = studentJpaDao;
-    }
-
-    @Autowired
-    public void setHomeworkJpaDao(HomeworkJpaDao homeworkJpaDao)
-    {
-        this.homeworkJpaDao = homeworkJpaDao;
-    }
-
-    @Autowired
-    public void setScheduleJpaDao(ClassScheduleJpaDao scheduleJpaDao)
+    public ClassScheduleServiceImpl(ClassScheduleJpaDao scheduleJpaDao,
+                                    HomeworkJpaDao homeworkJpaDao, StudentJpaDao studentJpaDao,
+                                    TeacherArrangementJpaDao arrangementJpaDao,
+                                    OnlineClassTestJpaDao onlineClassTestJpaDao)
     {
         this.scheduleJpaDao = scheduleJpaDao;
+        this.homeworkJpaDao = homeworkJpaDao;
+        this.studentJpaDao = studentJpaDao;
+        this.arrangementJpaDao = arrangementJpaDao;
+        this.onlineClassTestJpaDao = onlineClassTestJpaDao;
     }
 
     @Override
@@ -67,6 +59,50 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
+    public List<OnlineClassTest> findTestIsExpectedDone(Integer scheduleId)
+    {
+        ClassSchedule classSchedule = scheduleJpaDao.findOne(scheduleId);
+        if (classSchedule == null)
+        {
+            throw new EntityNotFoundException(
+                "Required / requested " + "class schedule " + scheduleId + " not found.");
+        }
+        Set<TestRecord> records = classSchedule.getTestRecords();
+        // 获取学生该门所有已经签到的记录ID
+        List<Integer> doneTestIds = new ArrayList<>();
+        for (TestRecord record : records)
+        {
+            doneTestIds.add(record.getTest().getTestId());
+        }
+        // 获取该门课发起所有的课堂测试
+        Set<OnlineClassTest> echoedTests = classSchedule.getTeacherArrangement().getTests();
+        List<Integer> echoedTestIds = new ArrayList<>();
+        for (OnlineClassTest test : echoedTests)
+        {
+            echoedTestIds.add(test.getTestId());
+        }
+        return onlineClassTestJpaDao.findByTestIdNotInAndTestIdIn(doneTestIds, echoedTestIds);
+    }
+
+    @Override
+    public List<OnlineClassTest> findTestsIsDone(Integer scheduleId)
+    {
+        ClassSchedule classSchedule = scheduleJpaDao.findOne(scheduleId);
+        if (classSchedule == null)
+        {
+            throw new EntityNotFoundException(
+                "Required / requested " + "schedule " + scheduleId + " not found.");
+        }
+        Set<TestRecord> records = classSchedule.getTestRecords();
+        List<OnlineClassTest> tests = new ArrayList<>();
+        for (TestRecord record : records)
+        {
+            tests.add(record.getTest());
+        }
+        return tests;
+    }
+
+    @Override
     public List<TestRecord> findAllTestRecords(Integer scheduleId)
     {
         return new ArrayList<TestRecord>(scheduleJpaDao.findOne(scheduleId).getTestRecords());
@@ -78,11 +114,11 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
         return new ArrayList<SignRecord>(scheduleJpaDao.findOne(scheduleId).getSignRecords());
     }
 
-//    @Override
-//    public List<Attendance> findAllAttendances(Integer scheduleId)
-//    {
-//        return new ArrayList<Attendance>(scheduleJpaDao.findOne(scheduleId).getAttendances());
-//    }
+    // @Override
+    // public List<Attendance> findAllAttendances(Integer scheduleId)
+    // {
+    // return new ArrayList<Attendance>(scheduleJpaDao.findOne(scheduleId).getAttendances());
+    // }
 
     @Override
     public List<Homework> findAllHomeworks(Integer scheduleId)
@@ -103,16 +139,24 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
-    public ClassSchedule deleteSchedule(Integer scheduleId) {
+    public ClassSchedule deleteSchedule(Integer scheduleId)
+    {
         ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
         scheduleJpaDao.delete(scheduleId);
         return schedule;
     }
 
     @Override
-    public ClassSchedule createSchedule(Integer userId, Integer arrangeId, ClassSchedule classSchedule) {
+    public ClassSchedule createSchedule(Integer userId, Integer arrangeId)
+    {
+        ClassSchedule classSchedule = new ClassSchedule();
         Student student = studentJpaDao.findOne(userId);
         TeacherArrangement arrangement = arrangementJpaDao.findOne(arrangeId);
+        if (student == null || arrangement == null)
+        {
+            throw new EntityNotFoundException(
+                "student " + userId + "or arrangement " + arrangeId + " not found.");
+        }
         classSchedule.setTeacherArrangement(arrangement);
         classSchedule.setStudent(student);
         return scheduleJpaDao.saveAndFlush(classSchedule);
