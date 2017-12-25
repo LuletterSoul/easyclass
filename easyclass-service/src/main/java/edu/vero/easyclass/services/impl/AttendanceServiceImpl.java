@@ -135,5 +135,10 @@ public class AttendanceServiceImpl implements AttendanceService
         return new ArrayList<>(attendanceJpaDao.findOne(attenndanceId).getVotes());
     }
 
-
+    @Override
+    public Vote findNewestVote(Integer attendanceId) {
+        List<Vote> votes = voteJpaDao.findNewestVote(attendanceId);
+        if(votes.isEmpty())return null;
+        else return votes.get(0);
+    }
 }

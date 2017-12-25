@@ -104,4 +104,9 @@ public class AttendanceController
     public ResponseEntity<SignRecord> createSignRecord(@PathVariable("attendanceId") Integer attendanceId,@PathVariable("scheduleId") Integer scheduleId){
         return new ResponseEntity<>(attendanceService.createSignRecord(attendanceId,scheduleId),HttpStatus.CREATED);
     }
+
+    @GetMapping(value="/{attendanceId}/newest_vote")
+    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId){
+        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId),HttpStatus.OK);
+    }
 }
