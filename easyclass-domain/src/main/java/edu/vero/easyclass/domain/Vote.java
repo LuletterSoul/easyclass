@@ -72,7 +72,7 @@ public class Vote
         this.attendance = attendance;
     }
 
-    @OneToMany(mappedBy = "vote")
+    @OneToMany(mappedBy = "vote",fetch = FetchType.EAGER)
     public Set<VoteOption> getOptions()
     {
         return options;
