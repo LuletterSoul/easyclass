@@ -107,7 +107,7 @@ public class ClassSchedule
         this.student = student;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "arrangeId")
     public TeacherArrangement getTeacherArrangement()
     {

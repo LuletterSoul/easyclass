@@ -20,19 +20,13 @@ public class Question
 
     private String content;
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Integer getAnswerOrder() {
+    public Integer getAnswerOrder()
+    {
         return answerOrder;
     }
 
-    public void setAnswerOrder(Integer answerOrder) {
+    public void setAnswerOrder(Integer answerOrder)
+    {
         this.answerOrder = answerOrder;
     }
 
@@ -80,7 +74,6 @@ public class Question
         this.questionId = questionId;
     }
 
-
     @OneToMany(mappedBy = "question")
     public Set<QuestionOption> getOptions()
     {
@@ -90,5 +83,15 @@ public class Question
     public void setOptions(Set<QuestionOption> options)
     {
         this.options = options;
+    }
+
+    public String getContent()
+    {
+        return content;
+    }
+
+    public void setContent(String content)
+    {
+        this.content = content;
     }
 }

@@ -1,7 +1,9 @@
 package edu.vero.easyclass.services.impl;
 
 
+import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.CourseComment;
+import edu.vero.easyclass.domain.TeacherArrangement;
 import edu.vero.easyclass.repositories.ClassScheduleJpaDao;
 import edu.vero.easyclass.repositories.CourseCommentJpaDao;
 import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
@@ -40,8 +42,15 @@ public class CourseCommentServiceImpl implements CourseCommentService
     @Override
     public CourseComment save(Integer arrangeId, Integer scheduleId, CourseComment comment)
     {
-        comment.setArrangement(teacherArrangementJpaDao.findOne(arrangeId));
-        comment.setSchedule(scheduleJpaDao.findOne(scheduleId));
-        return courseCommentJpaDao.saveAndFlush(comment);
+        TeacherArrangement teacherArrangement = new TeacherArrangement();
+        teacherArrangement.setArrangementId(arrangeId);
+        ClassSchedule classSchedule = new ClassSchedule();
+        classSchedule.setScheduleId(scheduleId);
+        comment.setArrangement(teacherArrangement);
+        comment.setSchedule(classSchedule);
+        classSchedule.setCourseComment(comment);
+        courseCommentJpaDao.saveAndFlush(comment);
+        scheduleJpaDao.saveAndFlush(classSchedule);
+        return comment;
     }
 }

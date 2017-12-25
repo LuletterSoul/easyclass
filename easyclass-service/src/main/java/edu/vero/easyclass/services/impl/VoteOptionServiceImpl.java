@@ -31,8 +31,8 @@ public class VoteOptionServiceImpl implements VoteOptionService
     public VoteOption updateOption(VoteOption voteOption)
     {
         VoteOption currentOption = voteOptionJpaDao.findOne(voteOption.getVoteOptionId());
-        // 将新的投票信息替换到当前的投票信息中去，此时投票信息被更新;
-        BeanUtils.copyProperties(voteOption, currentOption);
+        Integer count = currentOption.getOptionCount();
+        currentOption.setOptionCount(count + 1);
         return voteOptionJpaDao.saveAndFlush(currentOption);
     }
 }

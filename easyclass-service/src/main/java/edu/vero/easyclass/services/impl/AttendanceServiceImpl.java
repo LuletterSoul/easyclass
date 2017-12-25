@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,37 +31,27 @@ public class AttendanceServiceImpl implements AttendanceService
 
     private TeacherArrangementJpaDao arrangementJpaDao;
 
+    private VoteOptionJpaDao voteOptionJpaDao;
+
     private SignRecordJpaDao signRecordJpaDao;
 
-    private ClassScheduleJpaDao scheduleJpaDao;
+    private ClassScheduleJpaDao classScheduleJpaDao;
 
     @Autowired
-    public void setSignRecordJpaDao(SignRecordJpaDao signRecordJpaDao) {
-        this.signRecordJpaDao = signRecordJpaDao;
-    }
-
-    @Autowired
-    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao)
-    {
-        this.arrangementJpaDao = arrangementJpaDao;
-    }
-
-    @Autowired
-    public void setqRcodeJpaDao(QRcodeJpaDao qRcodeJpaDao)
-    {
-        this.qRcodeJpaDao = qRcodeJpaDao;
-    }
-
-    @Autowired
-    public void setVoteJpaDao(VoteJpaDao voteJpaDao)
+    public AttendanceServiceImpl(VoteJpaDao voteJpaDao, AttendanceJpaDao attendanceJpaDao,
+                                 QRcodeJpaDao qRcodeJpaDao,
+                                 TeacherArrangementJpaDao arrangementJpaDao,
+                                 VoteOptionJpaDao voteOptionJpaDao,
+                                 SignRecordJpaDao signRecordJpaDao,
+                                 ClassScheduleJpaDao classScheduleJpaDao)
     {
         this.voteJpaDao = voteJpaDao;
-    }
-
-    @Autowired
-    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
-    {
         this.attendanceJpaDao = attendanceJpaDao;
+        this.qRcodeJpaDao = qRcodeJpaDao;
+        this.arrangementJpaDao = arrangementJpaDao;
+        this.voteOptionJpaDao = voteOptionJpaDao;
+        this.signRecordJpaDao = signRecordJpaDao;
+        this.classScheduleJpaDao = classScheduleJpaDao;
     }
 
     @Override
@@ -71,6 +62,12 @@ public class AttendanceServiceImpl implements AttendanceService
         vote.setEstablishedTime(date);
         vote.setAttendance(attendance);
         voteJpaDao.save(vote);
+        Set<VoteOption> voteOptions = vote.getOptions();
+        for (VoteOption option : voteOptions)
+        {
+            option.setVote(vote);
+        }
+        voteOptionJpaDao.save(voteOptions);
         return vote;
     }
 
@@ -108,6 +105,11 @@ public class AttendanceServiceImpl implements AttendanceService
     @Override
     public Attendance createAttendance(Attendance attendance)
     {
+        TeacherArrangement teacherArrangement = arrangementJpaDao.findOne(
+            attendance.getArrangement().getArrangementId());
+        QRcode qRcode = qRcodeJpaDao.findOne(attendance.getqRcode().getCodeId());
+        attendance.setArrangement(teacherArrangement);
+        attendance.setqRcode(qRcode);
         return attendanceJpaDao.save(attendance);
     }
 
@@ -120,25 +122,33 @@ public class AttendanceServiceImpl implements AttendanceService
     }
 
     @Override
-    public SignRecord createSignRecord(Integer attendanceId, Integer scheduleId) {
-        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
-        ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
-        SignRecord signRecord = new SignRecord();
-        signRecord.setAttendance(attendance);
-        signRecord.setSchedule(schedule);
+    public List<Vote> findVotes(Integer attendanceId)
+    {
+        return new ArrayList<>(attendanceJpaDao.findOne(attendanceId).getVotes());
+    }
+
+    @Override
+    public SignRecord createSignRecord(Integer attendanceId, SignRecord signRecord,
+                                       Integer scheduleId)
+    {
+        ClassSchedule classSchedule = classScheduleJpaDao.findOne(attendanceId);
+        Set<SignRecord> currentSignRecords = classSchedule.getSignRecords();
+        //判断是否已经签到;
+        for (SignRecord record : currentSignRecords)
+        {
+            if (record.getAttendance().getAttendanceId() == attendanceId)
+            {
+                throw new DataIntegrityViolationException(
+                    "you has already signed in this attendance.Please don't sign repeatedly.");
+            }
+        }
+        //未签到
+        Attendance attendance = new Attendance();
         signRecord.setSignTime(new Date());
-        return signRecordJpaDao.saveAndFlush(signRecord);
+        attendance.setAttendanceId(attendanceId);
+        signRecord.setAttendance(attendance);
+        signRecordJpaDao.saveAndFlush(signRecord);
+        return signRecord;
     }
 
-    @Override
-    public List<Vote> findAllVote(Integer attenndanceId) {
-        return new ArrayList<>(attendanceJpaDao.findOne(attenndanceId).getVotes());
-    }
-
-    @Override
-    public Vote findNewestVote(Integer attendanceId) {
-        List<Vote> votes = voteJpaDao.findNewestVote(attendanceId);
-        if(votes.isEmpty())return null;
-        else return votes.get(0);
-    }
 }

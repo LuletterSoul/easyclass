@@ -1,6 +1,8 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,7 +31,8 @@ public class SignRecord
         this.signTime = signTime;
     }
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "attendanceId")
     public Attendance getAttendance()
     {
@@ -41,7 +44,8 @@ public class SignRecord
         this.attendance = attendance;
     }
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "scheduleId")
     public ClassSchedule getSchedule()
     {

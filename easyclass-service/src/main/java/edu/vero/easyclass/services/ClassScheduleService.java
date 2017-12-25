@@ -12,6 +12,10 @@ public interface ClassScheduleService
 
     List<ClassSchedule> findAll();
 
+    List<OnlineClassTest> findTestIsExpectedDone(Integer scheduleId);
+
+    List<OnlineClassTest> findTestsIsDone(Integer scheduleId);
+
     List<TestRecord> findAllTestRecords(Integer scheduleId);
 
     List<SignRecord> findAllSignRecords(Integer scheduleId);
@@ -26,5 +30,5 @@ public interface ClassScheduleService
 
     ClassSchedule deleteSchedule(Integer scheduleId);
 
-    ClassSchedule createSchedule(Integer userId,Integer arrangeId,ClassSchedule classSchedule);
+    ClassSchedule createSchedule(Integer userId,Integer arrangeId);
 }

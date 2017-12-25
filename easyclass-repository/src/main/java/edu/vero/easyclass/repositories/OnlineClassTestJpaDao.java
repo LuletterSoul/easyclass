@@ -1,9 +1,15 @@
 package edu.vero.easyclass.repositories;
 
+
 import edu.vero.easyclass.domain.OnlineClassTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OnlineClassTestJpaDao extends JpaRepository<OnlineClassTest,Integer> {
+import java.util.List;
 
+
+public interface OnlineClassTestJpaDao extends JpaRepository<OnlineClassTest, Integer>
+{
+    List<OnlineClassTest> findByTestIdNotInAndTestIdIn(List<Integer> doneTestIds,
+                                                       List<Integer> echoedTestIds);
 
 }

@@ -39,65 +39,29 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private CourseJpaDao courseJpaDao;
 
-    private TestsJpaDao testsJpaDao;
+    private QuestionJpaDao questionJpaDao;
 
     @Autowired
-    public void setTestsJpaDao(TestsJpaDao testsJpaDao) {
-        this.testsJpaDao = testsJpaDao;
-    }
-
-    @Autowired
-    public void setTeacherJpaDao(TeacherJpaDao teacherJpaDao)
-    {
-        this.teacherJpaDao = teacherJpaDao;
-    }
-
-    @Autowired
-    public void setCourseJpaDao(CourseJpaDao courseJpaDao)
-    {
-        this.courseJpaDao = courseJpaDao;
-    }
-
-    @Autowired
-    public void setTestRecordJpaDao(TestRecordJpaDao testRecordJpaDao)
-    {
-        this.testRecordJpaDao = testRecordJpaDao;
-    }
-
-    @Autowired
-    public void setAttendanceJpaDao(AttendanceJpaDao attendanceJpaDao)
-    {
-        this.attendanceJpaDao = attendanceJpaDao;
-    }
-
-    @Autowired
-    public void setOnlineClassTestJpaDao(OnlineClassTestJpaDao onlineClassTestJpaDao)
-    {
-        this.onlineClassTestJpaDao = onlineClassTestJpaDao;
-    }
-
-    @Autowired
-    public void setCoursewareJpaDao(CoursewareJpaDao coursewareJpaDao)
-    {
-        this.coursewareJpaDao = coursewareJpaDao;
-    }
-
-    @Autowired
-    public void setNoticeJpaDao(NoticeJpaDao noticeJpaDao)
-    {
-        this.noticeJpaDao = noticeJpaDao;
-    }
-
-    @Autowired
-    public void setTeacherArrangementJpaDao(TeacherArrangementJpaDao teacherArrangementJpaDao)
+    public TeacherArrangementServiceImpl(TeacherArrangementJpaDao teacherArrangementJpaDao,
+                                         NoticeJpaDao noticeJpaDao,
+                                         CoursewareJpaDao coursewareJpaDao,
+                                         OnlineClassTestJpaDao onlineClassTestJpaDao,
+                                         AttendanceJpaDao attendanceJpaDao,
+                                         TestRecordJpaDao testRecordJpaDao,
+                                         CourseCommentJpaDao courseCommentJpaDao,
+                                         TeacherJpaDao teacherJpaDao, CourseJpaDao courseJpaDao,
+                                         QuestionJpaDao questionJpaDao)
     {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
-    }
-
-    @Autowired
-    public void setCourseCommentJpaDao(CourseCommentJpaDao courseCommentJpaDao)
-    {
+        this.noticeJpaDao = noticeJpaDao;
+        this.coursewareJpaDao = coursewareJpaDao;
+        this.onlineClassTestJpaDao = onlineClassTestJpaDao;
+        this.attendanceJpaDao = attendanceJpaDao;
+        this.testRecordJpaDao = testRecordJpaDao;
         this.courseCommentJpaDao = courseCommentJpaDao;
+        this.teacherJpaDao = teacherJpaDao;
+        this.courseJpaDao = courseJpaDao;
+        this.questionJpaDao = questionJpaDao;
     }
 
     @Override
@@ -121,11 +85,16 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     {
 
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-
+        List<Question> questions = onlineClassTest.getQuestions();
+        List<Integer> questionIds = new ArrayList<>();
+        for (Question q : questions)
+        {
+            questionIds.add(q.getQuestionId());
+        }
+        List<Question> persistedQuestions = questionJpaDao.findByQuestionIdIsIn(questionIds);
+        onlineClassTest.setQuestions(persistedQuestions);
         onlineClassTest.setArrangement(teacherArrangement);
-
         onlineClassTestJpaDao.saveAndFlush(onlineClassTest);
-        teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return onlineClassTest;
     }
 
@@ -175,15 +144,15 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTest = teacherArrangement.getTests();
-        return onlineClassTest;
+        Set<OnlineClassTest> onlineClassTest = teacherArrangement.getTests();
+        return new ArrayList<>(onlineClassTest);
     }
 
     @Override
     public List<OnlineClassTest> findOpeningTests(Integer arrangementId)
     {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
         for (OnlineClassTest test : onlineClassTests)
@@ -193,7 +162,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                 tests.add(test);
             }
         }
-        if (tests.isEmpty()) {
+        if (tests.isEmpty())
+        {
             throw new EntityNotFoundException();
         }
         return tests;
@@ -203,7 +173,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<OnlineClassTest> findTimeOutTests(Integer arrangementId)
     {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<OnlineClassTest> onlineClassTests = arrangement.getTests();
+        Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
         for (OnlineClassTest test : onlineClassTests)
@@ -213,7 +183,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                 tests.add(test);
             }
         }
-        if (tests.isEmpty()) {
+        if (tests.isEmpty())
+        {
             throw new EntityNotFoundException();
         }
         return tests;
@@ -303,10 +274,13 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public OnlineClassTest findNewestTest(Integer arrangementId) {
+    public OnlineClassTest findNewestTest(Integer arrangementId)
+    {
         List<OnlineClassTest> tests = testsJpaDao.findNewestTest(arrangementId);
-        if(tests.isEmpty())return null;
-        else return tests.get(0);
+        if (tests.isEmpty())
+            return null;
+        else
+            return tests.get(0);
     }
 
 }

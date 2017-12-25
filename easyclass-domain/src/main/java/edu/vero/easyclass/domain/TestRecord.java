@@ -46,7 +46,7 @@ public class TestRecord
         this.schedule = schedule;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "testId")
     public OnlineClassTest getTest()
     {

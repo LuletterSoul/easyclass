@@ -38,7 +38,7 @@ public class TeacherArrangement
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    private List<OnlineClassTest> tests;
+    private Set<OnlineClassTest> tests;
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -98,12 +98,12 @@ public class TeacherArrangement
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public List<OnlineClassTest> getTests()
+    public Set<OnlineClassTest> getTests()
     {
         return tests;
     }
 
-    public void setTests(List<OnlineClassTest> tests)
+    public void setTests(Set<OnlineClassTest> tests)
     {
         this.tests = tests;
     }
