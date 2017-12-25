@@ -102,14 +102,11 @@ public class AttendanceController
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
     @PostMapping(value = "/{attendanceId}/sign_records")
-    public ResponseEntity<SignRecord> postSignRecord(@RequestBody SignRecord signRecord,
-                                                     @RequestParam("scheduleId") Integer scheduleId,
+    public ResponseEntity<SignRecord> postSignRecord(@RequestParam("scheduleId") Integer scheduleId,
                                                      @PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(
-            attendanceService.createSignRecord(attendanceId, signRecord, scheduleId),
+        return new ResponseEntity<>(attendanceService.createSignRecord(attendanceId, scheduleId),
             HttpStatus.CREATED);
-
     }
 
     @ApiOperation(value = "获取该签到项下的所有投票")
@@ -121,18 +118,9 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/{attendanceId}/votes")
-    public ResponseEntity<List<Vote>> findAllVote(@PathVariable("attendanceId") Integer attendanceId){
-        return new ResponseEntity<>(attendanceService.findAllVote(attendanceId),HttpStatus.OK);
-    }
-
-    @GetMapping(value="/{attendanceId}/schedule/{scheduleId}")
-    public ResponseEntity<SignRecord> createSignRecord(@PathVariable("attendanceId") Integer attendanceId,@PathVariable("scheduleId") Integer scheduleId){
-        return new ResponseEntity<>(attendanceService.createSignRecord(attendanceId,scheduleId),HttpStatus.CREATED);
-    }
-
-    @GetMapping(value="/{attendanceId}/newest_vote")
-    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId){
-        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId),HttpStatus.OK);
+    @GetMapping(value = "/{attendanceId}/newest_vote")
+    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
+    {
+        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
     }
 }

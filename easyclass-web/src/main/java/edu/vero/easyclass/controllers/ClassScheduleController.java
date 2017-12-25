@@ -32,7 +32,7 @@ public class ClassScheduleController
     @GetMapping
     public ResponseEntity<List<ClassSchedule>> findAllSchedule()
     {
-        return new ResponseEntity<>(scheduleService.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findAll(), HttpStatus.OK);
     }
 
     // 一次上传一个作业
@@ -55,17 +55,25 @@ public class ClassScheduleController
 
     @ApiOperation(value = "获取学生所有还未完成的课堂测试")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{scheduleId}/doing_tests")
     public ResponseEntity<List<OnlineClassTest>> findTestsIsExpectedDone(@PathVariable("scheduleId") Integer scheduleId)
     {
-        return new ResponseEntity<>(scheduleService.findTestIsExpectedDone(scheduleId), HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findTestIsExpectedDone(scheduleId),
+            HttpStatus.OK);
     }
 
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
         return new ResponseEntity<>(scheduleService.findAllTestRecords(scheduleId), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{scheduleId}/test_records")
+    public ResponseEntity<TestRecord> createTestRecord(@PathVariable("scheduleId") Integer scheduleId,
+                                                      @RequestBody TestRecord testRecord)
+    {
+        return null;
     }
 
     @GetMapping(value = "/{scheduleId}/sign_records")
@@ -103,8 +111,8 @@ public class ClassScheduleController
     public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId,
                                                         @RequestParam("arrangeId") Integer arrangeId)
     {
-        return new ResponseEntity<>(
-            scheduleService.createSchedule(userId, arrangeId), HttpStatus.CREATED);
+        return new ResponseEntity<>(scheduleService.createSchedule(userId, arrangeId),
+            HttpStatus.CREATED);
 
     }
 

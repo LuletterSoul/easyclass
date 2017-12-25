@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,13 +38,15 @@ public class AttendanceServiceImpl implements AttendanceService
 
     private ClassScheduleJpaDao classScheduleJpaDao;
 
+    private TestsJpaDao testsJpaDao;
+
     @Autowired
     public AttendanceServiceImpl(VoteJpaDao voteJpaDao, AttendanceJpaDao attendanceJpaDao,
                                  QRcodeJpaDao qRcodeJpaDao,
                                  TeacherArrangementJpaDao arrangementJpaDao,
                                  VoteOptionJpaDao voteOptionJpaDao,
                                  SignRecordJpaDao signRecordJpaDao,
-                                 ClassScheduleJpaDao classScheduleJpaDao)
+                                 ClassScheduleJpaDao classScheduleJpaDao, TestsJpaDao testsJpaDao)
     {
         this.voteJpaDao = voteJpaDao;
         this.attendanceJpaDao = attendanceJpaDao;
@@ -52,6 +55,7 @@ public class AttendanceServiceImpl implements AttendanceService
         this.voteOptionJpaDao = voteOptionJpaDao;
         this.signRecordJpaDao = signRecordJpaDao;
         this.classScheduleJpaDao = classScheduleJpaDao;
+        this.testsJpaDao = testsJpaDao;
     }
 
     @Override
@@ -128,12 +132,12 @@ public class AttendanceServiceImpl implements AttendanceService
     }
 
     @Override
-    public SignRecord createSignRecord(Integer attendanceId, SignRecord signRecord,
-                                       Integer scheduleId)
+    public SignRecord createSignRecord(Integer attendanceId, Integer scheduleId)
     {
+        SignRecord signRecord = new SignRecord();
         ClassSchedule classSchedule = classScheduleJpaDao.findOne(attendanceId);
         Set<SignRecord> currentSignRecords = classSchedule.getSignRecords();
-        //判断是否已经签到;
+        // 判断是否已经签到;
         for (SignRecord record : currentSignRecords)
         {
             if (record.getAttendance().getAttendanceId() == attendanceId)
@@ -142,7 +146,7 @@ public class AttendanceServiceImpl implements AttendanceService
                     "you has already signed in this attendance.Please don't sign repeatedly.");
             }
         }
-        //未签到
+        // 未签到
         Attendance attendance = new Attendance();
         signRecord.setSignTime(new Date());
         attendance.setAttendanceId(attendanceId);
@@ -151,4 +155,13 @@ public class AttendanceServiceImpl implements AttendanceService
         return signRecord;
     }
 
+    @Override
+    public Vote findNewestVote(Integer attendanceId)
+    {
+        List<Vote> newestVote = voteJpaDao.findNewestVote(attendanceId);
+        if (newestVote == null) {
+            throw new EntityNotFoundException();
+        }
+        return voteJpaDao.findNewestVote(attendanceId).get(0);
+    }
 }

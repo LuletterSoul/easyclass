@@ -41,6 +41,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private QuestionJpaDao questionJpaDao;
 
+    private TestsJpaDao testsJpaDao;
+
     @Autowired
     public TeacherArrangementServiceImpl(TeacherArrangementJpaDao teacherArrangementJpaDao,
                                          NoticeJpaDao noticeJpaDao,

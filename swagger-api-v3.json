@@ -101,7 +101,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取所有老师的所有安排表",
-        "operationId": "findAllArrangementsUsingGET_1",
+        "operationId": "findAllArrangementsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -134,7 +134,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "createArrangement",
-        "operationId": "createArrangementUsingPOST_1",
+        "operationId": "createArrangementUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -178,7 +178,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "updateArrangement",
-        "operationId": "updateArrangementUsingPUT_1",
+        "operationId": "updateArrangementUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -224,7 +224,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取特定的教师安排表",
-        "operationId": "findArrangementUsingGET_3",
+        "operationId": "findArrangementUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -264,7 +264,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "deleteArrangement",
-        "operationId": "deleteArrangementUsingDELETE_1",
+        "operationId": "deleteArrangementUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -306,7 +306,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课的所有出勤信息",
-        "operationId": "createAttendanceUsingPOST_3",
+        "operationId": "createAttendanceUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -360,7 +360,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课下的所有学生总评信息",
-        "operationId": "findAllCourseCommentUsingGET_1",
+        "operationId": "findAllCourseCommentUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -405,7 +405,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该教师安排表对应的课程详情",
-        "operationId": "findCourseUsingGET_3",
+        "operationId": "findCourseUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -447,7 +447,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取给门课的所有课件(此API涉及下载,尚未实现)",
-        "operationId": "findAllCoursewaresUsingGET_3",
+        "operationId": "findAllCoursewaresUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -492,7 +492,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课下的所有公告",
-        "operationId": "findAllNoticeUsingGET_1",
+        "operationId": "findAllNoticeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -535,7 +535,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "教师创建一个公告,此公告跟对应的教师安排相关联",
-        "operationId": "createNoticeUsingPOST_3",
+        "operationId": "createNoticeUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -589,7 +589,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课的最新公告",
-        "operationId": "findNewestNoticesUsingGET_1",
+        "operationId": "findNewestNoticesUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -631,7 +631,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课下正在开放的测试",
-        "operationId": "findOpeningTestsUsingGET_1",
+        "operationId": "findOpeningTestsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -676,7 +676,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课对应的老师详情",
-        "operationId": "findTeacherUsingGET_2",
+        "operationId": "findTeacherUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -718,7 +718,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取给该门课下发起的所有测试",
-        "operationId": "findAllOnlineClassTestUsingGET_1",
+        "operationId": "findAllOnlineClassTestUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -785,7 +785,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "教师创建一个在线测试,此测试跟对应的教师安排相关联",
-        "operationId": "createOnlineClassTestUsingPOST_1",
+        "operationId": "createOnlineClassTestUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -839,7 +839,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课下已经关闭的测试",
-        "operationId": "findTimeOutTestsUsingGET_1",
+        "operationId": "findTimeOutTestsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -884,7 +884,7 @@
           "teacher-arrangement-controller"
         ],
         "summary": "获取该门课下的所有上课时间",
-        "operationId": "findAllClassTimeUsingGET_1",
+        "operationId": "findAllClassTimeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -929,7 +929,7 @@
           "attendance-controller"
         ],
         "summary": "createAttendance",
-        "operationId": "createAttendanceUsingPOST_2",
+        "operationId": "createAttendanceUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -973,7 +973,7 @@
           "attendance-controller"
         ],
         "summary": "更新签到信息(可用于老师主动关闭签到)",
-        "operationId": "updateAttendanceUsingPUT_1",
+        "operationId": "updateAttendanceUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1027,7 +1027,7 @@
           "attendance-controller"
         ],
         "summary": "deleteAttendance",
-        "operationId": "deleteAttendanceUsingDELETE_1",
+        "operationId": "deleteAttendanceUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -1069,7 +1069,7 @@
           "attendance-controller"
         ],
         "summary": "获取签到的二维码(尚未实现)",
-        "operationId": "getQRcodeUsingGET_1",
+        "operationId": "getQRcodeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1109,7 +1109,7 @@
           "attendance-controller"
         ],
         "summary": "删除签到的二维码(尚未实现)",
-        "operationId": "deleteQRcodeUsingDELETE_1",
+        "operationId": "deleteQRcodeUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -1151,7 +1151,7 @@
           "attendance-controller"
         ],
         "summary": "获取该签到项下的所有签到记录",
-        "operationId": "getAttendanceUsingGET_1",
+        "operationId": "getAttendanceUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1188,15 +1188,118 @@
             "description": "Not Found"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "增加一条签到记录",
+        "operationId": "postSignRecordUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "signRecord",
+            "description": "signRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          },
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "课表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SignRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/attendances/{attendanceId}/votes": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取该签到项下的所有投票",
+        "operationId": "getVotesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "签到编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vote"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
       "post": {
         "tags": [
           "attendance-controller"
         ],
         "summary": "发起一个属于该签到项下的投票",
-        "operationId": "createVoteUsingPOST_2",
+        "operationId": "createVoteUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1250,7 +1353,7 @@
           "class-comment-controller"
         ],
         "summary": "给每节课提交评教",
-        "operationId": "postClassCommentUsingPOST_1",
+        "operationId": "postClassCommentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1312,7 +1415,7 @@
           "class-time-controller"
         ],
         "summary": "findAllClassTimes",
-        "operationId": "findAllClassTimesUsingGET_1",
+        "operationId": "findAllClassTimesUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1345,7 +1448,7 @@
           "class-time-controller"
         ],
         "summary": "createClassTime",
-        "operationId": "createClassTimeUsingPOST_1",
+        "operationId": "createClassTimeUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1389,7 +1492,7 @@
           "class-time-controller"
         ],
         "summary": "updateClassTime",
-        "operationId": "updateClassTimeUsingPUT_1",
+        "operationId": "updateClassTimeUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1435,7 +1538,7 @@
           "class-time-controller"
         ],
         "summary": "findClassTime",
-        "operationId": "findClassTimeUsingGET_1",
+        "operationId": "findClassTimeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1475,7 +1578,7 @@
           "class-time-controller"
         ],
         "summary": "deleteClassTime",
-        "operationId": "deleteClassTimeUsingDELETE_1",
+        "operationId": "deleteClassTimeUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -1517,7 +1620,7 @@
           "class-time-controller"
         ],
         "summary": "findAllClassComments",
-        "operationId": "findAllClassCommentsUsingGET_1",
+        "operationId": "findAllClassCommentsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1562,7 +1665,7 @@
           "course-comment-controller"
         ],
         "summary": "给每门课程提交总评",
-        "operationId": "postCourseCommentUsingPOST_1",
+        "operationId": "postCourseCommentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1624,7 +1727,7 @@
           "course-controller"
         ],
         "summary": "findAll",
-        "operationId": "findAllUsingGET_2",
+        "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1657,7 +1760,7 @@
           "course-controller"
         ],
         "summary": "createCourse",
-        "operationId": "createCourseUsingPOST_1",
+        "operationId": "createCourseUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1703,7 +1806,7 @@
           "course-controller"
         ],
         "summary": "findCourse",
-        "operationId": "findCourseUsingGET_2",
+        "operationId": "findCourseUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1743,7 +1846,7 @@
           "course-controller"
         ],
         "summary": "deleteCourse",
-        "operationId": "deleteCourseUsingDELETE_1",
+        "operationId": "deleteCourseUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -1785,7 +1888,7 @@
           "course-controller"
         ],
         "summary": "findQuestions",
-        "operationId": "findQuestionsUsingGET_1",
+        "operationId": "findQuestionsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1830,7 +1933,7 @@
           "courseware-controller"
         ],
         "summary": "findAllCoursewares",
-        "operationId": "findAllCoursewaresUsingGET_2",
+        "operationId": "findAllCoursewaresUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1863,7 +1966,7 @@
           "courseware-controller"
         ],
         "summary": "createCourseware",
-        "operationId": "createCoursewareUsingPOST_1",
+        "operationId": "createCoursewareUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1907,7 +2010,7 @@
           "courseware-controller"
         ],
         "summary": "updateCourseware",
-        "operationId": "updateCoursewareUsingPUT_1",
+        "operationId": "updateCoursewareUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1953,7 +2056,7 @@
           "courseware-controller"
         ],
         "summary": "findCourseware",
-        "operationId": "findCoursewareUsingGET_1",
+        "operationId": "findCoursewareUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1993,7 +2096,7 @@
           "courseware-controller"
         ],
         "summary": "deleteCourseware",
-        "operationId": "deleteCoursewareUsingDELETE_1",
+        "operationId": "deleteCoursewareUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2035,7 +2138,7 @@
           "department-controller"
         ],
         "summary": "findAllDepartments",
-        "operationId": "findAllDepartmentsUsingGET_1",
+        "operationId": "findAllDepartmentsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2068,7 +2171,7 @@
           "department-controller"
         ],
         "summary": "createDepartment",
-        "operationId": "createDepartmentUsingPOST_1",
+        "operationId": "createDepartmentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2112,7 +2215,7 @@
           "department-controller"
         ],
         "summary": "updateDepartment",
-        "operationId": "updateDepartmentUsingPUT_1",
+        "operationId": "updateDepartmentUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2158,7 +2261,7 @@
           "department-controller"
         ],
         "summary": "deleteDepartment",
-        "operationId": "deleteDepartmentUsingDELETE_1",
+        "operationId": "deleteDepartmentUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2200,7 +2303,7 @@
           "homework-controller"
         ],
         "summary": "findAllHomeworks",
-        "operationId": "findAllHomeworksUsingGET_1",
+        "operationId": "findAllHomeworksUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2233,7 +2336,7 @@
           "homework-controller"
         ],
         "summary": "createHomework",
-        "operationId": "createHomeworkUsingPOST_1",
+        "operationId": "createHomeworkUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2277,7 +2380,7 @@
           "homework-controller"
         ],
         "summary": "updateHomework",
-        "operationId": "updateHomeworkUsingPUT_1",
+        "operationId": "updateHomeworkUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2323,7 +2426,7 @@
           "homework-controller"
         ],
         "summary": "deleteHomework",
-        "operationId": "deleteHomeworkUsingDELETE_1",
+        "operationId": "deleteHomeworkUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2365,7 +2468,7 @@
           "notice-controller"
         ],
         "summary": "updateNotice",
-        "operationId": "updateNoticeUsingPUT_1",
+        "operationId": "updateNoticeUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2411,7 +2514,7 @@
           "notice-controller"
         ],
         "summary": "createNotice",
-        "operationId": "createNoticeUsingPOST_2",
+        "operationId": "createNoticeUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2457,7 +2560,7 @@
           "notice-controller"
         ],
         "summary": "getNotice",
-        "operationId": "getNoticeUsingGET_1",
+        "operationId": "getNoticeUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2497,7 +2600,7 @@
           "notice-controller"
         ],
         "summary": "deleteNotice",
-        "operationId": "deleteNoticeUsingDELETE_1",
+        "operationId": "deleteNoticeUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2539,7 +2642,7 @@
           "question-controller"
         ],
         "summary": "findAllQuestions",
-        "operationId": "findAllQuestionsUsingGET_1",
+        "operationId": "findAllQuestionsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2572,7 +2675,7 @@
           "question-controller"
         ],
         "summary": "createQuestion",
-        "operationId": "createQuestionUsingPOST_1",
+        "operationId": "createQuestionUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2616,7 +2719,7 @@
           "question-controller"
         ],
         "summary": "updateQuestion",
-        "operationId": "updateQuestionUsingPUT_1",
+        "operationId": "updateQuestionUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2662,7 +2765,7 @@
           "question-controller"
         ],
         "summary": "findQuestion",
-        "operationId": "findQuestionUsingGET_1",
+        "operationId": "findQuestionUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2702,7 +2805,7 @@
           "question-controller"
         ],
         "summary": "deleteQuestion",
-        "operationId": "deleteQuestionUsingDELETE_1",
+        "operationId": "deleteQuestionUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2744,7 +2847,7 @@
           "question-controller"
         ],
         "summary": "findQuestionOptions",
-        "operationId": "findQuestionOptionsUsingGET_1",
+        "operationId": "findQuestionOptionsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2789,7 +2892,7 @@
           "class-schedule-controller"
         ],
         "summary": "findAllSchedule",
-        "operationId": "findAllScheduleUsingGET_1",
+        "operationId": "findAllScheduleUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2822,7 +2925,7 @@
           "class-schedule-controller"
         ],
         "summary": "createSchedule",
-        "operationId": "createScheduleUsingPOST_1",
+        "operationId": "createScheduleUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2875,7 +2978,7 @@
           "class-schedule-controller"
         ],
         "summary": "deleteSchedule",
-        "operationId": "deleteScheduleUsingDELETE_1",
+        "operationId": "deleteScheduleUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -2917,7 +3020,7 @@
           "class-schedule-controller"
         ],
         "summary": "findArrangement",
-        "operationId": "findArrangementUsingGET_2",
+        "operationId": "findArrangementUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2959,7 +3062,7 @@
           "class-schedule-controller"
         ],
         "summary": "获取学生所有还未完成的课堂测试",
-        "operationId": "findTestsIsExpectedDoneUsingGET_1",
+        "operationId": "findTestsIsExpectedDoneUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3004,7 +3107,7 @@
           "class-schedule-controller"
         ],
         "summary": "获取所有已经被学生完成的课堂测试",
-        "operationId": "findTestsIsDoneUsingGET_1",
+        "operationId": "findTestsIsDoneUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3049,7 +3152,7 @@
           "class-schedule-controller"
         ],
         "summary": "findHomeworks",
-        "operationId": "findHomeworksUsingGET_1",
+        "operationId": "findHomeworksUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3092,7 +3195,7 @@
           "class-schedule-controller"
         ],
         "summary": "uploadHomeWork",
-        "operationId": "uploadHomeWorkUsingPOST_1",
+        "operationId": "uploadHomeWorkUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3146,7 +3249,7 @@
           "class-schedule-controller"
         ],
         "summary": "findSignRecords",
-        "operationId": "findSignRecordsUsingGET_1",
+        "operationId": "findSignRecordsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3191,7 +3294,7 @@
           "class-schedule-controller"
         ],
         "summary": "findStudents",
-        "operationId": "findStudentsUsingGET_1",
+        "operationId": "findStudentsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3233,7 +3336,7 @@
           "class-schedule-controller"
         ],
         "summary": "findTestRecords",
-        "operationId": "findTestRecordsUsingGET_1",
+        "operationId": "findTestRecordsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3278,7 +3381,7 @@
           "sign-record-controller"
         ],
         "summary": "findAllSignRecords",
-        "operationId": "findAllSignRecordsUsingGET_1",
+        "operationId": "findAllSignRecordsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3311,7 +3414,7 @@
           "sign-record-controller"
         ],
         "summary": "createSignRecord",
-        "operationId": "createSignRecordUsingPOST_1",
+        "operationId": "createSignRecordUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3355,7 +3458,7 @@
           "sign-record-controller"
         ],
         "summary": "updateSignRecord",
-        "operationId": "updateSignRecordUsingPUT_1",
+        "operationId": "updateSignRecordUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3401,7 +3504,7 @@
           "sign-record-controller"
         ],
         "summary": "findAttendance",
-        "operationId": "findAttendanceUsingGET_1",
+        "operationId": "findAttendanceUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3443,7 +3546,7 @@
           "sign-record-controller"
         ],
         "summary": "findClassSchedule",
-        "operationId": "findClassScheduleUsingGET_2",
+        "operationId": "findClassScheduleUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3485,7 +3588,7 @@
           "sign-record-controller"
         ],
         "summary": "deleteSignRecord",
-        "operationId": "deleteSignRecordUsingDELETE_1",
+        "operationId": "deleteSignRecordUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -3527,7 +3630,7 @@
           "student-controller"
         ],
         "summary": "findAllStudents",
-        "operationId": "findAllStudentsUsingGET_1",
+        "operationId": "findAllStudentsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3560,7 +3663,7 @@
           "student-controller"
         ],
         "summary": "createStudent",
-        "operationId": "createStudentUsingPOST_1",
+        "operationId": "createStudentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3606,7 +3709,7 @@
           "student-controller"
         ],
         "summary": "findStudentById",
-        "operationId": "findStudentByIdUsingGET_1",
+        "operationId": "findStudentByIdUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3646,7 +3749,7 @@
           "student-controller"
         ],
         "summary": "deleteStudent",
-        "operationId": "deleteStudentUsingDELETE_1",
+        "operationId": "deleteStudentUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -3688,7 +3791,7 @@
           "student-controller"
         ],
         "summary": "findSchedule",
-        "operationId": "findScheduleUsingGET_1",
+        "operationId": "findScheduleUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3733,7 +3836,7 @@
           "teacher-controller"
         ],
         "summary": "findAllTeacher",
-        "operationId": "findAllTeacherUsingGET_1",
+        "operationId": "findAllTeacherUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3766,7 +3869,7 @@
           "teacher-controller"
         ],
         "summary": "createTeacher",
-        "operationId": "createTeacherUsingPOST_1",
+        "operationId": "createTeacherUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3810,7 +3913,7 @@
           "teacher-controller"
         ],
         "summary": "updateTeacher",
-        "operationId": "updateTeacherUsingPUT_1",
+        "operationId": "updateTeacherUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3856,7 +3959,7 @@
           "teacher-controller"
         ],
         "summary": "deleteTeacher",
-        "operationId": "deleteTeacherUsingDELETE_1",
+        "operationId": "deleteTeacherUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -3898,7 +4001,7 @@
           "teacher-controller"
         ],
         "summary": "findTeacher",
-        "operationId": "findTeacherUsingGET_3",
+        "operationId": "findTeacherUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -3940,7 +4043,7 @@
           "teacher-controller"
         ],
         "summary": "findTeacherArrangement",
-        "operationId": "findTeacherArrangementUsingGET_1",
+        "operationId": "findTeacherArrangementUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3983,7 +4086,7 @@
           "teacher-controller"
         ],
         "summary": "createTeacherArrangement",
-        "operationId": "createTeacherArrangementUsingPOST_1",
+        "operationId": "createTeacherArrangementUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -4043,7 +4146,7 @@
           "test-record-controller"
         ],
         "summary": "findAllTestRecords",
-        "operationId": "findAllTestRecordsUsingGET_1",
+        "operationId": "findAllTestRecordsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4076,7 +4179,7 @@
           "test-record-controller"
         ],
         "summary": "updateTestRecord",
-        "operationId": "updateTestRecordUsingPUT_1",
+        "operationId": "updateTestRecordUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -4122,7 +4225,7 @@
           "test-record-controller"
         ],
         "summary": "createTestRecord",
-        "operationId": "createTestRecordUsingPOST_1",
+        "operationId": "createTestRecordUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -4168,7 +4271,7 @@
           "test-record-controller"
         ],
         "summary": "findClassSchedule",
-        "operationId": "findClassScheduleUsingGET_3",
+        "operationId": "findClassScheduleUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -4210,7 +4313,7 @@
           "test-record-controller"
         ],
         "summary": "findTest",
-        "operationId": "findTestUsingGET_3",
+        "operationId": "findTestUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -4252,7 +4355,7 @@
           "test-record-controller"
         ],
         "summary": "deleteTestRecord",
-        "operationId": "deleteTestRecordUsingDELETE_1",
+        "operationId": "deleteTestRecordUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -4294,7 +4397,7 @@
           "test-controller"
         ],
         "summary": "findAllTests",
-        "operationId": "findAllTestsUsingGET_1",
+        "operationId": "findAllTestsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4327,7 +4430,7 @@
           "test-controller"
         ],
         "summary": "createTest",
-        "operationId": "createTestUsingPOST_1",
+        "operationId": "createTestUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -4371,7 +4474,7 @@
           "test-controller"
         ],
         "summary": "updateTest",
-        "operationId": "updateTestUsingPUT_1",
+        "operationId": "updateTestUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -4417,7 +4520,7 @@
           "test-controller"
         ],
         "summary": "findTest",
-        "operationId": "findTestUsingGET_2",
+        "operationId": "findTestUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4457,7 +4560,7 @@
           "test-controller"
         ],
         "summary": "deleteTest",
-        "operationId": "deleteTestUsingDELETE_1",
+        "operationId": "deleteTestUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -4499,7 +4602,7 @@
           "test-controller"
         ],
         "summary": "findTestArrangement",
-        "operationId": "findTestArrangementUsingGET_1",
+        "operationId": "findTestArrangementUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4541,7 +4644,7 @@
           "test-controller"
         ],
         "summary": "findTestQuestions",
-        "operationId": "findTestQuestionsUsingGET_1",
+        "operationId": "findTestQuestionsUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4586,7 +4689,7 @@
           "user-controller"
         ],
         "summary": "findAll",
-        "operationId": "findAllUsingGET_3",
+        "operationId": "findAllUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -4619,7 +4722,7 @@
           "user-controller"
         ],
         "summary": "学生注册",
-        "operationId": "registerStudentUsingPOST_1",
+        "operationId": "registerStudentUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -4674,7 +4777,7 @@
           "user-controller"
         ],
         "summary": "通过用户Id查找用户信息",
-        "operationId": "findUserByIdUsingGET_1",
+        "operationId": "findUserByIdUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4715,7 +4818,7 @@
           "vote-option-controller"
         ],
         "summary": "可更新投票项的被选次数",
-        "operationId": "updateOptionUsingPUT_1",
+        "operationId": "updateOptionUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -4761,7 +4864,7 @@
           "vote-option-controller"
         ],
         "summary": "删除投票",
-        "operationId": "deleteOptionUsingDELETE_1",
+        "operationId": "deleteOptionUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -4803,7 +4906,7 @@
           "vote-controller"
         ],
         "summary": "createVote",
-        "operationId": "createVoteUsingPOST_3",
+        "operationId": "createVoteUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -4847,7 +4950,7 @@
           "vote-controller"
         ],
         "summary": "updateVote",
-        "operationId": "updateVoteUsingPUT_1",
+        "operationId": "updateVoteUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -4893,7 +4996,7 @@
           "vote-controller"
         ],
         "summary": "findVote",
-        "operationId": "findVoteUsingGET_1",
+        "operationId": "findVoteUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -4933,7 +5036,7 @@
           "vote-controller"
         ],
         "summary": "deleteVote",
-        "operationId": "deleteVoteUsingDELETE_1",
+        "operationId": "deleteVoteUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -4975,7 +5078,7 @@
           "vote-controller"
         ],
         "summary": "创建投可投票项",
-        "operationId": "createVoteOptionsUsingPOST_1",
+        "operationId": "createVoteOptionsUsingPOST",
         "consumes": [
           "application/json"
         ],

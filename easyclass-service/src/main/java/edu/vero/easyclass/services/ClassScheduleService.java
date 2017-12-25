@@ -20,6 +20,8 @@ public interface ClassScheduleService
 
     List<SignRecord> findAllSignRecords(Integer scheduleId);
 
+    TestRecord createTestRecord(Integer scheduleId, TestRecord testRecord);
+
 //    List<Attendance> findAllAttendances(Integer scheduleId);
 
     List<Homework> findAllHomeworks(Integer scheduleId);

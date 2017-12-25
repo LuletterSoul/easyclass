@@ -33,17 +33,24 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
 
     private OnlineClassTestJpaDao onlineClassTestJpaDao;
 
+    private TestsJpaDao testsJpaDao;
+
+    private TestRecordJpaDao testRecordJpaDao;
+
     @Autowired
     public ClassScheduleServiceImpl(ClassScheduleJpaDao scheduleJpaDao,
                                     HomeworkJpaDao homeworkJpaDao, StudentJpaDao studentJpaDao,
                                     TeacherArrangementJpaDao arrangementJpaDao,
-                                    OnlineClassTestJpaDao onlineClassTestJpaDao)
+                                    OnlineClassTestJpaDao onlineClassTestJpaDao,
+                                    TestsJpaDao testsJpaDao, TestRecordJpaDao testRecordJpaDao)
     {
         this.scheduleJpaDao = scheduleJpaDao;
         this.homeworkJpaDao = homeworkJpaDao;
         this.studentJpaDao = studentJpaDao;
         this.arrangementJpaDao = arrangementJpaDao;
         this.onlineClassTestJpaDao = onlineClassTestJpaDao;
+        this.testsJpaDao = testsJpaDao;
+        this.testRecordJpaDao = testRecordJpaDao;
     }
 
     @Override
@@ -112,6 +119,15 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     public List<SignRecord> findAllSignRecords(Integer scheduleId)
     {
         return new ArrayList<SignRecord>(scheduleJpaDao.findOne(scheduleId).getSignRecords());
+    }
+
+    @Override
+    public TestRecord createTestRecord(Integer scheduleId, TestRecord testRecord)
+    {
+        ClassSchedule schedule = new ClassSchedule();
+        schedule.setScheduleId(scheduleId);
+        testRecord.setSchedule(schedule);
+        return testRecordJpaDao.saveAndFlush(testRecord);
     }
 
     // @Override

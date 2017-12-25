@@ -36,7 +36,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.findAllTestRecords(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{recordId}")
+    @PostMapping
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {
         return new ResponseEntity<>(testRecordService.createTestRecord(testRecord),
