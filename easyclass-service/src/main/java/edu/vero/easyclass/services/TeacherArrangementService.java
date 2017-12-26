@@ -57,4 +57,6 @@ public interface TeacherArrangementService
     TeacherArrangement deleteArrangement(Integer arrangeId);
 
     OnlineClassTest findNewestTest(Integer arrangementId);
+
+    List<Homework> arrangeHomework(Integer homeworkId, Homework homework);
 }

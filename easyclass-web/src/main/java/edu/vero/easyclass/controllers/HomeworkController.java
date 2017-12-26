@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -48,5 +50,12 @@ public class HomeworkController
     public ResponseEntity<Homework> createHomework(@RequestBody Homework homework)
     {
         return new ResponseEntity<>(homeworkService.createHomework(homework), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/{homeworkId}")
+    public ResponseEntity<Homework> uploadHomework(@PathVariable("homeworkId") Integer homeworkId,
+                                                   @RequestParam("file") MultipartFile file, HttpServletRequest request)
+    {
+        return new ResponseEntity<>(homeworkService.uploadHomework(homeworkId, file,request), HttpStatus.CREATED);
     }
 }

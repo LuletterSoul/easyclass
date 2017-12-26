@@ -4,6 +4,7 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.TeacherArrangementService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,10 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     private TestsJpaDao testsJpaDao;
 
+    private HomeworkJpaDao homeworkJpaDao;
+
+    private ClassScheduleJpaDao classScheduleJpaDao;
+
     @Autowired
     public TeacherArrangementServiceImpl(TeacherArrangementJpaDao teacherArrangementJpaDao,
                                          NoticeJpaDao noticeJpaDao,
@@ -52,7 +57,9 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                                          TestRecordJpaDao testRecordJpaDao,
                                          CourseCommentJpaDao courseCommentJpaDao,
                                          TeacherJpaDao teacherJpaDao, CourseJpaDao courseJpaDao,
-                                         QuestionJpaDao questionJpaDao)
+                                         QuestionJpaDao questionJpaDao,
+                                         HomeworkJpaDao homeworkJpaDao,
+                                         ClassScheduleJpaDao classScheduleJpaDao)
     {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
         this.noticeJpaDao = noticeJpaDao;
@@ -64,6 +71,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         this.teacherJpaDao = teacherJpaDao;
         this.courseJpaDao = courseJpaDao;
         this.questionJpaDao = questionJpaDao;
+        this.homeworkJpaDao = homeworkJpaDao;
+        this.classScheduleJpaDao = classScheduleJpaDao;
     }
 
     @Override
@@ -127,9 +136,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public Attendance createAttendance(Integer arrangementId, Attendance attendance)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-
         attendance.setArrangement(teacherArrangement);
-
         attendanceJpaDao.saveAndFlush(attendance);
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return attendance;
@@ -283,6 +290,26 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
             return null;
         else
             return tests.get(0);
+    }
+
+    @Override
+    public List<Homework> arrangeHomework(Integer arrangementId, Homework homework)
+    {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<ClassSchedule> classSchedules = teacherArrangement.getSchedules();
+        List<Homework> homeworks = new ArrayList<>();
+        // 给该门课下的所有学生发布一次作业;
+        homework.setSubmitted(false);
+        homework.setEstablishedTime(new Date());
+        for (ClassSchedule s : classSchedules)
+        {
+            Homework perHomework = new Homework();
+            BeanUtils.copyProperties(homework, perHomework, "homeworkId");
+            perHomework.setSchedule(s);
+            homeworkJpaDao.save(perHomework);
+            homeworks.add(perHomework);
+        }
+        return homeworks;
     }
 
 }
