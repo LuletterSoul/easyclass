@@ -2,6 +2,8 @@ package edu.vero.easyclass.domain;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import util.DateUtil;
+import util.Week;
 
 import javax.persistence.*;
 import java.util.List;
