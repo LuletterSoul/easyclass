@@ -31,10 +31,15 @@ public class TeacherArrangement
         return arrangementId;
     }
 
+
     public void setArrangementId(int arrangementId)
     {
         this.arrangementId = arrangementId;
     }
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private Set<ClassSchedule> schedules;
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
@@ -59,6 +64,11 @@ public class TeacherArrangement
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     private Set<Attendance> attendances;
+
+//    @JsonIgnore
+//    @ApiModelProperty(hidden = true)
+//    private Set<Homework> homeworks;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
@@ -163,5 +173,24 @@ public class TeacherArrangement
     public void setCourseComments(Set<  CourseComment> courseComments)
     {
         this.courseComments = courseComments;
+    }
+
+
+//    @OneToMany(mappedBy = "arrangement")
+//    public Set<Homework> getHomeworks() {
+//        return homeworks;
+//    }
+//
+//    public void setHomeworks(Set<Homework> homeworks) {
+//        this.homeworks = homeworks;
+//    }
+
+    @OneToMany(mappedBy = "teacherArrangement")
+    public Set<ClassSchedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(Set<ClassSchedule> schedules) {
+        this.schedules = schedules;
     }
 }

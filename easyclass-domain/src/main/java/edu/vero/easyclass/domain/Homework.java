@@ -26,11 +26,12 @@ public class Homework
 
     private Date deadline;
 
-    private int size;
+    private Long size;
 
     private boolean isSubmitted;
 
     private ClassSchedule schedule;
+
 
     @ManyToOne
     @JoinColumn(name="scheduleId")
@@ -115,12 +116,12 @@ public class Homework
         this.deadline = deadline;
     }
 
-    public int getSize()
+    public Long getSize()
     {
         return size;
     }
 
-    public void setSize(int size)
+    public void setSize(Long size)
     {
         this.size = size;
     }
