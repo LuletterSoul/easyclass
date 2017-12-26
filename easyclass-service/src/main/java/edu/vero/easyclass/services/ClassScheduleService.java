@@ -2,13 +2,14 @@ package edu.vero.easyclass.services;
 
 
 import edu.vero.easyclass.domain.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 
 public interface ClassScheduleService
 {
-    Homework updateHomework(Integer scheduled, Homework homework);
+    Homework uploadHomework(Integer scheduled, Integer homeworkId, MultipartFile multipartFile);
 
     List<ClassSchedule> findAll();
 

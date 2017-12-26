@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,14 +36,16 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findAll(), HttpStatus.OK);
     }
 
-    // 一次上传一个作业
-    @PostMapping(value = "/{scheduleId}/homeworks")
-    public ResponseEntity<Homework> uploadHomeWork(@RequestBody Homework homework,
-                                                   @PathVariable("scheduleId") Integer scheduleId)
-    {
-        return new ResponseEntity<>(scheduleService.updateHomework(scheduleId, homework),
-            HttpStatus.CREATED);
-    }
+//    // 一次上传一个作业
+//    @PostMapping(value = "/{scheduleId}/homeworks/{homeworkId}")
+//    public ResponseEntity<Homework> uploadHomeWork(@RequestParam("file") MultipartFile multipartFile,
+//                                                   @PathVariable("scheduleId") Integer scheduleId,
+//                                                   @PathVariable("homeworkId") Integer homeworkId)
+//    {
+//        return new ResponseEntity<>(
+//            scheduleService.uploadHomework(scheduleId, homeworkId, multipartFile),
+//            HttpStatus.CREATED);
+//    }
 
     @ApiOperation(value = "获取所有已经被学生完成的课堂测试")
     @ApiImplicitParams({
@@ -71,7 +74,7 @@ public class ClassScheduleController
 
     @PostMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<TestRecord> createTestRecord(@PathVariable("scheduleId") Integer scheduleId,
-                                                      @RequestBody TestRecord testRecord)
+                                                       @RequestBody TestRecord testRecord)
     {
         return null;
     }
@@ -82,6 +85,9 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findAllSignRecords(scheduleId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取学生在该门课下被布置的作业(通过测试)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{scheduleId}/homeworks")
     public ResponseEntity<List<Homework>> findHomeworks(@PathVariable("scheduleId") Integer scheduleId)
     {
@@ -113,7 +119,6 @@ public class ClassScheduleController
     {
         return new ResponseEntity<>(scheduleService.createSchedule(userId, arrangeId),
             HttpStatus.CREATED);
-
     }
 
 }

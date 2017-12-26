@@ -4,10 +4,16 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.ClassScheduleService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -54,9 +60,24 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
-    public Homework updateHomework(Integer scheduled, Homework homework)
+    public Homework uploadHomework(Integer scheduled, Integer homeworkId,
+                                   MultipartFile multipartFile)
     {
-        return homeworkJpaDao.save(homework);
+//        ServletContext context = ContextLoader.getCurrentWebApplicationContext().getServletContext();
+//        // 获取应用部署到服务器之后的应用上下文，为文件保存的路径做基础规划；
+//        String relativePath = "\\schedules\\" + scheduled + "\\homeworks";
+//        String realPath = context.getRealPath(relativePath);
+//        try
+//        {
+//            FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(realPath));
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        String fileName = multipartFile.getOriginalFilename();
+//        Homework homework = homeworkJpaDao.findOne(homeworkId);
+        return null;
     }
 
     @Override

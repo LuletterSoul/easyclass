@@ -4,6 +4,7 @@ package edu.vero.easyclass.controllers;
 import edu.vero.easyclass.domain.Homework;
 import edu.vero.easyclass.services.HomeworkService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,7 @@ public class HomeworkController
         return new ResponseEntity<>(homeworkService.createHomework(homework), HttpStatus.CREATED);
     }
 
+    @ApiModelProperty(value = "学生提交作业(通过测试)")
     @PostMapping(value = "/{homeworkId}")
     public ResponseEntity<Homework> uploadHomework(@PathVariable("homeworkId") Integer homeworkId,
                                                    @RequestParam("file") MultipartFile file, HttpServletRequest request)

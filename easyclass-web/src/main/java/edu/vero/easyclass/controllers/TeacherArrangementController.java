@@ -212,9 +212,22 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-
     @GetMapping(value = "/{arrangementId}/find_newest_test")
-    public ResponseEntity<OnlineClassTest> findNewestTest(@PathVariable("arrangementId") Integer arrangementId){
-        return new ResponseEntity<>(teacherArrangementService.findNewestTest(arrangementId),HttpStatus.OK);
+    public ResponseEntity<OnlineClassTest> findNewestTest(@PathVariable("arrangementId") Integer arrangementId)
+    {
+        return new ResponseEntity<>(teacherArrangementService.findNewestTest(arrangementId),
+            HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "给该门课程下的所有学生发布作业(通过测试)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
+    @PostMapping(value = "/{arrangementId}/homeworks")
+    public ResponseEntity<List<Homework>> arrangeHomework(@PathVariable("arrangementId") Integer arrangementId,
+                                                          @RequestBody Homework homework)
+    {
+        return new ResponseEntity<>(
+            teacherArrangementService.arrangeHomework(arrangementId, homework),
+            HttpStatus.CREATED);
     }
 }
