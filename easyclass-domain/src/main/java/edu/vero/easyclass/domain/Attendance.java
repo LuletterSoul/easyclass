@@ -100,7 +100,6 @@ public class Attendance
         this.attendanceId = attendanceId;
     }
 
-    @Column(columnDefinition = "DATETIME default CURRENT_DATETIME")
     public Date getEstablishedTime()
     {
         return establishedTime;
@@ -131,7 +130,6 @@ public class Attendance
         isAttend = attend;
     }
 
-    @Column(columnDefinition = "bit default 0")
     public boolean isClosed()
     {
         return isClosed;
