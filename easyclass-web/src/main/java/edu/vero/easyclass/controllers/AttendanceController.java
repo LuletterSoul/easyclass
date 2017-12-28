@@ -118,9 +118,9 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
-//    @GetMapping(value = "/{attendanceId}/newest_vote")
-//    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
-//    {
-//        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
-//    }
+    @GetMapping(value = "/{attendanceId}/newest_vote")
+public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
+{
+    return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
+}
 }
