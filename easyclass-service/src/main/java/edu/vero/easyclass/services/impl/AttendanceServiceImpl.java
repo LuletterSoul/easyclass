@@ -157,13 +157,13 @@ public class AttendanceServiceImpl implements AttendanceService
         return signRecord;
     }
 
-//    @Override
-//    public Vote findNewestVote(Integer attendanceId)
-//    {
-//        List<Vote> newestVote = voteJpaDao.findNewestVote(attendanceId);
-//        if (newestVote == null) {
-//            throw new EntityNotFoundException();
-//        }
-//        return voteJpaDao.findNewestVote(attendanceId).get(0);
-//    }
+    @Override
+    public Vote findNewestVote(Integer attendanceId)
+    {
+        List<Vote> newestVote = voteJpaDao.findNewestVote(attendanceId);
+        if (newestVote == null) {
+            throw new EntityNotFoundException();
+        }
+        return voteJpaDao.findNewestVote(attendanceId).get(0);
+    }
 }
