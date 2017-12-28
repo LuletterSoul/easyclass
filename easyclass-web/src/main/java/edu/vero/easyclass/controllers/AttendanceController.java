@@ -81,10 +81,10 @@ public class AttendanceController
     @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
-    @PutMapping
-    public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance attendance)
+    @PutMapping(value = "/{attendanceId}")
+    public ResponseEntity<Attendance> updateAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(attendanceService.updateAttendance(attendance), HttpStatus.OK);
+        return new ResponseEntity<>(attendanceService.updateAttendance(attendanceId), HttpStatus.OK);
     }
 
     @ApiOperation(value = "获取该签到项下的所有签到记录")
@@ -118,9 +118,9 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/{attendanceId}/newest_vote")
-    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
-    {
-        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
-    }
+//    @GetMapping(value = "/{attendanceId}/newest_vote")
+//    public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
+//    {
+//        return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
+//    }
 }

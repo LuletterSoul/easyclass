@@ -30,5 +30,5 @@ public interface AttendanceService
 
     SignRecord createSignRecord(Integer attendanceId,Integer scheduleId);
 
-    Vote findNewestVote(Integer attendanceId);
+//    Vote findNewestVote(Integer attendanceId);
 }
