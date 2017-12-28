@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -59,5 +60,10 @@ public class HomeworkController
                                                    @RequestParam("file") MultipartFile file, HttpServletRequest request)
     {
         return new ResponseEntity<>(homeworkService.uploadHomework(homeworkId, file,request), HttpStatus.CREATED);
+    }
+    @ApiModelProperty(value = "下载上传到服务器的作业")
+    @GetMapping(value = "/{homeworkId}/download")
+    public ResponseEntity<Homework> downloadHomework(@PathVariable("homeworkId") Integer homeworkId, HttpServletRequest request, HttpServletResponse response){
+        return new ResponseEntity<Homework>(homeworkService.downloadHomework(homeworkId,response),HttpStatus.OK);
     }
 }

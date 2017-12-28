@@ -18,7 +18,7 @@ public interface AttendanceService
 
     QRcode findQRcode(Integer attendanceId);
 
-    Attendance updateAttendance(Attendance attendance);
+    Attendance updateAttendance(Integer attendanceId);
 
     List<SignRecord> findSignRecords(Integer attendanceId);
 

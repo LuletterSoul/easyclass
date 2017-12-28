@@ -93,8 +93,10 @@ public class AttendanceServiceImpl implements AttendanceService
     }
 
     @Override
-    public Attendance updateAttendance(Attendance attendance)
+    public Attendance updateAttendance(Integer attendanceId)
     {
+        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
+        attendance.setClosed(true);
         return attendanceJpaDao.save(attendance);
     }
 

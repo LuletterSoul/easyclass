@@ -17,9 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -86,7 +89,9 @@ public class HomeworkServiceImpl implements HomeworkService
         ServletContext context = request.getServletContext();
         // 获取应用部署到服务器之后的应用上下文，为文件保存的路径做基础规划；
         String relativePath = "\\schedules\\" + scheduleId + "\\homeworks\\"+fileName;
+        System.out.println(relativePath);
         String realPath = context.getRealPath(relativePath);
+        System.out.println(realPath);
         try
         {
             FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(realPath));
@@ -100,6 +105,62 @@ public class HomeworkServiceImpl implements HomeworkService
         homework.setFilePath(realPath);
         homework.setSize(multipartFile.getSize());
         homeworkJpaDao.save(homework);
+        return homework;
+    }
+
+//    public String toUTF8String(String str){
+//        StringBuffer sb = new StringBuffer();
+//        int len = str.length();
+//        for(int i = 0;i<len;i++){
+//            char c = str.charAt(i);
+//            if(c>0&&c<=255){
+//                sb.append(c);
+//            }else{
+//                byte b[];
+//                try{
+//                    b = Character.toString(c).getBytes("UTF-8");
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                    b=null;
+//                }
+//                for(int j=0;j<b.length;j++){
+//                    int k=b[j];
+//                    if(k<0){
+//                        k &=255;
+//                    }
+//                    sb.append("%"+Integer.toHexString(k).toUpperCase());
+//                }
+//            }
+//        }
+//        return sb.toString();
+//    }
+    @Override
+    public Homework downloadHomework(Integer homeworkId, HttpServletResponse response) {
+        Homework homework  = homeworkJpaDao.findOne(homeworkId);
+        String realPath = homework.getFilePath();
+        String fileName = homework.getFileName();
+        FileInputStream in = null;
+        ServletOutputStream out = null;
+        response.setHeader("Content-Type","application/x-msdownload");
+        try {
+            response.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(fileName,"UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            in = new FileInputStream(realPath);
+            out = response.getOutputStream();
+            int len = 0;
+            byte b[] = new byte[1024];
+            while((len = in.read(b))!=-1 && in!=null){
+                out.write(b,0,len);
+            }
+            in.close();
+            out.close();
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
+        System.out.println(realPath+""+fileName+" "+"下载成功");
         return homework;
     }
 
