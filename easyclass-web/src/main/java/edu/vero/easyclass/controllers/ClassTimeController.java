@@ -35,7 +35,7 @@ public class ClassTimeController
 //            HttpStatus.CREATED);
 //    }
 
-    @ApiOperation(value="找到指定id的课时安排的评教（未通过测试 no content）")
+    @ApiOperation(value="找到指定id的课时安排的评教（通过测试）")
     @GetMapping(value = "/{timeId}/comments")
     public ResponseEntity<List<ClassTimeComment>> findAllClassComments(@PathVariable("timeId") Integer timeId)
     {
@@ -70,7 +70,7 @@ public class ClassTimeController
     {
         return new ResponseEntity<>(classTimeService.updateClassTime(classTime), HttpStatus.OK);
     }
-    @ApiOperation(value="删除一个课时（未通过测试，懒加载问题）")
+    @ApiOperation(value="删除一个课时（通过测试）")
     @DeleteMapping(value = "/{timeId}")
     public ResponseEntity<ClassTime> deleteClassTime(@PathVariable("timeId") Integer timeId)
     {

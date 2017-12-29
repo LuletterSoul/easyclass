@@ -30,6 +30,7 @@ public class ClassScheduleController
         this.scheduleService = scheduleService;
     }
 
+    @ApiOperation(value = "获取所有的选课信息(通过测试)")
     @GetMapping
     public ResponseEntity<List<ClassSchedule>> findAllSchedule()
     {

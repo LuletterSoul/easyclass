@@ -38,7 +38,7 @@ public class HomeworkController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "查找全部的作业（no content问题，联系环路问题）")
+    @ApiOperation(value = "查找全部的作业（测试通过）")
     @GetMapping(value = "")
     public ResponseEntity<List<Homework>> findAllHomeworks()
     {
@@ -52,7 +52,7 @@ public class HomeworkController
         return new ResponseEntity<>(homeworkService.updateHomework(homework), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "创建作业（未通过测试，数据库更新了，却返回no content）")
+    @ApiOperation(value = "创建作业（测试通过）")
     @PostMapping(value = "")
     public ResponseEntity<Homework> createHomework(@RequestBody Homework homework)
     {
