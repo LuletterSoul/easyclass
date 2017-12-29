@@ -26,7 +26,7 @@ public class ClassCommentController
         this.classCommentService = classCommentService;
     }
 
-    @ApiOperation(value = "给每节课提交评教(测试未通过数据库正常添加 但是返回no content)")
+    @ApiOperation(value = "给每节课提交评教(通过测试)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "timeId", value = "教师安排表编号", dataType = "int", paramType = "query", required = true),
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
