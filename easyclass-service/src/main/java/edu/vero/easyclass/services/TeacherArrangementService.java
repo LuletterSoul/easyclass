@@ -35,6 +35,8 @@ public interface TeacherArrangementService
 
     List<OnlineClassTest> findTimeOutTests(Integer arrangementId);
 
+    List<ClassSchedule> findClassSchedule(Integer arrangementId);
+
     List<ClassTime> findAllClassTime(Integer arrangementId);
 
     List<CourseComment> findAllCourseComment(Integer arrangementId);

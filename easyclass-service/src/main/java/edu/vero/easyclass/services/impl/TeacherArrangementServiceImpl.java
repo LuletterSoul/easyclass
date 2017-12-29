@@ -96,7 +96,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                                                  OnlineClassTest onlineClassTest)
     {
 
-        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        TeacherArrangement teacherArrangement = findArrangement(arrangementId);
+        List<ClassSchedule> classSchedules = findClassSchedule(arrangementId);
         List<Question> questions = onlineClassTest.getQuestions();
         List<Integer> questionIds = new ArrayList<>();
         for (Question q : questions)
@@ -202,6 +203,11 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
+    public List<ClassSchedule> findClassSchedule(Integer arrangementId) {
+        return new ArrayList<>(findArrangement(arrangementId).getSchedules());
+    }
+
+    @Override
     public List<ClassTime> findAllClassTime(Integer arrangementId)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
@@ -302,7 +308,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     public List<Homework> arrangeHomework(Integer arrangementId, Homework homework)
     {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        Set<ClassSchedule> classSchedules = teacherArrangement.getSchedules();
+        List<ClassSchedule> classSchedules = findClassSchedule(arrangementId);
         List<Homework> homeworks = new ArrayList<>();
         // 给该门课下的所有学生发布一次作业;
         homework.setSubmitted(false);
@@ -317,5 +323,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         }
         return homeworks;
     }
+
+
 
 }
