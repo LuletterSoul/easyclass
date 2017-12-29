@@ -2,7 +2,9 @@ package edu.vero.easyclass.services.impl;
 
 
 import edu.vero.easyclass.domain.Courseware;
+import edu.vero.easyclass.domain.TeacherArrangement;
 import edu.vero.easyclass.repositories.CoursewareJpaDao;
+import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
 import edu.vero.easyclass.services.CoursewareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,13 @@ import java.util.List;
 public class CoursewareServiceImpl implements CoursewareService
 {
 
+    private TeacherArrangementJpaDao arrangementJpaDao;
     private CoursewareJpaDao coursewareJpaDao;
+
+    @Autowired
+    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
+        this.arrangementJpaDao = arrangementJpaDao;
+    }
 
     @Autowired
     public void setCoursewareJpaDao(CoursewareJpaDao coursewareJpaDao)
@@ -38,6 +46,7 @@ public class CoursewareServiceImpl implements CoursewareService
     @Override
     public Courseware createCourseware(Courseware courseware)
     {
+
         coursewareJpaDao.saveAndFlush(courseware);
         return courseware;
     }
@@ -53,7 +62,8 @@ public class CoursewareServiceImpl implements CoursewareService
     @Override
     public Courseware updateCourseware(Courseware courseware)
     {
-        coursewareJpaDao.saveAndFlush(courseware);
-        return courseware;
+        TeacherArrangement arrangement = arrangementJpaDao.findOne(courseware.getArrangement().getArrangementId());
+        courseware.setArrangement(arrangement);
+        return coursewareJpaDao.saveAndFlush(courseware);
     }
 }

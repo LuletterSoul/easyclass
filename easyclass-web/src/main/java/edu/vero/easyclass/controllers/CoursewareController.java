@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.Course;
 import edu.vero.easyclass.domain.Courseware;
 import edu.vero.easyclass.services.CoursewareService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +27,21 @@ public class CoursewareController
         this.coursewareService = coursewareService;
     }
 
+    @ApiOperation(value = "找到全部的课件（测试通过）")
     @GetMapping(value = "")
     public ResponseEntity<List<Courseware>> findAllCoursewares()
     {
         return new ResponseEntity<>(coursewareService.findAllCourseWare(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "根据id找到课件（测试通过）")
     @GetMapping(value = "/{coursewareId}")
     public ResponseEntity<Courseware> findCourseware(@PathVariable("coursewareId") Integer coursewareId)
     {
         return new ResponseEntity<>(coursewareService.findCourseWare(coursewareId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "创建课件（测试通过 具体的文件上传未完成）")
     @PostMapping(value = "")
     public ResponseEntity<Courseware> createCourseware(@RequestBody Courseware courseware)
     {
@@ -45,6 +49,7 @@ public class CoursewareController
 
     }
 
+    @ApiOperation(value = "更新课件信息（测试通过）")
     @PutMapping(value = "")
     public ResponseEntity<Courseware> updateCourseware(@RequestBody Courseware courseware)
     {
@@ -52,6 +57,7 @@ public class CoursewareController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "根据id删除课件（测试通过）")
     @DeleteMapping(value = "/{coursewareId}")
     public ResponseEntity<Courseware> deleteCourseware(@PathVariable("coursewareId") Integer coursewareId)
     {
