@@ -195,7 +195,7 @@ public class TeacherArrangementController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "获取该门课下正在开放的测试（未测试）")
+    @ApiOperation(value = "获取该门课下正在开放的测试（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/opening_tests")
@@ -205,7 +205,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下已经关闭的测试（未测试）")
+    @ApiOperation(value = "获取该门课下已经关闭的测试（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/time_out_tests")

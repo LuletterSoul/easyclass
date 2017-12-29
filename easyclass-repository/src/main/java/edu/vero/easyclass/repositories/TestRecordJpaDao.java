@@ -12,4 +12,7 @@ public interface TestRecordJpaDao extends JpaRepository<TestRecord, Integer>
 {
 //    @Query(value = "select TestRecord from TestRecord r where r.schedule.,")
 //    List<Integer> findAllByScheduleId(Integer scheduleId);
+
+    @Query(value = "select * from test_record t where t.testId = ?1",nativeQuery = true)
+    List<TestRecord> findAllRecordByTestId(Integer testId);
 }

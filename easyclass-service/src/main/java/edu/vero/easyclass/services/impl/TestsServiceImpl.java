@@ -4,16 +4,18 @@ package edu.vero.easyclass.services.impl;
 import edu.vero.easyclass.domain.OnlineClassTest;
 import edu.vero.easyclass.domain.Question;
 import edu.vero.easyclass.domain.TeacherArrangement;
-import edu.vero.easyclass.repositories.QuestionJpaDao;
-import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
-import edu.vero.easyclass.repositories.TestsJpaDao;
+import edu.vero.easyclass.domain.TestRecord;
+import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.TestRecordService;
 import edu.vero.easyclass.services.TestsService;
+import io.swagger.annotations.ApiOperation;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -24,6 +26,13 @@ public class TestsServiceImpl implements TestsService
     private QuestionJpaDao questionJpaDao;
 
     private TeacherArrangementJpaDao teacherArrangementJpaDao;
+
+    private TestRecordJpaDao testRecordJpaDao;
+
+    @Autowired
+    public void setTestRecordJpaDao(TestRecordJpaDao testRecordJpaDao) {
+        this.testRecordJpaDao = testRecordJpaDao;
+    }
 
     @Autowired
     public void setTestsJpaDao(TestsJpaDao testsJpaDao)
@@ -88,6 +97,8 @@ public class TestsServiceImpl implements TestsService
     @Override
     public OnlineClassTest deleteTest(Integer testId) {
         OnlineClassTest test = testsJpaDao.findOne(testId);
+        List<TestRecord> testRecords = testRecordJpaDao.findAllRecordByTestId(testId);
+        testRecordJpaDao.delete(testRecords);
         testsJpaDao.delete(testId);
         return test;
     }

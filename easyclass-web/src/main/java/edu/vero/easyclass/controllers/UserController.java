@@ -36,21 +36,22 @@ public class UserController
         this.userService = userService;
     }
 
+    @ApiOperation(value = "找到全部的用户（测试通过）")
     @GetMapping
     public ResponseEntity<List<User>> findAll()
     {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "学生注册")
-    @ApiImplicitParams({@ApiImplicitParam(name = "userId", value = "学生的模型数据")})
+    @ApiOperation(value = "学生注册（测试通过）")
+//    @ApiImplicitParams({@ApiImplicitParam(name = "userId", value = "学生的模型数据")})
     @PostMapping
     public ResponseEntity<Student> registerStudent(@RequestBody Student student)
     {
         return new ResponseEntity<Student>(userService.registerStudent(student), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "通过用户Id查找用户信息")
+    @ApiOperation(value = "通过用户Id查找用户信息（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "userId", value = "投票项的模型数据", dataType = "VoteOption", paramType = "path", required = true)})
     @GetMapping(value = "/{userId}")
