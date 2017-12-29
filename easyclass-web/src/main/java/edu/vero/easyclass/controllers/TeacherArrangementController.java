@@ -131,7 +131,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下的所有学生总评信息（返回实体是对的 但是返回实体是显示是no content）")
+    @ApiOperation(value = "获取该门课下的所有学生总评信息（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/comments")
@@ -171,7 +171,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "更新一门课程的安排(测试未通过需设计提交模式)")
+    @ApiOperation(value = "更新一门课程的安排(未测试)")
     @PutMapping(value = "")
     public ResponseEntity<TeacherArrangement> updateArrangement(@RequestBody TeacherArrangement teacherArrangement)
     {

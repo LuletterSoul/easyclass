@@ -42,7 +42,7 @@ public class VoteOptionController
         return new ResponseEntity<>(voteOptionService.updateOption(voteOption), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "删除投票（未测试，不一定有用）")
+    @ApiOperation(value = "删除投票（未测试 投票vote中有通过测试相同作用的Api）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "voteId", value = "投票项的编号", dataType = "int", paramType = "path", required = true)})
     @DeleteMapping(value = "/{voteId}")

@@ -2,6 +2,7 @@ package edu.vero.easyclass.services.impl;
 
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,10 @@ public class VoteServiceImpl implements VoteService
     public Vote deleteVote(Integer voteId)
     {
         Vote vote = voteJpaDao.findOne(voteId);
+        Set<VoteOption> options = vote.getOptions();
+        for(VoteOption option:options){
+            voteOptionJpaDao.delete(option);
+        }
         voteJpaDao.delete(vote);
         return vote;
     }
