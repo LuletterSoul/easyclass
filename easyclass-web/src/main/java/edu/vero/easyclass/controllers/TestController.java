@@ -73,7 +73,7 @@ public class TestController
         return new ResponseEntity<>(testsService.findTestQuestions(testId), HttpStatus.OK);
     }
 
-    @ApiOperation(value="根据id删除测试（测试未通过，懒加载问题）")
+    @ApiOperation(value="根据id删除测试（测试通过）")
     @DeleteMapping(value = "/{testId}")
     public ResponseEntity<OnlineClassTest> deleteTest(@PathVariable("testId") Integer testId)
     {
