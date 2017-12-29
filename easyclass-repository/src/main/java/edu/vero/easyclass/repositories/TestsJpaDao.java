@@ -14,8 +14,12 @@ import java.util.List;
  * @since easyclass
  */
 
-public interface TestsJpaDao extends JpaRepository<OnlineClassTest, Integer>
+public interface TestsJpaDao
+        extends JpaRepository<OnlineClassTest, Integer>
 {
-    @Query(value = "select * from online_class_test as t where t.establishedTime=(select max(t1.establishedTime) from online_class_test as t1 where t1.arrangeId = ?1 )", nativeQuery = true)
+    @Query(value = "select * from online_class_test as t where " +
+            "t.establishedTime=(select max(t1.establishedTime) " +
+            "from online_class_test as t1 where t1.arrangeId = ?1 )",
+            nativeQuery = true)
     List<OnlineClassTest> findNewestTest(Integer arrangementId);
 }

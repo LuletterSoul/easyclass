@@ -42,7 +42,7 @@ public class TestRecordController
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {
         return new ResponseEntity<>(testRecordService.createTestRecord(testRecord),
-            HttpStatus.ACCEPTED);
+            HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{recordId}/schedule")

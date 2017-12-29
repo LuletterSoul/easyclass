@@ -34,7 +34,8 @@ public class VoteOptionController
 
     @ApiOperation(value = "可更新投票项的被选次数(测试通过)")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "voteOption", value = "投票项的模型数据", dataType = "VoteOption", paramType = "body", required = true)})
+        @ApiImplicitParam(name = "voteOption", value = "投票项的模型数据",
+                        dataType = "VoteOption", paramType = "body", required = true)})
     @PutMapping
     public ResponseEntity<VoteOption> updateOption(@RequestBody VoteOption voteOption)
     {

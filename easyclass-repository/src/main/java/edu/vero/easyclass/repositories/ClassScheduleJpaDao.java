@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-public interface ClassScheduleJpaDao extends JpaRepository<ClassSchedule, Integer>,JpaSpecificationExecutor<ClassSchedule>
+public interface ClassScheduleJpaDao extends JpaRepository<ClassSchedule, Integer>,
+        JpaSpecificationExecutor<ClassSchedule>
 {
-//    List<TestRecord> findTestRecordsById(Integer scheduleId);
+    // List<TestRecord> findTestRecordsById(Integer scheduleId);
 }

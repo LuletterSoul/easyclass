@@ -1,6 +1,8 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -29,6 +31,7 @@ public class CourseComment extends TeachingComment
         return arrangement;
     }
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "scheduleId")
     public ClassSchedule getSchedule() {
