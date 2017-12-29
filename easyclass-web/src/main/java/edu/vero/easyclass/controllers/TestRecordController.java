@@ -37,7 +37,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.findAllTestRecords(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "创建建测试记录（no content 可能是tesRecordt出现了关联环路问题,下面几个测试都出问题了）")
+    @ApiOperation(value = "创建建测试记录(测试通过)")
     @PostMapping
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {
@@ -45,6 +45,7 @@ public class TestRecordController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "获取做测试的学生信息(测试通过)")
     @GetMapping(value = "/{recordId}/schedule")
     public ResponseEntity<ClassSchedule> findClassSchedule(@PathVariable("recordId") Integer recordId)
     {
@@ -52,6 +53,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.findClassSchedule(recordId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取测试记录对应的测试信息(通过测试)")
     @GetMapping(value = "/{recordId}/test")
     public ResponseEntity<OnlineClassTest> findTest(@PathVariable("recordId") Integer recordId)
     {
@@ -65,6 +67,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.updateTestRecord(testRecord), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "删除一条测试记录(通过测试)")
     @DeleteMapping(value = "/{testId}")
     public ResponseEntity<TestRecord> deleteTestRecord(@PathVariable("testId") Integer testId)
     {

@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface TestRecordService
 {
-    public List<TestRecord> findAllTestRecords();
+    List<TestRecord> findAllTestRecords();
 
-    public TestRecord createTestRecord(TestRecord testRecord);
+    TestRecord createTestRecord(TestRecord testRecord);
 
-    public ClassSchedule findClassSchedule(Integer recordId);
+    ClassSchedule findClassSchedule(Integer recordId);
 
-    public OnlineClassTest findTest(Integer recordId);
+    OnlineClassTest findTest(Integer recordId);
 
     TestRecord deleteTestRecord(Integer TestRecordId);
 
