@@ -47,7 +47,7 @@ public class ClassScheduleController
 //            HttpStatus.CREATED);
 //    }
 
-    @ApiOperation(value = "获取所有已经被学生完成的课堂测试(结果对但是返回 no content)")
+    @ApiOperation(value = "获取所有已经被学生完成的课堂测试(通过测试)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{scheduleId}/done_tests")
@@ -66,7 +66,7 @@ public class ClassScheduleController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取学生的一门选课下的所用课堂测试（no content，有关测试记录的都是no content其可能存在环路）")
+    @ApiOperation(value = "获取学生的一门选课下的所用课堂测试（通过测试）")
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
@@ -81,7 +81,7 @@ public class ClassScheduleController
 //        return null;
 //    }
 
-    @ApiOperation(value="找到该门课下的签到记录（no content 有关signRecord也是出现联系环路）")
+    @ApiOperation(value="找到该门课下的签到记录（通过测试）")
     @GetMapping(value = "/{scheduleId}/sign_records")
     public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("scheduleId") Integer scheduleId)
     {

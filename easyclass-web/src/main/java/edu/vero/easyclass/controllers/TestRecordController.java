@@ -30,6 +30,7 @@ public class TestRecordController
         this.testRecordService = testRecordService;
     }
 
+    @ApiOperation(value = "找到所有的测试记录(通过测试)")
     @GetMapping
     public ResponseEntity<List<TestRecord>> findAllTestRecords()
     {
@@ -37,7 +38,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.findAllTestRecords(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "创建建测试记录(测试通过)")
+    @ApiOperation(value = "创建建测试记录(通过测试)")
     @PostMapping
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {
@@ -45,7 +46,7 @@ public class TestRecordController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "获取做测试的学生信息(测试通过)")
+    @ApiOperation(value = "获取做测试的学生信息(通过测试)")
     @GetMapping(value = "/{recordId}/schedule")
     public ResponseEntity<ClassSchedule> findClassSchedule(@PathVariable("recordId") Integer recordId)
     {

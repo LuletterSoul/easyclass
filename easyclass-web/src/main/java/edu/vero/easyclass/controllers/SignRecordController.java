@@ -31,14 +31,14 @@ public class SignRecordController
         this.signRecordService = signRecordService;
     }
 
-    @ApiOperation(value = "找到全部的签到记录（no content）")
+    @ApiOperation(value = "找到全部的签到记录（测试通过）")
     @GetMapping(value = "")
     public ResponseEntity<List<SignRecord>> findAllSignRecords()
     {
         return new ResponseEntity<>(signRecordService.findAllSignRecord(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "找到该签到记录相关的签到（通过测试）")
+    @ApiOperation(value = "找到该签到记录相关的签到（测试通过）")
     @GetMapping(value = "/{signId}/attendance")
     public ResponseEntity<Attendance> findAttendance(@PathVariable("signId") Integer signId)
     {
@@ -46,7 +46,7 @@ public class SignRecordController
         return new ResponseEntity<>(signRecordService.findAttendance(signId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "找到该签到记录相关的学生选课（no content）")
+    @ApiOperation(value = "找到该签到记录相关的学生选课（测试通过）")
     @GetMapping(value = "/{signId}/schedule")
     public ResponseEntity<ClassSchedule> findClassSchedule(@PathVariable("signId") Integer signId)
     {
@@ -54,7 +54,7 @@ public class SignRecordController
         return new ResponseEntity<>(signRecordService.findClassSchedule(signId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "创建签到（数据库更新成功 返回no content）")
+    @ApiOperation(value = "创建签到（测试通过）")
     @PostMapping(value = "")
     public ResponseEntity<SignRecord> createSignRecord(@RequestBody SignRecord signRecord)
     {
@@ -63,14 +63,14 @@ public class SignRecordController
 
     }
 
-    @ApiOperation(value = "更新签到(暂时无用未测试）")
-    @PutMapping(value = "")
-    public ResponseEntity<SignRecord> updateSignRecord(@RequestBody SignRecord signRecord)
-    {
-        return new ResponseEntity<>(signRecordService.updateSignRecord(signRecord), HttpStatus.OK);
-    }
+//    @ApiOperation(value = "更新签到(暂时无用未测试）")
+//    @PutMapping(value = "")
+//    public ResponseEntity<SignRecord> updateSignRecord(@RequestBody SignRecord signRecord)
+//    {
+//        return new ResponseEntity<>(signRecordService.updateSignRecord(signRecord), HttpStatus.OK);
+//    }
 
-    @ApiOperation(value = "根据Id删除签到(通过测试）")
+    @ApiOperation(value = "根据Id删除签到(测试通过）")
     @DeleteMapping(value = "/{signRecordId}")
     public ResponseEntity<SignRecord> deleteSignRecord(@PathVariable("signRecordId") Integer signRecordId)
     {
