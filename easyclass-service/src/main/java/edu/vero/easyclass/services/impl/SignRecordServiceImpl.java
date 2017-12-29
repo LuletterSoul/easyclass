@@ -71,6 +71,7 @@ public class SignRecordServiceImpl implements SignRecordService
     @Override
     public SignRecord deleteSignRecord(Integer signrecordId) {
         SignRecord signRecord=signRecordJpaDao.findOne(signrecordId);
+        signRecordJpaDao.delete(signRecord);
         return signRecord;
     }
 

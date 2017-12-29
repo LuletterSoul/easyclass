@@ -32,7 +32,7 @@ public class VoteOptionController
         this.voteOptionService = voteOptionService;
     }
 
-    @ApiOperation(value = "可更新投票项的被选次数")
+    @ApiOperation(value = "可更新投票项的被选次数(测试通过)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "voteOption", value = "投票项的模型数据", dataType = "VoteOption", paramType = "body", required = true)})
     @PutMapping
@@ -41,7 +41,7 @@ public class VoteOptionController
         return new ResponseEntity<>(voteOptionService.updateOption(voteOption), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "删除投票")
+    @ApiOperation(value = "删除投票（未测试，不一定有用）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "voteId", value = "投票项的编号", dataType = "int", paramType = "path", required = true)})
     @DeleteMapping(value = "/{voteId}")

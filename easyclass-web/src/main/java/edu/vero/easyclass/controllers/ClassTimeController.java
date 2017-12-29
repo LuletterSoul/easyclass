@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.ClassTime;
 import edu.vero.easyclass.domain.ClassTimeComment;
 import edu.vero.easyclass.services.ClassTimeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,24 +35,29 @@ public class ClassTimeController
 //            HttpStatus.CREATED);
 //    }
 
+    @ApiOperation(value="找到指定id的课时安排的评教（未通过测试 no content）")
     @GetMapping(value = "/{timeId}/comments")
     public ResponseEntity<List<ClassTimeComment>> findAllClassComments(@PathVariable("timeId") Integer timeId)
     {
         return new ResponseEntity<>(classTimeService.findAllClassComments(timeId), HttpStatus.OK);
     }
 
+    @ApiOperation(value="找到指定id的课时安排（通过测试）")
     @GetMapping(value = "/{timeId}")
     public ResponseEntity<ClassTime> findClassTime(@PathVariable("timeId") Integer timeId)
     {
         return new ResponseEntity<>(classTimeService.findClassTime(timeId), HttpStatus.OK);
     }
 
+    @ApiOperation(value="找到教师的全部的课时安排（通过测试）")
     @GetMapping(value = "")
     public ResponseEntity<List<ClassTime>> findAllClassTimes()
 
     {
         return new ResponseEntity<>(classTimeService.findAllClassTimes(), HttpStatus.OK);
     }
+
+    @ApiOperation(value="为老师的一门课程安排时间（通过测试）")
     @PostMapping(value = "")
     public ResponseEntity<ClassTime> createClassTime(@RequestBody ClassTime classTime)
 
@@ -64,6 +70,7 @@ public class ClassTimeController
     {
         return new ResponseEntity<>(classTimeService.updateClassTime(classTime), HttpStatus.OK);
     }
+    @ApiOperation(value="删除一个课时（未通过测试，懒加载问题）")
     @DeleteMapping(value = "/{timeId}")
     public ResponseEntity<ClassTime> deleteClassTime(@PathVariable("timeId") Integer timeId)
     {

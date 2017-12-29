@@ -42,15 +42,10 @@ public class CourseCommentServiceImpl implements CourseCommentService
     @Override
     public CourseComment save(Integer arrangeId, Integer scheduleId, CourseComment comment)
     {
-        TeacherArrangement teacherArrangement = new TeacherArrangement();
-        teacherArrangement.setArrangementId(arrangeId);
-        ClassSchedule classSchedule = new ClassSchedule();
-        classSchedule.setScheduleId(scheduleId);
-        comment.setArrangement(teacherArrangement);
-        comment.setSchedule(classSchedule);
-        classSchedule.setCourseComment(comment);
-        courseCommentJpaDao.saveAndFlush(comment);
-        scheduleJpaDao.saveAndFlush(classSchedule);
-        return comment;
+        TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangeId);
+        ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
+        comment.setSchedule(schedule);
+        comment.setArrangement(arrangement);
+        return courseCommentJpaDao.saveAndFlush(comment);
     }
 }

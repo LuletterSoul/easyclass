@@ -47,7 +47,7 @@ public class ClassScheduleController
 //            HttpStatus.CREATED);
 //    }
 
-    @ApiOperation(value = "获取所有已经被学生完成的课堂测试")
+    @ApiOperation(value = "获取所有已经被学生完成的课堂测试(结果对但是返回 no content)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{scheduleId}/done_tests")
@@ -56,7 +56,7 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findTestsIsDone(scheduleId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取学生所有还未完成的课堂测试")
+    @ApiOperation(value = "获取学生所有还未完成的课堂测试（待测试）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{scheduleId}/doing_tests")
@@ -66,19 +66,22 @@ public class ClassScheduleController
             HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取学生的一门选课下的所用课堂测试（no content，有关测试记录的都是no content其可能存在环路）")
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
         return new ResponseEntity<>(scheduleService.findAllTestRecords(scheduleId), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{scheduleId}/test_records")
-    public ResponseEntity<TestRecord> createTestRecord(@PathVariable("scheduleId") Integer scheduleId,
-                                                       @RequestBody TestRecord testRecord)
-    {
-        return null;
-    }
+//    @ApiOperation(value = "testRecordController已有通过测试的方法此方法无用")
+//    @PostMapping(value = "/{scheduleId}/test_records")
+//    public ResponseEntity<TestRecord> createTestRecord(@PathVariable("scheduleId") Integer scheduleId,
+//                                                       @RequestBody TestRecord testRecord)
+//    {
+//        return null;
+//    }
 
+    @ApiOperation(value="找到该门课下的签到记录（no content 有关signRecord也是出现联系环路）")
     @GetMapping(value = "/{scheduleId}/sign_records")
     public ResponseEntity<List<SignRecord>> findSignRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
@@ -94,18 +97,21 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findAllHomeworks(scheduleId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取学生在该门课下对应的教师安排(通过测试)")
     @GetMapping(value = "/{scheduleId}/arrangement")
     public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("scheduleId") Integer scheduleId)
     {
         return new ResponseEntity<>(scheduleService.findArrangement(scheduleId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "该门选课的学生信息（通过测试）")
     @GetMapping(value = "/{scheduleId}/student")
     public ResponseEntity<Student> findStudents(@PathVariable("scheduleId") Integer scheduleId)
     {
         return new ResponseEntity<>(scheduleService.findStudent(scheduleId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "删除一门学生选课（通过测试）")
     @DeleteMapping(value = "/{scheduleId}")
     public ResponseEntity<ClassSchedule> deleteSchedule(@PathVariable("scheduleId") Integer scheduleId)
     {
@@ -113,6 +119,7 @@ public class ClassScheduleController
             HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "创建一门学生选课（通过测试）")
     @PostMapping
     public ResponseEntity<ClassSchedule> createSchedule(@RequestParam("userId") Integer userId,
                                                         @RequestParam("arrangeId") Integer arrangeId)

@@ -5,6 +5,7 @@ import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.services.StudentService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class StudentController
         this.studentService = studentService;
     }
 
+    @ApiOperation(value = "根据id查找学生对应的选课（测试通过）")
     @GetMapping(value = "/{userId}/schedules")
     public ResponseEntity<List<ClassSchedule>> findSchedule(@PathVariable("userId") Integer userId)
     {
@@ -38,24 +40,28 @@ public class StudentController
             HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获得全部学生列表（测试通过）")
     @GetMapping
     public ResponseEntity<List<Student>> findAllStudents()
     {
         return new ResponseEntity<List<Student>>(studentService.findAll(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "根据id查找学生（测试通过）")
     @GetMapping(value = "/{userId}")
     public ResponseEntity<Student> findStudentById(@PathVariable("userId") Integer userId)
     {
         return new ResponseEntity<Student>(studentService.findStudentById(userId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "添加一个学生（测试通过）")
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student)
     {
         return new ResponseEntity<>(studentService.createStudent(student), HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "根据id删除一个学生（测试通过）")
     @DeleteMapping(value = "/{userId}")
     public ResponseEntity<Student> deleteStudent(@PathVariable("userId") Integer userId)
     {

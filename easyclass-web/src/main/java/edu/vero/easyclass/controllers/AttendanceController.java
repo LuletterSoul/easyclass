@@ -33,6 +33,7 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
+    @ApiOperation(value = "创建签到（测试通过）")
     @PostMapping
     public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance)
     {
@@ -40,6 +41,7 @@ public class AttendanceController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "删除一个签到（测试通过）")
     @DeleteMapping(value = "/{attendanceId}")
     public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
@@ -47,10 +49,10 @@ public class AttendanceController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "发起一个属于该签到项下的投票")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
-        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
+    @ApiOperation(value = "发起一个属于该签到项下的投票（测试通过）")
+//    @ApiImplicitParams({
+//        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+//        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -78,16 +80,16 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findQRcode(attendanceId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)")
+    @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
-    @PutMapping
-    public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance attendance)
+    @PutMapping(value = "/{attendanceId}")
+    public ResponseEntity<Attendance> updateAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(attendanceService.updateAttendance(attendance), HttpStatus.OK);
+        return new ResponseEntity<>(attendanceService.updateAttendance(attendanceId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该签到项下的所有签到记录")
+    @ApiOperation(value = "获取该签到项下的所有签到记录(测试通过)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{attendanceId}/sign_records")
@@ -97,7 +99,7 @@ public class AttendanceController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "增加一条签到记录")
+    @ApiOperation(value = "增加一条签到记录（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
@@ -109,7 +111,7 @@ public class AttendanceController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "获取该签到项下的所有投票")
+    @ApiOperation(value = "获取该签到项下的所有投票（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{attendanceId}/votes")
@@ -118,6 +120,7 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "获取该签到项下的最新投票（测试通过）")
     @GetMapping(value = "/{attendanceId}/newest_vote")
     public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
     {

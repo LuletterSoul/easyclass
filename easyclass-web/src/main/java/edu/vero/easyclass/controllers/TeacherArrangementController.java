@@ -35,7 +35,7 @@ public class TeacherArrangementController
         this.teacherArrangementService = teacherArrangementService;
     }
 
-    @ApiOperation(value = "教师创建一个公告,此公告跟对应的教师安排相关联")
+    @ApiOperation(value = "教师创建一个公告,此公告跟对应的教师安排相关联（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @PostMapping(value = "/{arrangementId}/notices")
@@ -46,7 +46,7 @@ public class TeacherArrangementController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "教师创建一个在线测试,此测试跟对应的教师安排相关联")
+    @ApiOperation(value = "教师创建一个在线测试,此测试跟对应的教师安排相关联（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @PostMapping(value = "/{arrangementId}/tests")
@@ -58,7 +58,7 @@ public class TeacherArrangementController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "获取所有老师的所有安排表")
+    @ApiOperation(value = "获取所有老师的所有安排表（测试通过）")
     @GetMapping
     public ResponseEntity<List<TeacherArrangement>> findAllArrangements()
     {
@@ -76,7 +76,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课的最新公告")
+    @ApiOperation(value = "获取该门课的最新公告（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/notices/newest")
@@ -86,7 +86,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课的所有出勤信息")
+    @ApiOperation(value = "创建该门课下的签到（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @PostMapping(value = "/{arrangementId}/attendances")
@@ -98,7 +98,7 @@ public class TeacherArrangementController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "获取特定的教师安排表")
+    @ApiOperation(value = "获取特定的教师安排表（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}")
@@ -108,7 +108,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取给该门课下发起的所有测试")
+    @ApiOperation(value = "获取给该门课下发起的所有测试（未设置参数 测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/tests")
@@ -121,7 +121,7 @@ public class TeacherArrangementController
             teacherArrangementService.findAllOnlineClassTest(arrangementId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下的所有上课时间")
+    @ApiOperation(value = "获取该门课下的所有上课时间（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/times")
@@ -131,17 +131,17 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下的所有学生总评信息")
+    @ApiOperation(value = "获取该门课下的所有学生总评信息（返回实体是对的 但是返回实体是显示是no content）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/comments")
     public ResponseEntity<List<CourseComment>> findAllCourseComment(@PathVariable("arrangementId") Integer arrangementId)
     {
-        return new ResponseEntity<>(teacherArrangementService.findAllCourseComment(arrangementId),
+        return new ResponseEntity<List<CourseComment>>(teacherArrangementService.findAllCourseComment(arrangementId),
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该教师安排表对应的课程详情")
+    @ApiOperation(value = "获取该教师安排表对应的课程详情（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/course")
@@ -151,7 +151,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下的所有公告")
+    @ApiOperation(value = "获取该门课下的所有公告(测试通过)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/notices")
@@ -161,7 +161,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课对应的老师详情")
+    @ApiOperation(value = "获取该门课对应的老师详情（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/teacher")
@@ -171,6 +171,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
+    @ApiOperation(value = "更新一门课程的安排(测试未通过需设计提交模式)")
     @PutMapping(value = "")
     public ResponseEntity<TeacherArrangement> updateArrangement(@RequestBody TeacherArrangement teacherArrangement)
     {
@@ -178,6 +179,7 @@ public class TeacherArrangementController
             teacherArrangementService.updateArrangement(teacherArrangement), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "安排一门课程（测试通过）")
     @PostMapping(value = "")
     public ResponseEntity<TeacherArrangement> createArrangement(@RequestBody TeacherArrangement teacherArrangement)
     {
@@ -185,6 +187,7 @@ public class TeacherArrangementController
             teacherArrangementService.createArrangement(teacherArrangement), HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "删除一门课程的安排（测试通过）")
     @DeleteMapping(value = "/{arrangementId}")
     public ResponseEntity<TeacherArrangement> deleteArrangement(@PathVariable("arrangementId") Integer arrangeId)
     {
@@ -192,7 +195,7 @@ public class TeacherArrangementController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "获取该门课下正在开放的测试")
+    @ApiOperation(value = "获取该门课下正在开放的测试（未测试）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/opening_tests")
@@ -202,7 +205,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取该门课下已经关闭的测试")
+    @ApiOperation(value = "获取该门课下已经关闭的测试（未测试）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{arrangementId}/time_out_tests")
@@ -212,6 +215,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取该门课下最新发布的测试（测试通过）")
     @GetMapping(value = "/{arrangementId}/find_newest_test")
     public ResponseEntity<OnlineClassTest> findNewestTest(@PathVariable("arrangementId") Integer arrangementId)
     {
@@ -219,7 +223,7 @@ public class TeacherArrangementController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "给该门课程下的所有学生发布作业(通过测试)")
+    @ApiOperation(value = "给该门课程下的所有学生发布作业(测试通过)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @PostMapping(value = "/{arrangementId}/homeworks")
