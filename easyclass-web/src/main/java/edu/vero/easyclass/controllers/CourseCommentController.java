@@ -27,7 +27,7 @@ public class CourseCommentController
         this.courseCommentService = courseCommentService;
     }
 
-    @ApiOperation(value = "给每门课程提交总评")
+    @ApiOperation(value = "给每门课程提交总评(测试通过)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangeId", value = "教师安排表编号", dataType = "int", paramType = "query"),
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query")})

@@ -7,6 +7,8 @@ import edu.vero.easyclass.services.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -48,6 +50,7 @@ public class NoticeServiceImpl implements NoticeService
 
     @Override
     public Notice createNotice(Notice notice) {
+        notice.setEstablishedTime(new Date());
         return noticeJpaDao.saveAndFlush(notice);
     }
 }

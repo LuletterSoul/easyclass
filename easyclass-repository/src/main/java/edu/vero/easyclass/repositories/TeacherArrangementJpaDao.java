@@ -1,7 +1,11 @@
 package edu.vero.easyclass.repositories;
 
+import edu.vero.easyclass.domain.CourseComment;
 import edu.vero.easyclass.domain.TeacherArrangement;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
@@ -11,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface TeacherArrangementJpaDao extends JpaRepository<TeacherArrangement,Integer>{
+
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -85,13 +86,24 @@ public class QuestionServiceImpl implements QuestionService
     public Question deleteQuestion(Integer questionId)
     {
         Question question = questionJpaDao.findOne(questionId);
+        Set<QuestionOption> options = question.getOptions();
+        for(QuestionOption option:options){
+            optionJpaDao.delete(option);
+        }
+        questionJpaDao.delete(question);
         return question;
     }
 
     @Override
     public Question updateQuestion(Question question)
     {
-        questionJpaDao.saveAndFlush(question);
+        Set<QuestionOption> options = question.getOptions();
+        for (QuestionOption option : options)
+        {
+            option.setQuestion(question);
+        }
+        optionJpaDao.save(options);
+        question =questionJpaDao.saveAndFlush(question);
         return question;
     }
 }

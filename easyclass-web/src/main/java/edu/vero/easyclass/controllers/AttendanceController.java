@@ -33,6 +33,7 @@ public class AttendanceController
         this.attendanceService = attendanceService;
     }
 
+    @ApiOperation(value = "创建签到（测试通过）")
     @PostMapping
     public ResponseEntity<Attendance> createAttendance(@RequestBody Attendance attendance)
     {
@@ -40,6 +41,7 @@ public class AttendanceController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "删除一个签到（测试通过）")
     @DeleteMapping(value = "/{attendanceId}")
     public ResponseEntity<Attendance> deleteAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
@@ -47,7 +49,7 @@ public class AttendanceController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "发起一个属于该签到项下的投票")
+    @ApiOperation(value = "发起一个属于该签到项下的投票（测试通过）")
 //    @ApiImplicitParams({
 //        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
 //        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
@@ -109,7 +111,7 @@ public class AttendanceController
             HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "获取该签到项下的所有投票（）")
+    @ApiOperation(value = "获取该签到项下的所有投票（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
     @GetMapping(value = "/{attendanceId}/votes")
@@ -118,6 +120,7 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findVotes(attendanceId), HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "获取该签到项下的最新投票（测试通过）")
     @GetMapping(value = "/{attendanceId}/newest_vote")
     public ResponseEntity<Vote> findNewestVote(@PathVariable("attendanceId") Integer attendanceId)
     {

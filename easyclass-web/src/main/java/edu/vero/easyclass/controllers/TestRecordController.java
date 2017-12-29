@@ -7,6 +7,7 @@ import edu.vero.easyclass.domain.TestRecord;
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.services.TestRecordService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,7 @@ public class TestRecordController
         return new ResponseEntity<>(testRecordService.findAllTestRecords(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "创建建测试记录（no content 可能是tesRecordt出现了关联环路问题,下面几个测试都出问题了）")
     @PostMapping
     public ResponseEntity<TestRecord> createTestRecord(@RequestBody TestRecord testRecord)
     {

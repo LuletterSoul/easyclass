@@ -1,6 +1,7 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class ClassTime
 
     private String classOrder;
 
+    @JsonIgnore
     private Set<ClassTimeComment> classTimeComments;
 
     private TeacherArrangement arrangement;

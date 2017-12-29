@@ -60,6 +60,7 @@ public class VoteController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value="根据id查找一次投票信息（测试通过）")
     @GetMapping(value = "/{voteId}")
     public ResponseEntity<Vote> findVote(@PathVariable("voteId") Integer voteId)
     {

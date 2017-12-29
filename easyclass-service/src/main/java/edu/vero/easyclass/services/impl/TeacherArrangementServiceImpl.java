@@ -85,6 +85,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         // 这步可以删去，因为教师安排表中没有对应的公告键
         // teacherArrangement.getNotices().add(notice);
         // 持久化公告
+        notice.setEstablishedTime(new Date());
         noticeJpaDao.saveAndFlush(notice);
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return notice;
@@ -121,8 +122,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
             public int compare(Notice o1, Notice o2)
             {
 
-                return o1.getEstablishedTime().toString().compareTo(
-                    o2.getEstablishedTime().toString());
+                return o2.getEstablishedTime().toString().compareTo(
+                    o1.getEstablishedTime().toString());
             }
 
         });
@@ -211,9 +212,14 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     @Override
     public List<CourseComment> findAllCourseComment(Integer arrangementId)
     {
-        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        Set<CourseComment> courseComments = teacherArrangement.getCourseComments();
-        return new ArrayList<>(courseComments);
+//        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+//        Set<CourseComment> courseComments = teacherArrangement.getCourseComments();
+//        return courseComments;
+        List<CourseComment> courseComments = courseCommentJpaDao.findAllCourseComment(arrangementId,"Course");
+        for(CourseComment comment:courseComments){
+            System.out.println(comment.getCommentId());
+        }
+        return courseComments;
     }
 
     @Override
