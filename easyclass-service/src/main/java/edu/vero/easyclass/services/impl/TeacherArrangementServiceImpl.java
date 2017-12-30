@@ -337,6 +337,68 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         return homeworks;
     }
 
+    @Override
+    public List<HomeworkRecord> findAllHomeworkRecords(Integer arrangementId) {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+
+        Set<HomeworkRecord> HomeworkRecords0 = teacherArrangement.getHomeworkRecords();
+        List<HomeworkRecord> HomeworkRecords1 = new ArrayList<HomeworkRecord>(HomeworkRecords0);
+        return HomeworkRecords1;
+    }
+
+    @Override
+    public List<Student> findUnsubmittedStudents(Integer arrangementId, Integer homeworkrecordId) {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<HomeworkRecord> HomeworkRecords = teacherArrangement.getHomeworkRecords();
+        List<Student> student = new ArrayList<>();
+        for (HomeworkRecord homeworkrecord : HomeworkRecords)
+        {
+            if (homeworkrecord.getHomeworkRecordId()==homeworkrecordId)
+            {
+                String content = homeworkrecord.getContent();
+                String title = homeworkrecord.getTitle();
+                List<Homework> list = homeworkJpaDao.findAll();
+                for (Homework homework : list)
+                {
+                    if(homework.getContent().equals(content)&&homework.getTitle().equals(title)&&homework.isSubmitted()==false)
+                    {
+                        student.add(homework.getSchedule().getStudent());
+                    }
+
+                }
+                break;
+            }
+        }
+
+        return student;
+    }
+
+    @Override
+    public List<Student> findSubmittedStudents(Integer arrangementId, Integer homeworkrecordId) {
+        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+        Set<HomeworkRecord> HomeworkRecords = teacherArrangement.getHomeworkRecords();
+        List<Student> student = new ArrayList<>();
+        for (HomeworkRecord homeworkrecord : HomeworkRecords)
+        {
+            if (homeworkrecord.getHomeworkRecordId()==homeworkrecordId)
+            {
+                String content = homeworkrecord.getContent();
+                String title = homeworkrecord.getTitle();
+                List<Homework> list = homeworkJpaDao.findAll();
+                for (Homework homework : list)
+                {
+                    if(homework.getContent().equals(content)&&homework.getTitle().equals(title)&&homework.isSubmitted()==true)
+                    {
+                        student.add(homework.getSchedule().getStudent());
+                    }
+
+                }
+                break;
+            }
+        }
+
+        return student;
+    }
 
 
 }

@@ -61,4 +61,10 @@ public interface TeacherArrangementService
     OnlineClassTest findNewestTest(Integer arrangementId);
 
     List<Homework> arrangeHomework(Integer homeworkId, Homework homework);
+
+    List<HomeworkRecord> findAllHomeworkRecords(Integer arrangementId);
+
+    List<Student> findUnsubmittedStudents(Integer arrangementId, Integer homeworkrecordId);
+
+    List<Student> findSubmittedStudents(Integer arrangementId, Integer homeworkrecordId);
 }

@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -234,19 +233,27 @@ public class TeacherArrangementController
             teacherArrangementService.arrangeHomework(arrangementId, homework),
             HttpStatus.CREATED);
     }
-/*
+    @ApiOperation(value = "找到该门课全部的作业记录（未测试）")
+    @GetMapping(value = "/{arrangementId}/homeworkrecords")
+    public ResponseEntity<List<HomeworkRecord>> findAllHomeworkRecords(@PathVariable("arrangementId") Integer arrangementId)
+    {
+        return new ResponseEntity<>(teacherArrangementService.findAllHomeworkRecords(arrangementId), HttpStatus.OK);
+    }
+
+
     @ApiOperation(value = "获取提交作业的学生(未测试)")
-    @PostMapping(value = "/{arrangementId}/submitted")
-    public ResponseEntity<List<Student>> findSubmittedStudents(@PathVariable("arrangementId") Integer arrangementId)
+    @GetMapping(value = "/{arrangementId}/homeworkrecords/{homeworkrecordId}/submitted")
+    public ResponseEntity<List<Student>> findSubmittedStudents(@PathVariable("arrangementId") Integer arrangementId,
+                                                               @PathVariable("homeworkrecordId") Integer homeworkrecordId)
 
     {
-        return new ResponseEntity<>(teacherArrangementService.findSubmittedStudents(arrangementId), HttpStatus.OK);
+        return new ResponseEntity<>(teacherArrangementService.findSubmittedStudents(arrangementId,homeworkrecordId), HttpStatus.OK);
     }
     @ApiOperation(value = "获取未提交作业的学生(未测试)")
-    @PostMapping(value = "/{arrangementId}/unsubmitted")
-    public ResponseEntity<List<Student>> findUnsubmittedStudents(@PathVariable("arrangementId") Integer arrangementId)
-
+    @GetMapping(value = "/{arrangementId}/homeworkrecords/{homeworkrecordId}/unsubmitted")
+    public ResponseEntity<List<Student>> findUnsubmittedStudents(@PathVariable("arrangementId") Integer arrangementId,
+                                                                 @PathVariable("homeworkrecordId") Integer homeworkrecordId)
     {
-        return new ResponseEntity<>(teacherArrangementService.findUnsubmittedStudents(arrangementId), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(teacherArrangementService.findUnsubmittedStudents(arrangementId,homeworkrecordId), HttpStatus.OK);
+    }
 }
