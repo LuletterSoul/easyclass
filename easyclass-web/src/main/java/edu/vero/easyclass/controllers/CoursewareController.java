@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.util.List;
 
 
@@ -41,11 +45,13 @@ public class CoursewareController
         return new ResponseEntity<>(coursewareService.findCourseWare(coursewareId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "创建课件（测试通过 具体的文件上传未完成）")
+    @ApiOperation(value = "创建课件，课件的上传（测试通过）")
     @PostMapping(value = "")
-    public ResponseEntity<Courseware> createCourseware(@RequestBody Courseware courseware)
+    public ResponseEntity<Courseware> createCourseware(@RequestParam("arrangementId") Integer arrangeId,
+                                                       @RequestParam("file") MultipartFile multipartFile,
+                                                       HttpServletRequest request)
     {
-        return new ResponseEntity<>(coursewareService.createCourseware(courseware), HttpStatus.OK);
+        return new ResponseEntity<>(coursewareService.createCourseware(arrangeId,multipartFile,request), HttpStatus.OK);
 
     }
 
@@ -63,5 +69,11 @@ public class CoursewareController
     {
         return new ResponseEntity<>(coursewareService.deleteCourseware(coursewareId),
             HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "课件下载（下载完成 还是像作业上传下载一样都是utf-8编码）")
+    @GetMapping(value = "/{coursewareId}/download")
+    public ResponseEntity<Courseware> downloadCourseware(@PathVariable("coursewareId") Integer coursewareId, HttpServletRequest request, HttpServletResponse response){
+        return new ResponseEntity<>(coursewareService.downloadCourseware(coursewareId,request,response),HttpStatus.OK);
     }
 }
