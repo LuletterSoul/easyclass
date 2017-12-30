@@ -3,6 +3,7 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Homework;
+import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.repositories.HomeworkJpaDao;
 import edu.vero.easyclass.repositories.ScheduleJpaDao;
 import edu.vero.easyclass.services.HomeworkService;
@@ -163,5 +164,7 @@ public class HomeworkServiceImpl implements HomeworkService
         System.out.println(realPath+""+fileName+" "+"下载成功");
         return homework;
     }
+
+
 
 }

@@ -59,6 +59,10 @@ public class TeacherArrangement
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
+    private Set<HomeworkRecord> homeworkrecords;
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     private Set<CourseComment> courseComments;
 
     @JsonIgnore
@@ -92,6 +96,17 @@ public class TeacherArrangement
     public void setNotices(Set<Notice> notices)
     {
         this.notices = notices;
+    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "arrangement")
+    public Set<HomeworkRecord> getHomeworkRecords()
+    {
+        return homeworkrecords;
+    }
+
+    public void setHomeworkRecords(Set<HomeworkRecord> homeworkrecords)
+    {
+        this.homeworkrecords = homeworkrecords;
     }
 
     @JsonIgnore

@@ -234,4 +234,19 @@ public class TeacherArrangementController
             teacherArrangementService.arrangeHomework(arrangementId, homework),
             HttpStatus.CREATED);
     }
+/*
+    @ApiOperation(value = "获取提交作业的学生(未测试)")
+    @PostMapping(value = "/{arrangementId}/submitted")
+    public ResponseEntity<List<Student>> findSubmittedStudents(@PathVariable("arrangementId") Integer arrangementId)
+
+    {
+        return new ResponseEntity<>(teacherArrangementService.findSubmittedStudents(arrangementId), HttpStatus.OK);
+    }
+    @ApiOperation(value = "获取未提交作业的学生(未测试)")
+    @PostMapping(value = "/{arrangementId}/unsubmitted")
+    public ResponseEntity<List<Student>> findUnsubmittedStudents(@PathVariable("arrangementId") Integer arrangementId)
+
+    {
+        return new ResponseEntity<>(teacherArrangementService.findUnsubmittedStudents(arrangementId), HttpStatus.OK);
+    }*/
 }

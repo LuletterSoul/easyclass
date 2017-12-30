@@ -2,6 +2,7 @@ package edu.vero.easyclass.controllers;
 
 
 import edu.vero.easyclass.domain.Homework;
+import edu.vero.easyclass.domain.Student;
 import edu.vero.easyclass.services.HomeworkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;

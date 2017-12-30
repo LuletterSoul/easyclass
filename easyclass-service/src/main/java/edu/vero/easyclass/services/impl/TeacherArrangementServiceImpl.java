@@ -47,6 +47,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     private HomeworkJpaDao homeworkJpaDao;
 
     private ClassScheduleJpaDao classScheduleJpaDao;
+    private HomeworkRecordJpaDao homeworkRecordJpaDao;
 
     @Autowired
     public TeacherArrangementServiceImpl(TeacherArrangementJpaDao teacherArrangementJpaDao,
@@ -59,7 +60,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                                          TeacherJpaDao teacherJpaDao, CourseJpaDao courseJpaDao,
                                          QuestionJpaDao questionJpaDao,
                                          HomeworkJpaDao homeworkJpaDao,
-                                         ClassScheduleJpaDao classScheduleJpaDao)
+                                         ClassScheduleJpaDao classScheduleJpaDao,
+     HomeworkRecordJpaDao homeworkRecordJpaDao)
     {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
         this.noticeJpaDao = noticeJpaDao;
@@ -73,6 +75,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         this.questionJpaDao = questionJpaDao;
         this.homeworkJpaDao = homeworkJpaDao;
         this.classScheduleJpaDao = classScheduleJpaDao;
+        this.homeworkRecordJpaDao = homeworkRecordJpaDao;
     }
 
     @Override
@@ -313,6 +316,16 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
         // 给该门课下的所有学生发布一次作业;
         homework.setSubmitted(false);
         homework.setEstablishedTime(new Date());
+
+        HomeworkRecord homeworkrecord =new HomeworkRecord();
+        homeworkrecord.setArrangement(teacherArrangement);
+        homeworkrecord.setEstablishedTime(new Date());
+        homeworkrecord.setContent(homework.getContent());
+        homeworkrecord.setDeadline(homework.getDeadline());
+        homeworkrecord.setTitle(homework.getTitle());
+
+        homeworkRecordJpaDao.saveAndFlush(homeworkrecord);
+        teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         for (ClassSchedule s : classSchedules)
         {
             Homework perHomework = new Homework();
