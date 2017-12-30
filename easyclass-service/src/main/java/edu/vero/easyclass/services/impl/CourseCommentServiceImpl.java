@@ -46,6 +46,9 @@ public class CourseCommentServiceImpl implements CourseCommentService
         ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
         comment.setSchedule(schedule);
         comment.setArrangement(arrangement);
-        return courseCommentJpaDao.saveAndFlush(comment);
+        comment = courseCommentJpaDao.saveAndFlush(comment);
+        schedule.setCourseComment(comment);
+        scheduleJpaDao.saveAndFlush(schedule);
+        return comment;
     }
 }
