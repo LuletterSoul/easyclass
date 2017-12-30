@@ -2,7 +2,9 @@ package edu.vero.easyclass.services.impl;
 
 
 import edu.vero.easyclass.domain.Notice;
+import edu.vero.easyclass.domain.TeacherArrangement;
 import edu.vero.easyclass.repositories.NoticeJpaDao;
+import edu.vero.easyclass.repositories.TeacherArrangementJpaDao;
 import edu.vero.easyclass.services.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,13 @@ import java.util.Date;
 public class NoticeServiceImpl implements NoticeService
 {
 
+    private TeacherArrangementJpaDao arrangementJpaDao;
     private NoticeJpaDao noticeJpaDao;
+
+    @Autowired
+    public void setArrangementJpaDao(TeacherArrangementJpaDao arrangementJpaDao) {
+        this.arrangementJpaDao = arrangementJpaDao;
+    }
 
     @Autowired
     public void setNoticeJpaDao(NoticeJpaDao noticeJpaDao)
@@ -50,6 +58,8 @@ public class NoticeServiceImpl implements NoticeService
 
     @Override
     public Notice createNotice(Notice notice) {
+        TeacherArrangement arrangement = arrangementJpaDao.findOne(notice.getArrangement().getArrangementId());
+        notice.setArrangement(arrangement);
         notice.setEstablishedTime(new Date());
         return noticeJpaDao.saveAndFlush(notice);
     }

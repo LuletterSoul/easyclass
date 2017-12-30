@@ -116,6 +116,7 @@ public class AttendanceServiceImpl implements AttendanceService
         QRcode qRcode = qRcodeJpaDao.findOne(attendance.getqRcode().getCodeId());
         attendance.setArrangement(teacherArrangement);
         attendance.setqRcode(qRcode);
+        attendance.setEstablishedTime(new Date());
         return attendanceJpaDao.save(attendance);
     }
 
