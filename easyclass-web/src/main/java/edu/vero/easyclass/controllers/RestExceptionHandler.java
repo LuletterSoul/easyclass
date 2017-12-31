@@ -75,6 +75,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
             BAD_REQUEST, request);
     }
 
+
+    // 403
     @ExceptionHandler({InvalidDataAccessApiUsageException.class, DataAccessException.class,
         IllegalArgumentException.class})
     protected ResponseEntity<Object> handleConflict(final RuntimeException ex,
@@ -83,8 +85,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
         return handleExceptionInternal(ex, "The request parameters were not valid!",
             new HttpHeaders(), BAD_REQUEST, request);
     }
-
-    // 403
 
     // 404
 

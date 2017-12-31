@@ -13,6 +13,7 @@ import edu.vero.easyclass.services.AttendanceService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -201,6 +202,11 @@ public class AttendanceServiceImpl implements AttendanceService
         SignRecord signRecord = new SignRecord();
         ClassSchedule classSchedule = classScheduleJpaDao.findOne(attendanceId);
         Set<SignRecord> currentSignRecords = classSchedule.getSignRecords();
+        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
+        //签到已关闭
+        if (attendance.isClosed()) {
+            throw new InvalidDataAccessApiUsageException("The attendance has been closed.");
+        }
         // 判断是否已经签到;
         for (SignRecord record : currentSignRecords)
         {
@@ -210,8 +216,6 @@ public class AttendanceServiceImpl implements AttendanceService
                     "you has already signed in this attendance.Please don't sign repeatedly.");
             }
         }
-        // 未签到
-        Attendance attendance = new Attendance();
         signRecord.setSignTime(new Date());
         attendance.setAttendanceId(attendanceId);
         signRecord.setAttendance(attendance);
