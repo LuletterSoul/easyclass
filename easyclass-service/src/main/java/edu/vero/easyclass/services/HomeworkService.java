@@ -2,6 +2,7 @@ package edu.vero.easyclass.services;
 
 
 import edu.vero.easyclass.domain.Homework;
+import edu.vero.easyclass.domain.HomeworkRecord;
 import io.swagger.models.auth.In;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +23,8 @@ public interface HomeworkService
 
     public List<Homework> findAllHomeworks();
 
-    Homework uploadHomework(Integer homeworkId, MultipartFile file, HttpServletRequest request);
+    Homework uploadHomework(Integer scheduleId,Integer homeworkId, MultipartFile file, HttpServletRequest request);
 
-    Homework downloadHomework(Integer homeworkId, HttpServletResponse response);
+    HomeworkRecord downloadHomework(Integer homeworkId, HttpServletResponse response);
 
 }

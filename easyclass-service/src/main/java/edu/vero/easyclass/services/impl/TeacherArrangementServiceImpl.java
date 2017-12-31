@@ -19,8 +19,7 @@ import java.util.*;
  */
 
 @Service
-public class TeacherArrangementServiceImpl implements TeacherArrangementService
-{
+public class TeacherArrangementServiceImpl implements TeacherArrangementService {
 
     private TeacherArrangementJpaDao teacherArrangementJpaDao;
 
@@ -59,8 +58,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
                                          TeacherJpaDao teacherJpaDao, CourseJpaDao courseJpaDao,
                                          QuestionJpaDao questionJpaDao,
                                          HomeworkJpaDao homeworkJpaDao,
-                                         ClassScheduleJpaDao classScheduleJpaDao)
-    {
+                                         ClassScheduleJpaDao classScheduleJpaDao) {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
         this.noticeJpaDao = noticeJpaDao;
         this.coursewareJpaDao = coursewareJpaDao;
@@ -76,8 +74,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public Notice createNotice(Integer arrangementId, Notice notice)
-    {
+    public Notice createNotice(Integer arrangementId, Notice notice) {
         // 先从数据库里面查找出对应教师安排表
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         // 给公告关联对应的教师安排表
@@ -93,15 +90,13 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
 
     @Override
     public OnlineClassTest createOnlineClassTest(Integer arrangementId,
-                                                 OnlineClassTest onlineClassTest)
-    {
+                                                 OnlineClassTest onlineClassTest) {
 
         TeacherArrangement teacherArrangement = findArrangement(arrangementId);
         List<ClassSchedule> classSchedules = findClassSchedule(arrangementId);
         List<Question> questions = onlineClassTest.getQuestions();
         List<Integer> questionIds = new ArrayList<>();
-        for (Question q : questions)
-        {
+        for (Question q : questions) {
             questionIds.add(q.getQuestionId());
         }
         List<Question> persistedQuestions = questionJpaDao.findByQuestionIdIsIn(questionIds);
@@ -112,19 +107,16 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public Notice findNewestNotices(Integer arrangementId)
-    {
+    public Notice findNewestNotices(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<Notice> notices0 = teacherArrangement.getNotices();
         List<Notice> notices1 = new ArrayList<Notice>(notices0);
-        Collections.sort(notices1, new Comparator<Notice>()
-        {
+        Collections.sort(notices1, new Comparator<Notice>() {
             @Override
-            public int compare(Notice o1, Notice o2)
-            {
+            public int compare(Notice o1, Notice o2) {
 
                 return o2.getEstablishedTime().toString().compareTo(
-                    o1.getEstablishedTime().toString());
+                        o1.getEstablishedTime().toString());
             }
 
         });
@@ -135,8 +127,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public Attendance createAttendance(Integer arrangementId, Attendance attendance)
-    {
+    public Attendance createAttendance(Integer arrangementId, Attendance attendance) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         attendance.setArrangement(teacherArrangement);
         attendanceJpaDao.saveAndFlush(attendance);
@@ -145,57 +136,47 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public TeacherArrangement findArrangement(Integer arrangementId)
-    {
+    public TeacherArrangement findArrangement(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         return teacherArrangement;
     }
 
     @Override
-    public List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId)
-    {
+    public List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<OnlineClassTest> onlineClassTest = teacherArrangement.getTests();
         return new ArrayList<>(onlineClassTest);
     }
 
     @Override
-    public List<OnlineClassTest> findOpeningTests(Integer arrangementId)
-    {
+    public List<OnlineClassTest> findOpeningTests(Integer arrangementId) {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
-        for (OnlineClassTest test : onlineClassTests)
-        {
-            if (test.getDeadline().compareTo(date) >= 0)
-            {
+        for (OnlineClassTest test : onlineClassTests) {
+            if (test.getDeadline().compareTo(date) >= 0) {
                 tests.add(test);
             }
         }
-        if (tests.isEmpty())
-        {
+        if (tests.isEmpty()) {
             throw new EntityNotFoundException();
         }
         return tests;
     }
 
     @Override
-    public List<OnlineClassTest> findTimeOutTests(Integer arrangementId)
-    {
+    public List<OnlineClassTest> findTimeOutTests(Integer arrangementId) {
         TeacherArrangement arrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<OnlineClassTest> onlineClassTests = arrangement.getTests();
         List<OnlineClassTest> tests = new ArrayList<>();
         Date date = new Date();
-        for (OnlineClassTest test : onlineClassTests)
-        {
-            if (test.getDeadline().compareTo(date) < 0)
-            {
+        for (OnlineClassTest test : onlineClassTests) {
+            if (test.getDeadline().compareTo(date) < 0) {
                 tests.add(test);
             }
         }
-        if (tests.isEmpty())
-        {
+        if (tests.isEmpty()) {
             throw new EntityNotFoundException();
         }
         return tests;
@@ -208,37 +189,33 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public List<ClassTime> findAllClassTime(Integer arrangementId)
-    {
+    public List<ClassTime> findAllClassTime(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<ClassTime> classTime = teacherArrangement.getClassTimes();
         return new ArrayList<>(classTime);
     }
 
     @Override
-    public List<CourseComment> findAllCourseComment(Integer arrangementId)
-    {
+    public List<CourseComment> findAllCourseComment(Integer arrangementId) {
 //        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
 //        Set<CourseComment> courseComments = teacherArrangement.getCourseComments();
 //        return courseComments;
-        List<CourseComment> courseComments = courseCommentJpaDao.findAllCourseComment(arrangementId,"Course");
-        for(CourseComment comment:courseComments){
+        List<CourseComment> courseComments = courseCommentJpaDao.findAllCourseComment(arrangementId, "Course");
+        for (CourseComment comment : courseComments) {
             System.out.println(comment.getCommentId());
         }
         return courseComments;
     }
 
     @Override
-    public Course findCourse(Integer arrangementId)
-    {
+    public Course findCourse(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Course course = teacherArrangement.getCourse();
         return course;
     }
 
     @Override
-    public List<Notice> findAllNotice(Integer arrangementId)
-    {
+    public List<Notice> findAllNotice(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
 
         Set<Notice> notices0 = teacherArrangement.getNotices();
@@ -247,38 +224,33 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public Teacher findTeacher(Integer arrangementId)
-    {
+    public Teacher findTeacher(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Teacher teacher = teacherArrangement.getTeacher();
         return teacher;
     }
 
     @Override
-    public List<TeacherArrangement> findAllArrangements()
-    {
+    public List<TeacherArrangement> findAllArrangements() {
         List<TeacherArrangement> list = teacherArrangementJpaDao.findAll();
         return list;
     }
 
     @Override
-    public List<Courseware> findAllCoursewares(Integer arrangementId)
-    {
+    public List<Courseware> findAllCoursewares(Integer arrangementId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         Set<Courseware> courseware = teacherArrangement.getCoursewares();
         return new ArrayList<>(courseware);
     }
 
     @Override
-    public TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement)
-    {
+    public TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement) {
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return teacherArrangement;
     }
 
     @Override
-    public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement)
-    {
+    public TeacherArrangement createArrangement(TeacherArrangement teacherArrangement) {
         Teacher teacher = teacherJpaDao.findOne(teacherArrangement.getTeacher().getUserId());
         Course course = courseJpaDao.findOne(teacherArrangement.getCourse().getCourseId());
         teacherArrangement.setCourse(course);
@@ -287,16 +259,14 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
     }
 
     @Override
-    public TeacherArrangement deleteArrangement(Integer arrangeId)
-    {
+    public TeacherArrangement deleteArrangement(Integer arrangeId) {
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangeId);
         teacherArrangementJpaDao.delete(teacherArrangement);
         return teacherArrangement;
     }
 
     @Override
-    public OnlineClassTest findNewestTest(Integer arrangementId)
-    {
+    public OnlineClassTest findNewestTest(Integer arrangementId) {
         List<OnlineClassTest> tests = testsJpaDao.findNewestTest(arrangementId);
         if (tests.isEmpty())
             return null;
@@ -304,26 +274,29 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService
             return tests.get(0);
     }
 
+    //    @Override
+//    public List<Homework> arrangeHomework(Integer arrangementId, Homework homework)
+//    {
+//        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
+//        List<ClassSchedule> classSchedules = findClassSchedule(arrangementId);
+//        List<Homework> homeworks = new ArrayList<>();
+//        // 给该门课下的所有学生发布一次作业;
+//        homework.setSubmitted(false);
+//        homework.setEstablishedTime(new Date());
+//        for (ClassSchedule s : classSchedules)
+//        {
+//            Homework perHomework = new Homework();
+//            BeanUtils.copyProperties(homework, perHomework, "homeworkId");
+//            perHomework.setSchedule(s);
+//            homeworkJpaDao.save(perHomework);
+//            homeworks.add(perHomework);
+//        }
+//        return homeworks;
+//    }
     @Override
-    public List<Homework> arrangeHomework(Integer arrangementId, Homework homework)
-    {
-        TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
-        List<ClassSchedule> classSchedules = findClassSchedule(arrangementId);
-        List<Homework> homeworks = new ArrayList<>();
-        // 给该门课下的所有学生发布一次作业;
-        homework.setSubmitted(false);
+    public Homework arrangeHomework(Integer arrangementId, Homework homework) {
+        TeacherArrangement teacherArrangement = findArrangement(arrangementId);
         homework.setEstablishedTime(new Date());
-        for (ClassSchedule s : classSchedules)
-        {
-            Homework perHomework = new Homework();
-            BeanUtils.copyProperties(homework, perHomework, "homeworkId");
-            perHomework.setSchedule(s);
-            homeworkJpaDao.save(perHomework);
-            homeworks.add(perHomework);
-        }
-        return homeworks;
+        return homeworkJpaDao.saveAndFlush(homework);
     }
-
-
-
 }

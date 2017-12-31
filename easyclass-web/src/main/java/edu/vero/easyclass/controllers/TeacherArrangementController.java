@@ -227,7 +227,7 @@ public class TeacherArrangementController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
     @PostMapping(value = "/{arrangementId}/homeworks")
-    public ResponseEntity<List<Homework>> arrangeHomework(@PathVariable("arrangementId") Integer arrangementId,
+    public ResponseEntity<Homework> arrangeHomework(@PathVariable("arrangementId") Integer arrangementId,
                                                           @RequestBody Homework homework)
     {
         return new ResponseEntity<>(

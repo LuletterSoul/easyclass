@@ -3,7 +3,9 @@ package edu.vero.easyclass.services.impl;
 
 import edu.vero.easyclass.domain.ClassSchedule;
 import edu.vero.easyclass.domain.Homework;
+import edu.vero.easyclass.domain.HomeworkRecord;
 import edu.vero.easyclass.repositories.HomeworkJpaDao;
+import edu.vero.easyclass.repositories.HomeworkRecordJpaDao;
 import edu.vero.easyclass.repositories.ScheduleJpaDao;
 import edu.vero.easyclass.services.HomeworkService;
 import org.apache.commons.io.FileUtils;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,6 +37,8 @@ public class HomeworkServiceImpl implements HomeworkService
 
     private ScheduleJpaDao scheduleJpaDao;
 
+    private HomeworkRecordJpaDao homeworkRecordJpaDao;
+
     @Autowired
     public void setScheduleJpaDao(ScheduleJpaDao scheduleJpaDao)
     {
@@ -44,6 +49,11 @@ public class HomeworkServiceImpl implements HomeworkService
     public void setHomeworkJpaDao(HomeworkJpaDao homeworkJpaDao)
     {
         this.homeworkJpaDao = homeworkJpaDao;
+    }
+
+    @Autowired
+    public void setHomeworkRecordJpaDao(HomeworkRecordJpaDao homeworkRecordJpaDao) {
+        this.homeworkRecordJpaDao = homeworkRecordJpaDao;
     }
 
     @Override
@@ -65,8 +75,8 @@ public class HomeworkServiceImpl implements HomeworkService
     @Override
     public Homework createHomework(Homework homework)
     {
-        ClassSchedule schedule = scheduleJpaDao.findOne(homework.getSchedule().getScheduleId());
-        homework.setSchedule(schedule);
+//        ClassSchedule schedule = scheduleJpaDao.findOne(homework.getSchedule().getScheduleId());
+//        homework.setSchedule(schedule);
         return homeworkJpaDao.saveAndFlush(homework);
     }
 
@@ -77,15 +87,15 @@ public class HomeworkServiceImpl implements HomeworkService
         return list;
     }
 
-    public Homework uploadHomework(Integer homeworkId, MultipartFile multipartFile, HttpServletRequest request)
+    public Homework uploadHomework(Integer scheduleId, Integer homeworkId, MultipartFile multipartFile, HttpServletRequest request)
     {
         Homework homework = homeworkJpaDao.findOne(homeworkId);
+        ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
         String fileName = multipartFile.getOriginalFilename();
         if (homework == null)
         {
             throw new EntityNotFoundException();
         }
-        Integer scheduleId = homework.getSchedule().getScheduleId();
         ServletContext context = request.getServletContext();
         // 获取应用部署到服务器之后的应用上下文，为文件保存的路径做基础规划；
         String relativePath = "\\schedules\\" + scheduleId + "\\homeworks\\"+fileName;
@@ -100,11 +110,15 @@ public class HomeworkServiceImpl implements HomeworkService
         {
             e.printStackTrace();
         }
-        homework.setFileName(fileName);
-        homework.setSubmitted(true);
-        homework.setFilePath(realPath);
-        homework.setSize(multipartFile.getSize());
-        homeworkJpaDao.save(homework);
+        //新建一条作业记录
+        HomeworkRecord homeworkRecord = new HomeworkRecord();
+        homeworkRecord.setSubmittedTime(new Date());
+        homeworkRecord.setSchedule(schedule);
+        homeworkRecord.setHomework(homework);
+        homeworkRecord.setFileName(fileName);
+        homeworkRecord.setFilePath(realPath);
+        homeworkRecord.setSize(multipartFile.getSize());
+        homeworkRecordJpaDao.save(homeworkRecord);
         return homework;
     }
 
@@ -135,10 +149,10 @@ public class HomeworkServiceImpl implements HomeworkService
 //        return sb.toString();
 //    }
     @Override
-    public Homework downloadHomework(Integer homeworkId, HttpServletResponse response) {
-        Homework homework  = homeworkJpaDao.findOne(homeworkId);
-        String realPath = homework.getFilePath();
-        String fileName = homework.getFileName();
+    public HomeworkRecord downloadHomework(Integer homeworkRecordId, HttpServletResponse response) {
+        HomeworkRecord homeworkRecord  = homeworkRecordJpaDao.findOne(homeworkRecordId);
+        String realPath = homeworkRecord.getFilePath();
+        String fileName = homeworkRecord.getFileName();
         FileInputStream in = null;
         ServletOutputStream out = null;
         response.setHeader("Content-Type","application/x-msdownload");
@@ -161,7 +175,7 @@ public class HomeworkServiceImpl implements HomeworkService
             e.printStackTrace();
         }
         System.out.println(realPath+""+fileName+" "+"下载成功");
-        return homework;
+        return homeworkRecord;
     }
 
 }

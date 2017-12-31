@@ -60,5 +60,5 @@ public interface TeacherArrangementService
 
     OnlineClassTest findNewestTest(Integer arrangementId);
 
-    List<Homework> arrangeHomework(Integer homeworkId, Homework homework);
+    Homework arrangeHomework(Integer homeworkId, Homework homework);
 }
