@@ -47,6 +47,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
 
     private ClassScheduleJpaDao classScheduleJpaDao;
 
+    private HomeworkRecordJpaDao homeworkRecordJpaDao;
+
     @Autowired
     public TeacherArrangementServiceImpl(TeacherArrangementJpaDao teacherArrangementJpaDao,
                                          NoticeJpaDao noticeJpaDao,
@@ -58,7 +60,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
                                          TeacherJpaDao teacherJpaDao, CourseJpaDao courseJpaDao,
                                          QuestionJpaDao questionJpaDao,
                                          HomeworkJpaDao homeworkJpaDao,
-                                         ClassScheduleJpaDao classScheduleJpaDao) {
+                                         ClassScheduleJpaDao classScheduleJpaDao,
+                                         HomeworkRecordJpaDao homeworkRecordJpaDao) {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
         this.noticeJpaDao = noticeJpaDao;
         this.coursewareJpaDao = coursewareJpaDao;
@@ -71,6 +74,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
         this.questionJpaDao = questionJpaDao;
         this.homeworkJpaDao = homeworkJpaDao;
         this.classScheduleJpaDao = classScheduleJpaDao;
+        this.homeworkRecordJpaDao = homeworkRecordJpaDao;
     }
 
     @Override
@@ -303,6 +307,33 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
     @Override
     public List<Homework> findAllHomework(Integer arrangementId) {
         return homeworkJpaDao.findByArrangementOrderByEstablishedTimeAsc(findArrangement(arrangementId));
+    }
+
+    @Override
+    public List<Student> findAllUnSubmittedStudents(Integer arrangementId, Integer homeworkId) {
+//        Set<HomeworkRecord> homeworkRecords = homeworkJpaDao.findOne(homeworkId).getHomeworkRecords();
+        //该门课下的所有学生
+        List<Student> students = classScheduleJpaDao.findStudentsOfSchedulesByTeacherArrangement(findArrangement(arrangementId));
+        //已交作业的学生
+        List<Student> submittedStudents = findAllSubmittedStudents(arrangementId,homeworkId);
+        List<Student> unsubmiitedStudents = new ArrayList<>();
+        //如果当前交了的作业的学生是0,则改班级下的所有学生都未交作业;
+        if (submittedStudents.isEmpty()) {
+            return students;
+        }
+        for (Student student : students) {
+            for (Student subStudent : submittedStudents) {
+                if (!student.getStudentId().equals(subStudent.getStudentId())) {
+                    unsubmiitedStudents.add(student);
+                }
+            }
+        }
+        return unsubmiitedStudents;
+    }
+
+    @Override
+    public List<Student> findAllSubmittedStudents(Integer arrangementId, Integer homeworkId) {
+        return homeworkRecordJpaDao.findStudentsOfRecordByHomework(homeworkJpaDao.findOne(homeworkId));
     }
 
 }

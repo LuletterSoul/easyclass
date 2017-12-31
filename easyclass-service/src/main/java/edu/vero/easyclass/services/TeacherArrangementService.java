@@ -62,4 +62,8 @@ public interface TeacherArrangementService
     Homework arrangeHomework(Integer homeworkId, Homework homework);
 
     List<Homework> findAllHomework(Integer arrangementId);
+
+    List<Student> findAllUnSubmittedStudents(Integer arrangementId,Integer homeworkId);
+
+    List<Student> findAllSubmittedStudents(Integer arrangementId,Integer homeworkId);
 }

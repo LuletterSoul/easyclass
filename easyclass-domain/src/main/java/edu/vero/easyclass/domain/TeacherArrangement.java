@@ -2,6 +2,7 @@ package edu.vero.easyclass.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Objects;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -184,5 +185,13 @@ public class TeacherArrangement {
 
     public void setHomeworks(Set<Homework> homeworks) {
         this.homeworks = homeworks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TeacherArrangement that = (TeacherArrangement) o;
+        return arrangementId == that.arrangementId;
     }
 }

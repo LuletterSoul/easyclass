@@ -1,9 +1,7 @@
 package edu.vero.easyclass.repositories;
 
 
-import edu.vero.easyclass.domain.ClassSchedule;
-import edu.vero.easyclass.domain.OnlineClassTest;
-import edu.vero.easyclass.domain.TestRecord;
+import edu.vero.easyclass.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +12,6 @@ public interface ClassScheduleJpaDao extends JpaRepository<ClassSchedule, Intege
         JpaSpecificationExecutor<ClassSchedule>
 {
     // List<TestRecord> findTestRecordsById(Integer scheduleId);
+    @Query(value = "select c.student from ClassSchedule c where c.teacherArrangement = ?1")
+    List<Student> findStudentsOfSchedulesByTeacherArrangement(TeacherArrangement teacherArrangement);
 }

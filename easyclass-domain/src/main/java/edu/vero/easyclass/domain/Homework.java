@@ -2,6 +2,7 @@ package edu.vero.easyclass.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Objects;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,8 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "homework")
-public class Homework
-{
+public class Homework {
 
     private int homeworkId;
 
@@ -42,53 +42,43 @@ public class Homework
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")
-    public int getHomeworkId()
-    {
+    public int getHomeworkId() {
         return homeworkId;
     }
 
-    public void setHomeworkId(int homeworkId)
-    {
+    public void setHomeworkId(int homeworkId) {
         this.homeworkId = homeworkId;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public Date getEstablishedTime()
-    {
+    public Date getEstablishedTime() {
         return establishedTime;
     }
 
-    public void setEstablishedTime(Date establishedTime)
-    {
+    public void setEstablishedTime(Date establishedTime) {
         this.establishedTime = establishedTime;
     }
 
-    public Date getDeadline()
-    {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline)
-    {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -101,5 +91,18 @@ public class Homework
 
     public void setHomeworkRecords(Set<HomeworkRecord> homeworkRecords) {
         this.homeworkRecords = homeworkRecords;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Homework homework = (Homework) o;
+        return homeworkId == homework.homeworkId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(homeworkId);
     }
 }
