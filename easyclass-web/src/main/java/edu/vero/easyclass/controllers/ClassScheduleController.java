@@ -38,21 +38,10 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findAll(), HttpStatus.OK);
     }
 
-//    // 一次上传一个作业
-//    @PostMapping(value = "/{scheduleId}/homeworks/{homeworkId}")
-//    public ResponseEntity<Homework> uploadHomeWork(@RequestParam("file") MultipartFile multipartFile,
-//                                                   @PathVariable("scheduleId") Integer scheduleId,
-//                                                   @PathVariable("homeworkId") Integer homeworkId)
-//    {
-//        return new ResponseEntity<>(
-//            scheduleService.uploadHomework(scheduleId, homeworkId, multipartFile),
-//            HttpStatus.CREATED);
-//    }
-
-    @ApiOperation(value = "获得学生一门选课下的所有测试（待测试）")
+    @ApiOperation(value = "获得学生一门选课下的所有测试（通过测试）")
     @GetMapping(value = "/{scheduleId}/all_test")
     public ResponseEntity<List<OnlineClassTest>> findAllTests(@PathVariable("scheduleId") Integer scheduleId){
-        return new ResponseEntity<List<OnlineClassTest>>(scheduleService.findAllTests(scheduleId),HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.findAllTests(scheduleId), HttpStatus.OK);
     }
 
     @ApiOperation(value = "获取所有已经被学生完成的课堂测试(通过测试)")
