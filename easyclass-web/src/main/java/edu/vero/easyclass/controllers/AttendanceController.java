@@ -75,10 +75,13 @@ public class AttendanceController
             HttpStatus.NO_CONTENT);
     }
 
-    @ApiOperation(value = "获取签到的二维码(尚未实现)")
+    @ApiOperation(value = "获取签到的地址，返回一个二维码图片,里面包含学生签到的地址(通过测试)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
-        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true),
+        @ApiImplicitParam(name = "width", value = "二维码宽度", dataType = "int", paramType = "query", required = false, defaultValue = "200"),
+        @ApiImplicitParam(name = "height", value = "二维码高度", dataType = "int", paramType = "query", required = false, defaultValue = "200"),
+        @ApiImplicitParam(name = "format", value = "课表编号", dataType = "int", paramType = "query", required = false, defaultValue = "jpeg")})
     @GetMapping(value = "/{attendanceId}/QR_code")
     public ResponseEntity<byte[]> getQRcode(@PathVariable("attendanceId") Integer attendanceId,
                                             @RequestParam("scheduleId") Integer scheduleId,
@@ -90,8 +93,8 @@ public class AttendanceController
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(
-            attendanceService.findQRcode(attendanceId, scheduleId, height, width, format, request),headers,
-            HttpStatus.OK);
+            attendanceService.findQRcode(attendanceId, scheduleId, height, width, format, request),
+            headers, HttpStatus.OK);
     }
 
     @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)（测试通过）")
