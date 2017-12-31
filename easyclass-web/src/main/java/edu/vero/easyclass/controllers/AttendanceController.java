@@ -1,10 +1,7 @@
 package edu.vero.easyclass.controllers;
 
 
-import edu.vero.easyclass.domain.Attendance;
-import edu.vero.easyclass.domain.QRcode;
-import edu.vero.easyclass.domain.SignRecord;
-import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.services.AttendanceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -144,4 +141,19 @@ public class AttendanceController
     {
         return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "获取已签到的学生列表")
+    @GetMapping(value = "/{attendanceId}/attend_students")
+    public ResponseEntity<List<Student>> findAttendStudents(@PathVariable("attendanceId") Integer attendanceId) {
+        return null;
+    }
+
+    @ApiOperation(value = "获取未签到的学生列表")
+    @GetMapping(value = "/{attendanceId}/absent_students")
+    public ResponseEntity<List<Student>> findUnAttendStudents(@PathVariable("attendanceId") String attendanceId) {
+        return null;
+    }
+
+
+
 }

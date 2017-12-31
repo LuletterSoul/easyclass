@@ -1,10 +1,8 @@
 package edu.vero.easyclass.services;
 
 
-import edu.vero.easyclass.domain.Attendance;
-import edu.vero.easyclass.domain.QRcode;
-import edu.vero.easyclass.domain.SignRecord;
-import edu.vero.easyclass.domain.Vote;
+import edu.vero.easyclass.domain.*;
+import io.swagger.models.auth.In;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,4 +31,8 @@ public interface AttendanceService
     SignRecord createSignRecord(Integer attendanceId, Integer scheduleId);
 
     Vote findNewestVote(Integer attendanceId);
+
+    List<Student> findAttendStudents(Integer attendanceId);
+
+    List<Student> findAbsentStudents(Integer attendanceId);
 }

@@ -233,4 +233,14 @@ public class AttendanceServiceImpl implements AttendanceService
         }
         return voteJpaDao.findNewestVote(attendanceId).get(0);
     }
+
+    @Override
+    public List<Student> findAttendStudents(Integer attendanceId) {
+        return null;
+    }
+
+    @Override
+    public List<Student> findAbsentStudents(Integer attendanceId) {
+        return null;
+    }
 }
