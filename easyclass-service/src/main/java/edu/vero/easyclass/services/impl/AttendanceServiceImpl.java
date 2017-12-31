@@ -1,18 +1,31 @@
 package edu.vero.easyclass.services.impl;
 
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.AttendanceService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.*;
 
 
 /**
@@ -85,12 +98,60 @@ public class AttendanceServiceImpl implements AttendanceService
     }
 
     @Override
-    public QRcode findQRcode(Integer attendanceId)
+    public byte[] findQRcode(Integer attendanceId, Integer scheduleId, Integer height,
+                             Integer width, String format, HttpServletRequest request)
     {
-        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
-        QRcode qRcode = attendance.getqRcode();
-        return qRcode;
+        String doAttendanceRealUrl = "/" + attendanceId + "/sign_records" + "?scheduleId="
+                                     + scheduleId;
+        ServletContext servletContext = request.getServletContext();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        BitMatrix bitMatrix = new BitMatrix(2);// 生成矩阵
+        try
+        {
+            bitMatrix = new MultiFormatWriter().encode(doAttendanceRealUrl, BarcodeFormat.QR_CODE,
+                width, height, hints);
+        }
+        catch (WriterException e)
+        {
+            e.printStackTrace();
+        }
+        QRcode qRcode = new QRcode();
+        String fileName = attendanceId + "_" + scheduleId +"_QRcode."+format;
+        String relativePath = "\\attendances\\" + scheduleId + "\\QRcode\\" + fileName;
+        String realPath = servletContext.getRealPath(relativePath);
+        File QRfile = new File(realPath);
+        qRcode.setFileName(fileName);
+        qRcode.setFilePath(realPath);
+        OutputStream fileStream = null;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        // 将矩阵转为Image
+        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+        try
+        {
+            ImageIO.write(image, format, out);// 将BufferedImage转成out输出流
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try {
+            //将生成的二维码保存到本机
+            FileUtils.writeByteArrayToFile(QRfile,out.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        qRcodeJpaDao.save(qRcode);
+        return out.toByteArray();
     }
+
+    // @Override
+    // public QRcode findQRcode(Integer attendanceId)
+    // {
+    // Attendance attendance = attendanceJpaDao.findOne(attendanceId);
+    // QRcode qRcode = attendance.getqRcode();
+    // return qRcode;
+    // }
 
     @Override
     public Attendance updateAttendance(Integer attendanceId)
@@ -162,7 +223,8 @@ public class AttendanceServiceImpl implements AttendanceService
     public Vote findNewestVote(Integer attendanceId)
     {
         List<Vote> newestVote = voteJpaDao.findNewestVote(attendanceId);
-        if (newestVote == null) {
+        if (newestVote == null)
+        {
             throw new EntityNotFoundException();
         }
         return voteJpaDao.findNewestVote(attendanceId).get(0);

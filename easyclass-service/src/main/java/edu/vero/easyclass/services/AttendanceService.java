@@ -6,6 +6,7 @@ import edu.vero.easyclass.domain.QRcode;
 import edu.vero.easyclass.domain.SignRecord;
 import edu.vero.easyclass.domain.Vote;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,8 @@ public interface AttendanceService
 
     QRcode deleteQRcode(Integer attendanceId);
 
-    QRcode findQRcode(Integer attendanceId);
+    byte[] findQRcode(Integer attendanceId, Integer scheduleId, Integer height, Integer width,
+                      String format, HttpServletRequest request);
 
     Attendance updateAttendance(Integer attendanceId);
 
@@ -28,7 +30,7 @@ public interface AttendanceService
 
     List<Vote> findVotes(Integer attendanceId);
 
-    SignRecord createSignRecord(Integer attendanceId,Integer scheduleId);
+    SignRecord createSignRecord(Integer attendanceId, Integer scheduleId);
 
     Vote findNewestVote(Integer attendanceId);
 }

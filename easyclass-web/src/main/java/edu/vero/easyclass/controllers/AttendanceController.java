@@ -11,11 +11,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -50,9 +53,10 @@ public class AttendanceController
     }
 
     @ApiOperation(value = "发起一个属于该签到项下的投票（测试通过）")
-//    @ApiImplicitParams({
-//        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
-//        @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
+    // @ApiImplicitParams({
+    // @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType =
+    // "path", required = true),
+    // @ApiImplicitParam(name = "vote", value = "投票的模型数据")})
     @PostMapping(value = "/{attendanceId}/votes")
     public ResponseEntity<Vote> createVote(@PathVariable("attendanceId") Integer attendanceId,
                                            @RequestBody Vote vote)
@@ -73,11 +77,21 @@ public class AttendanceController
 
     @ApiOperation(value = "获取签到的二维码(尚未实现)")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true)})
+        @ApiImplicitParam(name = "attendanceId", value = "签到编号", dataType = "int", paramType = "path", required = true),
+        @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "query", required = true)})
     @GetMapping(value = "/{attendanceId}/QR_code")
-    public ResponseEntity<QRcode> getQRcode(@PathVariable("attendanceId") Integer attendanceId)
+    public ResponseEntity<byte[]> getQRcode(@PathVariable("attendanceId") Integer attendanceId,
+                                            @RequestParam("scheduleId") Integer scheduleId,
+                                            @RequestParam(value = "width", defaultValue = "200") Integer width,
+                                            @RequestParam(value = "height", defaultValue = "200") Integer height,
+                                            @RequestParam(value = "format", defaultValue = "jpeg") String format,
+                                            HttpServletRequest request)
     {
-        return new ResponseEntity<>(attendanceService.findQRcode(attendanceId), HttpStatus.OK);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(
+            attendanceService.findQRcode(attendanceId, scheduleId, height, width, format, request),headers,
+            HttpStatus.OK);
     }
 
     @ApiOperation(value = "更新签到信息(可用于老师主动关闭签到)（测试通过）")
@@ -86,7 +100,8 @@ public class AttendanceController
     @PutMapping(value = "/{attendanceId}")
     public ResponseEntity<Attendance> updateAttendance(@PathVariable("attendanceId") Integer attendanceId)
     {
-        return new ResponseEntity<>(attendanceService.updateAttendance(attendanceId), HttpStatus.OK);
+        return new ResponseEntity<>(attendanceService.updateAttendance(attendanceId),
+            HttpStatus.OK);
     }
 
     @ApiOperation(value = "获取该签到项下的所有签到记录(测试通过)")
