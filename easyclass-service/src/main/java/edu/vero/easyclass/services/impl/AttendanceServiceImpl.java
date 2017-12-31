@@ -10,6 +10,8 @@ import com.google.zxing.common.BitMatrix;
 import edu.vero.easyclass.domain.*;
 import edu.vero.easyclass.repositories.*;
 import edu.vero.easyclass.services.AttendanceService;
+import edu.vero.easyclass.services.ClassScheduleService;
+import edu.vero.easyclass.services.StudentService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSException;
 
 import javax.imageio.ImageIO;
 import javax.persistence.EntityNotFoundException;
@@ -236,11 +239,25 @@ public class AttendanceServiceImpl implements AttendanceService
 
     @Override
     public List<Student> findAttendStudents(Integer attendanceId) {
-        return null;
+        Attendance attendance = attendanceJpaDao.findOne(attendanceId);
+        Set<SignRecord> signRecords = attendance.getSignRecords();
+        List<Student> students = new ArrayList<>();
+        for(SignRecord signRecord:signRecords){
+            students.add(signRecord.getSchedule().getStudent());
+        }
+        return students;
     }
 
     @Override
     public List<Student> findAbsentStudents(Integer attendanceId) {
-        return null;
+        List<Student> studentsAttend = findAttendStudents(attendanceId);
+        TeacherArrangement arrangement = attendanceJpaDao.findOne(attendanceId).getArrangement();
+        Set<ClassSchedule> schedules = arrangement.getSchedules();
+        List<Student> students = new ArrayList<>();
+        for(ClassSchedule schedule:schedules){
+            students.add(schedule.getStudent());
+        }
+        students.removeAll(studentsAttend);
+        return students;
     }
 }

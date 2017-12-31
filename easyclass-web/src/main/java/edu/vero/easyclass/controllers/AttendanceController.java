@@ -142,16 +142,16 @@ public class AttendanceController
         return new ResponseEntity<>(attendanceService.findNewestVote(attendanceId), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取已签到的学生列表")
+    @ApiOperation(value = "获取已签到的学生列表(测试通过)")
     @GetMapping(value = "/{attendanceId}/attend_students")
     public ResponseEntity<List<Student>> findAttendStudents(@PathVariable("attendanceId") Integer attendanceId) {
-        return null;
+        return new ResponseEntity<List<Student>>(attendanceService.findAttendStudents(attendanceId),HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取未签到的学生列表")
+    @ApiOperation(value = "获取未签到的学生列表(测试通过)")
     @GetMapping(value = "/{attendanceId}/absent_students")
-    public ResponseEntity<List<Student>> findUnAttendStudents(@PathVariable("attendanceId") String attendanceId) {
-        return null;
+    public ResponseEntity<List<Student>> findAbsentStudents(@PathVariable("attendanceId") Integer attendanceId) {
+        return new ResponseEntity<List<Student>>(attendanceService.findAbsentStudents(attendanceId),HttpStatus.OK);
     }
 
 

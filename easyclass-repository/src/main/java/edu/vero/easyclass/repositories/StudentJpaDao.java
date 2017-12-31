@@ -2,6 +2,9 @@ package edu.vero.easyclass.repositories;
 
 import edu.vero.easyclass.domain.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @author XiangDe Liu qq313700046@icloud.com .
