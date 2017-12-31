@@ -51,7 +51,6 @@ public interface TeacherArrangementService
 
     List<Courseware> findAllCoursewares(Integer arrangementId);
 
-
     TeacherArrangement updateArrangement(TeacherArrangement teacherArrangement);
 
     TeacherArrangement createArrangement(TeacherArrangement teacherArrangement);
@@ -61,4 +60,6 @@ public interface TeacherArrangementService
     OnlineClassTest findNewestTest(Integer arrangementId);
 
     Homework arrangeHomework(Integer homeworkId, Homework homework);
+
+    List<Homework> findAllHomework(Integer arrangementId);
 }

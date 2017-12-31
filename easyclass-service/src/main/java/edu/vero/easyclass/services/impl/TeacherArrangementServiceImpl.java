@@ -295,8 +295,14 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
 //    }
     @Override
     public Homework arrangeHomework(Integer arrangementId, Homework homework) {
-        TeacherArrangement teacherArrangement = findArrangement(arrangementId);
         homework.setEstablishedTime(new Date());
+        homework.setArrangement(findArrangement(arrangementId));
         return homeworkJpaDao.saveAndFlush(homework);
     }
+
+    @Override
+    public List<Homework> findAllHomework(Integer arrangementId) {
+        return homeworkJpaDao.findByArrangementOrderByEstablishedTimeAsc(findArrangement(arrangementId));
+    }
+
 }
