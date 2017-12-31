@@ -100,7 +100,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取所有老师的所有安排表",
+        "summary": "获取所有老师的所有安排表（测试通过）",
         "operationId": "findAllArrangementsUsingGET",
         "consumes": [
           "application/json"
@@ -133,7 +133,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "createArrangement",
+        "summary": "安排一门课程（测试通过）",
         "operationId": "createArrangementUsingPOST",
         "consumes": [
           "application/json"
@@ -177,7 +177,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "updateArrangement",
+        "summary": "更新一门课程的安排(未测试)",
         "operationId": "updateArrangementUsingPUT",
         "consumes": [
           "application/json"
@@ -223,7 +223,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取特定的教师安排表",
+        "summary": "获取特定的教师安排表（测试通过）",
         "operationId": "findArrangementUsingGET_1",
         "consumes": [
           "application/json"
@@ -263,7 +263,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "deleteArrangement",
+        "summary": "删除一门课程的安排（测试通过）",
         "operationId": "deleteArrangementUsingDELETE",
         "consumes": [
           "application/json"
@@ -305,7 +305,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课的所有出勤信息",
+        "summary": "创建该门课下的签到（测试通过）",
         "operationId": "createAttendanceUsingPOST_1",
         "consumes": [
           "application/json"
@@ -359,7 +359,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课下的所有学生总评信息",
+        "summary": "获取该门课下的所有学生总评信息（测试通过）",
         "operationId": "findAllCourseCommentUsingGET",
         "consumes": [
           "application/json"
@@ -404,7 +404,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该教师安排表对应的课程详情",
+        "summary": "获取该教师安排表对应的课程详情（测试通过）",
         "operationId": "findCourseUsingGET_1",
         "consumes": [
           "application/json"
@@ -486,12 +486,257 @@
         }
       }
     },
+    "/arrangements/{arrangementId}/homeworks": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课发布的所有作业,顺序按时间从早到晚(测试通过)",
+        "operationId": "findAllHomeworksUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "arrangementId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Homework"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "给该门课程下的所有学生发布作业(测试通过)",
+        "operationId": "arrangeHomeworkUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "homework",
+            "description": "homework",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/homeworks/submitted_students": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "返回所有已上交作业的学生列表(通过测试)",
+        "operationId": "findAllSubmittedStudentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "homeworkId",
+            "in": "query",
+            "description": "作业编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/homeworks/unsubmitted_students": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "返回所有未上交作业的学生列表(通过测试)",
+        "operationId": "findAllUnSubmittedStudentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "教师安排表的编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "homeworkId",
+            "in": "query",
+            "description": "作业编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/arrangements/{arrangementId}/newest_test": {
+      "get": {
+        "tags": [
+          "teacher-arrangement-controller"
+        ],
+        "summary": "获取该门课下最新发布的测试（测试通过）",
+        "operationId": "findNewestTestUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "arrangementId",
+            "in": "path",
+            "description": "arrangementId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OnlineClassTest"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/arrangements/{arrangementId}/notices": {
       "get": {
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课下的所有公告",
+        "summary": "获取该门课下的所有公告(测试通过)",
         "operationId": "findAllNoticeUsingGET",
         "consumes": [
           "application/json"
@@ -534,7 +779,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "教师创建一个公告,此公告跟对应的教师安排相关联",
+        "summary": "教师创建一个公告,此公告跟对应的教师安排相关联（测试通过）",
         "operationId": "createNoticeUsingPOST_1",
         "consumes": [
           "application/json"
@@ -588,7 +833,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课的最新公告",
+        "summary": "获取该门课的最新公告（测试通过）",
         "operationId": "findNewestNoticesUsingGET",
         "consumes": [
           "application/json"
@@ -630,7 +875,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课下正在开放的测试",
+        "summary": "获取该门课下正在开放的测试（测试通过）",
         "operationId": "findOpeningTestsUsingGET",
         "consumes": [
           "application/json"
@@ -675,7 +920,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课对应的老师详情",
+        "summary": "获取该门课对应的老师详情（测试通过）",
         "operationId": "findTeacherUsingGET",
         "consumes": [
           "application/json"
@@ -717,7 +962,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取给该门课下发起的所有测试",
+        "summary": "获取给该门课下发起的所有测试（未设置参数 测试通过）",
         "operationId": "findAllOnlineClassTestUsingGET",
         "consumes": [
           "application/json"
@@ -784,7 +1029,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "教师创建一个在线测试,此测试跟对应的教师安排相关联",
+        "summary": "教师创建一个在线测试,此测试跟对应的教师安排相关联（测试通过）",
         "operationId": "createOnlineClassTestUsingPOST",
         "consumes": [
           "application/json"
@@ -838,7 +1083,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课下已经关闭的测试",
+        "summary": "获取该门课下已经关闭的测试（测试通过）",
         "operationId": "findTimeOutTestsUsingGET",
         "consumes": [
           "application/json"
@@ -883,7 +1128,7 @@
         "tags": [
           "teacher-arrangement-controller"
         ],
-        "summary": "获取该门课下的所有上课时间",
+        "summary": "获取该门课下的所有上课时间（测试通过）",
         "operationId": "findAllClassTimeUsingGET",
         "consumes": [
           "application/json"
@@ -928,7 +1173,7 @@
         "tags": [
           "attendance-controller"
         ],
-        "summary": "createAttendance",
+        "summary": "创建签到（测试通过）",
         "operationId": "createAttendanceUsingPOST",
         "consumes": [
           "application/json"
@@ -967,12 +1212,14 @@
             "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/attendances/{attendanceId}": {
       "put": {
         "tags": [
           "attendance-controller"
         ],
-        "summary": "更新签到信息(可用于老师主动关闭签到)",
+        "summary": "更新签到信息(可用于老师主动关闭签到)（测试通过）",
         "operationId": "updateAttendanceUsingPUT",
         "consumes": [
           "application/json"
@@ -981,15 +1228,6 @@
           "*/*"
         ],
         "parameters": [
-          {
-            "in": "body",
-            "name": "attendance",
-            "description": "attendance",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Attendance"
-            }
-          },
           {
             "name": "attendanceId",
             "in": "path",
@@ -1019,14 +1257,12 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/attendances/{attendanceId}": {
+      },
       "delete": {
         "tags": [
           "attendance-controller"
         ],
-        "summary": "deleteAttendance",
+        "summary": "删除一个签到（测试通过）",
         "operationId": "deleteAttendanceUsingDELETE",
         "consumes": [
           "application/json"
@@ -1145,12 +1381,54 @@
         }
       }
     },
+    "/attendances/{attendanceId}/newest_vote": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取该签到项下的最新投票（测试通过）",
+        "operationId": "findNewestVoteUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "attendanceId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vote"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/attendances/{attendanceId}/sign_records": {
       "get": {
         "tags": [
           "attendance-controller"
         ],
-        "summary": "获取该签到项下的所有签到记录",
+        "summary": "获取该签到项下的所有签到记录(测试通过)",
         "operationId": "getAttendanceUsingGET",
         "consumes": [
           "application/json"
@@ -1193,7 +1471,7 @@
         "tags": [
           "attendance-controller"
         ],
-        "summary": "增加一条签到记录",
+        "summary": "增加一条签到记录（测试通过）",
         "operationId": "postSignRecordUsingPOST",
         "consumes": [
           "application/json"
@@ -1202,15 +1480,6 @@
           "*/*"
         ],
         "parameters": [
-          {
-            "in": "body",
-            "name": "signRecord",
-            "description": "signRecord",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SignRecord"
-            }
-          },
           {
             "name": "attendanceId",
             "in": "path",
@@ -1255,7 +1524,7 @@
         "tags": [
           "attendance-controller"
         ],
-        "summary": "获取该签到项下的所有投票",
+        "summary": "获取该签到项下的所有投票（测试通过）",
         "operationId": "getVotesUsingGET",
         "consumes": [
           "application/json"
@@ -1298,7 +1567,7 @@
         "tags": [
           "attendance-controller"
         ],
-        "summary": "发起一个属于该签到项下的投票",
+        "summary": "发起一个属于该签到项下的投票（测试通过）",
         "operationId": "createVoteUsingPOST",
         "consumes": [
           "application/json"
@@ -1310,7 +1579,7 @@
           {
             "name": "attendanceId",
             "in": "path",
-            "description": "签到编号",
+            "description": "attendanceId",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -1318,10 +1587,10 @@
           {
             "in": "body",
             "name": "vote",
-            "description": "投票的模型数据",
-            "required": false,
+            "description": "vote",
+            "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/Vote"
             }
           }
         ],
@@ -1352,7 +1621,7 @@
         "tags": [
           "class-comment-controller"
         ],
-        "summary": "给每节课提交评教",
+        "summary": "给每节课提交评教(通过测试)",
         "operationId": "postClassCommentUsingPOST",
         "consumes": [
           "application/json"
@@ -1414,7 +1683,7 @@
         "tags": [
           "class-time-controller"
         ],
-        "summary": "findAllClassTimes",
+        "summary": "找到教师的全部的课时安排（通过测试）",
         "operationId": "findAllClassTimesUsingGET",
         "consumes": [
           "application/json"
@@ -1447,7 +1716,7 @@
         "tags": [
           "class-time-controller"
         ],
-        "summary": "createClassTime",
+        "summary": "为老师的一门课程安排时间（通过测试）",
         "operationId": "createClassTimeUsingPOST",
         "consumes": [
           "application/json"
@@ -1537,7 +1806,7 @@
         "tags": [
           "class-time-controller"
         ],
-        "summary": "findClassTime",
+        "summary": "找到指定id的课时安排（通过测试）",
         "operationId": "findClassTimeUsingGET",
         "consumes": [
           "application/json"
@@ -1577,7 +1846,7 @@
         "tags": [
           "class-time-controller"
         ],
-        "summary": "deleteClassTime",
+        "summary": "删除一个课时（通过测试）",
         "operationId": "deleteClassTimeUsingDELETE",
         "consumes": [
           "application/json"
@@ -1619,7 +1888,7 @@
         "tags": [
           "class-time-controller"
         ],
-        "summary": "findAllClassComments",
+        "summary": "找到指定id的课时安排的评教（通过测试）",
         "operationId": "findAllClassCommentsUsingGET",
         "consumes": [
           "application/json"
@@ -1664,7 +1933,7 @@
         "tags": [
           "course-comment-controller"
         ],
-        "summary": "给每门课程提交总评",
+        "summary": "给每门课程提交总评(测试通过)",
         "operationId": "postCourseCommentUsingPOST",
         "consumes": [
           "application/json"
@@ -1726,7 +1995,7 @@
         "tags": [
           "course-controller"
         ],
-        "summary": "findAll",
+        "summary": "查找全部的课程（测试通过）",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -1759,7 +2028,7 @@
         "tags": [
           "course-controller"
         ],
-        "summary": "createCourse",
+        "summary": "创建一门新课程（测试通过）",
         "operationId": "createCourseUsingPOST",
         "consumes": [
           "application/json"
@@ -1805,7 +2074,7 @@
         "tags": [
           "course-controller"
         ],
-        "summary": "findCourse",
+        "summary": "查找某门课程（测试通过）",
         "operationId": "findCourseUsingGET",
         "consumes": [
           "application/json"
@@ -1845,7 +2114,7 @@
         "tags": [
           "course-controller"
         ],
-        "summary": "deleteCourse",
+        "summary": "删除某门课程（测试通过）",
         "operationId": "deleteCourseUsingDELETE",
         "consumes": [
           "application/json"
@@ -1887,7 +2156,7 @@
         "tags": [
           "course-controller"
         ],
-        "summary": "findQuestions",
+        "summary": "获得课程下的问题（测试通过）",
         "operationId": "findQuestionsUsingGET",
         "consumes": [
           "application/json"
@@ -1932,7 +2201,7 @@
         "tags": [
           "courseware-controller"
         ],
-        "summary": "findAllCoursewares",
+        "summary": "找到全部的课件（测试通过）",
         "operationId": "findAllCoursewaresUsingGET",
         "consumes": [
           "application/json"
@@ -1965,23 +2234,29 @@
         "tags": [
           "courseware-controller"
         ],
-        "summary": "createCourseware",
+        "summary": "创建课件，课件的上传（测试通过）",
         "operationId": "createCoursewareUsingPOST",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "*/*"
         ],
         "parameters": [
           {
-            "in": "body",
-            "name": "courseware",
-            "description": "courseware",
+            "name": "arrangementId",
+            "in": "query",
+            "description": "arrangementId",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Courseware"
-            }
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -2009,7 +2284,7 @@
         "tags": [
           "courseware-controller"
         ],
-        "summary": "updateCourseware",
+        "summary": "更新课件信息（测试通过）",
         "operationId": "updateCoursewareUsingPUT",
         "consumes": [
           "application/json"
@@ -2055,7 +2330,7 @@
         "tags": [
           "courseware-controller"
         ],
-        "summary": "findCourseware",
+        "summary": "根据id找到课件（测试通过）",
         "operationId": "findCoursewareUsingGET",
         "consumes": [
           "application/json"
@@ -2095,7 +2370,7 @@
         "tags": [
           "courseware-controller"
         ],
-        "summary": "deleteCourseware",
+        "summary": "根据id删除课件（测试通过）",
         "operationId": "deleteCoursewareUsingDELETE",
         "consumes": [
           "application/json"
@@ -2132,12 +2407,54 @@
         }
       }
     },
+    "/courseware/{coursewareId}/download": {
+      "get": {
+        "tags": [
+          "courseware-controller"
+        ],
+        "summary": "课件下载（下载完成 还是像作业上传下载一样都是utf-8编码）",
+        "operationId": "downloadCoursewareUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "coursewareId",
+            "in": "path",
+            "description": "coursewareId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courseware"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/departments": {
       "get": {
         "tags": [
           "department-controller"
         ],
-        "summary": "findAllDepartments",
+        "summary": "查找全部的院系（测试通过）",
         "operationId": "findAllDepartmentsUsingGET",
         "consumes": [
           "application/json"
@@ -2170,7 +2487,7 @@
         "tags": [
           "department-controller"
         ],
-        "summary": "createDepartment",
+        "summary": "创建院系（测试通过）",
         "operationId": "createDepartmentUsingPOST",
         "consumes": [
           "application/json"
@@ -2214,7 +2531,7 @@
         "tags": [
           "department-controller"
         ],
-        "summary": "updateDepartment",
+        "summary": "更新院系信息（测试通过）",
         "operationId": "updateDepartmentUsingPUT",
         "consumes": [
           "application/json"
@@ -2260,7 +2577,7 @@
         "tags": [
           "department-controller"
         ],
-        "summary": "deleteDepartment",
+        "summary": "根据id删除院系（测试通过）",
         "operationId": "deleteDepartmentUsingDELETE",
         "consumes": [
           "application/json"
@@ -2302,7 +2619,7 @@
         "tags": [
           "homework-controller"
         ],
-        "summary": "findAllHomeworks",
+        "summary": "查找全部的作业（测试通过）",
         "operationId": "findAllHomeworksUsingGET",
         "consumes": [
           "application/json"
@@ -2335,7 +2652,7 @@
         "tags": [
           "homework-controller"
         ],
-        "summary": "createHomework",
+        "summary": "创建作业（测试通过）",
         "operationId": "createHomeworkUsingPOST",
         "consumes": [
           "application/json"
@@ -2379,7 +2696,7 @@
         "tags": [
           "homework-controller"
         ],
-        "summary": "updateHomework",
+        "summary": "更新作业（测试通过）",
         "operationId": "updateHomeworkUsingPUT",
         "consumes": [
           "application/json"
@@ -2420,12 +2737,112 @@
         }
       }
     },
+    "/homeworks/home_records/{recordId}": {
+      "get": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "下载上传到服务器的作业（正常下载，但是下载后UTF-8返回直接打开还是乱码，需要进一步测试）",
+        "operationId": "downloadHomeworkUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "记录编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HomeworkRecord"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/homeworks/{homeworkId}": {
+      "post": {
+        "tags": [
+          "homework-controller"
+        ],
+        "summary": "学生提交作业(通过测试)",
+        "operationId": "uploadHomeworkUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "homeworkId",
+            "in": "path",
+            "description": "任务编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "课表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Homework"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "homework-controller"
         ],
-        "summary": "deleteHomework",
+        "summary": "删除作业（待添加服务器端作业文件删除）",
         "operationId": "deleteHomeworkUsingDELETE",
         "consumes": [
           "application/json"
@@ -2467,7 +2884,7 @@
         "tags": [
           "notice-controller"
         ],
-        "summary": "updateNotice",
+        "summary": "更新公告（未测试）",
         "operationId": "updateNoticeUsingPUT",
         "consumes": [
           "application/json"
@@ -2513,7 +2930,7 @@
         "tags": [
           "notice-controller"
         ],
-        "summary": "createNotice",
+        "summary": "根据创建公告（测试通过）",
         "operationId": "createNoticeUsingPOST",
         "consumes": [
           "application/json"
@@ -2559,7 +2976,7 @@
         "tags": [
           "notice-controller"
         ],
-        "summary": "getNotice",
+        "summary": "根据id查找公告（测试通过）",
         "operationId": "getNoticeUsingGET",
         "consumes": [
           "application/json"
@@ -2599,7 +3016,7 @@
         "tags": [
           "notice-controller"
         ],
-        "summary": "deleteNotice",
+        "summary": "根据id删除公告（测试通过）",
         "operationId": "deleteNoticeUsingDELETE",
         "consumes": [
           "application/json"
@@ -2641,7 +3058,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "findAllQuestions",
+        "summary": "查找所有问题（测试通过）",
         "operationId": "findAllQuestionsUsingGET",
         "consumes": [
           "application/json"
@@ -2674,7 +3091,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "createQuestion",
+        "summary": "创建问题（测试通过）",
         "operationId": "createQuestionUsingPOST",
         "consumes": [
           "application/json"
@@ -2718,7 +3135,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "updateQuestion",
+        "summary": "更新一个问题（测试通过）",
         "operationId": "updateQuestionUsingPUT",
         "consumes": [
           "application/json"
@@ -2764,7 +3181,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "findQuestion",
+        "summary": "查找问题（测试通过）",
         "operationId": "findQuestionUsingGET",
         "consumes": [
           "application/json"
@@ -2804,7 +3221,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "deleteQuestion",
+        "summary": "指定id删除一个问题（测试通过）",
         "operationId": "deleteQuestionUsingDELETE",
         "consumes": [
           "application/json"
@@ -2846,7 +3263,7 @@
         "tags": [
           "question-controller"
         ],
-        "summary": "findQuestionOptions",
+        "summary": "查找指定id问题下的选项（测试通过）",
         "operationId": "findQuestionOptionsUsingGET",
         "consumes": [
           "application/json"
@@ -2891,7 +3308,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findAllSchedule",
+        "summary": "获取所有的选课信息(通过测试)",
         "operationId": "findAllScheduleUsingGET",
         "consumes": [
           "application/json"
@@ -2924,7 +3341,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "createSchedule",
+        "summary": "创建一门学生选课（通过测试）",
         "operationId": "createScheduleUsingPOST",
         "consumes": [
           "application/json"
@@ -2977,7 +3394,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "deleteSchedule",
+        "summary": "删除一门学生选课（通过测试）",
         "operationId": "deleteScheduleUsingDELETE",
         "consumes": [
           "application/json"
@@ -3014,12 +3431,57 @@
         }
       }
     },
+    "/schedules/{scheduleId}/all_test": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "获得学生一门选课下的所有测试（通过测试）",
+        "operationId": "findAllTestsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "scheduleId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OnlineClassTest"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/schedules/{scheduleId}/arrangement": {
       "get": {
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findArrangement",
+        "summary": "获取学生在该门课下对应的教师安排(通过测试)",
         "operationId": "findArrangementUsingGET",
         "consumes": [
           "application/json"
@@ -3061,7 +3523,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "获取学生所有还未完成的课堂测试",
+        "summary": "获取学生所有还未完成的课堂测试（待测试）",
         "operationId": "findTestsIsExpectedDoneUsingGET",
         "consumes": [
           "application/json"
@@ -3106,7 +3568,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "获取所有已经被学生完成的课堂测试",
+        "summary": "获取所有已经被学生完成的课堂测试(通过测试)",
         "operationId": "findTestsIsDoneUsingGET",
         "consumes": [
           "application/json"
@@ -3146,12 +3608,57 @@
         }
       }
     },
+    "/schedules/{scheduleId}/homework_records": {
+      "get": {
+        "tags": [
+          "class-schedule-controller"
+        ],
+        "summary": "获取学生已交作业的记录(通过测试)",
+        "operationId": "findHomeworkRecordUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "课表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HomeworkRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/schedules/{scheduleId}/homeworks": {
       "get": {
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findHomeworks",
+        "summary": "获取学生在该门课下被布置的作业(通过测试)",
         "operationId": "findHomeworksUsingGET",
         "consumes": [
           "application/json"
@@ -3163,7 +3670,7 @@
           {
             "name": "scheduleId",
             "in": "path",
-            "description": "scheduleId",
+            "description": "课表编号",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -3189,58 +3696,6 @@
             "description": "Not Found"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "class-schedule-controller"
-        ],
-        "summary": "uploadHomeWork",
-        "operationId": "uploadHomeWorkUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "homework",
-            "description": "homework",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Homework"
-            }
-          },
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "description": "scheduleId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Homework"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
       }
     },
     "/schedules/{scheduleId}/sign_records": {
@@ -3248,7 +3703,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findSignRecords",
+        "summary": "找到该门课下的签到记录（通过测试）",
         "operationId": "findSignRecordsUsingGET",
         "consumes": [
           "application/json"
@@ -3293,7 +3748,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findStudents",
+        "summary": "该门选课的学生信息（通过测试）",
         "operationId": "findStudentsUsingGET",
         "consumes": [
           "application/json"
@@ -3335,7 +3790,7 @@
         "tags": [
           "class-schedule-controller"
         ],
-        "summary": "findTestRecords",
+        "summary": "获取学生的一门选课下的所用课堂测试记录（通过测试）",
         "operationId": "findTestRecordsUsingGET",
         "consumes": [
           "application/json"
@@ -3380,7 +3835,7 @@
         "tags": [
           "sign-record-controller"
         ],
-        "summary": "findAllSignRecords",
+        "summary": "找到全部的签到记录（测试通过）",
         "operationId": "findAllSignRecordsUsingGET",
         "consumes": [
           "application/json"
@@ -3413,52 +3868,8 @@
         "tags": [
           "sign-record-controller"
         ],
-        "summary": "createSignRecord",
+        "summary": "创建签到（测试通过）",
         "operationId": "createSignRecordUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "signRecord",
-            "description": "signRecord",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SignRecord"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SignRecord"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "sign-record-controller"
-        ],
-        "summary": "updateSignRecord",
-        "operationId": "updateSignRecordUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3503,7 +3914,7 @@
         "tags": [
           "sign-record-controller"
         ],
-        "summary": "findAttendance",
+        "summary": "找到该签到记录相关的签到（测试通过）",
         "operationId": "findAttendanceUsingGET",
         "consumes": [
           "application/json"
@@ -3545,7 +3956,7 @@
         "tags": [
           "sign-record-controller"
         ],
-        "summary": "findClassSchedule",
+        "summary": "找到该签到记录相关的学生选课（测试通过）",
         "operationId": "findClassScheduleUsingGET",
         "consumes": [
           "application/json"
@@ -3587,7 +3998,7 @@
         "tags": [
           "sign-record-controller"
         ],
-        "summary": "deleteSignRecord",
+        "summary": "根据Id删除签到(测试通过）",
         "operationId": "deleteSignRecordUsingDELETE",
         "consumes": [
           "application/json"
@@ -3629,7 +4040,7 @@
         "tags": [
           "student-controller"
         ],
-        "summary": "findAllStudents",
+        "summary": "获得全部学生列表（测试通过）",
         "operationId": "findAllStudentsUsingGET",
         "consumes": [
           "application/json"
@@ -3662,7 +4073,7 @@
         "tags": [
           "student-controller"
         ],
-        "summary": "createStudent",
+        "summary": "添加一个学生（测试通过）",
         "operationId": "createStudentUsingPOST",
         "consumes": [
           "application/json"
@@ -3708,7 +4119,7 @@
         "tags": [
           "student-controller"
         ],
-        "summary": "findStudentById",
+        "summary": "根据id查找学生（测试通过）",
         "operationId": "findStudentByIdUsingGET",
         "consumes": [
           "application/json"
@@ -3748,7 +4159,7 @@
         "tags": [
           "student-controller"
         ],
-        "summary": "deleteStudent",
+        "summary": "根据id删除一个学生（测试通过）",
         "operationId": "deleteStudentUsingDELETE",
         "consumes": [
           "application/json"
@@ -3790,7 +4201,7 @@
         "tags": [
           "student-controller"
         ],
-        "summary": "findSchedule",
+        "summary": "根据id查找学生对应的选课（测试通过）",
         "operationId": "findScheduleUsingGET",
         "consumes": [
           "application/json"
@@ -3835,7 +4246,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "findAllTeacher",
+        "summary": "查找全部老师(测试通过)",
         "operationId": "findAllTeacherUsingGET",
         "consumes": [
           "application/json"
@@ -3868,7 +4279,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "createTeacher",
+        "summary": "注册一个老师(测试通过)",
         "operationId": "createTeacherUsingPOST",
         "consumes": [
           "application/json"
@@ -3912,7 +4323,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "updateTeacher",
+        "summary": "更新老师信息(测试通过)",
         "operationId": "updateTeacherUsingPUT",
         "consumes": [
           "application/json"
@@ -3958,7 +4369,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "deleteTeacher",
+        "summary": "删除一位老师(测试通过)",
         "operationId": "deleteTeacherUsingDELETE",
         "consumes": [
           "application/json"
@@ -4000,7 +4411,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "findTeacher",
+        "summary": "查找一个老师(测试通过)",
         "operationId": "findTeacherUsingGET_1",
         "consumes": [
           "application/json"
@@ -4042,7 +4453,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "findTeacherArrangement",
+        "summary": "查找某位老师的课程(测试通过)",
         "operationId": "findTeacherArrangementUsingGET",
         "consumes": [
           "application/json"
@@ -4085,7 +4496,7 @@
         "tags": [
           "teacher-controller"
         ],
-        "summary": "createTeacherArrangement",
+        "summary": "为老师安排一门课(测试通过)",
         "operationId": "createTeacherArrangementUsingPOST",
         "consumes": [
           "application/json"
@@ -4145,7 +4556,7 @@
         "tags": [
           "test-record-controller"
         ],
-        "summary": "findAllTestRecords",
+        "summary": "找到所有的测试记录(通过测试)",
         "operationId": "findAllTestRecordsUsingGET",
         "consumes": [
           "application/json"
@@ -4162,6 +4573,50 @@
                 "$ref": "#/definitions/TestRecord"
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "test-record-controller"
+        ],
+        "summary": "创建建测试记录(通过测试)",
+        "operationId": "createTestRecordUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "testRecord",
+            "description": "testRecord",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestRecord"
+            }
+          },
+          "201": {
+            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -4219,58 +4674,12 @@
         }
       }
     },
-    "/test_records/{recordId}": {
-      "post": {
-        "tags": [
-          "test-record-controller"
-        ],
-        "summary": "createTestRecord",
-        "operationId": "createTestRecordUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "testRecord",
-            "description": "testRecord",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TestRecord"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TestRecord"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/test_records/{recordId}/schedule": {
       "get": {
         "tags": [
           "test-record-controller"
         ],
-        "summary": "findClassSchedule",
+        "summary": "获取做测试的学生信息(通过测试)",
         "operationId": "findClassScheduleUsingGET_1",
         "consumes": [
           "application/json"
@@ -4312,7 +4721,7 @@
         "tags": [
           "test-record-controller"
         ],
-        "summary": "findTest",
+        "summary": "获取测试记录对应的测试信息(通过测试)",
         "operationId": "findTestUsingGET_1",
         "consumes": [
           "application/json"
@@ -4354,7 +4763,7 @@
         "tags": [
           "test-record-controller"
         ],
-        "summary": "deleteTestRecord",
+        "summary": "删除一条测试记录(通过测试)",
         "operationId": "deleteTestRecordUsingDELETE",
         "consumes": [
           "application/json"
@@ -4396,8 +4805,8 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "findAllTests",
-        "operationId": "findAllTestsUsingGET",
+        "summary": "找到所有测试（测试通过）",
+        "operationId": "findAllTestsUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -4429,7 +4838,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "createTest",
+        "summary": "创建一次测试（测试通过）",
         "operationId": "createTestUsingPOST",
         "consumes": [
           "application/json"
@@ -4473,7 +4882,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "updateTest",
+        "summary": "更新一次测试（未测试）",
         "operationId": "updateTestUsingPUT",
         "consumes": [
           "application/json"
@@ -4519,7 +4928,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "findTest",
+        "summary": "根据id查找某一次测试（测试通过）",
         "operationId": "findTestUsingGET",
         "consumes": [
           "application/json"
@@ -4559,7 +4968,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "deleteTest",
+        "summary": "根据id删除测试（测试通过）",
         "operationId": "deleteTestUsingDELETE",
         "consumes": [
           "application/json"
@@ -4601,7 +5010,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "findTestArrangement",
+        "summary": "找到测试对应的课程（测试通过）",
         "operationId": "findTestArrangementUsingGET",
         "consumes": [
           "application/json"
@@ -4643,7 +5052,7 @@
         "tags": [
           "test-controller"
         ],
-        "summary": "findTestQuestions",
+        "summary": "找到测试对应的题目（测试通过）",
         "operationId": "findTestQuestionsUsingGET",
         "consumes": [
           "application/json"
@@ -4688,7 +5097,7 @@
         "tags": [
           "user-controller"
         ],
-        "summary": "findAll",
+        "summary": "找到全部的用户（测试通过）",
         "operationId": "findAllUsingGET_1",
         "consumes": [
           "application/json"
@@ -4721,7 +5130,7 @@
         "tags": [
           "user-controller"
         ],
-        "summary": "学生注册",
+        "summary": "学生注册（测试通过）",
         "operationId": "registerStudentUsingPOST",
         "consumes": [
           "application/json"
@@ -4737,15 +5146,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Student"
-            }
-          },
-          {
-            "in": "body",
-            "name": "userId",
-            "description": "学生的模型数据",
-            "required": false,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -4776,7 +5176,7 @@
         "tags": [
           "user-controller"
         ],
-        "summary": "通过用户Id查找用户信息",
+        "summary": "通过用户Id查找用户信息（测试通过）",
         "operationId": "findUserByIdUsingGET",
         "consumes": [
           "application/json"
@@ -4817,7 +5217,7 @@
         "tags": [
           "vote-option-controller"
         ],
-        "summary": "可更新投票项的被选次数",
+        "summary": "可更新投票项的被选次数(测试通过)",
         "operationId": "updateOptionUsingPUT",
         "consumes": [
           "application/json"
@@ -4863,7 +5263,7 @@
         "tags": [
           "vote-option-controller"
         ],
-        "summary": "删除投票",
+        "summary": "删除投票（未测试 投票vote中有通过测试相同作用的Api）",
         "operationId": "deleteOptionUsingDELETE",
         "consumes": [
           "application/json"
@@ -4905,52 +5305,8 @@
         "tags": [
           "vote-controller"
         ],
-        "summary": "createVote",
+        "summary": "创建投票（测试通过）",
         "operationId": "createVoteUsingPOST_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "vote",
-            "description": "vote",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Vote"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Vote"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "vote-controller"
-        ],
-        "summary": "updateVote",
-        "operationId": "updateVoteUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -4995,7 +5351,7 @@
         "tags": [
           "vote-controller"
         ],
-        "summary": "findVote",
+        "summary": "根据id查找一次投票信息（测试通过）",
         "operationId": "findVoteUsingGET",
         "consumes": [
           "application/json"
@@ -5035,7 +5391,7 @@
         "tags": [
           "vote-controller"
         ],
-        "summary": "deleteVote",
+        "summary": "删除一个投票（测试通过）",
         "operationId": "deleteVoteUsingDELETE",
         "consumes": [
           "application/json"
@@ -5068,66 +5424,6 @@
           },
           "403": {
             "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/votes/{voteId}/vote_options": {
-      "post": {
-        "tags": [
-          "vote-controller"
-        ],
-        "summary": "创建投可投票项",
-        "operationId": "createVoteOptionsUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "voteOptions",
-            "description": "voteOptions",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VoteOption"
-              }
-            }
-          },
-          {
-            "name": "voteId",
-            "in": "path",
-            "description": "投票编号",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VoteOption"
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -5194,12 +5490,6 @@
         "classOrder": {
           "type": "string"
         },
-        "classTimeComments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassTimeComment"
-          }
-        },
         "term": {
           "type": "string"
         },
@@ -5263,9 +5553,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "schedule": {
-          "$ref": "#/definitions/ClassSchedule"
-        },
         "score": {
           "type": "number",
           "format": "float"
@@ -5290,7 +5577,7 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "title": {
           "type": "string"
@@ -5312,6 +5599,9 @@
     "Homework": {
       "type": "object",
       "properties": {
+        "arrangement": {
+          "$ref": "#/definitions/TeacherArrangement"
+        },
         "content": {
           "type": "string"
         },
@@ -5323,13 +5613,28 @@
           "type": "string",
           "format": "date-time"
         },
+        "homeworkId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "HomeworkRecord": {
+      "type": "object",
+      "properties": {
         "fileName": {
           "type": "string"
         },
         "filePath": {
           "type": "string"
         },
-        "homeworkId": {
+        "homework": {
+          "$ref": "#/definitions/Homework"
+        },
+        "recordId": {
           "type": "integer",
           "format": "int32"
         },
@@ -5338,13 +5643,11 @@
         },
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
-        "submitted": {
-          "type": "boolean"
-        },
-        "title": {
-          "type": "string"
+        "submittedTime": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5603,6 +5906,12 @@
         "establishedTime": {
           "type": "string",
           "format": "date-time"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoteOption"
+          }
         },
         "voteContent": {
           "type": "string"

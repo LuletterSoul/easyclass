@@ -25,6 +25,6 @@ public interface HomeworkService
 
     Homework uploadHomework(Integer scheduleId,Integer homeworkId, MultipartFile file, HttpServletRequest request);
 
-    HomeworkRecord downloadHomework(Integer homeworkId, HttpServletResponse response);
+    HomeworkRecord downloadHomework(Integer recordId, HttpServletResponse response);
 
 }

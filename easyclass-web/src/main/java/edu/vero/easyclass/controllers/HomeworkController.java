@@ -68,9 +68,13 @@ public class HomeworkController
     {
         return new ResponseEntity<>(homeworkService.uploadHomework(scheduleId,homeworkId, file,request), HttpStatus.CREATED);
     }
+
     @ApiOperation(value = "下载上传到服务器的作业（正常下载，但是下载后UTF-8返回直接打开还是乱码，需要进一步测试）")
-    @GetMapping(value = "/{homeworkId}/download")
-    public ResponseEntity<HomeworkRecord> downloadHomework(@PathVariable("homeworkId") Integer homeworkId, HttpServletRequest request, HttpServletResponse response){
-        return new ResponseEntity<HomeworkRecord>(homeworkService.downloadHomework(homeworkId,response),HttpStatus.OK);
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "recordId", value = "记录编号", dataType = "int", paramType = "path", required = true)}
+    )
+    @GetMapping(value = "/home_records/{recordId}")
+    public ResponseEntity<HomeworkRecord> downloadHomework(@PathVariable("recordId") Integer recordId, HttpServletRequest request, HttpServletResponse response){
+        return new ResponseEntity<>(homeworkService.downloadHomework(recordId, response), HttpStatus.OK);
     }
 }
