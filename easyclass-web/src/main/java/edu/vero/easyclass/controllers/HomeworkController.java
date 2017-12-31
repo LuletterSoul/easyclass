@@ -2,6 +2,7 @@ package edu.vero.easyclass.controllers;
 
 
 import edu.vero.easyclass.domain.Homework;
+import edu.vero.easyclass.domain.HomeworkRecord;
 import edu.vero.easyclass.services.HomeworkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -61,14 +62,14 @@ public class HomeworkController
 
     @ApiOperation(value = "学生提交作业(通过测试)")
     @PostMapping(value = "/{homeworkId}")
-    public ResponseEntity<Homework> uploadHomework(@PathVariable("homeworkId") Integer homeworkId,
+    public ResponseEntity<Homework> uploadHomework(@PathVariable("homeworkId") Integer homeworkId,@RequestParam("scheduleId") Integer scheduleId,
                                                    @RequestParam("file") MultipartFile file, HttpServletRequest request)
     {
-        return new ResponseEntity<>(homeworkService.uploadHomework(homeworkId, file,request), HttpStatus.CREATED);
+        return new ResponseEntity<>(homeworkService.uploadHomework(scheduleId,homeworkId, file,request), HttpStatus.CREATED);
     }
     @ApiOperation(value = "下载上传到服务器的作业（正常下载，但是下载后UTF-8返回直接打开还是乱码，需要进一步测试）")
     @GetMapping(value = "/{homeworkId}/download")
-    public ResponseEntity<Homework> downloadHomework(@PathVariable("homeworkId") Integer homeworkId, HttpServletRequest request, HttpServletResponse response){
-        return new ResponseEntity<Homework>(homeworkService.downloadHomework(homeworkId,response),HttpStatus.OK);
+    public ResponseEntity<HomeworkRecord> downloadHomework(@PathVariable("homeworkId") Integer homeworkId, HttpServletRequest request, HttpServletResponse response){
+        return new ResponseEntity<HomeworkRecord>(homeworkService.downloadHomework(homeworkId,response),HttpStatus.OK);
     }
 }
