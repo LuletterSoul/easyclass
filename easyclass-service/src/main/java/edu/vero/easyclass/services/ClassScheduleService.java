@@ -13,6 +13,8 @@ public interface ClassScheduleService
 
     List<ClassSchedule> findAll();
 
+    List<OnlineClassTest> findAllTests(Integer scheduleId);
+
     List<OnlineClassTest> findTestIsExpectedDone(Integer scheduleId);
 
     List<OnlineClassTest> findTestsIsDone(Integer scheduleId);

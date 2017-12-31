@@ -87,6 +87,12 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
+    public List<OnlineClassTest> findAllTests(Integer scheduleId) {
+        ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
+        return new ArrayList<>(schedule.getTeacherArrangement().getTests());
+    }
+
+    @Override
     public List<OnlineClassTest> findTestIsExpectedDone(Integer scheduleId)
     {
         ClassSchedule classSchedule = scheduleJpaDao.findOne(scheduleId);

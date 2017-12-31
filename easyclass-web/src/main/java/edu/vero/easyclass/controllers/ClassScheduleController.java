@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,12 @@ public class ClassScheduleController
 //            HttpStatus.CREATED);
 //    }
 
+    @ApiOperation(value = "获得学生一门选课下的所有测试（待测试）")
+    @GetMapping(value = "/{scheduleId}/all_test")
+    public ResponseEntity<List<OnlineClassTest>> findAllTests(@PathVariable("scheduleId") Integer scheduleId){
+        return new ResponseEntity<List<OnlineClassTest>>(scheduleService.findAllTests(scheduleId),HttpStatus.OK);
+    }
+
     @ApiOperation(value = "获取所有已经被学生完成的课堂测试(通过测试)")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
@@ -67,7 +74,7 @@ public class ClassScheduleController
             HttpStatus.OK);
     }
 
-    @ApiOperation(value = "获取学生的一门选课下的所用课堂测试（通过测试）")
+    @ApiOperation(value = "获取学生的一门选课下的所用课堂测试记录（通过测试）")
     @GetMapping(value = "/{scheduleId}/test_records")
     public ResponseEntity<List<TestRecord>> findTestRecords(@PathVariable("scheduleId") Integer scheduleId)
     {
