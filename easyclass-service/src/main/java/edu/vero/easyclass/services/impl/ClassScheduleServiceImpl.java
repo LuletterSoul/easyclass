@@ -87,9 +87,18 @@ public class ClassScheduleServiceImpl implements ClassScheduleService
     }
 
     @Override
+    public List<HomeworkRecord> findHomeworkRecords(Integer scheduleId) {
+        return new ArrayList<>(findClassSchedule(scheduleId).getHomeworkRecords());
+    }
+
+    @Override
     public List<OnlineClassTest> findAllTests(Integer scheduleId) {
-        ClassSchedule schedule = scheduleJpaDao.findOne(scheduleId);
+        ClassSchedule schedule = findClassSchedule(scheduleId);
         return new ArrayList<>(schedule.getTeacherArrangement().getTests());
+    }
+
+    private ClassSchedule findClassSchedule(Integer scheduleId) {
+        return scheduleJpaDao.findOne(scheduleId);
     }
 
     @Override

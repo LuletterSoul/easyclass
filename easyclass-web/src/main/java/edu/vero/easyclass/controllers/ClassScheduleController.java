@@ -94,6 +94,14 @@ public class ClassScheduleController
         return new ResponseEntity<>(scheduleService.findAllHomeworks(scheduleId), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "获取学生已交作业的记录(通过测试)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "scheduleId", value = "课表编号", dataType = "int", paramType = "path", required = true)})
+    @GetMapping(value = "/{scheduleId}/homework_records")
+    public ResponseEntity<List<HomeworkRecord>> findHomeworkRecord(@PathVariable("scheduleId") Integer scheduleId) {
+        return new ResponseEntity<>(scheduleService.findHomeworkRecords(scheduleId), HttpStatus.OK);
+    }
+
     @ApiOperation(value = "获取学生在该门课下对应的教师安排(通过测试)")
     @GetMapping(value = "/{scheduleId}/arrangement")
     public ResponseEntity<TeacherArrangement> findArrangement(@PathVariable("scheduleId") Integer scheduleId)

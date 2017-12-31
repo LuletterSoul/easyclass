@@ -1,14 +1,15 @@
 package edu.vero.easyclass.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Objects;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.GenericGenerator;
+import java.util.Set;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModelProperty;
 
 
 @Entity

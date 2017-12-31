@@ -149,8 +149,8 @@ public class HomeworkServiceImpl implements HomeworkService
 //        return sb.toString();
 //    }
     @Override
-    public HomeworkRecord downloadHomework(Integer homeworkRecordId, HttpServletResponse response) {
-        HomeworkRecord homeworkRecord  = homeworkRecordJpaDao.findOne(homeworkRecordId);
+    public HomeworkRecord downloadHomework(Integer recordId, HttpServletResponse response) {
+        HomeworkRecord homeworkRecord  = homeworkRecordJpaDao.findOne(recordId);
         String realPath = homeworkRecord.getFilePath();
         String fileName = homeworkRecord.getFileName();
         FileInputStream in = null;
