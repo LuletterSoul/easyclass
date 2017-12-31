@@ -1,10 +1,13 @@
 package edu.vero.easyclass.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 
 @Entity
@@ -23,6 +26,8 @@ public class Homework
     private Date deadline;
 
     private TeacherArrangement arrangement;
+
+    private Set<HomeworkRecord> homeworkRecords;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "arrangementId")
@@ -85,5 +90,16 @@ public class Homework
     public void setDeadline(Date deadline)
     {
         this.deadline = deadline;
+    }
+
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "homework")
+    public Set<HomeworkRecord> getHomeworkRecords() {
+        return homeworkRecords;
+    }
+
+    public void setHomeworkRecords(Set<HomeworkRecord> homeworkRecords) {
+        this.homeworkRecords = homeworkRecords;
     }
 }
