@@ -12,8 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "teacher_arrangement")
-public class TeacherArrangement
-{
+public class TeacherArrangement {
 
     private int arrangementId;
 
@@ -26,14 +25,12 @@ public class TeacherArrangement
     @Id
     @GenericGenerator(name = "increment", strategy = "increment")
     @GeneratedValue(generator = "increment")
-    public int getArrangementId()
-    {
+    public int getArrangementId() {
         return arrangementId;
     }
 
 
-    public void setArrangementId(int arrangementId)
-    {
+    public void setArrangementId(int arrangementId) {
         this.arrangementId = arrangementId;
     }
 
@@ -65,6 +62,10 @@ public class TeacherArrangement
     @ApiModelProperty(hidden = true)
     private Set<Attendance> attendances;
 
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private Set<Homework> homeworks;
+
 //    @JsonIgnore
 //    @ApiModelProperty(hidden = true)
 //    private Set<Homework> homeworks;
@@ -72,106 +73,88 @@ public class TeacherArrangement
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public Set<Attendance> getAttendances()
-    {
+    public Set<Attendance> getAttendances() {
         return attendances;
     }
 
-    public void setAttendances(Set<Attendance> attendances)
-    {
+    public void setAttendances(Set<Attendance> attendances) {
         this.attendances = attendances;
     }
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public Set<Notice> getNotices()
-    {
+    public Set<Notice> getNotices() {
         return notices;
     }
 
-    public void setNotices(Set<Notice> notices)
-    {
+    public void setNotices(Set<Notice> notices) {
         this.notices = notices;
     }
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public Set<Courseware> getCoursewares()
-    {
+    public Set<Courseware> getCoursewares() {
         return coursewares;
     }
 
-    public void setCoursewares(Set<Courseware> coursewares)
-    {
+    public void setCoursewares(Set<Courseware> coursewares) {
         this.coursewares = coursewares;
     }
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public Set<OnlineClassTest> getTests()
-    {
+    public Set<OnlineClassTest> getTests() {
         return tests;
     }
 
-    public void setTests(Set<OnlineClassTest> tests)
-    {
+    public void setTests(Set<OnlineClassTest> tests) {
         this.tests = tests;
     }
 
     @JsonIgnore
     @OneToMany(mappedBy = "arrangement")
-    public Set<ClassTime> getClassTimes()
-    {
+    public Set<ClassTime> getClassTimes() {
         return classTimes;
     }
 
-    public void setClassTimes(Set<ClassTime> classTimes)
-    {
+    public void setClassTimes(Set<ClassTime> classTimes) {
         this.classTimes = classTimes;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseId")
-    public Course getCourse()
-    {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Course course)
-    {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
-    public String getPlace()
-    {
+    public String getPlace() {
         return place;
     }
 
-    public void setPlace(String place)
-    {
+    public void setPlace(String place) {
         this.place = place;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
-    public Teacher getTeacher()
-    {
+    public Teacher getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher)
-    {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
     @OneToMany(mappedBy = "arrangement")
-    public Set<CourseComment> getCourseComments()
-    {
+    public Set<CourseComment> getCourseComments() {
         return courseComments;
     }
 
-    public void setCourseComments(Set<  CourseComment> courseComments)
-    {
+    public void setCourseComments(Set<CourseComment> courseComments) {
         this.courseComments = courseComments;
     }
 
@@ -192,5 +175,14 @@ public class TeacherArrangement
 
     public void setSchedules(Set<ClassSchedule> schedules) {
         this.schedules = schedules;
+    }
+
+    @OneToMany(mappedBy = "arrangement")
+    public Set<Homework> getHomeworks() {
+        return homeworks;
+    }
+
+    public void setHomeworks(Set<Homework> homeworks) {
+        this.homeworks = homeworks;
     }
 }

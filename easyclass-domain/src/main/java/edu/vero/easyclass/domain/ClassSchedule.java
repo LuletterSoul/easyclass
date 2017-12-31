@@ -53,9 +53,10 @@ public class ClassSchedule
         this.courseComment = courseComment;
     }
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
-    private Set<Homework> homeworks;
+    private Set<HomeworkRecord> homeworkRecords;
+//    @ApiModelProperty(hidden = true)
+//    @JsonIgnore
+//    private Set<Homework> homeworks;
 
 //    @ApiModelProperty(hidden = true)
 //    @JsonIgnore
@@ -119,18 +120,18 @@ public class ClassSchedule
         this.teacherArrangement = teacherArrangement;
     }
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
-    @OneToMany(mappedBy = "schedule")
-    public Set<Homework> getHomeworks()
-    {
-        return homeworks;
-    }
-
-    public void setHomeworks(Set<Homework> homeworks)
-    {
-        this.homeworks = homeworks;
-    }
+//    @ApiModelProperty(hidden = true)
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "schedule")
+//    public Set<Homework> getHomeworks()
+//    {
+//        return homeworks;
+//    }
+//
+//    public void setHomeworks(Set<Homework> homeworks)
+//    {
+//        this.homeworks = homeworks;
+//    }
 
 //    @OneToMany
 //    @JoinColumn(name = "scheduleId")
@@ -143,6 +144,17 @@ public class ClassSchedule
 //    {
 //        this.attendances = attendances;
 //    }
+
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "schedule")
+    public Set<HomeworkRecord> getHomeworkRecords() {
+        return homeworkRecords;
+    }
+
+    public void setHomeworkRecords(Set<HomeworkRecord> homeworkRecords) {
+        this.homeworkRecords = homeworkRecords;
+    }
 
     @Override
     public String toString()

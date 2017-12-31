@@ -18,29 +18,20 @@ public class Homework
 
     private String content;
 
-    private String fileName;
-
-    private String filePath;
-
     private Date establishedTime;
 
     private Date deadline;
 
-    private Long size;
+    private TeacherArrangement arrangement;
 
-    private boolean isSubmitted;
-
-    private ClassSchedule schedule;
-
-
-    @ManyToOne
-    @JoinColumn(name="scheduleId")
-    public ClassSchedule getSchedule() {
-        return schedule;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "arrangementId")
+    public TeacherArrangement getArrangement() {
+        return arrangement;
     }
 
-    public void setSchedule(ClassSchedule schedule) {
-        this.schedule = schedule;
+    public void setArrangement(TeacherArrangement arrangement) {
+        this.arrangement = arrangement;
     }
 
     @Id
@@ -76,26 +67,6 @@ public class Homework
         this.content = content;
     }
 
-    public String getFileName()
-    {
-        return fileName;
-    }
-
-    public void setFileName(String fileName)
-    {
-        this.fileName = fileName;
-    }
-
-    public String getFilePath()
-    {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath)
-    {
-        this.filePath = filePath;
-    }
-
     public Date getEstablishedTime()
     {
         return establishedTime;
@@ -114,25 +85,5 @@ public class Homework
     public void setDeadline(Date deadline)
     {
         this.deadline = deadline;
-    }
-
-    public Long getSize()
-    {
-        return size;
-    }
-
-    public void setSize(Long size)
-    {
-        this.size = size;
-    }
-
-    public boolean isSubmitted()
-    {
-        return isSubmitted;
-    }
-
-    public void setSubmitted(boolean submitted)
-    {
-        isSubmitted = submitted;
     }
 }
