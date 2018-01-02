@@ -98,6 +98,16 @@ public class TeacherArrangementController
             HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "创建该门课下的签到（测试通过）")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
+    @GetMapping(value = "/{arrangementId}/attendances")
+    public ResponseEntity<List<Attendance>> getAttendances(@PathVariable("arrangementId") Integer arrangementId)
+    {
+        return new ResponseEntity<>(teacherArrangementService.getAttendance(arrangementId),
+            HttpStatus.OK);
+    }
+
     @ApiOperation(value = "获取特定的教师安排表（测试通过）")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true)})
@@ -258,14 +268,14 @@ public class TeacherArrangementController
 
     @ApiOperation(value = "返回所有已上交作业的学生列表(通过测试)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true),
-            @ApiImplicitParam(name = "homeworkId", value = "作业编号", dataType = "int", paramType = "query", required = true)})
+        @ApiImplicitParam(name = "arrangementId", value = "教师安排表的编号", dataType = "int", paramType = "path", required = true),
+        @ApiImplicitParam(name = "homeworkId", value = "作业编号", dataType = "int", paramType = "query", required = true)})
     @GetMapping(value = "/{arrangementId}/homeworks/submitted_students")
     public ResponseEntity<List<Student>> findAllSubmittedStudents(@PathVariable("arrangementId") Integer arrangementId,
-                                                                    @RequestParam("homeworkId") Integer homeworkId)
+                                                                  @RequestParam("homeworkId") Integer homeworkId)
     {
         return new ResponseEntity<>(
-                teacherArrangementService.findAllSubmittedStudents(arrangementId, homeworkId),
-                HttpStatus.OK);
+            teacherArrangementService.findAllSubmittedStudents(arrangementId, homeworkId),
+            HttpStatus.OK);
     }
 }

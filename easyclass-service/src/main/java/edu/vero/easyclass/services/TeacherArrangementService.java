@@ -27,6 +27,8 @@ public interface TeacherArrangementService
 
     Attendance createAttendance(Integer arrangementId, Attendance attendance);
 
+    List<Attendance> getAttendance(Integer arrangementId);
+
     TeacherArrangement findArrangement(Integer arrangementId);
 
     List<OnlineClassTest> findAllOnlineClassTest(Integer arrangementId);

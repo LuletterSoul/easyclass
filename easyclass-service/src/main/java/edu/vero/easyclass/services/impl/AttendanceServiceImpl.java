@@ -203,7 +203,7 @@ public class AttendanceServiceImpl implements AttendanceService
     public SignRecord createSignRecord(Integer attendanceId, Integer scheduleId)
     {
         SignRecord signRecord = new SignRecord();
-        ClassSchedule classSchedule = classScheduleJpaDao.findOne(attendanceId);
+        ClassSchedule classSchedule = classScheduleJpaDao.findOne(scheduleId);
         Set<SignRecord> currentSignRecords = classSchedule.getSignRecords();
         Attendance attendance = attendanceJpaDao.findOne(attendanceId);
         //签到已关闭
@@ -222,6 +222,7 @@ public class AttendanceServiceImpl implements AttendanceService
         signRecord.setSignTime(new Date());
         attendance.setAttendanceId(attendanceId);
         signRecord.setAttendance(attendance);
+        signRecord.setSchedule(classSchedule);
         signRecordJpaDao.saveAndFlush(signRecord);
         return signRecord;
     }

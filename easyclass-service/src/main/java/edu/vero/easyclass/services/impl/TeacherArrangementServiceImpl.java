@@ -137,8 +137,14 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
         TeacherArrangement teacherArrangement = teacherArrangementJpaDao.findOne(arrangementId);
         attendance.setArrangement(teacherArrangement);
         attendanceJpaDao.saveAndFlush(attendance);
+
         teacherArrangementJpaDao.saveAndFlush(teacherArrangement);
         return attendance;
+    }
+
+    @Override
+    public List<Attendance> getAttendance(Integer arrangementId) {
+        return new ArrayList<>(findArrangement(arrangementId).getAttendances());
     }
 
     @Override
