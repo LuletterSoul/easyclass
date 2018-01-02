@@ -10,7 +10,7 @@
       "email": "luvletterU@njust.edu.cn"
     }
   },
-  "host": "localhost:8080",
+  "host": "http://47.95.113.21:8080",
   "basePath": "/",
   "tags": [
     {
@@ -1304,7 +1304,7 @@
         "tags": [
           "attendance-controller"
         ],
-        "summary": "获取签到的二维码(尚未实现)",
+        "summary": "获取签到的地址，返回一个二维码图片,里面包含学生签到的地址(通过测试)",
         "operationId": "getQRcodeUsingGET",
         "consumes": [
           "application/json"
@@ -1320,13 +1320,49 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "scheduleId",
+            "in": "query",
+            "description": "课表编号",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "二维码宽度",
+            "required": false,
+            "type": "integer",
+            "default": 200,
+            "format": "int32"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "二维码高度",
+            "required": false,
+            "type": "integer",
+            "default": 200,
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "课表编号",
+            "required": false,
+            "type": "integer",
+            "default": "jpeg",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/QRcode"
+              "type": "string",
+              "format": "byte"
             }
           },
           "401": {
@@ -1377,6 +1413,96 @@
           },
           "403": {
             "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/attendances/{attendanceId}/absent_students": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取未签到的学生列表(测试通过)",
+        "operationId": "findAbsentStudentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "attendanceId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/attendances/{attendanceId}/attend_students": {
+      "get": {
+        "tags": [
+          "attendance-controller"
+        ],
+        "summary": "获取已签到的学生列表(测试通过)",
+        "operationId": "findAttendStudentsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "attendanceId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Student"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
