@@ -47,6 +47,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>edu.vero.easyclass.web.EasyClassApplication</mainClass>
+                    <executable>true</executable>
                 </configuration>
                 <executions>
                     <execution>

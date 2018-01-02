@@ -48,7 +48,7 @@ public class UserController
     @PostMapping
     public ResponseEntity<Student> registerStudent(@RequestBody Student student)
     {
-        return new ResponseEntity<Student>(userService.registerStudent(student), HttpStatus.OK);
+        return new ResponseEntity<Student>(userService.registerStudent(student), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "通过用户Id查找用户信息（测试通过）")

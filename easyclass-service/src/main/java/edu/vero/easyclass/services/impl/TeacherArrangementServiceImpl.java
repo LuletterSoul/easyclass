@@ -61,7 +61,8 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
                                          QuestionJpaDao questionJpaDao,
                                          HomeworkJpaDao homeworkJpaDao,
                                          ClassScheduleJpaDao classScheduleJpaDao,
-                                         HomeworkRecordJpaDao homeworkRecordJpaDao) {
+                                         HomeworkRecordJpaDao homeworkRecordJpaDao,
+                                         TestsJpaDao testsJpaDao) {
         this.teacherArrangementJpaDao = teacherArrangementJpaDao;
         this.noticeJpaDao = noticeJpaDao;
         this.coursewareJpaDao = coursewareJpaDao;
@@ -75,6 +76,7 @@ public class TeacherArrangementServiceImpl implements TeacherArrangementService 
         this.homeworkJpaDao = homeworkJpaDao;
         this.classScheduleJpaDao = classScheduleJpaDao;
         this.homeworkRecordJpaDao = homeworkRecordJpaDao;
+        this.testsJpaDao = testsJpaDao;
     }
 
     @Override

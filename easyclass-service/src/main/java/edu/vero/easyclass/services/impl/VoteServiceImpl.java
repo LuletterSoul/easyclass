@@ -75,8 +75,15 @@ public class VoteServiceImpl implements VoteService
     @Override
     public Vote createVote(Vote vote)
     {
+        voteJpaDao.save(vote);
+        Set<VoteOption> voteOptions = vote.getOptions();
+        for (VoteOption option :
+                voteOptions) {
+            option.setVote(vote);
+        }
 
-        return voteJpaDao.save(vote);
+        voteOptionJpaDao.save(vote.getOptions());
+        return vote;
     }
 
     @Override

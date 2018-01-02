@@ -41,6 +41,7 @@ public interface TeacherArrangementService
 
     List<CourseComment> findAllCourseComment(Integer arrangementId);
 
+
     Course findCourse(Integer arrangementId);
 
     List<Notice> findAllNotice(Integer arrangementId);
